@@ -2,44 +2,36 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class User extends Authenticatable
+class User extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        "NIP", "name", "password", "class", "gender", "room_number", "phone_number", "photo"
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $table = "users";
+    protected $primaryKey = 'NIP';
+    protected $keyType = 'string';
+    public $incrementing = false;
+    public $timestamps = false;
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
+    public function bookStuff(): HasMany{
+        return $this->hasMany(BookKitchen::class, 'NIP', 'NIP');
+    }
+    public function bookMachine(): HasMany{
+        return $this->hasMany(BookMachine::class, 'NIP', 'NIP');
+    }
+    public function bookRoom(): HasMany{
+        return $this->hasMany(BookRoom::class, 'NIP', 'NIP');
+    }
+    public function report(): HasMany{
+        return $this->hasMany(Report::class, 'NIP', 'NIP');
+    }
+    public function forum(): HasMany{
+        return $this->hasMany(Forum::class, 'NIP', 'NIP');
+    }
 }
+
