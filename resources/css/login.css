@@ -47,6 +47,7 @@ h1{
     font-size: 60px;
     /* background-color: palevioletred; */
     margin:0px;
+    margin-top: -20px;
 }
 
 .form{
@@ -55,6 +56,7 @@ h1{
     display: flex;
     flex-direction: column;
     margin-top: 2vw; 
+    color: #646464;
 }
 
 .group{
@@ -80,6 +82,8 @@ label{
     color: #939393;
     font-family: Poppins;
     font-size: 20px;
+
+    padding-left: 10px;
 }
 
 .submitbtn{
