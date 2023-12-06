@@ -10,9 +10,16 @@ class ReportController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if($request->is('dashboard/*')){
+            return response()->view('dashboard.report', [
+                "title" => "Report"
+            ]);
+        }
+        return response()->view('penghuni.report', [
+            "title" => "Report"
+        ]);
     }
 
     /**

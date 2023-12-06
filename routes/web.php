@@ -1,5 +1,13 @@
 <?php
 
+use App\Http\Controllers\BookKitchenController;
+use App\Http\Controllers\BookMachineController;
+use App\Http\Controllers\ForumController;
+use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\PenghuniController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SerbagunaController;
+use App\Http\Controllers\TheatreController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\GuestMiddleware;
 use App\Http\Middleware\MemberMiddleware;
@@ -21,59 +29,32 @@ Route::get('/', [\App\Http\Controllers\HomeController::class, 'home']);
 
 Route::get('/sesi',[UserController::class, 'index'])->middleware([GuestMiddleware::class]);
 Route::post('/sesi/login',[UserController::class, 'login'])->middleware([GuestMiddleware::class]);
+Route::post("/logout", [UserController::class, 'logout'])->middleware([MemberMiddleware::class]);
 
 
 
 Route::prefix('/penghuni')->middleware([MemberMiddleware::class])->group(function(){
-    Route::get("/forum", function(){
-        return view('penghuni.forum');
-    });
-    Route::get("/mesincuci", function(){
-        return view('penghuni.mesincuci');
-    });
+    Route::get("/forum", [ForumController::class, 'index']);
+    Route::get("/mesincuci", [BookMachineController::class, 'index']);
     Route::get("/coworking", function(){
         return view('penghuni.coworking');
     });
-    Route::get("/dapur", function(){
-        return view('penghuni.dapur');
-    });
-    Route::get("/history", function(){
-        return view('penghuni.history');
-    });
-    Route::get("/serbaguna", function(){
-        return view('penghuni.serbaguna');
-    });
-    Route::get("/report", function(){
-        return view('penghuni.report');
-    });
-    Route::get("/theatre", function(){
-        return view('penghuni.theatre');
-    });
+    Route::get("/dapur", [BookKitchenController::class, 'index']);
+    Route::get("/history", [HistoryController::class, 'index']);
+    Route::get("/serbaguna", [SerbagunaController::class, 'index']);
+    Route::get("/report", [ReportController::class, 'index']);
+    Route::get("/theatre", [TheatreController::class, 'index']);
 });
 
 Route::prefix("/dashboard")->middleware([MemberMiddleware::class])->group(function(){
-    Route::get("/forum", function(){
-        return view('dashboard.forum');
-    });
-    Route::get("/mesincuci", function(){
-        return view('dashboard.mesincuci');
-    });
+    Route::get("/forum", [ForumController::class, 'index']);
+    Route::get("/mesincuci", [BookMachineController::class, 'index']);
     Route::get("/coworking", function(){
         return view('dashboard.coworking');
     });
-    Route::get("/dapur", function(){
-        return view('dashboard.dapur');
-    });
-    Route::get("/penghuni", function(){
-        return view('dashboard.penghuni');
-    });
-    Route::get("/serbaguna", function(){
-        return view('dashboard.serbaguna');
-    });
-    Route::get("/report", function(){
-        return view('dashboard.report');
-    });
-    Route::get("/theatre", function(){
-        return view('dashboard.theatre');
-    });
+    Route::get("/dapur", [BookKitchenController::class, 'index']);
+    Route::get("/serbaguna", [SerbagunaController::class, 'index']);
+    Route::get("/report", [ReportController::class, 'index']);
+    Route::get("/theatre", [TheatreController::class, 'index']);
+    Route::get("/penghuni", [PenghuniController::class, 'index']);
 });

@@ -50,6 +50,10 @@ class UserController extends Controller
         ]);
     }
 
+    public function logout(Request $request){
+        $request->session()->forget('NIP');
+        return redirect("/");
+    }
     /**
      * Show the form for creating a new resource.
      */

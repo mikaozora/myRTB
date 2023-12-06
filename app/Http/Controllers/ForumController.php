@@ -10,9 +10,16 @@ class ForumController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if($request->is('dashboard/*')){
+            return response()->view('dashboard.forum', [
+                "title" => "Forum"
+            ]);
+        }
+        return response()->view('penghuni.forum', [
+            "title" => "Forum"
+        ]);
     }
 
     /**
