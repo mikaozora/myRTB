@@ -10,9 +10,16 @@ class BookKitchenController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if($request->is('dashboard/*')){
+            return response()->view('dashboard.dapur', [
+                "title" => "Booking Dapur"
+            ]);
+        }
+        return response()->view('penghuni.dapur', [
+            "title" => "Booking Dapur"
+        ]);
     }
 
     /**

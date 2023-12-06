@@ -10,9 +10,16 @@ class BookMachineController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if($request->is('dashboard/*')){
+            return response()->view('dashboard.mesincuci', [
+                "title" => "Booking Mesin Cuci"
+            ]);
+        }
+        return response()->view('penghuni.mesincuci', [
+            "title" => "Booking Mesin Cuci"
+        ]);
     }
 
     /**
