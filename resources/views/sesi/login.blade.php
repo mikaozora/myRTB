@@ -32,7 +32,7 @@
                 </form>
             </div>
         </div>
-        <img class="image" src="https://drive.google.com/uc?id=1PpRA1SoM2s8GbXt-z2gDX1jvqZVH_o47" alt="">
+        <img class="image" src="/public/assets/rtbLogin.svg" alt="">
     
     </div>
 
