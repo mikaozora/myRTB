@@ -1,0 +1,174 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #eeeeee;
+}
+
+.wrap-sidebar {
+    display: inline-block;
+    font-family: "poppins";
+    background-color: #fff;
+    padding: 24px;
+    border-radius: 16px;
+    height: 88vh;
+    position: fixed;
+    top: 16px;
+    left: 16px;
+}
+
+.wrap-sidebar .wrap-content-sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrap-sidebar h3 {
+    color: var(--primary);
+    font-family: Poppins;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    margin-top: 0px;
+}
+
+.wrap-sidebar .content-sidebar {
+    display: flex;
+    flex-direction: column;
+}
+
+.wrap-sidebar .content-sidebar .card-sidebar {
+    padding: 8px 16px;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    border-radius: 16px;
+    margin: 8px 0px 8px 0px;
+    max-width: 15rem;
+    width: 13rem;
+    height: 2rem;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.wrap-sidebar .content-sidebar .card-sidebar:hover {
+    background-color: var(--bg-secondary);
+}
+
+.wrap-sidebar .content-sidebar .card-sidebar svg {
+    fill: #adadad;
+    transition: all 0.3s ease-in-out;
+}
+
+#history {
+    fill: none;
+    stroke: #adadad;
+}
+
+.wrap-sidebar .content-sidebar .card-sidebar:hover #history {
+    stroke: #205295;
+}
+
+.wrap-sidebar .content-sidebar .card-sidebar.active #history {
+    stroke: #205295;
+}
+
+.wrap-sidebar .content-sidebar .card-sidebar.active {
+    background-color: #deecff;
+}
+
+.wrap-sidebar .content-sidebar .card-sidebar.active svg {
+    fill: #205295;
+}
+
+.wrap-sidebar .content-sidebar .card-sidebar p {
+    display: inline-block;
+    margin: 0px;
+    font-weight: 600;
+    margin-left: 8px;
+    font-size: 1rem;
+    color: #adadad;
+    transition: all 0.3s ease-in-out;
+}
+
+.wrap-sidebar .content-sidebar .card-sidebar:hover p {
+    color: #205295;
+}
+
+.wrap-sidebar .content-sidebar .card-sidebar:hover svg {
+    fill: #205295;
+}
+
+.wrap-sidebar .content-sidebar .card-sidebar.active p {
+    color: #205295;
+}
+
+.menu-toggle {
+    position: relative;
+    display: none;
+    flex-direction: column;
+    height: 20px;
+    justify-content: space-between;
+}
+
+.menu-toggle input {
+    position: absolute;
+    top: 11px;
+    left: 11px;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 10;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 20px;
+    height: 3px;
+    background-color: #ADADAD;
+    border-radius: 3px;
+    transition: all .3s ease-in;
+}
+
+.menu-toggle span:nth-child(2){
+    transform-origin: 0 0;
+}
+.menu-toggle span:nth-child(4){
+    transform-origin: 0 100%;
+}
+
+.menu-toggle input:checked ~ span:nth-child(2) {
+    transform: rotate(45deg) translate(3px, 0px);
+}
+.menu-toggle input:checked ~ span:nth-child(4) {
+    transform: rotate(-45deg) translate(2px, 0px);
+}
+.menu-toggle input:checked ~ span:nth-child(3) {
+    transform: scale(0);
+}
+
+@media screen and (max-width: 992px) {
+    .wrap-sidebar{
+        height: 0vh;
+        padding: 0px;
+    }
+    .wrap-sidebar .wrap-content-sidebar{
+        background-color: #fff;
+        padding: 16px;
+        position: absolute;
+        border-radius: 16px;
+        top: 70px;
+        opacity: 0;
+        transition: all .3s ease-in;
+    }
+    .wrap-sidebar .wrap-content-sidebar.show{
+        opacity: 1;
+    }
+    .menu-toggle{
+        display: flex;
+        padding: 16px;
+        background-color: white;
+        border-radius: 8px;
+    }
+}
