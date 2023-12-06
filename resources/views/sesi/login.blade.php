@@ -21,7 +21,10 @@
                     </div>
                     <div class="group">
                         <label>Password</label><br>
-                        <input type="password" name="password" class="input" placeholder="Masukkan Password">
+                        <input type="password" name="password" class="input pass" placeholder="Masukkan Password">
+                        @if(isset($error) && ($error == "NIP or Password is required" || $error == "Invalid NIP or Password"))
+                            <label class="errormsg">{{$error}}</label>                    
+                        @endif
                     </div>
                     <div class="group btn">
                         <button name="submit" type="submit" class="submitbtn">Sign In</button>
@@ -29,7 +32,7 @@
                 </form>
             </div>
         </div>
-        <img class="image" src="https://drive.google.com/uc?id=1PpRA1SoM2s8GbXt-z2gDX1jvqZVH_o47" alt="">
+        <img class="image" src="/public/assets/rtbLogin.svg" alt="">
     
     </div>
 

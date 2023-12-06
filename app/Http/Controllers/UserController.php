@@ -22,13 +22,20 @@ class UserController extends Controller
         $password = $request->input('password');
         if(empty($NIP)||empty($password)){
             return response()->view('sesi.login', [
-                "error"=>"NIP or password is required"
+                "error"=>"NIP or Password is required"
             ]);
         }
         $user = User::query()->where('NIP','=',$NIP)->get();
+
+        if(empty($user->first()->NIP)){
+            return response()->view('sesi.login', [
+                "error"=>"Invalid NIP or Password"
+            ]);
+        }
+
         if(empty($user->first()->password)){
             return response()->view('sesi.login', [
-                "error"=>"password salah"
+                "error"=>"Invalid NIP or Password"
             ]);
         }
         $correctPass = $user->first()->password;
@@ -39,7 +46,7 @@ class UserController extends Controller
         }
 
         return response()->view("sesi.login",[
-            "error"=>"wrong username or password"
+            "error"=>"Invalid NIP or Password"
         ]);
     }
 

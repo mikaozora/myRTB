@@ -39,6 +39,8 @@ h2{
     font-family: Poppins;
     font-size: 25px;
     margin:0px;
+    opacity: 40%;
+    font-weight: 400;
 }
 
 h1{
@@ -55,48 +57,111 @@ h1{
     /* background-color: plum; */
     display: flex;
     flex-direction: column;
-    margin-top: 2vw; 
+    margin-top: 1vw; 
     color: #646464;
 }
 
 .group{
-    width: 80%;
-    height: 6vw;
+    width: 90%;
+    height: 30%;
     /* background-color: royalblue; */
+    margin-bottom: 3%;
 }
 
 label{
     color: var(--text-primary, #000);
     font-family: Poppins;
-    font-size: 24px;
+    font-size: 1.2rem;
 }
 
 .input{
     margin-top:2%;
     width: 95%;
-    height: 33%;
+    height: 35px;
     border-radius: 20px;
     border: 2px solid var(--primary, #205295);
     background: #FFF;
 
     color: #939393;
     font-family: Poppins;
-    font-size: 20px;
+    font-size: 1rem;
 
     padding-left: 10px;
+}
+
+.pass{
+    margin-bottom: 4%;
 }
 
 .submitbtn{
     color: #FFF;
     font-family: Poppins;
-    font-size: 24px;
-    width: 95%;
+    font-size: 1.38rem;
+    width: 100%;
     height: 50%;
     border-radius: 20px;
     border: 2px solid var(--primary, #205295);
     background: var(--primary, #205295);
+    margin-top: 2%;
 }
 
 .btn{
-    width: 82%;
+    width: 90%;
+}
+
+.errormsg{
+    color:red;
+    font-family: Poppins;
+    font-size: 15px;
+}
+
+@media screen and (max-width: 906px) {
+    .container{
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 716px) {
+    .image{
+        display: none;
+    }
+    .content{
+        width: 80%;
+        /* background-color: paleturquoise; */
+    }
+}
+
+@media screen and (max-width: 426px) {
+    h1{
+        font-size: 2.8em;
+    }
+    h2{
+        font-size: 1.2em;
+        padding-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    label{
+        font-size: 1em;
+    }
+    .input{
+        font-size: 0.7em;
+    }
+    .submitbtn{
+        height: 9vw;
+        /* background-color: red; */
+        font-size: 1em;
+    }
+    .errormsg{
+        font-size: 0.7em;
+    }
+    h1{
+        font-size: 2.3em;
+    }
+    h2{
+        margin-top: 10%;
+        font-size: 0.9em;
+        padding-bottom: 10px;
+    }
 }
