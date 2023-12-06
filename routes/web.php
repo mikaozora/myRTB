@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Http\Middleware\GuestMiddleware;
+use App\Http\Middleware\MemberMiddleware;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,15 +17,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('components.sidebaruser');
-});
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'home']);
 
-Route::get("/forum", function(){
-    return view('penghuni.forum');
-});
+Route::get('/sesi',[UserController::class, 'index'])->middleware([GuestMiddleware::class]);
+Route::post('/sesi/login',[UserController::class, 'login'])->middleware([GuestMiddleware::class]);
 
-Route::prefix('/penghuni')->group(function(){
+
+
+Route::prefix('/penghuni')->middleware([MemberMiddleware::class])->group(function(){
     Route::get("/forum", function(){
         return view('penghuni.forum');
     });
@@ -48,7 +51,7 @@ Route::prefix('/penghuni')->group(function(){
     });
 });
 
-Route::prefix("/dashboard")->group(function(){
+Route::prefix("/dashboard")->middleware([MemberMiddleware::class])->group(function(){
     Route::get("/forum", function(){
         return view('dashboard.forum');
     });
