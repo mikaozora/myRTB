@@ -9,7 +9,9 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SerbagunaController;
 use App\Http\Controllers\TheatreController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\GuestMiddleware;
+use App\Http\Middleware\LogoutMiddleware;
 use App\Http\Middleware\MemberMiddleware;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -29,7 +31,7 @@ Route::get('/', [\App\Http\Controllers\HomeController::class, 'home']);
 
 Route::get('/sesi',[UserController::class, 'index'])->middleware([GuestMiddleware::class]);
 Route::post('/sesi/login',[UserController::class, 'login'])->middleware([GuestMiddleware::class]);
-Route::post("/logout", [UserController::class, 'logout'])->middleware([MemberMiddleware::class]);
+Route::post("/logout", [UserController::class, 'logout'])->middleware([LogoutMiddleware::class]);
 
 
 
@@ -46,7 +48,7 @@ Route::prefix('/penghuni')->middleware([MemberMiddleware::class])->group(functio
     Route::get("/theatre", [TheatreController::class, 'index']);
 });
 
-Route::prefix("/dashboard")->middleware([MemberMiddleware::class])->group(function(){
+Route::prefix("/dashboard")->middleware([AdminMiddleware::class])->group(function(){
     Route::get("/forum", [ForumController::class, 'index']);
     Route::get("/mesincuci", [BookMachineController::class, 'index']);
     Route::get("/coworking", function(){

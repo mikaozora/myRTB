@@ -32,7 +32,7 @@
                 </form>
             </div>
         </div>
-        <img class="image" src="/public/assets/rtbLogin.svg" alt="">
+        <img class="image" src="{{asset('assets/rtbLogin.svg')}}" alt="">
     
     </div>
 
