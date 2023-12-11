@@ -1,0 +1,138 @@
+body {
+    margin-left: 320px;
+    margin-right: 20px;
+    margin-top: 40px;
+    padding: 0;
+    font-family: "poppins";
+}
+
+h4{
+    padding-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 8px;
+}
+
+.bottom-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.top-box{
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 16px;
+}
+
+.top-box img{
+    width: 100px;
+}
+
+.schedule-box{
+    margin-top: 15px;
+    background-color: white;
+    border-radius: 16px;
+}   
+
+.wrap-date{
+    width: 50vw;
+    height: 5vh;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.wrap-time{
+    display: flex;
+    flex-direction: row;
+}
+
+.from-time{
+    margin-right: 8vw;
+}
+
+.wrap-time h5{
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.wrap-date a{
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
+
+.wrap-time{
+    padding-left: 20px;
+}
+
+.wrap-participation{
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.wrap-participation input{
+    height: 30px;
+    border-radius: 16px;
+    padding-left: 10px;
+    border: solid 1px black;
+}
+
+.wrap-type{
+    display: flex;
+    flex-direction: row;
+    padding-left: 20px;
+}
+
+.wrap-private{
+    display: flex;
+    flex-direction: row;
+    margin-right: 5vw;
+    margin-top: 0;
+}
+
+.wrap-public{
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+}
+
+.wrap-private input{
+    margin: 0;
+    width: 20px;
+}
+
+.wrap-public input{
+    margin: 0;
+    width: 20px;
+}
+
+p{
+    margin: 0;
+    margin-left: 5px;
+}
+
+.wrap-submit{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.wrap-submit button{
+    width: 45vw;
+    height: 30px;
+    background-color: var(--primary);
+    color: var(--bg-primary);
+    border-radius: 8px;
+    border: none;
+}
+
+.today-user-box{
+    background-color: aquamarine;
+}

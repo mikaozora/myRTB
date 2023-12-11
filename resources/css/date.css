@@ -1,0 +1,67 @@
+body{
+    font-family: "poppins";
+}
+
+.wrap-date{
+    width: 50vw;
+    height: 5vh;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.book-date{
+    padding: 0.2vw;
+    padding-left: 17px;
+    padding-right: 17px;
+    text-decoration: none;
+    font-weight: 500;
+    color: var(--primary);
+    border-radius: 8px;
+}
+.book-date.active{
+    background-color: var(--bg-secondary);
+    color: var(--primary);
+}
+
+.validate-choose-date{
+    margin-left: 12px;
+    color: rgb(255, 0, 0);
+    font-style: italic;
+}
+
+.date-active .validate-choose-date {
+    display: none;
+}
+
+@media screen and (max-width: 1228px){
+    .book-date{
+        font-size: 11px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .validate-choose-date{
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .wrap-date{
+        padding-top: 8px;
+        height: 3vh;
+    }
+
+    .book-date{
+        font-size: 6px;
+        padding-right: 4px;
+        padding-left: 5px;
+    }
+
+    .validate-choose-date{
+        margin-left: 4px;
+        font-size: 5px;
+    }
+}
