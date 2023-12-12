@@ -1,11 +1,11 @@
 <?php
 
 use App\Http\Controllers\BookKitchenController;
-use App\Http\Controllers\BookMachineController;
+use App\Http\Controllers\BookRoomController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\HistoryController;
-use App\Http\Controllers\PenghuniController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SerbagunaController;
 use App\Http\Controllers\TheatreController;
 use App\Http\Controllers\UserController;
@@ -37,10 +37,8 @@ Route::post("/logout", [UserController::class, 'logout'])->middleware([LogoutMid
 
 Route::prefix('/penghuni')->middleware([MemberMiddleware::class])->group(function(){
     Route::get("/forum", [ForumController::class, 'index']);
-    Route::get("/mesincuci", [BookMachineController::class, 'index']);
-    Route::get("/coworking", function(){
-        return view('penghuni.coworking');
-    });
+    Route::get("/mesincuci", [BookRoomController::class, 'index']);
+    Route::get("/coworking", [RoomController::class, 'index']);
     Route::get("/dapur", [BookKitchenController::class, 'index']);
     Route::get("/history", [HistoryController::class, 'index']);
     Route::get("/serbaguna", [SerbagunaController::class, 'index']);
