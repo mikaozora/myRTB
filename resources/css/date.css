@@ -16,20 +16,16 @@ body{
     padding: 0.2vw;
     padding-left: 17px;
     padding-right: 17px;
+    margin-bottom: 8px;
     text-decoration: none;
     font-weight: 500;
     color: var(--primary);
     border-radius: 8px;
 }
+
 .book-date.active{
     background-color: var(--bg-secondary);
     color: var(--primary);
-}
-
-.validate-choose-date{
-    margin-left: 12px;
-    color: rgb(255, 0, 0);
-    font-style: italic;
 }
 
 .date-active .validate-choose-date {
@@ -61,7 +57,6 @@ body{
     }
 
     .validate-choose-date{
-        margin-left: 4px;
         font-size: 5px;
     }
 }
