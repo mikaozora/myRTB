@@ -9,9 +9,6 @@
 </head>
 <body>
     <div class="wrap-date {{ Request::get('date') ? 'date-active' : '' }}">
-        @if(!Request::get('date'))
-        <span class="validate-choose-date">Choose Date</span>
-        @endif
         @foreach($datenow as $date)
         <a href="/penghuni/coworking/?date={{$date}}" class="book-date {{Request::get('date') == $date ? 'active' : ''}}">{{$date}} 
         </a> 

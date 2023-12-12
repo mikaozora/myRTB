@@ -6,6 +6,10 @@ body {
     font-family: "poppins";
 }
 
+hr{
+    margin: 0;
+}
+
 h4{
     padding-left: 20px;
     margin-top: 10px;
@@ -131,6 +135,19 @@ p{
     color: var(--bg-primary);
     border-radius: 8px;
     border: none;
+}
+
+.wrap-span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    font-size: 20px;
+}
+
+.validate-choose-date{
+    color: black;
+    font-style: italic;
 }
 
 .today-user-box{
