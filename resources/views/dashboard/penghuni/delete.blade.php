@@ -12,7 +12,7 @@
                     <p>Apakah anda yakin ingin menghapus <span>{{$user->name}}</span>?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn-simpan">Simpan</button>
+                    <button type="submit" class="btn-simpan">Hapus</button>
                 </div>
             </form>
         </div>

@@ -178,6 +178,7 @@ body {
         top: 90px;
         opacity: 0;
         visibility: hidden;
+        box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.1);
         transition: all 0.3s ease-in;
     }
     .wrap-sidebar .wrap-content-sidebar.show {

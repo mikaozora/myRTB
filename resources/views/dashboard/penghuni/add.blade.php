@@ -38,7 +38,7 @@
                     </div>
                     <div class="wrap-input">
                         <p>Foto Profile</p>
-                        <input type="file" id="photo" name="photo" required>
+                        <input type="file" id="photo" name="photo" required accept=".png, .jpg, .jpeg">
                     </div>
                 </div>
                 <div class="modal-footer">

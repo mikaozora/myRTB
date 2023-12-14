@@ -139,6 +139,10 @@ thead, tbody{
     margin-right: 8px;
 }
 
+.modal-body .wrap-detail .detail-penghuni .content h6{
+    font-weight: 700;
+}
+
 #dialog-detail{
     max-width: 600px;
 }
