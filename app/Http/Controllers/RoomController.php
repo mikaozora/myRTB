@@ -3,18 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\Room;
+use App\Models\User;
 use Carbon\Traits\ToStringFormat;
 use DateTimeZone;
 use Illuminate\Http\Client\Response as ClientResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response as FacadesResponse;
 
 class RoomController extends Controller
 {
 
-    public function index(){
+    public function index(Request $request){
+        if($request->is('dashboard/*')){
+            return response()->view('dashboard.coworking', [
+                "title" => "Booking Co-working Space"
+            ]);
+        }
         $date = [];
         for($i = 0; $i <= 6; $i++){
             $date[$i] = Carbon::now()->addDay($i)->locale('id_ID')->format('D, d');

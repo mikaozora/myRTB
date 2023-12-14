@@ -1,0 +1,16 @@
+.notification{
+    padding: 8px 24px;
+    min-width: 200px;
+    border-left: 10px solid var(--primary);
+    border-radius: 16px;
+    position: absolute;
+    z-index: 100;
+    bottom: 24px;
+    right: 24px;
+    font-size: .85rem;
+    font-weight: 500;
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+    transition: all .5s ease-in-out;
+}
