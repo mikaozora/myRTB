@@ -52,15 +52,15 @@ class PenghuniController extends Controller
                 );
             }catch(QueryException $err){
                 if ($err->errorInfo[1] == 1062){
-                    return redirect()->action([PenghuniController::class, 'index'])->with(
-                        "message",
-                        "NIP sudah terdaftar"
-                    );
+                    return redirect()->action([PenghuniController::class, 'index'])->with([
+                        "message" => "NIP sudah terdaftar",
+                        "status" => "error"
+                    ]);
                 }else{
-                    return redirect()->action([PenghuniController::class, 'index'])->with(
-                        "message",
-                        "Gagal menambah data penghuni"
-                    );
+                    return redirect()->action([PenghuniController::class, 'index'])->with([
+                        "message" => "Gagal menambah data penghuni",
+                        "status" => "error"
+                    ]);
                 }
             }
         }
