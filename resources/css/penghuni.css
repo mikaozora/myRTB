@@ -8,6 +8,10 @@ body{
     justify-content: right;
 }
 
+tbody tr td{
+    vertical-align: middle;
+}
+
 .wrap-button .btn-penghuni {
     color: #fff;
     font-family: Poppins;
