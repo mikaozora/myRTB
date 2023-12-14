@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <h3 class="notification" id="notif">
+    <h3 class="notification {{ session('status') == 'error' ? 'error' : ''}}" id="notif">
         {{ session('message') }}
     </h3>
     <script>

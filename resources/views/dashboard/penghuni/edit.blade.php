@@ -39,7 +39,7 @@
                     </div>
                     <div class="wrap-input">
                         <p>Foto Profile</p>
-                        <input type="file" id="photo" name="photo" value="{{$user->photo}}">
+                        <input type="file" id="photo" name="photo" value="{{$user->photo}}" accept=".png, .jpg, .jpeg">
                     </div>
                 </div>
                 <div class="modal-footer">

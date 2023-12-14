@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Carbon\Carbon;
+use FFI\Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 use function PHPUnit\Framework\fileExists;
@@ -32,22 +34,35 @@ class PenghuniController extends Controller
         $file = $request->file('photo');
         $photo = Carbon::now()->getTimestamp() . $file->getClientOriginalName();
         $path = "data";
-        if ($file->move($path, $photo)) {
-            $user = new User();
-            $user->NIP = $nip;
-            $user->name = $name;
-            $user->password = $password;
-            $user->class = $class;
-            $user->room_number = $roomNum;
-            $user->phone_number = $phoneNum;
-            $user->photo = $photo;
-            $user->gender = $gender;
-
-            $user->save();
-            return redirect()->action([PenghuniController::class, 'index'])->with(
-                "message",
-                "Berhasil menambah data penghuni"
-            );
+        if ($file->move($path, $photo)) { 
+            try{
+                $user = new User();
+                $user->NIP = $nip;
+                $user->name = $name;
+                $user->password = $password;
+                $user->class = $class;
+                $user->room_number = $roomNum;
+                $user->phone_number = $phoneNum;
+                $user->photo = $photo;
+                $user->gender = $gender;
+                $user->save();
+                return redirect()->action([PenghuniController::class, 'index'])->with(
+                    "message",
+                    "Berhasil menambah data penghuni"
+                );
+            }catch(QueryException $err){
+                if ($err->errorInfo[1] == 1062){
+                    return redirect()->action([PenghuniController::class, 'index'])->with([
+                        "message" => "NIP sudah terdaftar",
+                        "status" => "error"
+                    ]);
+                }else{
+                    return redirect()->action([PenghuniController::class, 'index'])->with([
+                        "message" => "Gagal menambah data penghuni",
+                        "status" => "error"
+                    ]);
+                }
+            }
         }
     }
 
