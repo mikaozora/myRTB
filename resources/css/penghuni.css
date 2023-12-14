@@ -1,0 +1,175 @@
+body{
+    font-family: 'poppins';
+}
+.wrap-button {
+    margin: 10px 0px;
+    width: 100%;
+    display: flex;
+    justify-content: right;
+}
+
+.wrap-button .btn-penghuni {
+    color: #fff;
+    font-family: Poppins;
+    font-size: .85rem;
+    font-style: normal;
+    font-weight: 500;
+    background-color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+.wrap-button .btn-penghuni svg{
+    margin-right: 8px;
+}
+
+.wrap-table{
+    background-color: #fff;
+    padding: 16px 24px;
+    padding-bottom: 4px;
+    border-radius: 16px;
+}
+
+.wrap-action{
+    display: flex;
+}
+
+.btn-action{
+    border: none;
+    border-radius: 8px;
+    height: 30px;
+    width: 30px;
+    padding: 0px;
+    background-color: var(--bg-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0px 4px;
+}
+#btn-delete{
+    background-color: #FFDEDE;
+}
+
+thead, tbody{
+    font-size: .85rem;
+}
+
+.wrap-input p{
+    margin-bottom: 8px;
+    color: #000;
+    font-weight: 500;
+}
+
+.wrap-input input{
+    width: 90%;
+    border: 2px solid var(--primary);
+    border-radius: 16px;
+    padding: 4px 16px;
+    margin-bottom: 10px;
+}
+.wrap-input input:disabled{
+    background-color: #eee;
+}
+.wrap-input select{
+    width: 90%;
+    border: 2px solid var(--primary);
+    border-radius: 16px;
+    padding: 4px 16px;
+    margin-bottom: 10px;
+}
+
+.wrap-input select option{
+    border: 5px solid red;
+}
+
+.wrap-input input[type=file]::file-selector-button {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 16px;
+    color: var(--primary);
+    font-weight: 500;
+    background-color: var(--bg-secondary);
+    cursor: pointer;
+  }
+
+#photo{
+    border: none;
+    padding: 0px;
+    border-radius: 0px;
+}
+.btn-simpan{
+    border: none;
+    background-color: var(--primary);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+
+.modal-body{
+    max-height: 450px;
+    overflow-y: auto;
+    padding-right: 0px;
+}
+
+.modal-body .wrap-detail{
+    display: flex;
+}
+
+.modal-body .wrap-detail .photo{
+    width: 200px;
+    height: 250px;
+    border-radius: 16px;
+    object-fit: cover;  
+    margin-right: 16px;
+}
+
+.modal-body .wrap-detail .detail-penghuni{
+    max-width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.modal-body .wrap-detail .detail-penghuni .content{
+    width: 45%;
+    margin-right: 8px;
+}
+
+#dialog-detail{
+    max-width: 600px;
+}
+#detail{
+    max-width: 600px; 
+}
+
+.modal-body p span{
+    color: var(--primary);
+    font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+    .wrap-table{
+        overflow-x: auto;
+    }
+    .wrap-button .btn-penghuni{
+        font-size: 0.75rem;
+    }
+    .modal-body{
+        padding-right: 8px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .modal-body .wrap-detail{
+        flex-direction: column;
+    }
+    .modal-body .wrap-detail .photo{
+        width: 100%;
+        margin-right: 0px;
+        margin-bottom: 16px;
+    }
+}

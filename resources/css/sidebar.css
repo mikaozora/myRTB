@@ -4,6 +4,22 @@ body {
     background-color: #eeeeee;
 }
 
+* {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+*:before,
+*:after {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    line-height: normal;
+}
+
 .wrap-sidebar {
     display: inline-block;
     font-family: "poppins";
@@ -126,15 +142,15 @@ body {
     display: block;
     width: 20px;
     height: 3px;
-    background-color: #ADADAD;
+    background-color: #adadad;
     border-radius: 3px;
-    transition: all .3s ease-in;
+    transition: all 0.3s ease-in;
 }
 
-.menu-toggle span:nth-child(2){
+.menu-toggle span:nth-child(2) {
     transform-origin: 0 0;
 }
-.menu-toggle span:nth-child(4){
+.menu-toggle span:nth-child(4) {
     transform-origin: 0 100%;
 }
 
@@ -149,23 +165,26 @@ body {
 }
 
 @media screen and (max-width: 992px) {
-    .wrap-sidebar{
+    .wrap-sidebar {
         height: 0vh;
         padding: 0px;
+        position: absolute;
     }
-    .wrap-sidebar .wrap-content-sidebar{
+    .wrap-sidebar .wrap-content-sidebar {
         background-color: #fff;
         padding: 16px;
         position: absolute;
         border-radius: 16px;
         top: 90px;
         opacity: 0;
-        transition: all .3s ease-in;
+        visibility: hidden;
+        transition: all 0.3s ease-in;
     }
-    .wrap-sidebar .wrap-content-sidebar.show{
+    .wrap-sidebar .wrap-content-sidebar.show {
         opacity: 1;
+        visibility: visible;
     }
-    .menu-toggle{
+    .menu-toggle {
         display: flex;
         padding: 22px;
         background-color: white;

@@ -11,7 +11,6 @@
     @include('components.sidebaruser')
     <div class="container-content">
         @include('components.headercontent')
-        
     </div>
 </body>
 </html>

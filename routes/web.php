@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\BookKitchenController;
+use App\Http\Controllers\BookMachineController;
 use App\Http\Controllers\BookRoomController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\PenghuniController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SerbagunaController;
@@ -49,12 +51,16 @@ Route::prefix('/penghuni')->middleware([MemberMiddleware::class])->group(functio
 Route::prefix("/dashboard")->middleware([AdminMiddleware::class])->group(function(){
     Route::get("/forum", [ForumController::class, 'index']);
     Route::get("/mesincuci", [BookMachineController::class, 'index']);
-    Route::get("/coworking", function(){
-        return view('dashboard.coworking');
-    });
+    Route::get("/coworking", [RoomController::class, 'index']);
     Route::get("/dapur", [BookKitchenController::class, 'index']);
     Route::get("/serbaguna", [SerbagunaController::class, 'index']);
     Route::get("/report", [ReportController::class, 'index']);
     Route::get("/theatre", [TheatreController::class, 'index']);
     Route::get("/penghuni", [PenghuniController::class, 'index']);
+    Route::controller(PenghuniController::class)->group(function(){
+        Route::get("/penghuni", 'index');
+        Route::post("/penghuni", 'create');
+        Route::put("/penghuni/{NIP}", 'update');
+        Route::delete("/penghuni/{NIP}", 'destroy');
+    });
 });
