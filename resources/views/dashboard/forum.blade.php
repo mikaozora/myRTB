@@ -9,8 +9,10 @@
 </head>
 <body>
     @include('components.sidebaradmin')
-    <div class="container-content">
+    <div class="kontainer-header">
         @include('components.headercontent')
+    </div>
+    <div class="container-content">
     </div>
 </body>
 </html>
