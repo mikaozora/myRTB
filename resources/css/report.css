@@ -9,6 +9,12 @@ body{
     border-radius: 16px;
 }
 
+.wrap-all{
+    background: white;
+    border-radius: 16px;
+    padding-bottom: 1px;
+}
+
 .wrap-type{
     display: flex;
     flex-direction: column;
@@ -32,6 +38,10 @@ body{
     flex-direction: row;
 }
 
+.wrap-fasum input{
+    accent-color: var(--primary);
+}
+
 .wrap-report{
     width: 90%;
     margin-left: 20px;
@@ -52,8 +62,10 @@ body{
 
 textarea{
     border-radius: 16px;
-    padding-top: 5px;
-    padding-left: 10px;
+    padding-top: 20px;
+    padding-left: 20px;
+    border: solid 2px var(--primary);
+    outline: none;
 }
 
 .wrap-report h3{
@@ -77,27 +89,23 @@ textarea{
 .wrap-photo-upload input[type=file]::file-selector-button {
     margin-right: 20px;
     border: none;
-    background: var(--primary);
+    background: rgb(216, 216, 216);
     padding: 10px 20px;
     border-radius: 10px;
-    color: #fff;
     cursor: pointer;
+    font-weight: bold;
     transition: background .2s ease-in-out;
-}
-  
-input[type=file]::file-selector-button:hover {
-    background: #0d45a5;
 }
 
 .wrap-submit{
-    margin-top: 25px;
+    margin-top: 20px;
     margin-bottom: 15px;
     display: flex;
     justify-content: center;
 }
 
 .wrap-submit button{
-    width: 50vw;
+    width: 96%;
     height: 4.5vh;
     background-color: var(--primary);
     color: var(--bg-primary);
