@@ -36,15 +36,20 @@ Route::post('/sesi/login',[UserController::class, 'login'])->middleware([GuestMi
 Route::post("/logout", [UserController::class, 'logout'])->middleware([LogoutMiddleware::class]);
 
 
-
 Route::prefix('/penghuni')->middleware([MemberMiddleware::class])->group(function(){
     Route::get("/forum", [ForumController::class, 'index']);
     Route::get("/mesincuci", [BookRoomController::class, 'index']);
-    Route::get("/coworking", [RoomController::class, 'index']);
+    Route::controller(RoomController::class)->group(function(){
+        Route::get("/coworking", 'index');
+        Route::post("/coworking", 'bookCWS');
+    }); 
     Route::get("/dapur", [BookKitchenController::class, 'index']);
     Route::get("/history", [HistoryController::class, 'index']);
     Route::get("/serbaguna", [SerbagunaController::class, 'index']);
-    Route::get("/report", [ReportController::class, 'index']);
+    Route::controller(ReportController::class)->group(function(){
+        Route::get("/report", 'index');
+        Route::post("/report", 'sendReport');
+    });
     Route::get("/theatre", [TheatreController::class, 'index']);
 });
 
