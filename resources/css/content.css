@@ -10,6 +10,7 @@ body{
     padding-left: 320px;
     padding-top: 16px;
     padding-right: 16px;
+    margin-bottom: 16px;
 }
 
 @media screen and (max-width: 992px) {
