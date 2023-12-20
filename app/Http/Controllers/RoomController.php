@@ -59,16 +59,19 @@ class RoomController extends Controller
         $decode = json_decode($status, true);
         $status_id = $decode[0]['status_id'];
 
+
         $book = new BookRoom();
         $book->NIP = $nip;
         $book->room_id = $room_id;
         $book->status_id = $status_id;
         $book->participant = $count;
         $book->type = $book_type;
-        $book->save();
+        // $book->start_time = $date;
+        // $book->end_time = $date;
+        // $book->save();
 
-        return redirect()->action([RoomController::class, 'index'])->with(
-            'message', 'Berhasil Melakukan Booking Co-working Space'
-        );
+        // return redirect()->action([RoomController::class, 'index'])->with(
+        //     'message', 'Berhasil Melakukan Booking Co-working Space'
+        // );
     }
 }

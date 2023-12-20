@@ -60,11 +60,11 @@
                         <h4>Tipe</h4>
                         <div class="wrap-type">
                             <div class="wrap-private">
-                                <input type="radio" name="book-type" value="Private" required>
+                                <input type="radio" name="book_type" value="Private" required>
                                 <p>Private</p>
                             </div>
                             <div class="wrap-public">
-                                <input type="radio" name="book-type" value="Public" required>
+                                <input type="radio" name="book_type" value="Public" required>
                                 <p>Public</p>
                             </div>
                         </div>
