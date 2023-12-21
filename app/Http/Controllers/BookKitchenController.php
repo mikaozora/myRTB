@@ -8,6 +8,7 @@ use App\Models\Status;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use PhpParser\Node\Stmt\Foreach_;
 
 class BookKitchenController extends Controller
@@ -186,6 +187,12 @@ class BookKitchenController extends Controller
         
         $nip = $request->session()->get('NIP');
         
+        if(empty($stuffId)){
+            return redirect()->action([BookKitchenController::class, 'index'])->with([
+                "message" => 'Fasilitas wajib diisi',
+                "status" => 'error'
+            ]);
+        }
         $bookKitchen = new BookKitchen();
         $bookKitchen->NIP = $nip;
         $bookKitchen->stuff_id = $stuffId;
@@ -194,7 +201,7 @@ class BookKitchenController extends Controller
         $bookKitchen->status_id = $statusId;
         $bookKitchen->save();
 
-        return redirect()->action([BookKitchenController::class, 'index']);
+        return redirect()->action([BookKitchenController::class, 'index'])->with('message', 'Berhasil melakukan booking');
     }
 
 }

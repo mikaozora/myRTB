@@ -36,6 +36,22 @@ Route::post('/sesi/login',[UserController::class, 'login'])->middleware([GuestMi
 Route::post("/logout", [UserController::class, 'logout'])->middleware([LogoutMiddleware::class]);
 
 
+Route::prefix("/dashboard")->middleware([AdminMiddleware::class])->group(function(){
+    Route::get("/forum", [ForumController::class, 'index']);
+    Route::get("/mesincuci", [BookMachineController::class, 'index']);
+    Route::get("/coworking", [RoomController::class, 'index']);
+    Route::get("/dapur", [BookKitchenController::class, 'index']);
+    Route::get("/serbaguna", [SerbagunaController::class, 'index']);
+    Route::get("/report", [ReportController::class, 'index']);
+    Route::get("/theatre", [TheatreController::class, 'index']);
+    Route::controller(PenghuniController::class)->group(function(){
+        Route::get("/penghuni", 'index');
+        Route::post("/penghuni", 'create');
+        Route::put("/penghuni/{NIP}", 'update');
+        Route::delete("/penghuni/{NIP}", 'destroy');
+    });
+});
+
 Route::prefix('/penghuni')->middleware([MemberMiddleware::class])->group(function(){
     Route::get("/forum", [ForumController::class, 'index']);
     Route::get("/mesincuci", [BookMachineController::class, 'index']);
@@ -54,21 +70,4 @@ Route::prefix('/penghuni')->middleware([MemberMiddleware::class])->group(functio
         Route::post("/report", 'sendReport');
     });
     Route::get("/theatre", [TheatreController::class, 'index']);
-});
-
-Route::prefix("/dashboard")->middleware([AdminMiddleware::class])->group(function(){
-    Route::get("/forum", [ForumController::class, 'index']);
-    Route::get("/mesincuci", [BookMachineController::class, 'index']);
-    Route::get("/coworking", [RoomController::class, 'index']);
-    Route::get("/dapur", [BookKitchenController::class, 'index']);
-    Route::get("/serbaguna", [SerbagunaController::class, 'index']);
-    Route::get("/report", [ReportController::class, 'index']);
-    Route::get("/theatre", [TheatreController::class, 'index']);
-    Route::get("/penghuni", [PenghuniController::class, 'index']);
-    Route::controller(PenghuniController::class)->group(function(){
-        Route::get("/penghuni", 'index');
-        Route::post("/penghuni", 'create');
-        Route::put("/penghuni/{NIP}", 'update');
-        Route::delete("/penghuni/{NIP}", 'destroy');
-    });
 });
