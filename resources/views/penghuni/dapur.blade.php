@@ -12,6 +12,9 @@
 </head>
 
 <body>
+    @if(session('message'))
+        @include('components.notification')
+    @endif
     @include('components.sidebaruser')
     <div class="kontainer-header">
         @include('components.headercontent')
@@ -21,7 +24,7 @@
             <div class="wrap-left">
                 @include('components.date')
                 <hr>
-                <form action="/penghuni/dapur" method="post">
+                <form action="/penghuni/dapur?date={{Request::get('date')}}" method="post">
                     @csrf
                     <div class="wrap-validate-choose-date">
                         @if (!Request::get('date'))
@@ -33,7 +36,6 @@
                             <h4>Jam Booking</h4>
                             <div class="wrap-time">
                                 <div class="from-time">
-                                    {{-- <h5>Dari :</h5> --}}
                                     <select name="from-time" id="time" class="from-time-select"
                                         onchange="timeChange()" required>
                                         <option value="">Pilih Jam</option>

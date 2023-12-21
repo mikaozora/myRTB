@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\BookKitchen;
 use App\Models\KitchenStuff;
+use App\Models\Status;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use PhpParser\Node\Stmt\Foreach_;
 
 class BookKitchenController extends Controller
@@ -169,45 +171,37 @@ class BookKitchenController extends Controller
     public function create(Request $request)
     {
         $date = $request->get('date');
+        $startTime = $request->input('from-time');
+        $tempTime = Carbon::today()->setTimeFromTimeString($startTime);
+        $tempTime->addHours(2);
+        $tempTime = explode(' ', $tempTime);
+        $endTime = $tempTime[1];
+
+        $startTime = $date . ' ' . $startTime;
+        $endTime = $date . ' ' . $endTime;
+
+        $stuffId = $request->input('stuff');
+        $status = Status::query()->where('name', '=', 'Booked')->get('status_id');
+        $status = json_decode($status, true);
+        $statusId = $status[0]['status_id'];
+        
+        $nip = $request->session()->get('NIP');
+        
+        if(empty($stuffId)){
+            return redirect()->action([BookKitchenController::class, 'index'])->with([
+                "message" => 'Fasilitas wajib diisi',
+                "status" => 'error'
+            ]);
+        }
+        $bookKitchen = new BookKitchen();
+        $bookKitchen->NIP = $nip;
+        $bookKitchen->stuff_id = $stuffId;
+        $bookKitchen->start_time = $startTime;
+        $bookKitchen->end_time = $endTime;
+        $bookKitchen->status_id = $statusId;
+        $bookKitchen->save();
+
+        return redirect()->action([BookKitchenController::class, 'index'])->with('message', 'Berhasil melakukan booking');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(BookKitchen $bookKitchen)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(BookKitchen $bookKitchen)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, BookKitchen $bookKitchen)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(BookKitchen $bookKitchen)
-    {
-        //
-    }
 }
