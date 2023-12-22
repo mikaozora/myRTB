@@ -55,8 +55,7 @@ class BookKitchenController extends Controller
             ->select('book_kitchens.stuff_id') // Select the columns you need
             ->get();
 
-        $stoves = KitchenStuff::where('name', 'like', 'Stove%')->get('stuff_id');
-
+        $stoves = KitchenStuff::where('name', 'like', 'Stove%')->get(['stuff_id', 'name']);
         $stoveAvailLeft = [];
         $stoveAvailRight = [];
 
@@ -154,6 +153,33 @@ class BookKitchenController extends Controller
             }
             $idx++;
         }
+
+        // get pengguna hari ini
+        $stuffSelected = $request->get('stuff');
+        $books = BookKitchen::join('users', 'book_kitchens.NIP', '=', 'users.NIP')
+        ->whereDate('book_kitchens.start_time', '=', $dateParam)
+        ->where('book_kitchens.stuff_id', '=', $stuffSelected)
+        ->select('users.NIP', 'users.name', 'users.photo', 'users.class', 'book_kitchens.start_time', 'book_kitchens.end_time') // Select the columns you need
+        ->get();
+
+        $userBooks = [];
+        foreach($books as $book){
+            $tempStartTime = explode(' ', $book->start_time);
+            $tempEndTime = explode(' ', $book->end_time);
+            $tempStartTime = $tempStartTime[1];
+            $tempEndTime = $tempEndTime[1];
+            $tempStartTime = str_replace(':00:00', '.00', $tempStartTime);
+            $tempEndTime = str_replace(':00:00', '.00', $tempEndTime);
+            $userBooks[] = [
+                "name" => $book['name'],
+                "NIP" => $book['NIP'],
+                "photo" => $book['photo'],
+                "class" => $book['class'],
+                'start_time' => $tempStartTime,
+                "end_time" => $tempEndTime
+            ];
+        }
+
         return response()->view('penghuni.dapur', [
             "title" => "Booking Dapur",
             "datenow" => $date,
@@ -161,7 +187,11 @@ class BookKitchenController extends Controller
             "stoveAvailLeft" => $stoveAvailLeft,
             "stoveAvailRight" => $stoveAvailRight,
             "riceCookerAvail" => $riceCookerAvail,
-            "airFryerAvail" => $airFryerAvail
+            "airFryerAvail" => $airFryerAvail,
+            "stoves" => $stoves,
+            "riceCookers" => $riceCookers,
+            "airFryers" => $airFryers,
+            "books" => $userBooks
         ]);
     }
 

@@ -5,12 +5,14 @@ h4 {
 
 .wrap-content {
     display: flex;
+    justify-content: space-between;
 }
 
 .wrap-content .wrap-left {
     padding: 6px 16px 16px 16px;
     background-color: #fff;
     border-radius: 16px;
+    width: 65%;
 }
 
 .wrap-content .wrap-validate-choose-date .wrap-span {
@@ -139,4 +141,66 @@ input[type="radio"]:checked + .custom-radio {
 
 .btn-submit:hover{
     background-color: #16437f;
+}
+
+.wrap-content .wrap-right {
+    padding: 6px 16px 16px 16px;
+    background-color: #fff;
+    border-radius: 16px;
+    width: 29%;
+}
+
+.wrap-content .wrap-right h5{
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 16px 0px 8px 0px;
+}
+
+.ml-0{
+    margin-left: 0px;
+}
+
+.wrap-scrollable{
+    max-height: 110px;
+    overflow-y: auto;
+    border-radius: 8px;
+    scrollbar-width: none;
+}
+.empty{
+    margin: 0px;
+    font-size: .85rem;
+    color: rgba(120, 120, 120, 1);
+}
+
+.wrap-scrollable::-webkit-scrollbar{
+    display: none;
+}
+
+.wrap-detail-user{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+.wrap-detail-user img{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    object-fit: cover;  
+    cursor: pointer;
+}
+.wrap-detail-user .wrap-detail-mid h6{
+    margin: 0px;
+    font-size: .85rem;
+    font-weight: 600;
+}
+.wrap-detail-user .wrap-detail-mid p{
+    margin: 0px;
+    font-size: .75rem;
+    color: rgba(120, 120, 120, 1);
+}
+.wrap-detail-user .wrap-detail-right p{
+    margin: 0px;
+    font-size: .75rem;
+    color: rgba(120, 120, 120, 1);
 }
