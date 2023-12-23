@@ -26,16 +26,17 @@ class RoomController extends Controller
             ]);
         }
         $date = [];
-        $dateValue = [];
-        for($i = 0; $i <= 6; $i++){
-            $date[$i] = Carbon::now()->addDay($i)->locale('id_ID')->format('D, d');
-            $dateValue[$i] = Carbon::now()->addDay($i);
+        for ($i = 0; $i <= 6; $i++) {
+            $carbonInstance = Carbon::createFromFormat('Y-m-d H:i:s', Carbon::now()->addDay($i));
+            $res = $carbonInstance->format('Y-m-d');
+            $date[] = [
+                "label" => Carbon::now()->addDay($i)->locale('id_ID')->format('D, d'),
+                "value" => $res
+            ];
         }
-        $encondedDateValue = htmlspecialchars(json_encode($dateValue));
 
         return response()->view('penghuni.coworking', [
             "datenow" => $date,
-            "dateValue" => $encondedDateValue,
             "title" => "Booking Co-working Space",
         ]);   
     }

@@ -164,7 +164,6 @@ input[type="radio"]:checked + .custom-radio {
     max-height: 110px;
     overflow-y: auto;
     border-radius: 8px;
-    scrollbar-width: none;
 }
 .empty{
     margin: 0px;
@@ -173,7 +172,18 @@ input[type="radio"]:checked + .custom-radio {
 }
 
 .wrap-scrollable::-webkit-scrollbar{
-    display: none;
+    width: 5px;
+}
+
+.wrap-scrollable::-webkit-scrollbar-track{
+    background-color: white;
+}
+.wrap-scrollable::-webkit-scrollbar-thumb{
+    background-color: #e0e0e0;
+    border-radius: 16px;
+}
+.wrap-scrollable::-webkit-scrollbar-thumb:hover{
+    background-color: #d3d3d3;
 }
 
 .wrap-detail-user{
@@ -181,6 +191,7 @@ input[type="radio"]:checked + .custom-radio {
     align-items: center;
     justify-content: space-between;
     margin-bottom: 16px;
+    padding-right: 8px;
 }
 .wrap-detail-user img{
     width: 3rem;
