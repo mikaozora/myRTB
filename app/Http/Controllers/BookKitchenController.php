@@ -33,17 +33,37 @@ class BookKitchenController extends Controller
             ];
         }
         $timeAvail = [];
+        $timeNow = Carbon::now()->timezone('Asia/Jakarta')->format('H');
         for ($i = 0; $i <= 22; $i += 2) {
             if ($i == 22) {
-                $timeAvail[] = [
-                    "label" => str_pad($i, 2, '0', STR_PAD_LEFT) . '.00 - ' . str_pad(0, 2, '0', STR_PAD_LEFT) . '.00',
-                    "value" => str_pad($i, 2, '0', STR_PAD_LEFT) . ':00:00'
-                ];
+                if($i > $timeNow){
+                    $timeAvail[] = [
+                        "label" => str_pad($i, 2, '0', STR_PAD_LEFT) . '.00 - ' . str_pad(0, 2, '0', STR_PAD_LEFT) . '.00',
+                        "value" => str_pad($i, 2, '0', STR_PAD_LEFT) . ':00:00',
+                        "isAvailable" => true
+                    ];
+                }else{
+                    $timeAvail[] = [
+                        "label" => str_pad($i, 2, '0', STR_PAD_LEFT) . '.00 - ' . str_pad(0, 2, '0', STR_PAD_LEFT) . '.00',
+                        "value" => str_pad($i, 2, '0', STR_PAD_LEFT) . ':00:00',
+                        "isAvailable" => false
+                    ];
+                }
+            }else{
+                if($i > $timeNow){
+                    $timeAvail[] = [
+                        "label" => str_pad($i, 2, '0', STR_PAD_LEFT) . '.00 - ' . str_pad($i + 2, 2, '0', STR_PAD_LEFT) . '.00',
+                        "value" => str_pad($i, 2, '0', STR_PAD_LEFT) . ':00:00',
+                        "isAvailable" => true
+                    ];
+                }else{
+                    $timeAvail[] = [
+                        "label" => str_pad($i, 2, '0', STR_PAD_LEFT) . '.00 - ' . str_pad($i + 2, 2, '0', STR_PAD_LEFT) . '.00',
+                        "value" => str_pad($i, 2, '0', STR_PAD_LEFT) . ':00:00',
+                        "isAvailable" => false
+                    ];
+                }
             }
-            $timeAvail[] = [
-                "label" => str_pad($i, 2, '0', STR_PAD_LEFT) . '.00 - ' . str_pad($i + 2, 2, '0', STR_PAD_LEFT) . '.00',
-                "value" => str_pad($i, 2, '0', STR_PAD_LEFT) . ':00:00'
-            ];
         }
 
         $timeParam = $request->get('time');

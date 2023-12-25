@@ -41,7 +41,7 @@
                                         <option value="">Pilih Jam</option>
                                         @foreach ($timeAvail as $time)
                                             <option value="{{ $time['value'] }}"
-                                                {{ Request::get('time') == $time['value'] ? 'selected' : '' }}>
+                                                {{ Request::get('time') == $time['value'] ? 'selected' : '' }} {{$time['isAvailable'] ? '' : 'disabled'}}>
                                                 {{ $time['label'] }}</option>
                                         @endforeach
                                     </select>
