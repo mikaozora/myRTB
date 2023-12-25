@@ -95,3 +95,9 @@ img, svg {
         height: 2rem;
     }
 }
+
+@media screen and (max-width: 476px) {
+    .kontainer-header{
+        margin-bottom: 0px;
+    }
+}
