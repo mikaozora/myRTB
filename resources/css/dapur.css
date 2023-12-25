@@ -6,13 +6,15 @@ h4 {
 .wrap-content {
     display: flex;
     justify-content: space-between;
+    gap: 8px;
 }
 
 .wrap-content .wrap-left {
     padding: 6px 16px 16px 16px;
     background-color: #fff;
     border-radius: 16px;
-    width: 65%;
+    /* width: 65%; */
+    flex-grow: 1;
 }
 
 .wrap-content .wrap-validate-choose-date .wrap-span {
@@ -75,8 +77,7 @@ h4 {
 .wrap-content .wrap-validate-choose-date .wrap-stove{
     display: flex;
     align-items: center;
-    width: 45%;
-    justify-content: space-between;
+    gap: 16px;
     margin-bottom: 16px;
 }
 
@@ -89,8 +90,7 @@ h4 {
 
 .wrap-content .wrap-validate-choose-date .wrap-bottom{
     display: flex;
-    width: 50%;
-    justify-content: space-between;
+    gap: 16px;
     margin-bottom: 16px;
 }
 
@@ -214,4 +214,83 @@ input[type="radio"]:checked + .custom-radio {
     margin: 0px;
     font-size: .75rem;
     color: rgba(120, 120, 120, 1);
+}
+
+@media screen and (max-width: 1024px) {
+    .custom-radio {
+        width: 2rem;
+        padding: 4px 0px;
+        border-radius: 8px;
+        font-size: 1rem;
+    }
+    .wrap-content .wrap-right {
+        width: 25%;
+    }
+}
+@media screen and (max-width: 992px) {
+    .wrap-content .wrap-right {
+        width: 27%;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .wrap-content {
+        flex-direction: column;
+        row-gap: 16px;
+    }
+    .wrap-content .wrap-left{
+        width: 95%;
+    }
+    .wrap-content .wrap-right{
+        width: 95%;
+        display: flex;
+        gap: 100px;
+    }
+    .wrap-content .wrap-right .wrap-scrollable .wrap-detail-user{
+        gap: 24px;
+    }
+    .wrap-content .wrap-right .wrap-scrollable{
+        max-height: 200px;
+    }
+    .wrap-content .wrap-right .wrap-scrollable .wrap-detail-user .wrap-detail-right p{
+        margin-right: 32px;
+    }
+    .mr{
+        margin-right: 8px;
+        margin-left: 0px;
+    }
+}
+
+@media screen and (max-width: 476px){
+    .wrap-content .wrap-left{
+        width: 95%;
+    }
+    .wrap-content .wrap-right{
+        gap: 16px;
+    }
+    .wrap-content .wrap-right .wrap-scrollable .wrap-detail-user{
+        gap: 8px;
+    }
+    .wrap-content .wrap-right .wrap-scrollable{
+        max-height: 230px;
+    }
+    .wrap-content .wrap-right .wrap-scrollable .wrap-detail-user .wrap-detail-right p{
+        margin-right: 0px;
+    }
+    .mr{
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+    .wrap-detail-user img{
+        width: 2rem;
+        height: 2rem;
+    }
+    .wrap-detail-user .wrap-detail-mid h6{
+        font-size: .75rem;
+    }
+    .stuff-items{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
 }

@@ -106,52 +106,65 @@
                 </form>
             </div>
             <div class="wrap-right">
-                <h5>Kompor</h5>
-                @foreach ($stoves as $stove)
-                    <label>
-                        <input type="radio" name="getStuff" id="{{ $stove->stuff_id }}"
-                            value="{{ $stove->stuff_id }}" class="radio" onchange="stuffChange()"
-                            {{ Request::get('stuff') == $stove->stuff_id ? 'checked' : '' }}>
-                        <span class="custom-radio mr ml-0">{{ $loop->iteration }}</span>
-                    </label>
-                @endforeach
-                <h5>Rice Cooker</h5>
-                @foreach ($riceCookers as $riceCooker)
-                    <label>
-                        <input type="radio" name="getStuff" id="{{ $riceCooker->stuff_id }}"
-                            value="{{ $riceCooker->stuff_id }}" class="radio" onchange="stuffChange()"
-                            {{ Request::get('stuff') == $riceCooker->stuff_id ? 'checked' : '' }}>
-                        <span class="custom-radio mr ml-0">{{ $loop->iteration }}</span>
-                    </label>
-                @endforeach
-                <h5>Air Fryer</h5>
-                @foreach ($airFryers as $airFryer)
-                    <label>
-                        <input type="radio" name="getStuff" id="{{ $airFryer->stuff_id }}"
-                            value="{{ $airFryer->stuff_id }}" class="radio" onchange="stuffChange()"
-                            {{ Request::get('stuff') == $airFryer->stuff_id ? 'checked' : '' }}>
-                        <span class="custom-radio mr ml-0">{{ $loop->iteration }}</span>
-                    </label>
-                @endforeach
-                <h5>Pengguna Hari Ini</h5>
-                <div class="wrap-scrollable">
-                    @if (empty($books))
-                        <p class="empty">Tidak ada pengguna hari ini</p>
-                    @else
-                        @foreach ($books as $book)
-                            <div class="wrap-detail-user">
-                                <img src="{{ asset('data/' . $book['photo']) }}" alt="">
-                                <div class="wrap-detail-mid">
-                                    <h6>{{ $book['name'] }}</h6>
-                                    <p>{{ $book['class'] }}</p>
-                                </div>
-                                <div class="wrap-detail-right">
-                                    <p>{{ $book['start_time'] }} - {{ $book['end_time'] }}</p>
-                                </div>
-                            </div>
+                <div class="stuff-content">
+                    <h5>Kompor</h5>
+                    <div class="stuff-items">
+                        @foreach ($stoves as $stove)
+                            <label>
+                                <input type="radio" name="getStuff" id="{{ $stove->stuff_id }}"
+                                    value="{{ $stove->stuff_id }}" class="radio" onchange="stuffChange()"
+                                    {{ Request::get('stuff') == $stove->stuff_id ? 'checked' : '' }}>
+                                <span class="custom-radio mr ml-0">{{ $loop->iteration }}</span>
+                            </label>
                         @endforeach
-                    @endif
+                    </div>
+                    <h5>Rice Cooker</h5>
+                    <div class="stuff-items">
+
+                        @foreach ($riceCookers as $riceCooker)
+                            <label>
+                                <input type="radio" name="getStuff" id="{{ $riceCooker->stuff_id }}"
+                                    value="{{ $riceCooker->stuff_id }}" class="radio" onchange="stuffChange()"
+                                    {{ Request::get('stuff') == $riceCooker->stuff_id ? 'checked' : '' }}>
+                                <span class="custom-radio mr ml-0">{{ $loop->iteration }}</span>
+                            </label>
+                        @endforeach
+                    </div>
+                    <h5>Air Fryer</h5>
+                    <div class="stuff-items">
+
+                        @foreach ($airFryers as $airFryer)
+                            <label>
+                                <input type="radio" name="getStuff" id="{{ $airFryer->stuff_id }}"
+                                    value="{{ $airFryer->stuff_id }}" class="radio" onchange="stuffChange()"
+                                    {{ Request::get('stuff') == $airFryer->stuff_id ? 'checked' : '' }}>
+                                <span class="custom-radio mr ml-0">{{ $loop->iteration }}</span>
+                            </label>
+                        @endforeach
+                    </div>
                 </div>
+                <div class="user-content">
+                    <h5>Pengguna Hari Ini</h5>
+                    <div class="wrap-scrollable">
+                        @if (empty($books))
+                            <p class="empty">Tidak ada pengguna hari ini</p>
+                        @else
+                            @foreach ($books as $book)
+                                <div class="wrap-detail-user">
+                                    <img src="{{ asset('data/' . $book['photo']) }}" alt="">
+                                    <div class="wrap-detail-mid">
+                                        <h6>{{ $book['name'] }}</h6>
+                                        <p>{{ $book['class'] }}</p>
+                                    </div>
+                                    <div class="wrap-detail-right">
+                                        <p>{{ $book['start_time'] }} - {{ $book['end_time'] }}</p>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
