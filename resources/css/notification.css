@@ -6,7 +6,8 @@
     position: absolute;
     z-index: 100;
     top: 32px;
-    left: 45%;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 0.85rem;
     font-weight: 500;
     color: var(--primary);
@@ -20,11 +21,4 @@
     color: rgba(149, 32, 32, 1);
     background-color: rgba(255, 222, 222, 1);
     border-left: 10px solid rgba(149, 32, 32, 1);
-}
-
-@media screen and (max-width: 768px) {
-    .notification {
-        top: 32px;
-        left: 15%;
-    }
 }

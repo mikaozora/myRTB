@@ -32,43 +32,42 @@ class BookKitchenController extends Controller
                 "value" => $res
             ];
         }
-        $timeAvail = [];
-        $timeNow = Carbon::now()->timezone('Asia/Jakarta')->format('H');
-        for ($i = 0; $i <= 22; $i += 2) {
-            if ($i == 22) {
-                if($i > $timeNow){
-                    $timeAvail[] = [
-                        "label" => str_pad($i, 2, '0', STR_PAD_LEFT) . '.00 - ' . str_pad(0, 2, '0', STR_PAD_LEFT) . '.00',
-                        "value" => str_pad($i, 2, '0', STR_PAD_LEFT) . ':00:00',
-                        "isAvailable" => true
-                    ];
-                }else{
-                    $timeAvail[] = [
-                        "label" => str_pad($i, 2, '0', STR_PAD_LEFT) . '.00 - ' . str_pad(0, 2, '0', STR_PAD_LEFT) . '.00',
-                        "value" => str_pad($i, 2, '0', STR_PAD_LEFT) . ':00:00',
-                        "isAvailable" => false
-                    ];
-                }
-            }else{
-                if($i > $timeNow){
-                    $timeAvail[] = [
-                        "label" => str_pad($i, 2, '0', STR_PAD_LEFT) . '.00 - ' . str_pad($i + 2, 2, '0', STR_PAD_LEFT) . '.00',
-                        "value" => str_pad($i, 2, '0', STR_PAD_LEFT) . ':00:00',
-                        "isAvailable" => true
-                    ];
-                }else{
-                    $timeAvail[] = [
-                        "label" => str_pad($i, 2, '0', STR_PAD_LEFT) . '.00 - ' . str_pad($i + 2, 2, '0', STR_PAD_LEFT) . '.00',
-                        "value" => str_pad($i, 2, '0', STR_PAD_LEFT) . ':00:00',
-                        "isAvailable" => false
-                    ];
-                }
-            }
-        }
 
         $timeParam = $request->get('time');
         $dateParam = $request->get('date');
         $datetime = $dateParam . ' ' . $timeParam;
+
+        $timeAvail = [];
+        $timeNow = Carbon::now()->timezone('Asia/Jakarta')->format('H');
+        $dateNow = Carbon::now()->timezone('Asia/Jakarta')->format('Y-m-d');
+
+        for ($i = 0; $i <= 22; $i += 2) {
+            $isNow = false;
+            if ($dateParam == $dateNow) {
+                $isNow = true;
+            }
+            if ($isNow) {
+                if ($i > $timeNow) {
+                    $timeAvail[] = [
+                        "label" => str_pad($i, 2, '0', STR_PAD_LEFT) . '.00 - ' . ($i == 22 ? str_pad(0, 2, '0', STR_PAD_LEFT) . '.00' : str_pad($i + 2, 2, '0', STR_PAD_LEFT) . '.00'),
+                        "value" => str_pad($i, 2, '0', STR_PAD_LEFT) . ':00:00',
+                        "isAvailable" => true
+                    ];
+                } else {
+                    $timeAvail[] = [
+                        "label" => str_pad($i, 2, '0', STR_PAD_LEFT) . '.00 - ' . ($i == 22 ? str_pad(0, 2, '0', STR_PAD_LEFT) . '.00' : str_pad($i + 2, 2, '0', STR_PAD_LEFT) . '.00'),
+                        "value" => str_pad($i, 2, '0', STR_PAD_LEFT) . ':00:00',
+                        "isAvailable" => false
+                    ];
+                }
+            } else {
+                $timeAvail[] = [
+                    "label" => str_pad($i, 2, '0', STR_PAD_LEFT) . '.00 - ' . ($i == 22 ? str_pad(0, 2, '0', STR_PAD_LEFT) . '.00' : str_pad($i + 2, 2, '0', STR_PAD_LEFT) . '.00'),
+                    "value" => str_pad($i, 2, '0', STR_PAD_LEFT) . ':00:00',
+                    "isAvailable" => true
+                ];
+            }
+        }
 
         $stuffBooked = BookKitchen::join('kitchen_stuffs', 'book_kitchens.stuff_id', '=', 'kitchen_stuffs.stuff_id')
             ->where('book_kitchens.start_time', $datetime)
@@ -177,13 +176,13 @@ class BookKitchenController extends Controller
         // get pengguna hari ini
         $stuffSelected = $request->get('stuff');
         $books = BookKitchen::join('users', 'book_kitchens.NIP', '=', 'users.NIP')
-        ->whereDate('book_kitchens.start_time', '=', $dateParam)
-        ->where('book_kitchens.stuff_id', '=', $stuffSelected)
-        ->select('users.NIP', 'users.name', 'users.photo', 'users.class', 'book_kitchens.start_time', 'book_kitchens.end_time') // Select the columns you need
-        ->get();
+            ->whereDate('book_kitchens.start_time', '=', $dateParam)
+            ->where('book_kitchens.stuff_id', '=', $stuffSelected)
+            ->select('users.NIP', 'users.name', 'users.photo', 'users.class', 'book_kitchens.start_time', 'book_kitchens.end_time') // Select the columns you need
+            ->get();
 
         $userBooks = [];
-        foreach($books as $book){
+        foreach ($books as $book) {
             $tempStartTime = explode(' ', $book->start_time);
             $tempEndTime = explode(' ', $book->end_time);
             $tempStartTime = $tempStartTime[1];
@@ -234,10 +233,10 @@ class BookKitchenController extends Controller
         $status = Status::query()->where('name', '=', 'Booked')->get('status_id');
         $status = json_decode($status, true);
         $statusId = $status[0]['status_id'];
-        
+
         $nip = $request->session()->get('NIP');
-        
-        if(empty($stuffId)){
+
+        if (empty($stuffId)) {
             return redirect()->action([BookKitchenController::class, 'index'])->with([
                 "message" => 'Fasilitas wajib diisi',
                 "status" => 'error'
@@ -253,5 +252,4 @@ class BookKitchenController extends Controller
 
         return redirect()->action([BookKitchenController::class, 'index'])->with('message', 'Berhasil melakukan booking');
     }
-
 }
