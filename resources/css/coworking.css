@@ -6,14 +6,27 @@ body {
     font-family: "poppins";
 }
 
-hr{
-    margin: 0;
-}
-
 h4{
     padding-left: 20px;
     margin-top: 10px;
     margin-bottom: 8px;
+}
+
+.schedule-box .wrap-validate-choose-date .wrap-span {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.schedule-box .wrap-validate-choose-date .wrap-span img {
+    width: 250px;
+    height: auto;
+}
+.schedule-box .wrap-validate-choose-date .wrap-span h6 {
+    font-size: 16px;
+    margin: 0px;
+    font-weight: 600;
 }
 
 .bottom-box{
@@ -36,9 +49,9 @@ h4{
 }
 
 .schedule-box{
-    margin-top: 15px;
     background-color: white;
     border-radius: 16px;
+    padding: 6px 16px 16px 16px;
 }   
 
 .wrap-date{
@@ -144,22 +157,89 @@ p{
     font-style: italic;
 }
 
-.from-time-select{
+.from-time-select {
     width: 85px;
     height: 30px;
     border-radius: 16px;
-    padding-left: 5px;
+    padding: 0px 5px;
     margin-bottom: 5px;
+    font-family: "poppins", monospace;
 }
 
-.to-time-select{
+.to-time-select {
     width: 85px;
     height: 30px;
     border-radius: 16px;
-    padding-left: 5px;
+    padding: 0px 5px;
     margin-bottom: 5px;
+    font-family: "poppins", monospace;
 }
 
-.today-user-box{
-    background-color: aquamarine;
+.wrap-right {
+    padding: 6px 16px 16px 16px;
+    background-color: #fff;
+    border-radius: 16px;
+    width: 29%;
+}
+
+.wrap-right h5{
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 10px 0px 8px 0px;
+}
+
+.wrap-scrollable{
+    max-height: 320px;
+    overflow-y: auto;
+    border-radius: 8px;
+}
+.empty{
+    margin: 0px;
+    font-size: .85rem;
+    color: rgba(120, 120, 120, 1);
+}
+
+.wrap-scrollable::-webkit-scrollbar{
+    width: 5px;
+}
+
+.wrap-scrollable::-webkit-scrollbar-track{
+    background-color: white;
+}
+.wrap-scrollable::-webkit-scrollbar-thumb{
+    background-color: #e0e0e0;
+    border-radius: 16px;
+}
+.wrap-scrollable::-webkit-scrollbar-thumb:hover{
+    background-color: #d3d3d3;
+}
+
+.wrap-detail-user{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding-right: 8px;
+}
+.wrap-detail-user img{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    object-fit: cover;  
+    cursor: pointer;
+}
+.wrap-detail-user .wrap-detail-mid h6{
+    margin: 0px;
+    font-size: .85rem;
+    font-weight: 600;
+}
+.wrap-detail-user .wrap-detail-mid p{
+    margin: 0px;
+    font-size: .75rem;
+    color: rgba(120, 120, 120, 1);
+}
+.wrap-detail-user .wrap-detail-right p{
+    margin: 0px;
+    font-size: .75rem;
+    color: rgba(120, 120, 120, 1);
 }
