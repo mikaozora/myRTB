@@ -17,6 +17,7 @@ h4{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: fit-content;
 }
 
 .schedule-box .wrap-validate-choose-date .wrap-span img {
@@ -51,7 +52,7 @@ h4{
 .schedule-box{
     background-color: white;
     border-radius: 16px;
-    padding: 6px 16px 16px 16px;
+    padding: 6px 22px 16px 22px;
 }   
 
 .wrap-date{
@@ -242,4 +243,64 @@ p{
     margin: 0px;
     font-size: .75rem;
     color: rgba(120, 120, 120, 1);
+}
+
+@media screen and (max-width: 1024px) {
+    .bottom-box .wrap-right {
+        width: 25%;
+    }
+}
+@media screen and (max-width: 992px) {
+    .bottom-box .wrap-right {
+        width: 27%;
+    }
+}
+@media screen and (max-width: 768px){
+    .bottom-box {
+        flex-direction: column;
+        row-gap: 16px;
+    }
+    .bottom-box .schedule-box{
+        width: 95%;
+    }
+    .bottom-box .wrap-right{
+        width: 95%;
+        display: flex;
+        gap: 100px;
+    }
+    .bottom-box .wrap-right .wrap-scrollable .wrap-detail-user{
+        gap: 24px;
+    }
+    .bottom-box .wrap-right .wrap-scrollable{
+        max-height: 200px;
+    }
+    .bottom-box .wrap-right .wrap-scrollable .wrap-detail-user .wrap-detail-right p{
+        margin-right: 32px;
+    }
+}
+
+@media screen and (max-width: 476px){
+    .bottom-box .schedule-box{
+        width: 87%;
+    }
+    .bottom-box .wrap-right{
+        gap: 16px;
+        width: 90%;
+    }
+    .bottom-box .wrap-right .wrap-scrollable .wrap-detail-user{
+        gap: 8px;
+    }
+    .bottom-box .wrap-right .wrap-scrollable{
+        max-height: 230px;
+    }
+    .bottom-box .wrap-right .wrap-scrollable .wrap-detail-user .wrap-detail-right p{
+        margin-right: 0px;
+    }
+    .wrap-detail-user img{
+        width: 2rem;
+        height: 2rem;
+    }
+    .wrap-detail-user .wrap-detail-mid h6{
+        font-size: .75rem;
+    }
 }
