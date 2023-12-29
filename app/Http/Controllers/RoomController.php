@@ -46,14 +46,6 @@ class RoomController extends Controller
             ];            
         }
 
-        // $timeTo = [];
-        // for ($i = 7; $i <= 24; $i++) {
-        //     $timeTo[] = [
-        //         "label" => $i . ':00',
-        //         "value" => str_pad($i, 2, '0', STR_PAD_LEFT) . ':00:00'
-        //     ];
-        // }
-
         $timeParam = $request->get('fromtime');
         $dateParam = $request->get('date');
         $datetime = $dateParam . ' ' . $timeParam;
@@ -66,195 +58,79 @@ class RoomController extends Controller
         $bookCWS = BookRoom::where('room_id', $room_id)
         ->where('start_time', 'like', $today.'%')
         ->get();
-
+        
+        // FROM TIME
         $roomAvail = [];
-        // 1.
-        // foreach($timeFrom as $tf){
-        //     $isBooked = false;
-        //     if (empty($bookCWS)){
-        //         $roomAvail[] = [
-        //             "label" => $tf['label'],
-        //             "value" => $tf['value'],
-        //             "booked" => false                        
-        //         ];
-        //     } else {
-        //         // foreach($bookCWS as $bc){
-        //         //     if ($tf['allval'] == $bc['start_time']){
-        //         //         $isBooked = true;
-        //         //         break;
-        //         //     }
-        //         // }
-        //         for ($i = 0; $i < sizeof($bookCWS); $i++){
-        //             if ($tf['allval'] == $bookCWS[$i]['start_time']) {
-        //                 $isBooked = true;
-
-        //                 break;
-        //             }
-        //         }
-
-        //         if ($isBooked){
-        //             $roomAvail[] = [
-        //                 'booked' => true,
-        //                 'value' => $tf['allval'],
-        //                 'label' => $tf['label']
-        //             ];
-        //         } else {
-        //             $roomAvail[] = [
-        //                 'booked' => false,
-        //                 'value' => $tf['allval'],
-        //                 'label' => $tf['label']
-        //             ];
-        //         }
-        //     }
-        // }
-
-        // 2.
+        $timeNow = Carbon::now()->timezone('Asia/Jakarta')->format('H');
+        $dateNow = Carbon::now()->timezone('Asia/Jakarta')->format('Y-m-d');
         for($j = 0; $j < sizeof($timeFrom); $j++){
             $isBooked = false;
+            $startBook = 0;
+            $endBook = 0;
+            $isNow = false;
+            $past = (int)substr($timeFrom[$j]['allval'], 11, 2);
+            if ($dateParam == $dateNow) $isNow = true;
             if (empty($bookCWS)){
-                $roomAvail[] = [
-                    "label" => $timeFrom[$j]['label'],
-                    "value" => $timeFrom[$j]['value'],
-                    "booked" => false                        
-                ];
+                if ($isNow){
+                    if ($past < $timeNow){
+                        $roomAvail[$j] = [
+                            "label" => $timeFrom[$j]['label'],
+                            "value" => $timeFrom[$j]['value'],
+                            "booked" => true,
+                            "end" => null
+                        ];
+                    } else {
+                        $roomAvail[$j] = [
+                            "label" => $timeFrom[$j]['label'],
+                            "value" => $timeFrom[$j]['value'],
+                            "booked" => true,
+                            "end" => null
+                        ];
+                    }
+                }
             } else {
                 for ($i = 0; $i < sizeof($bookCWS); $i++){
                     if ($timeFrom[$j]['allval'] == $bookCWS[$i]['start_time']) {
                         $isBooked = true;
                         $startBook = substr($bookCWS[$i]['start_time'], 11, 2);
                         $endBook = substr($bookCWS[$i]['end_time'], 11, 2);
-                        if ($endBook - $startBook == 2){
-                            $roomAvail[$j] = [
-                                'booked' => true,
-                                'value' => $timeFrom[$j]['allval'],
-                                'label' => $timeFrom[$j]['label']
-                            ];
-                            $j++;
-                        }
+                        $roomAvail[$j] = [
+                            'booked' => true,
+                            'value' => $timeFrom[$j]['allval'],
+                            'label' => $timeFrom[$j]['label'],
+                            'end' => $bookCWS[$i]['end_time']
+                        ];
                     }
-                }
-                
-                if ($isBooked){
-                    $roomAvail[$j] = [
-                        'booked' => true,
-                        'value' => $timeFrom[$j]['allval'],
-                        'label' => $timeFrom[$j]['label']
-                    ];
-                } else {
-                    $roomAvail[$j] = [
-                        'booked' => false,
-                        'value' => $timeFrom[$j]['allval'],
-                        'label' => $timeFrom[$j]['label']
-                    ];
-                }
+                }    
+                if (!$isBooked){
+                    if ($past < $timeNow){
+                        $roomAvail[$j] = [
+                            'booked' => true,
+                            'value' => $timeFrom[$j]['allval'],
+                            'label' => $timeFrom[$j]['label'],
+                            'end' => null
+                        ];
+                    } else {
+                        $roomAvail[$j] = [
+                            'booked' => false,
+                            'value' => $timeFrom[$j]['allval'],
+                            'label' => $timeFrom[$j]['label'],
+                            'end' => null
+                        ];
+                    }
+                }            
             }
         }
 
-        // 3.
-        // $count = 0;
-        // for($j = 0; $j < sizeof($timeFrom); $j++){
-        //     $count++;
-        //     $isBooked = false;
-        //     if ($count < 24 & $count > 6){
-        //         if (empty($bookCWS)){
-        //             $roomAvail[] = [
-        //                 "label" => $timeFrom[$j]['label'],
-        //                 "value" => $timeFrom[$j]['value'],
-        //                 "booked" => false,
-        //                 'show' => true
-        //             ];
-        //         } else {
-        //             for ($i = 0; $i < sizeof($bookCWS); $i++){
-        //                 if ($timeFrom[$j]['allval'] == $bookCWS[$i]['start_time']) {
-        //                     $isBooked = true;
-        //                     $startBook = substr($bookCWS[$i]['start_time'], 11, 2);
-        //                     $endBook = substr($bookCWS[$i]['end_time'], 11, 2);
-        //                     if ($endBook - $startBook == 2){
-        //                         $roomAvail[$j] = [
-        //                             'booked' => true,
-        //                             'value' => $timeFrom[$j]['allval'],
-        //                             'label' => $timeFrom[$j]['label'],
-        //                             'show' => true
-        //                         ];
-        //                         $j++;
-        //                     }
-        //                 }
-        //             }
-                    
-        //             if ($isBooked){ 
-        //                 $roomAvail[$j] = [
-        //                     'booked' => true,
-        //                     'value' => $timeFrom[$j]['allval'],
-        //                     'label' => $timeFrom[$j]['label'],
-        //                     'show' => true
-        //                 ];
-        //             } else {
-        //                 $roomAvail[$j] = [
-        //                     'booked' => false,
-        //                     'value' => $timeFrom[$j]['allval'],
-        //                     'label' => $timeFrom[$j]['label'],
-        //                     'show' => true
-        //                 ];
-        //             }
-        //         }
-        //     } else {
-        //         $roomAvail[$j] = [
-        //             'booked' => null,
-        //             'value' => null,
-        //             'label' => null,
-        //             'show' => false
-        //         ];
-        //     }
-        // }
+        for ($i = 0; $i < sizeof($roomAvail); $i++){
+            $startBook = (int)substr($roomAvail[$i]['value'], 11, 2);
+            $endBook = (int)substr($roomAvail[$i]['end'], 11, 2);
+            if ($endBook - $startBook == 2){
+                $roomAvail[$i+1]['booked'] = true;
+            }
+        }
 
-        // 1
-        // $timeTo = [];
-        // $fromChosen = $request->get('fromtime');
-        // if (empty($fromChosen) || $fromChosen == "PilihJam"){
-        // } else {
-        //     $fromChosen = $request->get('fromtime');
-        //     $hour = substr($fromChosen, 11, 2); 
-        //     foreach($roomAvail as $ra){
-        //         $idx = 0;
-        //         for($i = 1; $i <= 2; $i++){
-        //             $idx++;
-        //             // $hour + $i . ':00'
-        //             if ($idx == 2){
-        //                 $timeTo[$i] = [
-        //                     "label" => $hour + $i . ':00',
-        //                     "value" => str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00',
-        //                     "booked" => false,
-        //                     "allval" => $request->get('date') . ' ' . str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00'
-        //                 ];
-        //                 if ($ra['value'] == $timeTo[$i]['allval'] && $ra['booked'] == true){
-        //                     $timeTo[$i] = [
-        //                         "label" => $hour + $i . ':00',
-        //                         "value" => str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00',
-        //                         "booked" => true,
-        //                         "allval" => $request->get('date') . ' ' . str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00'
-        //                     ];
-        //                 } 
-        //                 // else {
-        //                 //     $timeTo[$i] = [
-        //                 //         "label" => $hour + $i . ':00',
-        //                 //         "value" => str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00',
-        //                 //         "booked" => false,
-        //                 //         "allval" => $request->get('date') . ' ' . str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00'
-        //                 //     ];
-        //                 // }
-        //                 // dd($timeTo);
-        //             } else {
-        //                 $timeTo[$i] = [
-        //                     "label" => $hour + $i . ':00',
-        //                     "value" => str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00',
-        //                     "booked" => false,
-        //                     "allval" => $request->get('date') . ' ' . str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00'
-        //                 ];
-        //             }
-        //         }
-        //     }
-        // }
-
+        // TO TIME
         $roomAlrBooked = [];
         foreach ($roomAvail as $ra){
             if ($ra['booked'] == true){
@@ -262,62 +138,6 @@ class RoomController extends Controller
             }
         }
 
-        // 2
-        // $timeTo = [];
-        // $fromChosen = $request->get('fromtime');
-        // if (empty($fromChosen) || $fromChosen == "PilihJam"){
-        // } else {
-        //     $fromChosen = $request->get('fromtime');
-        //     $hour = substr($fromChosen, 11, 2); 
-        //     if (sizeof($roomAlrBooked) == 0){
-        //         for($i = 1; $i <= 2; $i++){
-        //             $timeTo[$i] = [
-        //                 "label" => $hour + $i . ':00',
-        //                 "value" => str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00',
-        //                 "booked" => false,
-        //                 "allval" => $request->get('date') . ' ' . str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00'
-        //             ];
-        //         }
-        //     } 
-
-        //     for($j = 0; $j < 47; $j++){
-        //         for($i = 1; $i <= 2; $i++){
-        //             $timeTo[$i] = [
-        //                 "label" => $hour + $i . ':00',
-        //                 "value" => str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00',
-        //                 "booked" => false,
-        //                 "allval" => $request->get('date') . ' ' . str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00'
-        //             ];
-    
-        //             $tempFromChosen = substr($fromChosen, 11, 2); 
-        //             $tempTT = substr($timeTo[$i]['allval'], 11, 2); 
-                    
-        //             if ($tempTT - 2 == $tempFromChosen && $roomAvail[$j+1]['booked'] == false && $roomAvail[$j+2]['booked'] == false){
-        //                 $i++;
-        //                 $timeTo[$i] = [
-        //                     "label" => $hour + $i . ':00',
-        //                     "value" => str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00',
-        //                     "booked" => false,
-        //                     "allval" => $request->get('date') . ' ' . str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00'
-        //                 ];
-        //                 $j = sizeof($roomAvail)-1; 
-        //             }
-
-        //             if ($tempTT - 2 == $tempFromChosen && $roomAvail[$j]['value'] == $timeTo[$i]['allval']){
-        //                 $timeTo[$i] = [
-        //                     "label" => $hour + $i . ':00',
-        //                     "value" => str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00',
-        //                     "booked" => true,
-        //                     "allval" => $request->get('date') . ' ' . str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00'
-        //                 ];
-        //                 $j = sizeof($roomAvail); 
-        //             }
-
-        //         }
-        //     }
-        // }
-
-        // 3
         $timeTo = [];
         $fromChosen = $request->get('fromtime');
         if (empty($fromChosen) || $fromChosen == "PilihJam"){
@@ -333,34 +153,51 @@ class RoomController extends Controller
                         "allval" => $request->get('date') . ' ' . str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00'
                     ];
                 }
-            } 
-            for($j = 0; $j < sizeof($roomAlrBooked); $j++){
-                for($i = 1; $i <= 2; $i++){
-                    $timeTo[$i] = [
-                        "label" => $hour + $i . ':00',
-                        "value" => str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00',
-                        "booked" => false,
-                        "allval" => $request->get('date') . ' ' . str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00'
-                    ];
+            } else {
+                for ($k = 0; $k < sizeof($roomAvail)-1; $k++){
+                    for ($j = 0; $j < sizeof($roomAlrBooked); $j++){
+                        for($i = 1; $i <= 2; $i++){
+                            if ($hour + $i > 24){
+                                break;
+                            }
+                            $timeTo[$i] = [
+                                "label" => $hour + $i . ':00',
+                                "value" => str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00',
+                                "booked" => false,
+                                "allval" => $request->get('date') . ' ' . str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00'
+                            ];
+    
+                            $tempFromChosen = (int)substr($fromChosen, 11, 2); 
+                            $tempEndRAB = (int)substr($roomAlrBooked[$j]['end'], 11, 2);
+                            $tempRAB = (int)substr($roomAlrBooked[$j]['value'], 11, 2);
 
-                    $tempFromChosen = substr($fromChosen, 11, 2); 
-                    $tempTT = substr($timeTo[$i]['allval'], 11, 2); 
-                    // $startHour =
-                    // bandingin start sma end time buat yg booking 1 jam 
-                    
-                    if ($tempTT - 2 == $tempFromChosen && $roomAlrBooked[$j]['value'] == $timeTo[$i]['allval']){
-                        $timeTo[$i] = [
-                            "label" => $hour + $i . ':00',
-                            "value" => str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00',
-                            "booked" => true,
-                            "allval" => $request->get('date') . ' ' . str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00'
-                        ];
-                        $j = sizeof($roomAlrBooked); 
+                            if ($tempEndRAB - $tempFromChosen == 2){
+                                $timeTo[2] = [
+                                    "label" => $hour + 2 . ':00',
+                                    "value" => str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00',
+                                    "booked" => true,
+                                    "allval" => $request->get('date') . ' ' . str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00'
+                                ];
+                                $j = sizeof($roomAlrBooked)-1;
+                                $i = 2;
+                                $k = sizeof($roomAvail)-1;
+                            } else if ($tempEndRAB - $tempFromChosen == 3 && $tempRAB - 1 == $tempFromChosen){
+                                $timeTo[2] = [
+                                    "label" => $hour + 2 . ':00',
+                                    "value" => str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00',
+                                    "booked" => true,
+                                    "allval" => $request->get('date') . ' ' . str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00'
+                                ];
+                                $j = sizeof($roomAlrBooked)-1;
+                                $i = 2;
+                                $k = sizeof($roomAvail)-1;
+                            }                       
+                        }
                     }
                 }
             }
         }
-            
+                    
         $books = BookRoom::join('users', 'book_rooms.NIP', '=', 'users.NIP')
         ->whereDate('book_rooms.start_time', '=', $dateParam)
         ->where('book_rooms.room_id', '=', $room_id)
