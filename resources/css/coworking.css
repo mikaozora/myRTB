@@ -280,18 +280,32 @@ p{
 }
 
 @media screen and (max-width: 476px){
+    .bottom-box{
+        display: flex;
+        align-items: center;
+    }
     .bottom-box .schedule-box{
-        width: 87%;
+        width: 75%;
+    }
+    .wrap-submit{
+        margin-top: 20px;
+    }
+    .wrap-submit button{
+        width: 95%;
     }
     .bottom-box .wrap-right{
         gap: 16px;
-        width: 90%;
+        width: 78%;
+    }
+    .wrap-right{
+        display: flex;
+        flex-direction: column;
     }
     .bottom-box .wrap-right .wrap-scrollable .wrap-detail-user{
         gap: 8px;
     }
     .bottom-box .wrap-right .wrap-scrollable{
-        max-height: 230px;
+        max-height: 200px;
     }
     .bottom-box .wrap-right .wrap-scrollable .wrap-detail-user .wrap-detail-right p{
         margin-right: 0px;
