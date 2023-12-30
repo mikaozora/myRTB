@@ -39,7 +39,7 @@
                                 <option value="PilihJam">Pilih Jam</option>
                                     @foreach ($roomAvail as $ra)
                                         <option value="{{$ra['value']}}" {{ Request::get('fromtime') == $ra['value']  ? 'selected' : '' }} 
-                                        {{$ra['booked'] == true ? 'disabled' : ''}}>
+                                        {{$ra['booked'] == true ? 'disabled' : ''}} {{$ra['isAvailable'] == true ? '' : 'disabled'}}>
                                             {{$ra['label']}}
                                         </option>
                                     @endforeach
