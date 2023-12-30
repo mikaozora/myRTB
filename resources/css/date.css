@@ -80,7 +80,7 @@ body {
     }
 }
 
-@media screen and (max-width: 426px){
+@media screen and (max-width: 476px){
     .wrap-date{
         gap: 16px;
         height: 100%;
