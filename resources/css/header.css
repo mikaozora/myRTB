@@ -100,4 +100,10 @@ img, svg {
     .kontainer-header{
         margin-bottom: 0px;
     }
+    .container-header h3{
+        font-family: 'poppins';
+        font-size: 1rem;
+        font-weight: 700;
+        margin: 0px;
+    }
 }

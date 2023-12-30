@@ -24,7 +24,7 @@ class RoomController extends Controller
     public function index(Request $request){
         if($request->is('dashboard/*')){
             return response()->view('dashboard.coworking', [
-                "title" => "Booking Co-working Space"
+                "title" => "Booking CWS"
             ]);
         }
         $date = [];
@@ -222,7 +222,7 @@ class RoomController extends Controller
 
         return response()->view('penghuni.coworking', [
             "datenow" => $date,
-            "title" => "Booking Co-working Space",
+            "title" => "Booking CWS",
             "timeFrom" => $timeFrom,
             "timeTo" => $timeTo,
             "roomAvail" => $roomAvail,
