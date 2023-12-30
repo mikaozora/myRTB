@@ -38,7 +38,7 @@ class RoomController extends Controller
         }
 
         $timeFrom = [];
-        for ($i = 6; $i <= 23; $i++) {
+        for ($i = 6; $i <= 21; $i++) {
             $timeFrom[] = [
                 "label" => $i . ':00',
                 "value" => str_pad($i, 2, '0', STR_PAD_LEFT) . ':00:00',
@@ -67,27 +67,13 @@ class RoomController extends Controller
             $isBooked = false;
             $startBook = 0;
             $endBook = 0;
-            $isNow = false;
-            $past = (int)substr($timeFrom[$j]['allval'], 11, 2);
-            if ($dateParam == $dateNow) $isNow = true;
             if (empty($bookCWS)){
-                if ($isNow){
-                    if ($past < $timeNow){
-                        $roomAvail[$j] = [
-                            "label" => $timeFrom[$j]['label'],
-                            "value" => $timeFrom[$j]['value'],
-                            "booked" => true,
-                            "end" => null
-                        ];
-                    } else {
-                        $roomAvail[$j] = [
-                            "label" => $timeFrom[$j]['label'],
-                            "value" => $timeFrom[$j]['value'],
-                            "booked" => true,
-                            "end" => null
-                        ];
-                    }
-                }
+                $roomAvail[$j] = [
+                    "label" => $timeFrom[$j]['label'],
+                    "value" => $timeFrom[$j]['value'],
+                    "booked" => false,
+                    "end" => null
+                ];
             } else {
                 for ($i = 0; $i < sizeof($bookCWS); $i++){
                     if ($timeFrom[$j]['allval'] == $bookCWS[$i]['start_time']) {
@@ -98,30 +84,24 @@ class RoomController extends Controller
                             'booked' => true,
                             'value' => $timeFrom[$j]['allval'],
                             'label' => $timeFrom[$j]['label'],
-                            'end' => $bookCWS[$i]['end_time']
+                            'end' => $bookCWS[$i]['end_time'],
+                            'isAvailable' => false
                         ];
                     }
                 }    
                 if (!$isBooked){
-                    if ($past < $timeNow){
-                        $roomAvail[$j] = [
-                            'booked' => true,
-                            'value' => $timeFrom[$j]['allval'],
-                            'label' => $timeFrom[$j]['label'],
-                            'end' => null
-                        ];
-                    } else {
-                        $roomAvail[$j] = [
-                            'booked' => false,
-                            'value' => $timeFrom[$j]['allval'],
-                            'label' => $timeFrom[$j]['label'],
-                            'end' => null
-                        ];
-                    }
+                    $roomAvail[$j] = [
+                        'booked' => false,
+                        'value' => $timeFrom[$j]['allval'],
+                        'label' => $timeFrom[$j]['label'],
+                        'end' => null,
+                        'isAvailable' => true
+                    ];
                 }            
             }
         }
 
+        // DISABLE NEXT HOUR FOR THOSE BOOKING 2 HOURS
         for ($i = 0; $i < sizeof($roomAvail); $i++){
             $startBook = (int)substr($roomAvail[$i]['value'], 11, 2);
             $endBook = (int)substr($roomAvail[$i]['end'], 11, 2);
@@ -130,8 +110,26 @@ class RoomController extends Controller
             }
         }
 
+        // DISABLE TIME THAT ALREADY PAST
+        for ($i = 0; $i < sizeof($timeFrom); $i++) {
+            $past = (int)substr($timeFrom[$i]['allval'], 11, 2) + 1;
+            $isNow = false;
+            if ($dateParam == $dateNow) {
+                $isNow = true;
+            }
+            if ($isNow) {
+                if ($past > $timeNow) {
+                    $roomAvail[$i]["isAvailable"] = true;
+                } else {
+                    $roomAvail[$i]["isAvailable"] = false;
+                }
+            } else {
+                $roomAvail[$i]["isAvailable"] = true;
+            }
+        }
+
         // TO TIME
-        $roomAlrBooked = [];
+        $roomAlrBooked = []; // array of booked room on that day
         foreach ($roomAvail as $ra){
             if ($ra['booked'] == true){
                 $roomAlrBooked[] = $ra;
@@ -157,7 +155,7 @@ class RoomController extends Controller
                 for ($k = 0; $k < sizeof($roomAvail)-1; $k++){
                     for ($j = 0; $j < sizeof($roomAlrBooked); $j++){
                         for($i = 1; $i <= 2; $i++){
-                            if ($hour + $i > 24){
+                            if ($hour + $i > 23){
                                 break;
                             }
                             $timeTo[$i] = [
