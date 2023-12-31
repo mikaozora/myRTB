@@ -36,6 +36,28 @@ Route::post('/sesi/login',[UserController::class, 'login'])->middleware([GuestMi
 Route::post("/logout", [UserController::class, 'logout'])->middleware([LogoutMiddleware::class]);
 
 
+Route::prefix('/penghuni')->middleware([MemberMiddleware::class])->group(function(){
+    Route::get("/forum", [ForumController::class, 'index']);
+    Route::get("/mesincuci", [BookMachineController::class, 'index']);
+    Route::controller(BookMachineController::class)->group(function()
+    {
+        Route::get("/mesincuci", "index");
+        Route::post("/mesincuci", "bookMesinCuci");
+    });
+    Route::controller(RoomController::class)->group(function(){
+        Route::get("/coworking", 'index');
+        Route::post("/coworking", 'bookCWS');
+    });
+    Route::get("/dapur", [BookKitchenController::class, 'index']);
+    Route::get("/history", [HistoryController::class, 'index']);
+    Route::get("/serbaguna", [SerbagunaController::class, 'index']);
+    Route::controller(ReportController::class)->group(function(){
+        Route::get("/report", 'index');
+        Route::post("/report", 'sendReport');
+    });
+    Route::get("/theatre", [TheatreController::class, 'index']);
+});
+
 Route::prefix("/dashboard")->middleware([AdminMiddleware::class])->group(function(){
     Route::get("/forum", [ForumController::class, 'index']);
     Route::get("/mesincuci", [BookMachineController::class, 'index']);
@@ -50,24 +72,4 @@ Route::prefix("/dashboard")->middleware([AdminMiddleware::class])->group(functio
         Route::put("/penghuni/{NIP}", 'update');
         Route::delete("/penghuni/{NIP}", 'destroy');
     });
-});
-
-Route::prefix('/penghuni')->middleware([MemberMiddleware::class])->group(function(){
-    Route::get("/forum", [ForumController::class, 'index']);
-    Route::get("/mesincuci", [BookMachineController::class, 'index']);
-    Route::controller(RoomController::class)->group(function(){
-        Route::get("/coworking", 'index');
-        Route::post("/coworking", 'bookCWS');
-    }); 
-    Route::controller(BookKitchenController::class)->group(function(){
-        Route::get("/dapur", 'index');
-        Route::post("/dapur", 'create');
-    });
-    Route::get("/history", [HistoryController::class, 'index']);
-    Route::get("/serbaguna", [SerbagunaController::class, 'index']);
-    Route::controller(ReportController::class)->group(function(){
-        Route::get("/report", 'index');
-        Route::post("/report", 'sendReport');
-    });
-    Route::get("/theatre", [TheatreController::class, 'index']);
 });

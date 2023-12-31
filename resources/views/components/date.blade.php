@@ -10,8 +10,8 @@
 <body>
     <div class="wrap-date {{ Request::get('date') ? 'date-active' : '' }}">
         @foreach($datenow as $date)
-        <a href="{{Request::url()}}?date={{$date["value"]}}" class="book-date {{Request::get('date') == $date["value"] ? 'active' : ''}}">{{$date["label"]}} 
-        </a> 
+        <a href="{{Request::url()}}?date={{$date["value"]}}" class="book-date {{Request::get('date') == $date["value"] ? 'active' : ''}}">{{$date["label"]}}
+        </a>
         @endforeach
     </div>
 </body>
