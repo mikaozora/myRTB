@@ -236,7 +236,7 @@ class BookKitchenController extends Controller
 
         $nip = $request->session()->get('NIP');
 
-        if (empty($stuffId)) {
+        if(empty($stuffId)){
             return redirect()->action([BookKitchenController::class, 'index'])->with([
                 "message" => 'Fasilitas wajib diisi',
                 "status" => 'error'

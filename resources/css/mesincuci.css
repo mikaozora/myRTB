@@ -1,0 +1,167 @@
+/* ini base awal, punya JC */
+/* biar gak berubah aja base-nya */
+
+hr
+{
+    color: gray;
+}
+
+h4
+{
+    margin-top: 10px;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+    margin-left: 25px;
+}
+
+body
+{
+
+    margin-left: 320px;
+    margin-right: 20px;
+    margin-top: 40px;
+    padding: 0;
+    font-family: "poppins";
+
+}
+
+.inner-box
+{
+
+    display: flex;
+    justify-content: space-between;
+
+}
+
+/* ini sisi form mesin cuci */
+.schedule-box
+{
+    padding: 10px 10px 10px;
+    background-color: white;
+    height: 350px;
+    width: 800px;
+    border-radius: 16px;
+}
+
+.Not-choose-date
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 340px;
+    width: 800px;
+}
+
+.Not-choose-date h2
+{
+    font-weight: normal;
+    font-style: italic;
+}
+
+.Choose-time
+{
+    padding-left: 25px;
+
+    display: flex;
+    flex-direction: row;
+
+    /* background-color: aqua; */
+}
+
+.Choose-time h5
+{
+    font-style: italic;
+}
+
+.opt-time
+{
+    /* background-color: brown; */
+    margin-right: 3rem;
+}
+
+/* ini untuk bubble time select */
+.from-time-select
+{
+    width: 150px;
+    height: 30px;
+    border-radius: 16px;
+    padding: 0px 5px;
+    margin-bottom: 5px;
+    font-family: "poppins", monospace;
+}
+
+
+
+.Choose-Washing-Machine
+{
+    height: 130px;
+    width: 800px;
+    padding-left: 25px;
+    /* background-color: aqua; */
+}
+
+.mr
+{
+    margin-right: 4px;
+    margin-left: 4px;
+}
+
+input[type="radio"]
+{
+    display: none;
+}
+
+.custom-radio {
+    width: 3rem;
+    padding: 8px 0px;
+    border: 2px solid var(--primary);
+    border-radius: 16px;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    font-size: 1.25rem;
+    font-family: 'poppins';
+    font-weight: 700;
+    background-color: #fff;
+    color: rgba(0, 0, 0, 0.20);
+}
+
+
+input[type="radio"]:checked + .custom-radio {
+    background-color: var(--primary);
+}
+.radio[disabled] + .custom-radio{
+    background-color: #D9D9D9;
+    cursor: default;
+}
+
+.btn-submit{
+    width: 780px;
+    height: 30px;
+    border-radius: 8px;
+    background-color: var(--primary);
+    color: #fff;
+    font-size: 1.1rem;
+    border: none;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+.btn-submit:hover{
+    background-color: #16437f;
+}
+
+/* ini sisi pengguna hari ini */
+.today-user-box
+{
+    padding: 0px 10px 0px;
+    background-color: white;
+    height: 370px;
+    width: 350px;
+    border-radius: 16px;
+}
+
+.today-user-box h3
+{
+    padding-left: 10px;
+}

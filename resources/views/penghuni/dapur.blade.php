@@ -85,7 +85,7 @@
                                             </label>
                                         @endforeach
                                     </div>
-                                </div>
+                                </div> 
                                 <div class="air-fryer">
                                     <h5>Air Fryer</h5>
                                     <div class="item">
