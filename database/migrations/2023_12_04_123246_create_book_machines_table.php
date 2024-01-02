@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('start_time')->nullable(true);
             $table->timestamp('end_time')->nullable(true);
             $table->string('photo', 255)->nullable(true);
-            $table->uuid('status_id')->nullable(false);
+            $table->uuid('status_id')->nullable(false); 
 
             $table->foreign('NIP')->on('users')->references('NIP');
             $table->foreign('machine_id')->on('washing_machines')->references('machine_id');
