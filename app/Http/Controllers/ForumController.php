@@ -53,11 +53,9 @@ class ForumController extends Controller
 
         $forum = new Forum();
         $forum->NIP = $NIP;
-        // dd ($request->file('photo'));
 
+        $test = $request->get('photo');
         $file = $request->file('photo');
-        // echo "halo";
-        // echo $file;
         if(isset($file)){
             // echo "halo";    
             // $file = $request->file('photo');

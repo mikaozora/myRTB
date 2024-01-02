@@ -11,7 +11,6 @@ const currentPath = window.location.pathname;
 
 const nip = laravelSessionData.NIP;
 
-console.log(lastCreatedAt);
 
 function scrollToBottom() {
     messages_el.scrollTop = messages_el.scrollHeight;
@@ -30,70 +29,47 @@ message_form.addEventListener("submit", function (e) {
     if (has_errors) {
         return;
     }
-    console.log(file_input.value);
-    console.log(message_input.value);
     if (message_input.value === "") {
-        console.log("mesg_input null");
+        // console.log("mesg_input null");
         message_input.value = file_input.value;
     } else if (file_input.value === "") {
-        console.log("file_input null");
+        // console.log("file_input null");
     }
     const formData = new FormData();
 
-    formData.append("photo", file_input.value);
-    formData.append("message", message_input.value);
-    
+    if(file_input.value){
+
+        formData.append("photo", file_input.files[0] ,file_input.files[0].name);
+    }else{
+        
+        formData.append("message", message_input.value);
+    }
+
     const options = {
         method: "post",
         url: currentPath + "/send-msg",
-        data: formData,
-        headers: {
-            "content-type": "multipart/form-data",
-        },
+        data: formData
     };
 
-    axios.interceptors.request.use(
-        (config) => {
-            if (config.headers["Content-Type"] !== "multipart/form-data") {
-                config.headers["Content-Type"] = "multipart/form-data";
-            }
-
-            return config;
-        },
-        (error) => {
-            // Handle request error
-            return Promise.reject(error);
-        }
-    );
-
-    // fetch(currentPath + "/send-msg", {
-    //     method: "POST",
-    //     body: formData,
-    //     headers: {
-    //         "Content-Type": "multipart/form-data",
-    //     },
-    // }).then((response) => response.json());
-
-    axios(options).then(res=>{console.log(res)});
+    axios(options);
     
     scrollToBottom();
+
+    
 });
 
-// const datenow = document.getElementById("datenow")
 
 window.Echo.channel('chat')
     .listen('.message', (e) => {
         console.log(e);
 
-        //buat tanggal
+    //buat tanggal
         const date = new Date(lastCreatedAt);
 
         const edateOnly = e.created_at.substring(0, 10);
         const etimeOnly = e.created_at.substring(12,16)
         const edate = new Date(edateOnly);
 
-        console.log(e.created_at);
-        console.log(date.getDate());
 
 
         if (date===edate) {
@@ -105,8 +81,6 @@ window.Echo.channel('chat')
         
 
         if (file_input.value != "") {
-            console.log(file_input.files[0].name);
-            console.log("ini file");
             if (nip == e.nip) {
                 messages_el.innerHTML +=
                     '<div class="right-chat"><div class="wrap2"><div class="time2">' +
@@ -152,6 +126,8 @@ window.Echo.channel('chat')
                 console.log("failed");
             }
         }
+        message_input.value = null;
+        file_input.value = null;
     });
 
 // var bottomBox = document.getElementById('messages');
