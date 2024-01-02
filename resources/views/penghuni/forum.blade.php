@@ -9,40 +9,13 @@
     @vite('resources/css/forum.css')
 </head>
 <body>    
-    <!-- <div id="session-data" data-nip="{{ session('NIP') }}"></div> -->
-
-    @include('components.sidebaradmin')
+    @include('components.sidebaruser')
     <div class="kontainer-header">
         @include('components.headercontent')
     </div>
     <div class="container-content">
-        <div id="messages" class="bottom-box">
-
-                    <div class="left-chat">
-                        <div class="profile-info">
-                            <img class="profile-pict" src=" {{asset('data/1703836552gladis.jpg') }}">
-                            <h2>halo</h2>
-                        </div>
-                        <div class="wrap">
-                            <div class="container-chat">
-                                <img id="image_result" src=" {{asset('data/1703836552gladis.jpg') }}">
-                            </div>
-                            <div class="time">
-                                12.20
-                            </div>
-                        </div>
-                    </div>  
-
-                    <div class="right-chat">
-                        <div class="wrap2">
-                            <div class="time2">
-                                12.20
-                            </div>
-                            <div class="container-chat2">
-                             aaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                            </div>
-                        </div>
-                    </div> 
+        <div class="content">
+            <div id="messages" class="bottom-box">
                 @php 
                     $prevDate = null;
                 @endphp
@@ -53,7 +26,9 @@
                     @endphp
 
                     @if($currDate != $prevDate)
-                        <h1>{{ \Carbon\Carbon::parse($chat->created_at)->locale('id_ID')->isoFormat('dddd, D MMMM YYYY') }}</h1>
+                        <div class="datenow">
+                            <h1>{{ \Carbon\Carbon::parse($chat->created_at)->locale('id_ID')->isoFormat('dddd, D MMMM YYYY') }}</h1>
+                        </div>
                         @php
                             $prevDate = $currDate;
                         @endphp
@@ -102,17 +77,25 @@
                 <div id="datenow">
 
                 </div>
-
+            </div>
         </div>
 
         <form id="message_form" method="POST" enctype="multipart/form-data" action="/penghuni/forum/send-msg">
             @csrf
             <div class="inputs">
-                <input id="message_input" type="text" name="message" placeholder="Ketik disini..">
-                <input id="file_input" type="file" name="photo" accept=".png, .jpg, .jpeg" >            
+                    <input id="message_input" type="text" name="message" placeholder="Ketik disini..">
+                    
+                <!-- <div class="msg_wrap">
+                    <input id="message_input" type="text" name="message" placeholder="Ketik disini..">
+                    <img id="file_result" src=" {{ asset('data/1703836552gladis.jpg') }}">
+                    <img id="file_result">
+                </div> -->
+
+                <input id="file_input" type="file" name="photo" accept=".png, .jpg, .jpeg" onchange="loadFile(event)">            
                 <img id="icon-input-file" src="{{asset('assets/uploadPict.svg')}}">
                 
                 <button type="submit" id="message_send">Kirim</button>
+
             </div>
         </form>
     </div>
@@ -121,6 +104,11 @@
     <script>
         var laravelSessionData = @json(session()->all());
         const lastCreatedAt = "{{ $lastChat->created_at }}";
+        
+        var loadFile = function (e) {
+            var output = document.getElementById("file_result");
+            output.src = URL.createObjectURL(event.target.files[0]);
+        }
     </script>
     @vite("resources/js/forum.js")
 </body>
