@@ -65,26 +65,32 @@ window.Echo.channel('chat')
 
     //buat tanggal
         const date = new Date(lastCreatedAt);
+        const edate = new Date(e.created_at);
 
-        const edateOnly = e.created_at.substring(0, 10);
-        const etimeOnly = e.created_at.substring(12,16)
-        const edate = new Date(edateOnly);
+        const options = {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+        };
+        const eformattedDate = edate.toLocaleDateString("id-ID", options);
+        const formattedDate = date.toLocaleDateString("id-ID", options);
 
+        const hours = edate.getHours().toString().padStart(2, "0"); 
+        const minutes = edate.getMinutes().toString().padStart(2, "0");
 
+        const timenow = hours + ":" + minutes;
 
-        if (date===edate) {
+        if (formattedDate !== eformattedDate) {
             datenow.innerHTML +=
-                '<h1>' +
-                e.created_at +
-                '</h1>'
+                '<dic class="datenow"><h1>' + eformattedDate + "</h1></div>";
         }
         
-
         if (file_input.value != "") {
             if (nip == e.nip) {
                 messages_el.innerHTML +=
                     '<div class="right-chat"><div class="wrap2"><div class="time2">' +
-                    etimeOnly +
+                    timenow +
                     '</div> <div class="container-chat2"><img id="image_result" src="../forum/' +
                     e.message +
                     '"></div></div></div>';
@@ -97,7 +103,7 @@ window.Echo.channel('chat')
                     '</h2></div><div class="wrap"><div class="container-chat"><img id="image_result" src="../forum/' +
                     e.message +
                     '"></div><div class="time">' +
-                    etimeOnly +
+                    timenow +
                     "</div></div></div>";
             } else {
                 console.log("failed");
@@ -107,7 +113,7 @@ window.Echo.channel('chat')
             if (nip == e.nip) {
                 messages_el.innerHTML +=
                     '<div class="right-chat"><div class="wrap2"><div class="time2">' +
-                    etimeOnly +
+                    timenow +
                     '</div> <div class="container-chat2"><p>' +
                     e.message +
                     "</p></div></div></div>";
@@ -120,7 +126,7 @@ window.Echo.channel('chat')
                     '</h2></div><div class="wrap2"><div class="container-chat"><p>' +
                     e.message +
                     '</p></div><div class="time">' +
-                    etimeOnly +
+                    timenow +
                     "</div></div></div>";
             } else {
                 console.log("failed");
@@ -130,15 +136,6 @@ window.Echo.channel('chat')
         file_input.value = null;
     });
 
-// var bottomBox = document.getElementById('messages');
-
-// function scrollToBottom() {
-//     bottomBox.scrollTop = bottomBox.scrollHeight;
-// }
-
-// document.getElementById('message_form').addEventListener('submit', function() {
-//     scrollToBottom();
-// });
 
 window.onload = function() {
     scrollToBottom();
