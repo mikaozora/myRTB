@@ -17,6 +17,10 @@ use App\Http\Middleware\LogoutMiddleware;
 use App\Http\Middleware\MemberMiddleware;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use APp\Events\ChatForum;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +41,11 @@ Route::post("/logout", [UserController::class, 'logout'])->middleware([LogoutMid
 
 
 Route::prefix("/dashboard")->middleware([AdminMiddleware::class])->group(function(){
-    Route::get("/forum", [ForumController::class, 'index']);
+    Route::controller(ForumController::class)->group(function(){
+        Route::get("/forum",'index');
+        Route::post("/forum/send-msg",'sendMessage');
+    });
+
     Route::get("/mesincuci", [BookMachineController::class, 'index']);
     Route::get("/coworking", [RoomController::class, 'index']);
     Route::get("/dapur", [BookKitchenController::class, 'index']);
@@ -54,7 +62,10 @@ Route::prefix("/dashboard")->middleware([AdminMiddleware::class])->group(functio
 
 
 Route::prefix('/penghuni')->middleware([MemberMiddleware::class])->group(function(){
-    Route::get("/forum", [ForumController::class, 'index']);
+    Route::controller(ForumController::class)->group(function(){
+        Route::get("/forum",'index');
+        Route::post("/forum/send-msg",'sendMessage');
+    });
     Route::get("/mesincuci", [BookMachineController::class, 'index']);
     Route::controller(BookMachineController::class)->group(function()
     {

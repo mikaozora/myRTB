@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+
+.bottom-box{
+    width: 76vw;
+    height: 67vh;
+    margin-top: 1.4%;
+    border-radius: 16px;
+    background: #FFF;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-around; */
+    align-content: center;
+    padding: 1.3%;
+    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+p{
+    font-size: 30px;
+}
+
+h1{
+    color: var(--text-primary, #000);
+    text-align: center;
+    font-family: Open Sans;
+    font-size: 0.8rem;
+}
+
+.inputs{
+    margin-top: 1%;
+    width: 78vw;
+    /* height: 7vh; */
+    position: relative;
+}
+
+#message_input{
+    width: 66.2vw;
+    height: 6vh;
+    border-radius: 16px;
+    border: 1px solid var(--primary, #205295);
+    background: #FFF;
+    color: #939393;
+    font-family: Open Sans;
+    font-size: 16px;
+    padding-left: 2%;
+    font-weight: 400;
+    position: relative;
+}
+
+#file_input{
+    position: absolute;
+    width: 30px;
+    height: 30px;   
+    right: 15%;
+    top: 10%;  
+    z-index: 99;
+    /* background-color: red; */
+    opacity: 0;
+    cursor: pointer;
+}
+
+#input-file:hover {
+  cursor: pointer;
+}
+
+#image_result {
+  max-width: 300px;
+  max-height: 300px;
+  width: auto;
+  height: auto;
+}
+#icon-input-file {
+    width: 30px;
+    height: 30px;
+    right: 5%;
+    top: 10px;
+    z-index: 2;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+}
+
+button{
+    width: 17.5vh;
+    height: 6vh;
+    border-radius: 16px;
+    border: 1px solid var(--primary, #205295);
+    background: var(--primary, #205295);
+    color: #FFF;
+    font-family: Open Sans;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    position: absolute;
+    right: 2px;
+}
+
+.profile-pict{
+    width: 7.5vh;
+    height: 7.5vh;
+    border-radius: 50%;    
+    object-fit: cover;
+}
+
+h2{
+    color: var(--text-primary, #000);
+    font-family: Open Sans;
+    font-size: 14px;
+    font-weight: 700;
+    margin-left: 2%;
+}
+
+.profile-info{
+    /* background-color: red; */
+    width: 40%;
+    height: 8vh;
+    display: flex;
+    flex-direction: row;
+}
+
+p{
+    color: #000;
+    font-family: Open Sans;
+    font-size: 15px;
+    font-weight: 400;
+    margin-top: -1%;
+    padding-top: 4%;
+    margin-left: 3%;
+}
+
+.left-chat{
+    padding-top: 10px;
+    /* background-color: seagreen; */
+    /* width: 100%; */
+    position: relative;
+    display: inline;
+}
+
+.right-chat{
+    padding-top: 10px;
+    /* background-color: red; */
+    width: 100%;
+    height: auto;
+    display: flex; 
+    flex-direction: row;
+    justify-content: flex-end;
+    align-self: center;
+    /* padding-left: 20%; */
+    /* left: 40%; */
+    margin-right: -2%;
+    position: relative;
+}
+.right-chat p{
+    margin-right: 5%;
+    text-align: right;
+}
+
+.container-chat{
+    /* width:5%; */
+    height: auto;
+    border-radius: 0px 16px 16px 16px;
+    background: var(--background, #EEE);
+    margin-left: 5.3%;
+    margin-top: -1%;
+    display: inline-block;
+    max-width: 40%; 
+    word-wrap: break-word; 
+    height: auto;
+    padding: 10px;
+    min-width:2%;
+    position: relative;
+}
+.container-chat2{
+    /* width:5%; */
+    height: auto;
+    border-radius: 16px 0px 16px 16px;
+    background: var(--bg-secondary, #DEECFF);
+    margin-right: 1%;
+
+    /* min-width:2%; */
+    display: inline-block;
+    max-width: 400px; 
+    height: auto;
+    padding: 10px;
+    position: relative;
+    word-wrap: break-word;
+
+}
+
+.container-chat2 p{
+    padding-top: 10px;
+    text-align: left;
+    max-width: 60%; 
+    word-wrap:break-word; 
+
+}
+
+.time{
+    /* margin-left: 12%; */
+    /* margin-top: -1.5%; */
+    color: #6E6E6E;    
+    font-family: Open Sans;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal; 
+    /* position: absolute;
+    right: 0;
+    bottom: 0;    */
+}
+.time2{
+    margin-right: 0.4vw;
+    color: #6E6E6E;
+    text-align: center;
+    font-family: Open Sans;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    /* position: relative; */
+    /* top: 75%; */
+    /* right: 43%; */
+}
+.wrap{
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+}
+.wrap2{
+    display: flex;
+    align-items: flex-end;
+}

@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ChatForum;
 use App\Models\Forum;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+
+use function PHPUnit\Framework\isNull;
 
 class ForumController extends Controller
 {
@@ -12,14 +17,68 @@ class ForumController extends Controller
      */
     public function index(Request $request)
     {
+        $chats = Forum::join('users', 'forums.NIP', '=', 'users.NIP')
+            ->select('forums.*', 'users.name', 'users.photo')
+            ->orderBy('forums.created_at') 
+            ->get();
+        $date = Carbon::now()->locale('id_ID')->isoFormat('dddd, D MMMM YYYY');
+        $lastChat = Forum::orderBy('created_at', 'desc')->first();
+
         if($request->is('dashboard/*')){
             return response()->view('dashboard.forum', [
-                "title" => "Forum"
+                "title" => "Forum",
+                "datenow" => $date,
+                "chats" => $chats,
+                "lastChat" => $lastChat
             ]);
         }
         return response()->view('penghuni.forum', [
-            "title" => "Forum"
+            "title" => "Forum",
+            "datenow" => $date,
+            "chats" => $chats,
+            "lastChat" => $lastChat
         ]);
+    }
+
+    public function sendMessage(Request $request){
+        $NIP = $request->session()->get('NIP');
+
+        $user = User::query()->find($NIP);
+
+        $name = $user->name;
+        $photo = $user->photo;
+
+        // $created_at = Carbon::now()->locale('id_ID');
+        $created_at = Carbon::now()->setTimezone('Asia/Jakarta');
+
+        $forum = new Forum();
+        $forum->NIP = $NIP;
+        // dd ($request->file('photo'));
+
+        $file = $request->file('photo');
+        // echo "halo";
+        // echo $file;
+        if(isset($file)){
+            // echo "halo";    
+            // $file = $request->file('photo');
+            $originalName = $file->getClientOriginalName();
+
+            if($file->move("forum", $originalName)){
+                $forum->message = $originalName;
+                $forum->type = "img";
+            };
+            $message = $originalName;
+        }else if($request->input('message')){
+            $message = $request->input('message');
+            $forum->message = $message;
+            $forum->type = "text";
+        }
+
+        event(new ChatForum($NIP,$name, $message, $created_at, $photo));
+
+        $forum->save();
+
+        return["success"=>true, "foto"=>$file]; 
     }
 
     /**

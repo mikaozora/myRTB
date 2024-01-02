@@ -181,3 +181,9 @@ thead, tbody{
         margin-bottom: 16px;
     }
 }
+
+
+
+td {
+  vertical-align: middle;
+}
