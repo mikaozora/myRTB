@@ -20,7 +20,7 @@
     <div class="container-content">
         <div class="bottom-box">
             <div class="schedule-box">
-                @include('components.date')                
+                @include('components.date', ["page" => "coworking"])                
                 <hr>
                 <form action="/penghuni/coworking?date={{Request::get('date')}}" method="post">
                     @csrf
