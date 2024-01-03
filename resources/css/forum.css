@@ -1,29 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
 
+
 .content{
-    margin-top: -1.4%;
+    margin-top: 0%;
     width: 78vw;
-    height: 67vh;
-    background-color: white;
+    height: 71.7vh;
     padding: 1%;
     padding-right: 0;
     padding-left: 0%;
-    /* background: rebeccapurple; */
+    background: white;
     display: flex;
     align-content: center;
     justify-content: center;
     border-radius: 16px;
     margin-right: 5px;
-    margin-top: 15px;
-    padding-bottom: 2px
-
+    padding-bottom: 5px;
+    position: relative;
 }
 
 .bottom-box{
     width: 75.8vw;
-    height: 65vh;
+    height: 97%;
     border-radius: 16px;
-    background: #FFF;
+    background:white;
     display: flex;
     flex-direction: column;
     /* justify-content: space-around; */
@@ -33,6 +32,7 @@
     overflow: auto;
     overflow-y: auto;
     overflow-x: hidden;
+    /* position: relative; */
 }
 
 .bottom-box h1{
@@ -51,28 +51,48 @@
 }
 
 .inputs{
-    margin-top: 1%;
-    width: 78vw;
-    /* height: 7vh; */
+    margin-top: 0.7%;
+    width: 57.3%;
+    /* height: 100%; */
+    /* height: 7vh;m */
     position: relative;
+    padding-left: 320px;
+    padding-right: 0px;
+    /* position: fixed; */
+    /* background-color: blue; */
+    position: fixed;
+    bottom: 3%;
+    /* display: flex; */
+    /* align-items: -enflexd;
+    align-content: flex-end; */
+    /* background-color: wheat; */
+    margin-left: 20.8%;
 }
 
-.msg_wrap{
-    width: 66.2vw;
+
+#msg_wrap{
+    width: fit-content;
     height: auto;
     border-radius: 16px;
-    border: 1px solid var(--primary, #205295);
-    background: red;
+    /* background: red; */
     color: #939393;
     font-family: Open Sans;
     font-size: 16px;
-    /* padding-left: 2%; */
+    background-color: white;
+    border: 1px solid var(--primary, #205295);
     font-weight: 400;
+    padding: 32px;
+    padding-bottom: 20px;
+    position: relative;
+    display: flex;
+    z-index: 99;
+    left: -36.5%;
+    display: none;
     padding-right: 20px;
-}
 
+}
 #message_input{
-    width: 65vw;
+    width: 83.5%;
     height: 6vh;
     border-radius: 16px;
     border: 1px solid var(--primary, #205295);
@@ -82,29 +102,37 @@
     font-size: 16px;
     padding-left: 2%;
     font-weight: 400;
-    position: relative;
     padding-right: 20px;
+    position: absolute;
+    bottom: 0%;
+    left: 0%;
+    z-index: -999;
 }
 #file_result{
-  max-width: 150px;
-  max-height: 150px;
-  width: auto;
-  height: auto;
-  /* top: 20px; */
-  padding: 10px;
-
+    max-width: 250px;
+    max-height: 250px;
+    width: auto;
+    height: auto;
+    /* top: 20px; */
+    padding: 5px;
+    /* position: absolute; */
+    z-index: 9999;
+    justify-self: center;
+    align-self: center;
 }
 
 #file_input{
     position: absolute;
     width: 30px;
     height: 30px;   
-    right: 15%;
-    top: 4%;  
-    z-index: 99;
+    right: 12%;
+    bottom: 30px;  
+    z-index: 2;
     background-color: red;
     opacity: 0;
     cursor: pointer;
+    /* display: flex; */
+    position: fixed;
 }
 
 #file_input:hover {
@@ -114,9 +142,9 @@
 #icon-input-file {
     width: 30px;
     height: 30px;
-    right: 15%;
-    top: 10px;
-    z-index: 5;
+    right: 14%;
+    bottom: 9px;
+    z-index: -1;
     cursor: pointer;
     position: absolute;
     display: inline-block;
@@ -134,7 +162,19 @@
     font-weight: 600;
     cursor: pointer;
     position: absolute;
-    right: 2px;
+    right: 3px;
+    bottom: 0px;
+}
+
+.cross{
+    width: 15px;
+    height: 15px;
+    /* margin-top: -6%; */
+    justify-self:flex-start;
+    position: relative;
+    margin-left: 7px;
+    top: -250px;
+    cursor: pointer;
 }
 
 .profile-pict{
@@ -224,7 +264,7 @@ h2{
     /* max-width: 440px; */
     width: 300px; 
     height: auto;
-    padding: 5px;
+    padding: 8px;
     padding-bottom: 0px;
     position: relative;
     word-wrap: break-word;
@@ -298,8 +338,9 @@ h2{
     background: #d3d3d3;
 }
 #image_result {
-  max-width: 300px;
-  max-height: 300px;
+  max-width: 200px;
+  max-height: 200px;
   width: auto;
   height: auto;
+  padding: 5px;
 }
