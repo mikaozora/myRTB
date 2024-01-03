@@ -16,7 +16,7 @@
     <div class="container-content">
         <div class="content">
             <div id="messages" class="bottom-box">
-                        <div class="left-chat">
+                        <!-- <div class="left-chat">
 
                             <div class="profile-info">
                                 <img class="profile-pict" src=" {{asset('data/1703836552gladis.jpg') }}">
@@ -41,7 +41,7 @@
                                 aaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
                                 </div>
                             </div>
-                        </div> 
+                        </div>  -->
                     @php 
                         $prevDate = null;
                     @endphp
@@ -136,6 +136,7 @@
             content.style.display = 'block';   
             var output = document.getElementById("file_result");
             output.src = URL.createObjectURL(event.target.files[0]); 
+            message_input.setAttribute('disabled','true');
         }
 
         function exit(msg_wrap){
@@ -147,7 +148,7 @@
             } else {
                 content.style.display = 'block';
             }
-    
+            message_input.removeAttribute('disabled')
         }
     </script>
     @vite("resources/js/forum.js")
