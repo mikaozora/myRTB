@@ -169,37 +169,49 @@ h4{
     color: rgba(120, 120, 120, 1);
 }
 
+@media screen and (max-width: 1440px) {
+    .wrap-right {
+        padding: 6px 16px 16px 9px;
+    }
+    
+}
+
 @media screen and (max-width: 1024px) {
     .wrap-content .wrap-left{
         width: 63%;
     }
     .wrap-content .wrap-right {
+        padding: 6px 16px 16px 16px;
         width: 25%;
     }
 }
 
 @media screen and (max-width: 768px) {
-    
-    .wrap-content .schedule-box{
-        width: 100%;
-    }
     .wrap-content{
+        display: flex;
+        align-items: center;
         flex-direction: column;
         row-gap: 16px;
+    }
+    .wrap-content .schedule-box{
+        width: 95%;
     }
     .wrap-content .wrap-left{
         width: 95%;
     }
     .wrap-content .wrap-right{
-        width: 95%; 
-        display: flex;
-        gap: 100px;
+       gap: 16px;
+       width: 95%;
     }
-    .wrap-content .wrap-right .wrap-scrollable .wrap-detail-user{
-        gap: 24px;
+    .wrap-right{
+        display: flex;
+        flex-direction: column;
     }
     .wrap-content .wrap-right .wrap-scrollable{
         max-height: 200px;
+    }
+    .wrap-content .wrap-right .wrap-scrollable .wrap-detail-user{
+        gap: 24px;
     }
     .wrap-content .wrap-right .wrap-scrollable .wrap-detail-user .wrap-detail-right p{
         margin-right: 32px;
@@ -215,27 +227,35 @@ h4{
         justify-content: start;
         overflow-x: auto;
     }
-    .wrap-content .wrap-left{
+    .wrap-content{
+        display: flex;
+        align-items: center;
+    }
+    .wrap-content .schedule-box{
+        width: 75%;
+    }
+    .wrap-submit{
+        margin-top: 20px;
+    }
+    .wrap-submit button{
         width: 95%;
     }
     .wrap-content .wrap-right{
         gap: 16px;
+        width: 78%;
     }
-    .wrap-time{
-        justify-content: center;
+    .wrap-right{
+        display: flex;
+        flex-direction: column;
+    }
+    .wrap-content .wrap-right .wrap-scrollable{
+        max-height: 200px;
     }
     .wrap-content .wrap-right .wrap-scrollable .wrap-detail-user{
         gap: 8px;
-    }
-    .wrap-content .wrap-right .wrap-scrollable{
-        max-height: 230px;
-    }
+    } 
     .wrap-content .wrap-right .wrap-scrollable .wrap-detail-user .wrap-detail-right p{
         margin-right: 0px;
-    }
-    .mr{
-        margin-right: 0px;
-        margin-left: 0px;
     }
     .wrap-detail-user img{
         width: 2rem;
@@ -247,7 +267,7 @@ h4{
 
 }
 
-@media screen and (max-width: 365px) {
+@media screen and (max-width: 375px) {
     .wrap-time .from-time-select{
         width: 80px;
     }

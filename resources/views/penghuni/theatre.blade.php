@@ -40,7 +40,8 @@
                                 <select name="from-time" id="fromtime" class="from-time-select" onchange="timeChange()" required>
                                     <option value="PilihJam">Pilih Jam</option>
                                     @foreach ($theatreAvail as $ta)
-                                    <option value="{{$ta['value']}}" {{ Request::get('fromtime') == $ta['value']  ? 'selected' : '' }} {{$ta['booked'] == true ? 'disabled' : ''}}>
+                                    <option value="{{$ta['value']}}" {{ Request::get('fromtime') == $ta['value']  ? 'selected' : '' }} 
+                                    {{$ta['booked'] == true ? 'disabled' : ''}}  {{$ta['isAvailable'] == true ? '' : 'disabled'}}>
                                         {{$ta['label']}}
                                     </option>
                                     @endforeach

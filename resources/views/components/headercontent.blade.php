@@ -14,8 +14,8 @@
         <div class="container-header">
             <h3>{{ $title }}</h3>
             <div class="img-container">
-                <img src="https://st.depositphotos.com/1770836/1372/i/450/depositphotos_13720689-stock-photo-young-businesswoman.jpg"
-                    alt="">
+            <img class="profile-pict" src="{{asset('data/' .$photoProfile)}}">
+
             </div>
         </div>
         <div class="logout">

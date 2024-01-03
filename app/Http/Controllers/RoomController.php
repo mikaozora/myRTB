@@ -21,10 +21,17 @@ use function PHPUnit\Framework\isNull;
 
 class RoomController extends Controller
 {
+    
     public function index(Request $request){
+               
+        $NIP = $request->session()->get('NIP');
+        $user = User::query()->find($NIP);
+        $photoProfile = $user->photo;
+
         if($request->is('dashboard/*')){
             return response()->view('dashboard.coworking', [
-                "title" => "Booking CWS"
+                "title" => "Booking CWS",
+                "photoProfile" => $photoProfile
             ]);
         }
         $date = [];
@@ -228,7 +235,8 @@ class RoomController extends Controller
             "timeFrom" => $timeFrom,
             "timeTo" => $timeTo,
             "roomAvail" => $roomAvail,
-            "books" => $userBooks
+            "books" => $userBooks,
+            "photoProfile" => $photoProfile
         ]);   
     }
 

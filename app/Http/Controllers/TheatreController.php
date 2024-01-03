@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BookRoom;
 use App\Models\Room;
 use App\Models\Status;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -12,9 +13,14 @@ class TheatreController extends Controller
 {
     public function index(Request $request){
 
+        $NIP = $request->session()->get('NIP');
+        $user = User::query()->find($NIP);
+        $photoProfile = $user->photo;
+
         if($request->is('dashboard/*')){
              return response()->view('dashboard.theatre', [
-             "title" => "Booking Theatre"
+             "title" => "Booking Theatre",
+             "photoProfile" => $photoProfile
               ]);
         }
 
@@ -29,10 +35,6 @@ class TheatreController extends Controller
         }
 
 
-        $timeParam = $request->get('fromtime');
-        $dateParam = $request->get('date');
-        $datetime = $dateParam . ' ' . $timeParam;
-
         $timeFrom = [];
         for ($i = 6; $i <= 21; $i++) {
             $timeFrom[] = [
@@ -41,6 +43,10 @@ class TheatreController extends Controller
                 "allval" => $request->get('date') . ' ' . str_pad($i, 2, '0', STR_PAD_LEFT) . ':00:00',
             ];            
         }
+
+        $timeParam = $request->get('fromtime');
+        $dateParam = $request->get('date');
+        $datetime = $dateParam . ' ' . $timeParam;
 
         $room = Room::query()->where('name', '=', 'Theatre')->get('room_id');
         $decode = json_decode($room, true);
@@ -59,77 +65,62 @@ class TheatreController extends Controller
             $isBooked = false;
             $start = 0;
             $end = 0;
-            $isNow = false;
-            $past = (int)substr($timeFrom[$i]['allval'], 11, 2);
-            if ($dateParam == $dateNow){
-                $isNow = true;
-            }
             if (empty($book)){
-                if ($isNow){
-                
-                    if ($past > $timeNow){
                         $theatreAvail[$i] = [
                             "label" => $timeFrom[$i]['label'],
                             "value" => $timeFrom[$i]['value'],
-                            "booked" => true,
+                            "booked" => false,
                             "end" => null
-                        ];
-                         
-                    } else {
-                        $theatreAvail[$i] = [
-                            "label" => $timeFrom[$i]['label'],
-                            "value" => $timeFrom[$i]['value'],
-                            "booked" => true,
-                            "end" => null
-                        ];
-
-                    }
-                }
-                
+                        ];   
             } else {
                 for ($j = 0; $j < sizeof($book); $j++){
-
                     if ($timeFrom[$i]['allval'] == $book[$j]['start_time']) {
                         $isBooked = true;
-                        $start = substr($book[$j]['start_time'], 9, 2);
+                        $start = substr($book[$j]['start_time'], 11, 2);
                         $end = substr($book[$j]['end_time'], 11, 2);
                         $theatreAvail[$i] = [
                             'booked' => true,
                             'value' => $timeFrom[$i]['allval'],
                             'label' => $timeFrom[$i]['label'],
-                            'end' => $book[$j]['end_time']
+                            'end' => $book[$j]['end_time'],
+                            'isAvailable' => false
                         ];
                     }
-
                 }    
                 if (!$isBooked){
-
-                    if ($past > $timeNow){
-
                         $theatreAvail[$i] = [
                             'booked' => false,
                             'value' => $timeFrom[$i]['allval'],
                             'label' => $timeFrom[$i]['label'],
-                            'end' => null
+                            'end' => null,
+                            'isAvailable' => true
                         ];
-                    } else {
-                        
-                        $theatreAvail[$i] = [
-                            'booked' => true,
-                            'value' => $timeFrom[$i]['allval'],
-                            'label' => $timeFrom[$i]['label'],
-                            'end' => null
-                        ];
-                    }
                 }            
             }
         }
 
         for ($i = 0; $i < sizeof($theatreAvail); $i++){
-            $start = (int)substr($theatreAvail[$i]['value'], 9, 2);
+            $start = (int)substr($theatreAvail[$i]['value'], 11, 2);
             $end = (int)substr($theatreAvail[$i]['end'], 11, 2);
             if ($end - $start == 2){
                 $theatreAvail[$i+1]['booked'] = true;
+            }
+        }
+
+        for ($i = 0; $i < sizeof($timeFrom); $i++) {
+            $past = (int)substr($timeFrom[$i]['allval'], 11, 2);
+            $isNow = false;
+            if ($dateParam == $dateNow) {
+                $isNow = true;
+            }
+            if ($isNow) {
+                if ($past > $timeNow) {
+                    $theatreAvail[$i]["isAvailable"] = true;
+                } else{
+                    $theatreAvail[$i]["isAvailable"] = false;
+                }
+            } else {
+                $theatreAvail[$i]["isAvailable"] = true;
             }
         }
 
@@ -159,6 +150,9 @@ class TheatreController extends Controller
                 for ($k = 0; $k < sizeof($theatreAvail)-1; $k++){
                     for ($j = 0; $j < sizeof($theatreBook); $j++){
                         for($i = 1; $i <= 2; $i++){
+                            if ($hour + $i > 23){
+                                break;
+                            }
                             $timeTo[$i] = [
                                 "label" => $hour + $i . ':00',
                                 "value" => str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00',
@@ -224,7 +218,8 @@ class TheatreController extends Controller
             "timeFrom" => $timeFrom,
             "timeTo" => $timeTo,
             "theatreAvail" => $theatreAvail,
-            "books" => $userBooks
+            "books" => $userBooks,
+            "photoProfile" => $photoProfile
         ]);   
     }
 

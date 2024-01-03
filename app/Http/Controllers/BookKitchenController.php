@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BookKitchen;
 use App\Models\KitchenStuff;
 use App\Models\Status;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,11 +17,18 @@ class BookKitchenController extends Controller
     /**
      * Display a listing of the resource.
      */
+    
     public function index(Request $request)
     {
+               
+        $NIP = $request->session()->get('NIP');
+        $user = User::query()->find($NIP);
+        $photoProfile = $user->photo;
+
         if ($request->is('dashboard/*')) {
             return response()->view('dashboard.dapur', [
-                "title" => "Booking Dapur"
+                "title" => "Booking Dapur",
+                "photoProfile" => $photoProfile
             ]);
         }
         $date = [];
@@ -210,7 +218,8 @@ class BookKitchenController extends Controller
             "stoves" => $stoves,
             "riceCookers" => $riceCookers,
             "airFryers" => $airFryers,
-            "books" => $userBooks
+            "books" => $userBooks,
+            "photoProfile" => $photoProfile
         ]);
     }
 

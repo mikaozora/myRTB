@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Report;
 use App\Models\Status;
+use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -15,13 +16,20 @@ class ReportController extends Controller
      */
     public function index(Request $request)
     {
+               
+        $NIP = $request->session()->get('NIP');
+        $user = User::query()->find($NIP);
+        $photoProfile = $user->photo;
+
         if($request->is('dashboard/*')){
             return response()->view('dashboard.report', [
-                "title" => "Report"
+                "title" => "Report",
+                "photoProfile" => $photoProfile
             ]);
         }
         return response()->view('penghuni.report', [
-            "title" => "Report"
+            "title" => "Report",
+            "photoProfile" => $photoProfile
         ]);
     }
 

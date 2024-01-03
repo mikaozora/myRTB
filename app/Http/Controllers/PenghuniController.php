@@ -12,12 +12,18 @@ use function PHPUnit\Framework\fileExists;
 
 class PenghuniController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+               
+        $NIP = $request->session()->get('NIP');
+        $user = User::query()->find($NIP);
+        $photoProfile = $user->photo;
+
         $users = User::query()->get();
         return response()->view('dashboard.penghuni', [
             "title" => "Penghuni",
-            "users" => $users
+            "users" => $users,
+            "photoProfile" => $photoProfile
         ]);
     }
 
