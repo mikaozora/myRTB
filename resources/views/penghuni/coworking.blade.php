@@ -63,7 +63,10 @@
                         </div>
                         <h4>Jumlah Partisipan</h4>
                         <div class="wrap-participation">
-                            <input type="text" name="count" placeholder="Type Here" required>
+                            <input type="text" name="count" id="participant" placeholder="Type Here" required>
+                            <div class="error-participant">
+                                <label for="">Minimal Partisipan adalah 15 Orang</label>
+                            </div>
                         </div>
                         <h4>Tipe</h4>
                         <div class="wrap-type">
@@ -77,7 +80,7 @@
                             </div>
                         </div>
                         <div class="wrap-submit">
-                            <button type="submit">Submit</button>
+                            <button id="submit-button" type="submit">Submit</button>
                         </div>
                         @endif
                     </div>
@@ -117,5 +120,35 @@
             document.location.href = "?" + params.toString(); // refresh the page with new url
         }
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var participantInput = document.getElementById('participant');
+            var submitButton = document.getElementById('submit-button');
+            var errorParticipantDiv = document.querySelector('.error-participant');
+
+            errorParticipantDiv.style.display = 'none';
+            submitButton.disabled = true;
+
+            participantInput.addEventListener('input', function () {
+                var participantCount = parseInt(participantInput.value, 10);
+
+                // Check if the entered value is a number
+                if (isNaN(participantCount)) {
+                    errorParticipantDiv.style.display = 'block';
+                    submitButton.disabled = true;
+                } else if (participantCount < 15) {
+                    // Check if the participant count is less than 15
+                    errorParticipantDiv.style.display = 'block';
+                    submitButton.disabled = true;
+                } else {
+                    // Hide the error-participant div and enable the submit button
+                    errorParticipantDiv.style.display = 'none';
+                    submitButton.disabled = false;
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>

@@ -179,6 +179,11 @@ p{
     font-family: "poppins", monospace;
 }
 
+.error-participant label{
+    color: red;
+    font-size: 12px;
+}
+
 .wrap-right {
     padding: 6px 16px 16px 16px;
     background-color: #fff;
@@ -269,10 +274,10 @@ p{
     .bottom-box .wrap-right{
         width: 95%;
         display: flex;
-        gap: 100px;
     }
     .wrap-right{
         display: flex;
+        flex-direction: column;
         align-items: center;
     }
     .bottom-box .wrap-right .wrap-scrollable .wrap-detail-user{
