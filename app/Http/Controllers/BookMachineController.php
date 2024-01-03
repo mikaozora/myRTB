@@ -16,10 +16,16 @@ class BookMachineController extends Controller
      */
     public function index(Request $request)
     {
+               
+        $NIP = $request->session()->get('NIP');
+        $user = User::query()->find($NIP);
+        $photoProfile = $user->photo;
+
 
         if($request->is('dashboard/*')){
             return response()->view('dashboard.mesincuci', [
-                "title" => "Booking Mesin Cuci"
+                "title" => "Booking Mesin Cuci",
+                "photoProfile" => $photoProfile
             ]);
         }
 
@@ -239,7 +245,8 @@ class BookMachineController extends Controller
             "timeAvail" => $TimeAvailable,
             "userGender" => $userGender,
             "MaleMachine" => $MaleMachineAvail,
-            "FemaleMachine" => $FemaleMachineAvail
+            "FemaleMachine" => $FemaleMachineAvail,
+            "photoProfile" => $photoProfile
         ]);
     }
 

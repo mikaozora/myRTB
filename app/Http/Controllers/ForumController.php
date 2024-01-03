@@ -17,6 +17,11 @@ class ForumController extends Controller
      */
     public function index(Request $request)
     {
+               
+        $NIP = $request->session()->get('NIP');
+        $user = User::query()->find($NIP);
+        $photoProfile = $user->photo;
+
         $chats = Forum::join('users', 'forums.NIP', '=', 'users.NIP')
             ->select('forums.*', 'users.name', 'users.photo')
             ->orderBy('forums.created_at') 
@@ -29,14 +34,16 @@ class ForumController extends Controller
                 "title" => "Forum",
                 "datenow" => $date,
                 "chats" => $chats,
-                "lastChat" => $lastChat
+                "lastChat" => $lastChat,
+                "photoProfile" => $photoProfile
             ]);
         }
         return response()->view('penghuni.forum', [
             "title" => "Forum",
             "datenow" => $date,
             "chats" => $chats,
-            "lastChat" => $lastChat
+            "lastChat" => $lastChat,
+            "photoProfile" => $photoProfile
         ]);
     }
 
