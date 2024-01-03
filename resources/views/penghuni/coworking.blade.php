@@ -97,6 +97,7 @@
                                     <p>{{ $book['class'] }}</p>
                                 </div>
                                 <div class="wrap-detail-right">
+                                    <p> {{$book['type']}} </p>
                                     <p>{{ $book['start_time'] }} - {{ $book['end_time'] }}</p>
                                 </div>
                             </div>

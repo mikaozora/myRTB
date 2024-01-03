@@ -43,7 +43,7 @@ body{
 }
 
 .wrap-report{
-    width: 90%;
+    width: 987;
     margin-left: 20px;
     margin-right: 20px;
 }
@@ -54,10 +54,12 @@ body{
 
 .wrap-report textarea{
     font-size: 16px;
+    height: 200px;
+    width: 97%;
 }
 
 .report-textarea{
-    width: 90%;
+    resize: none;
 }
 
 textarea{
@@ -65,7 +67,7 @@ textarea{
     padding-top: 20px;
     padding-left: 20px;
     border: solid 2px var(--primary);
-    outline: none;
+    font-family: "poppins";
 }
 
 .wrap-report h3{
@@ -106,15 +108,32 @@ textarea{
 
 .wrap-submit button{
     width: 96%;
-    height: 4.5vh;
     background-color: var(--primary);
     color: var(--bg-primary);
     border-radius: 8px;
     border: none;
+    transition: all .2s ease-in-out;
+    font-size: 1.1rem;
+    padding: 8px 0px;
+}
+
+.wrap-submit button:hover{
+    background-color: #16437f;
 }
 
 .wrap-fasum input{
     width: 20px;
+}
+
+@media screen and (max-width: 769px){
+    .wrap-submit button{
+        width: 93%;
+        height: 4.5vh;
+        background-color: var(--primary);
+        color: var(--bg-primary);
+        border-radius: 8px;
+        border: none;
+    }
 }
 
 @media screen and (max-width: 380px){
@@ -125,8 +144,17 @@ textarea{
     .wrap-photo-upload input[type=file]::file-selector-button{
         font-size: 10px;
     }
-
-    textarea{
-        max-height: 250px;
+    .wrap-report textarea{
+        font-size: 16px;
+        height: 200px;
+        width: 91%;
+    }
+    .wrap-submit button{
+        width: 85%;
+        height: 4.5vh;
+        background-color: var(--primary);
+        color: var(--bg-primary);
+        border-radius: 8px;
+        border: none;
     }
 }

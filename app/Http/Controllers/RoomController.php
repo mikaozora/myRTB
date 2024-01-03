@@ -199,7 +199,7 @@ class RoomController extends Controller
         $books = BookRoom::join('users', 'book_rooms.NIP', '=', 'users.NIP')
         ->whereDate('book_rooms.start_time', '=', $dateParam)
         ->where('book_rooms.room_id', '=', $room_id)
-        ->select('users.NIP', 'users.name', 'users.photo', 'users.class', 'book_rooms.start_time', 'book_rooms.end_time')
+        ->select('users.NIP', 'users.name', 'users.photo', 'users.class', 'book_rooms.start_time', 'book_rooms.end_time', 'book_rooms.type')
         ->get();
 
         $userBooks = [];
@@ -210,13 +210,15 @@ class RoomController extends Controller
             $tempEndTime = $tempEndTime[1];
             $tempStartTime = str_replace(':00:00', '.00', $tempStartTime);
             $tempEndTime = str_replace(':00:00', '.00', $tempEndTime);
+            $tempType = $book->type;
             $userBooks[] = [
                 "name" => $book['name'],
                 "NIP" => $book['NIP'],
                 "photo" => $book['photo'],
                 "class" => $book['class'],
                 'start_time' => $tempStartTime,
-                "end_time" => $tempEndTime
+                "end_time" => $tempEndTime,
+                "type" => $tempType
             ];
         }
 
