@@ -22,7 +22,7 @@ message_form.addEventListener("submit", function (e) {
     let has_errors = false;
 
     if (message_input.value === "" && file_input.value === "") {
-        alert("please enter message");
+        // alert("please enter message");
         has_errors = true;
     }
 
@@ -132,6 +132,15 @@ window.Echo.channel('chat')
                 console.log("failed");
             }
         }
+
+        var content = document.getElementById('msg_wrap');
+        var fileInput = document.getElementById('file_input');
+        if (content.style.display !== 'none') {
+            content.style.display = 'none';
+        } else {
+            content.style.display = 'block';
+        }
+        
         message_input.value = null;
         file_input.value = null;
     });
