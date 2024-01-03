@@ -122,7 +122,7 @@
     display: inline-block;
 }
 
-button{
+#message_send{
     width: 17.5vh;
     height: 6vh;
     border-radius: 16px;
