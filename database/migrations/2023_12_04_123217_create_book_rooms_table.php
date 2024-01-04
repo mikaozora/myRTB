@@ -22,7 +22,7 @@ return new class extends Migration
             $table->enum('type', ['Public', 'Private'])->nullable(false)->default('Public');
             $table->integer('participant')->nullable(false)->default(0);
 
-            $table->foreign('NIP')->on('users')->references('NIP');
+            $table->foreign('NIP')->on('users')->references('NIP')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('room_id')->on('rooms')->references('room_id');
             $table->foreign('status_id')->on('status')->references('status_id');
         });

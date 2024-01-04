@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('photo')->nullable(false);
             $table->uuid('status_id')->nullable(false);
 
-            $table->foreign('NIP')->on('users')->references('NIP');
+            $table->foreign('NIP')->on('users')->references('NIP')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('status_id')->on('status')->references('status_id');
         });
     }

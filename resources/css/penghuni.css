@@ -45,12 +45,26 @@ tbody tr td{
     margin-bottom: 0;
 }
 
+.wrap-input .input-phone-edit{
+    margin-bottom: 0;
+}
+
 .error-phone-start label{
     color: red;
     font-size: 14px;
 }
 
 .error-phone-length label{
+    color: red;
+    font-size: 14px;
+}
+
+.error-phone-start-edit label{
+    color: red;
+    font-size: 14px;
+}
+
+.error-phone-length-edit label{
     color: red;
     font-size: 14px;
 }
@@ -120,6 +134,15 @@ thead, tbody{
     border-radius: 0px;
 }
 .btn-simpan{
+    border: none;
+    background-color: var(--primary);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+.btn-simpan-edit{
     border: none;
     background-color: var(--primary);
     color: #fff;
