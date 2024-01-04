@@ -34,7 +34,13 @@
                     </div>
                     <div class="wrap-input">
                         <p>No Telepon</p>
-                        <input type="text" name="phone_number" required placeholder="08xxx">
+                        <input type="text" name="phone_number" class="input-phone" required placeholder="08xxx">
+                        <div class="error-phone-start">
+                            <label for="">Phone Number must starts with '08'</label>
+                        </div>
+                        <div class="error-phone-length">
+                            <label for="">Phone Number must be between 11 - 13 numbers</label>
+                        </div>
                     </div>
                     <div class="wrap-input">
                         <p>Foto Profile</p>
@@ -48,3 +54,57 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var phoneNumberInput = document.querySelector('input[name="phone_number"]');
+        var errorPhoneStartDiv = document.querySelector('.error-phone-start');
+        var errorPhoneLengthDiv = document.querySelector('.error-phone-length');
+        var submitButton = document.querySelector('button.btn-simpan');
+
+        function setLabelColor(label, isValid) {
+            label.style.color = isValid ? 'green' : 'red';
+        }
+
+        function isNumeric(value) {
+            return !isNaN(value);
+        }
+
+        errorPhoneStartDiv.style.visible = 'hidden';
+        errorPhoneLengthDiv.style.visible = 'hidden';
+        setLabelColor(errorPhoneStartDiv.querySelector('label'), false);
+        setLabelColor(errorPhoneLengthDiv.querySelector('label'), false);
+
+        phoneNumberInput.addEventListener('input', function () {
+            var phoneNumberValue = phoneNumberInput.value;
+
+            if (!isNumeric(phoneNumberValue)) {
+                errorPhoneStartDiv.style.visible = 'visible';
+                setLabelColor(errorPhoneStartDiv.querySelector('label'), false);
+                submitButton.disabled = true;
+            } else {
+                errorPhoneStartDiv.style.visible = 'hidden';
+                setLabelColor(errorPhoneStartDiv.querySelector('label'), true);
+
+                if (!phoneNumberValue.startsWith('08')) {
+                    errorPhoneStartDiv.style.visible = 'visible';
+                    setLabelColor(errorPhoneStartDiv.querySelector('label'), false);
+                    submitButton.disabled = true;
+                } else {
+                    errorPhoneStartDiv.style.visible = 'hidden';
+                    setLabelColor(errorPhoneStartDiv.querySelector('label'), true);
+
+                    if (phoneNumberValue.length < 11 || phoneNumberValue.length > 13) {
+                        errorPhoneLengthDiv.style.visible = 'visible';
+                        setLabelColor(errorPhoneLengthDiv.querySelector('label'), false);
+                        submitButton.disabled = true;
+                    } else {
+                        errorPhoneLengthDiv.style.visible = 'hidden';
+                        setLabelColor(errorPhoneLengthDiv.querySelector('label'), true);
+                        submitButton.disabled = false;
+                    }
+                }
+            }
+        });
+    });
+</script>

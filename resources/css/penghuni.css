@@ -41,6 +41,20 @@ tbody tr td{
     display: flex;
 }
 
+.wrap-input .input-phone{
+    margin-bottom: 0;
+}
+
+.error-phone-start label{
+    color: red;
+    font-size: 14px;
+}
+
+.error-phone-length label{
+    color: red;
+    font-size: 14px;
+}
+
 .btn-action{
     border: none;
     border-radius: 8px;
