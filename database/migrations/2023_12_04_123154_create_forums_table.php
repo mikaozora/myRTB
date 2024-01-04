@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('message')->nullable(false);
             $table->timestamp('created_at')->nullable(false)->useCurrent();
 
-            $table->foreign('NIP')->on('users')->references('NIP');
+            $table->foreign('NIP')->on('users')->references('NIP')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
