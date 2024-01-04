@@ -22,7 +22,7 @@ class TheatreController extends Controller
              "title" => "Booking Theatre",
              "photoProfile" => $photoProfile
               ]);
-        }
+        } 
 
         $date = [];
         for ($i = 0; $i <= 6; $i++) {
@@ -100,7 +100,7 @@ class TheatreController extends Controller
         }
 
         for ($i = 0; $i < sizeof($theatreAvail); $i++){
-            $start = (int)substr($theatreAvail[$i]['value'], 11, 2);
+            $start = (int)substr($theatreAvail[$i]['value'], 12, 2);
             $end = (int)substr($theatreAvail[$i]['end'], 11, 2);
             if ($end - $start == 2){
                 $theatreAvail[$i+1]['booked'] = true;
