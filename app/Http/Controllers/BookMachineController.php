@@ -16,7 +16,7 @@ class BookMachineController extends Controller
      */
     public function index(Request $request)
     {
-               
+
         $NIP = $request->session()->get('NIP');
         $user = User::query()->find($NIP);
         $photoProfile = $user->photo;
@@ -159,7 +159,7 @@ class BookMachineController extends Controller
             if ($isBooked)
                 {
 
-                    $MaleMachineAvai[] =
+                    $MaleMachineAvail[] =
                     [
 
                         "index" => $idx,
@@ -185,7 +185,7 @@ class BookMachineController extends Controller
         }
 
         // Washing Machine cewek
-        $WashingMachine_F = WashingMachine::skip(5)->take(7)->get(['machine_id']);
+        $WashingMachine_F = WashingMachine::skip(5)->take(7)->get(['machine_id', 'name']);
         $FemaleMachineAvail = [];
         $idx = 1;
 
@@ -212,7 +212,7 @@ class BookMachineController extends Controller
             if ($isBooked)
                 {
 
-                    $FemaleMachineAvai[] =
+                    $FemaleMachineAvail[] =
                     [
 
                         "index" => $idx,
@@ -237,8 +237,81 @@ class BookMachineController extends Controller
 
         }
 
+        // Minta ID
+        $machineSelected_M = $request->get('machine');
+        $books_M = BookMachine::join('users', 'book_machines.NIP', '=', 'users.NIP')
+                    ->whereDate('book_machines.start_time', '=', $DateReq)
+                    ->where('book_machines.machine_id', '=', $machineSelected_M)
+                    ->where('users.gender', '=', 'Male')
+                    ->select('users.NIP', 'users.name', 'users.photo', 'users.class', 'book_machines.start_time', 'book_machines.end_time')
+                    ->get();
 
-        // dd($FemaleMachineAvail);
+        $userBooks_M = [];
+        foreach ($books_M as $book)
+        {
+
+            $tempStartTime = explode(' ', $book->start_time);
+            $tempEndTime = explode(' ', $book->end_time);
+
+            $tempStartTime = $tempStartTime[1];
+            $tempEndTime = $tempEndTime[1];
+
+            $tempStartTime = str_replace(':00:00', '.00', $tempStartTime);
+            $tempEndTime = str_replace(':00:00', '.00', $tempEndTime);
+
+            $userBooks_M[] =
+            [
+
+                "name" => $book['name'],
+                "NIP" => $book['NIP'],
+                "photo" => $book['photo'],
+                "class" => $book['class'],
+                "start_time" => $tempStartTime,
+                "end_time" => $tempEndTime
+
+            ];
+
+
+        }
+
+        $machineSelected_F = $request->get('machine');
+        $books_F = BookMachine::join('users', 'book_machines.NIP', '=', 'users.NIP')
+                    ->whereDate('book_machines.start_time', '=', $DateReq)
+                    ->where('book_machines.machine_id', '=', $machineSelected_F)
+                    ->where('users.gender', '=', 'Female')
+                    ->select('users.NIP', 'users.name', 'users.photo', 'users.class', 'book_machines.start_time', 'book_machines.end_time')
+                    ->get();
+
+        $userBooks_F = [];
+        foreach ($books_F as $book)
+        {
+
+            $tempStartTime = explode(' ', $book->start_time);
+            $tempEndTime = explode(' ', $book->end_time);
+
+            $tempStartTime = $tempStartTime[1];
+            $tempEndTime = $tempEndTime[1];
+
+            $tempStartTime = str_replace(':00:00', '.00', $tempStartTime);
+            $tempEndTime = str_replace(':00:00', '.00', $tempEndTime);
+
+            $userBooks_F[] =
+            [
+
+                "name" => $book['name'],
+                "NIP" => $book['NIP'],
+                "photo" => $book['photo'],
+                "class" => $book['class'],
+                "start_time" => $tempStartTime,
+                "end_time" => $tempEndTime
+
+            ];
+
+
+        }
+
+
+        // dd($books_M);
         return response()->view('penghuni.mesincuci', [
             "title" => "Booking Mesin Cuci",
             "datenow" => $date,
@@ -246,8 +319,12 @@ class BookMachineController extends Controller
             "userGender" => $userGender,
             "MaleMachine" => $MaleMachineAvail,
             "FemaleMachine" => $FemaleMachineAvail,
-            "photoProfile" => $photoProfile
+            "photoProfile" => $photoProfile,
+            "books_M" => $userBooks_M,
+            "books_F" => $userBooks_F
         ]);
+
+
     }
 
     /**
@@ -280,7 +357,7 @@ class BookMachineController extends Controller
 
         // ini kalau dia gk milih mesin, wajib isi
         if(empty($machine_id)){
-            return redirect()->action([BookMachine::class, 'index'])->with([
+            return redirect()->action([BookMachineController::class, 'index'])->with([
                 "message" => 'Wajib memilih mesin cuci',
                 "status" => 'error'
             ]);

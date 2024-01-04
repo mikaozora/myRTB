@@ -11,7 +11,7 @@ h4
     margin-top: 10px;
     margin-bottom: 8px;
     font-size: 1.1rem;
-    margin-left: 25px;
+    margin-left: 10px;
 }
 
 body
@@ -38,7 +38,7 @@ body
 {
     padding: 10px 10px 10px;
     background-color: white;
-    height: 350px;
+    height: auto;
     width: 800px;
     border-radius: 16px;
 }
@@ -46,24 +46,38 @@ body
 .Not-choose-date
 {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 340px;
+    /* height: 340px; */
     width: 800px;
+    /* background-color: rebeccapurple; */
 }
 
-.Not-choose-date h2
+.Not-choose-date h6
 {
-    font-weight: normal;
-    font-style: italic;
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0px;
+    /* background-color: red; */
+
+}
+
+.Not-choose-date img
+{
+    width: 250px;
+    height: auto;
+    /* background-color: blue; */
+    margin: 0px;
 }
 
 .Choose-time
 {
-    padding-left: 25px;
-
+    padding-left: 10px;
+    padding-bottom: 15px;
     display: flex;
     flex-direction: row;
+    width: auto;
 
     /* background-color: aqua; */
 }
@@ -94,9 +108,9 @@ body
 
 .Choose-Washing-Machine
 {
-    height: 130px;
-    width: 800px;
-    padding-left: 25px;
+    height: auto;
+    width: auto;
+    padding-left: 10px;
     /* background-color: aqua; */
 }
 
@@ -114,6 +128,8 @@ input[type="radio"]
 .custom-radio {
     width: 3rem;
     padding: 8px 0px;
+    /* margin-bottom: 10px; */
+    overflow-x: auto;
     border: 2px solid var(--primary);
     border-radius: 16px;
     display: inline-block;
@@ -152,11 +168,20 @@ input[type="radio"]:checked + .custom-radio {
 }
 
 /* ini sisi pengguna hari ini */
+
+.Look-Washing-Machine
+{
+    padding-top: 10px;
+}
+.Check-Users
+{
+    padding-top: 20px;
+}
 .today-user-box
 {
     padding: 0px 10px 0px;
     background-color: white;
-    height: 370px;
+    height: auto;
     width: 350px;
     border-radius: 16px;
 }
@@ -164,4 +189,260 @@ input[type="radio"]:checked + .custom-radio {
 .today-user-box h3
 {
     padding-left: 10px;
+}
+
+.Female-Washing-Machine
+{
+    height: 120px;
+}
+
+.Male-Washing-Machine
+{
+    height: 120px;
+}
+
+.empty
+{
+    margin: 0px;
+    font-size: .85rem;
+    color: rgba(120, 120, 120, 1);
+    padding-left: 10px;
+}
+
+/* scrollable cowok */
+.Users-Scrollable_M
+{
+    max-height: 180px;
+    overflow-y: auto;
+    border-radius: 8px;
+    padding-top: 5px;
+}
+
+.Users-Scrollable_M::-webkit-scrollbar
+{
+    width: 5px;
+
+}
+
+.Users-Scrollable_M::-webkit-scrollbar-track{
+    background-color: white;
+}
+.Users-Scrollable_M::-webkit-scrollbar-thumb{
+    background-color: #e0e0e0;
+}
+
+.Users-Scrollable-M::-webkit-scrollbar-thumb:hover{
+    background-color: #d3d3d3;
+}
+
+/* scrollable cewek */
+.Users-Scrollable_F
+{
+    max-height: 125px;
+    overflow-y: auto;
+    border-radius: 8px;
+    padding-top: 5px;
+}
+
+.Users-Scrollable_F::-webkit-scrollbar
+{
+    width: 5px;
+
+}
+
+.Users-Scrollable_F::-webkit-scrollbar-track{
+    background-color: white;
+}
+.Users-Scrollable_F::-webkit-scrollbar-thumb{
+    background-color: #e0e0e0;
+}
+
+.Users-Scrollable-F::-webkit-scrollbar-thumb:hover{
+    background-color: #d3d3d3;
+}
+
+
+
+.Users-detail
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-right: 8px;
+}
+
+.Users-detail img
+{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.detail-middle h6
+{
+    margin: 0px;
+    font-size: .85rem;
+    font-weight: 600;
+
+}
+
+.detail-middle p
+{
+    margin: 0px;
+    font-size: .75rem;
+    color: rgba(120, 120, 120, 1);
+
+}
+
+.detail-right p
+{
+    margin: 0px;
+    font-size: .75rem;
+    color: rgba(120, 120, 120, 1);
+}
+
+/* responsif */
+
+@media screen and (max-width: 1440px)
+{
+    .schedule-box
+    {
+        width: auto;
+    }
+
+    .Not-choose-date
+    {
+        width: 705px;
+    }
+
+    .btn-submit
+    {
+        width: 690px;
+    }
+
+}
+
+@media screen and (max-width: 1024px)
+{
+    h4
+    {
+        font-size: 0.9rem;
+    }
+    .schedule-box
+    {
+        width: auto;
+    }
+
+    .Not-choose-date
+    {
+        width: 460px;
+    }
+
+    .btn-submit
+    {
+        width: 450px;
+    }
+
+    .custom-radio {
+        width: 2rem;
+        padding: 4px 0px;
+        border-radius: 8px;
+        font-size: 1rem;
+    }
+
+    .today-user-box
+    {
+        width: 175px;
+    }
+
+    .Choose-Washing-Machine
+    {
+        height: 139px;
+    }
+
+
+}
+
+@media screen and (max-width: 768px)
+{
+    .validate-date
+    {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        /* align-items: center; */
+    }
+
+    .Not-choose-date
+    {
+        align-self: center;
+    }
+    .inner-box
+    {
+        flex-direction: column
+    }
+
+    .today-user-box
+    {
+        width: auto;
+        margin-top: 15px;
+    }
+
+    h4
+    {
+        font-size: 1.1rem;
+    }
+
+    .custom-radio {
+        width: 3rem;
+        padding: 8px 0px;
+        border-radius: 16px;
+        font-size: 1.25rem;
+    }
+
+    .btn-submit
+    {
+        width: auto;
+    }
+
+    .detail-middle
+    {
+        padding-left: 20px;
+    }
+
+    .detail-right
+    {
+        padding-left: 20px;
+    }
+
+    .Users-detail
+    {
+        justify-content: flex-start;
+        padding-left: 10px;
+    }
+}
+
+@media screen and (max-width: 426px)
+{
+    h4
+    {
+        font-size: 0.95rem;
+    }
+
+    .custom-radio {
+        width: 2rem;
+        padding: 4px 0px;
+        border-radius: 8px;
+        font-size: 1rem;
+    }
+
+    .today-user-box
+    {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
 }
