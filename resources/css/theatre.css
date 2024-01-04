@@ -188,8 +188,6 @@ h4{
 
 @media screen and (max-width: 768px) {
     .wrap-content{
-        display: flex;
-        align-items: center;
         flex-direction: column;
         row-gap: 16px;
     }
@@ -200,12 +198,13 @@ h4{
         width: 95%;
     }
     .wrap-content .wrap-right{
-       gap: 16px;
+       display: flex;
        width: 95%;
     }
     .wrap-right{
         display: flex;
         flex-direction: column;
+        align-items: center;
     }
     .wrap-content .wrap-right .wrap-scrollable{
         max-height: 200px;

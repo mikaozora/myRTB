@@ -1,0 +1,33 @@
+h4{
+    margin-top: 10px;
+    margin-bottom: 8px;
+}
+
+
+.wrap-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.wrap-content .wrap-left {
+    padding: 6px 16px 16px 16px;
+    background-color: #fff;
+    border-radius: 16px;
+    width: 65%;
+}
+
+.wrap-content .wrap-validate-choose-date .wrap-span {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.wrap-content .wrap-validate-choose-date .wrap-span img {
+    width: 250px;
+    height: auto;
+}
+.wrap-content .wrap-validate-choose-date .wrap-span h6 {
+    font-size: 16px;
+    margin: 0px;
+    font-weight: 600;
+}
