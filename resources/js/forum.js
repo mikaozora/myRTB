@@ -143,6 +143,7 @@ window.Echo.channel('chat')
         
         message_input.value = null;
         file_input.value = null;
+        message_input.removeAttribute("disabled");
     });
 
 
