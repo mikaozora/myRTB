@@ -8,6 +8,7 @@ use App\Models\Status;
 use App\Models\User;
 use Carbon\Traits\ToStringFormat;
 use DateTimeZone;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Client\Response as ClientResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -119,7 +120,7 @@ class RoomController extends Controller
 
         // DISABLE TIME THAT ALREADY PAST
         for ($i = 0; $i < sizeof($timeFrom); $i++) {
-            $past = (int)substr($timeFrom[$i]['allval'], 11, 2) + 1;
+            $past = (int)substr($timeFrom[$i]['allval'], 11, 2);
             $isNow = false;
             if ($dateParam == $dateNow) {
                 $isNow = true;
@@ -246,15 +247,7 @@ class RoomController extends Controller
         $room = Room::query()->where('name', '=', 'Co-working Space')->get('room_id');
         $decode = json_decode($room, true);
         $room_id = $decode[0]['room_id'];
-
         $count = $request->input('count');
-        if ($count < 15){
-            return redirect()->action([RoomController::class, 'index'])->with(
-                'message', 'Minimum Participant is 15 persons'
-            );
-        }
-
-        $date = $request->get('date');
         $start_time = $request->input('from-time');
         $end_time = $request->input('to-time');
         $book_type = $request->get('book_type');

@@ -91,7 +91,8 @@ textarea{
 .wrap-photo-upload input[type=file]::file-selector-button {
     margin-right: 20px;
     border: none;
-    background: rgb(216, 216, 216);
+    background: var(--bg-secondary);
+    color: var(--primary);
     padding: 10px 20px;
     border-radius: 10px;
     cursor: pointer;
