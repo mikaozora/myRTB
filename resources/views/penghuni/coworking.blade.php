@@ -126,7 +126,7 @@
             var participantInput = document.getElementById('participant');
             var submitButton = document.getElementById('submit-button');
             var errorParticipantDiv = document.querySelector('.error-participant');
-
+               
             errorParticipantDiv.style.display = 'none';
             submitButton.disabled = true;
 
