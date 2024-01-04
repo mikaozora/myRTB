@@ -197,7 +197,7 @@ input[type="radio"]:checked + .custom-radio {
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
-    object-fit: cover;  
+    object-fit: cover;
     cursor: pointer;
 }
 .wrap-detail-user .wrap-detail-mid h6{
