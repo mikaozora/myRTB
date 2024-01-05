@@ -80,7 +80,10 @@ Route::prefix('/penghuni')->middleware([MemberMiddleware::class])->group(functio
         Route::get("/dapur", 'index');
         Route::post("/dapur", 'create');
     });
-    Route::get("/history", [HistoryController::class, 'index']);
+    Route::controller(HistoryController::class)->group(function(){
+        Route::get('/history', 'index');
+        Route::put('/history/{id}', 'uploadPhoto');
+    });
     Route::get("/serbaguna", [SerbagunaController::class, 'index']);
     Route::controller(ReportController::class)->group(function(){
         Route::get("/report", 'index');
