@@ -16,32 +16,32 @@
     <div class="container-content">
         <div class="content">
             <div id="messages" class="bottom-box">
-                        <!-- <div class="left-chat">
+                <!-- <div class="left-chat">
 
-                            <div class="profile-info">
-                                <img class="profile-pict" src=" {{asset('data/1703836552gladis.jpg') }}">
-                                <h2>halo</h2>
-                            </div>
-                            <div class="wrap">
-                                <div class="container-chat">
-                                    <img id="image_result" src=" {{asset('data/1703836552gladis.jpg') }}">
-                                </div>
-                                <div class="time">
-                                    12.20
-                                </div>
-                            </div>
-                        </div>  
+                    <div class="profile-info">
+                        <img class="profile-pict" src=" {{asset('data/1703836552gladis.jpg') }}">
+                        <h2>halo</h2>
+                    </div>
+                    <div class="wrap">
+                        <div class="container-chat">
+                            <img id="image_result" src=" {{asset('data/1703836552gladis.jpg') }}">
+                        </div>
+                        <div class="time">
+                            12.20
+                        </div>
+                    </div>
+                </div>  
 
-                        <div class="right-chat">
-                            <div class="wrap2">
-                                <div class="time2">
-                                    12.20
-                                </div>
-                                <div class="container-chat2">
-                                aaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                                </div>
-                            </div>
-                        </div>  -->
+                <div class="right-chat">
+                    <div class="wrap2">
+                        <div class="time2">
+                            12.20
+                        </div>
+                        <div class="container-chat2">
+                        aaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                        </div>
+                    </div>
+                </div>  -->
                     @php 
                         $prevDate = null;
                     @endphp
@@ -115,7 +115,6 @@
                 <img id="icon-input-file" src="{{asset('assets/uploadPict.svg')}}">
                   
                 <div id="msg_wrap">
-                    <!-- <img id="file_result" src=" {{ asset('data/1703836552gladis.jpg') }}"> -->
                     <img id="file_result">
                     <img class="cross" src="{{ asset('assets/silang.svg') }}" onclick="exit('msg_wrap')">
                 </div>
@@ -125,12 +124,12 @@
             </div>
         </form>
     </div>
-    <div id="last-chat" data-created-at="{{ $lastChat->created_at }}"></div>
+    <div id="last-chat" data-created-at="{{ $lastChat }}"></div>
     
     <script>
         var laravelSessionData = @json(session()->all());
-        const lastCreatedAt = "{{ $lastChat->created_at }}";
-        
+        const lastCreatedAt = "{{ $lastChat }}";
+
         var loadFile = function (e) {
             var content = document.getElementById('msg_wrap');
             content.style.display = 'block';   

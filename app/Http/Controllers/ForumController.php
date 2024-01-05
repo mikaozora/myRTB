@@ -27,7 +27,14 @@ class ForumController extends Controller
             ->orderBy('forums.created_at') 
             ->get();
         $date = Carbon::now()->locale('id_ID')->isoFormat('dddd, D MMMM YYYY');
-        $lastChat = Forum::orderBy('created_at', 'desc')->first();
+        $forumcount = Forum::count();
+        $lastChat = "";
+        if($forumcount === 0){
+            $lastChat = "null";
+        }else{
+            $lastChatt = Forum::orderBy('created_at', 'desc')->first();
+            $lastChat = $lastChatt->created_at;
+        }
 
         if($request->is('dashboard/*')){
             return response()->view('dashboard.forum', [
@@ -35,7 +42,8 @@ class ForumController extends Controller
                 "datenow" => $date,
                 "chats" => $chats,
                 "lastChat" => $lastChat,
-                "photoProfile" => $photoProfile
+                "photoProfile" => $photoProfile,
+                "lastChat" => $lastChat
             ]);
         }
         return response()->view('penghuni.forum', [
@@ -43,7 +51,8 @@ class ForumController extends Controller
             "datenow" => $date,
             "chats" => $chats,
             "lastChat" => $lastChat,
-            "photoProfile" => $photoProfile
+            "photoProfile" => $photoProfile,
+            "lastChat" => $lastChat
         ]);
     }
 
@@ -63,6 +72,7 @@ class ForumController extends Controller
 
         $test = $request->get('photo');
         $file = $request->file('photo');
+        $type = "";
         if(isset($file)){
             // echo "halo";    
             // $file = $request->file('photo');
@@ -71,15 +81,17 @@ class ForumController extends Controller
             if($file->move("forum", $originalName)){
                 $forum->message = $originalName;
                 $forum->type = "img";
+                $type = "img";
             };
             $message = $originalName;
         }else if($request->input('message')){
             $message = $request->input('message');
             $forum->message = $message;
             $forum->type = "text";
+            $type = "text";
         }
 
-        event(new ChatForum($NIP,$name, $message, $created_at, $photo));
+        event(new ChatForum($NIP,$name, $message, $created_at, $photo, $type));
 
         $forum->save();
 

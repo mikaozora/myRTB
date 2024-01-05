@@ -19,15 +19,16 @@ class ChatForum implements ShouldBroadcast
     public $created_at;
     public $photo;
     public $nip;
-    public $message_photo;
+    public $type;
 
-    public function __construct($nip,$name, $message, $created_at, $photo)
+    public function __construct($nip,$name, $message, $created_at, $photo, $type)
     {
         $this->nip = $nip;
         $this->name = $name;
         $this->message = $message;
         $this->created_at = $created_at;
         $this->photo = $photo;
+        $this->type = $type;
     }
 
     public function broadcastOn():array
