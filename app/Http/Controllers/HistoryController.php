@@ -6,6 +6,7 @@ use App\Models\BookKitchen;
 use App\Models\BookMachine;
 use App\Models\BookRoom;
 use App\Models\Report;
+use App\Models\Status;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -51,7 +52,9 @@ class HistoryController extends Controller
                 "title" => "Booking Dapur",
                 "label" => $bk->name,
                 "date" => $formattedDate,
-                "desc" => $start_time . '.00' . ' - ' . $end_time . '.00'
+                "desc" => $start_time . '.00' . ' - ' . $end_time . '.00',
+                "id" => $bk->book_id,
+                "type" => "kitchen"
             ];
         };
 
@@ -73,7 +76,9 @@ class HistoryController extends Controller
                 "title" => "Booking Mesin Cuci",
                 "label" => $bk->name,
                 "date" => $formattedDate,
-                "desc" => $start_time . '.00' . ' - ' . $end_time . '.00'
+                "desc" => $start_time . '.00' . ' - ' . $end_time . '.00',
+                "id" => $bk->book_id,
+                "type" => "machine"
             ];
         };
 
@@ -95,7 +100,9 @@ class HistoryController extends Controller
                 "title" => "Booking Co-Working Space",
                 "label" => $bk->participant . ' participant',
                 "date" => $formattedDate,
-                "desc" => $start_time . '.00' . ' - ' . $end_time . '.00'
+                "desc" => $start_time . '.00' . ' - ' . $end_time . '.00',
+                "id" => $bk->book_id,
+                "type" => "room"
             ];
         };
 
@@ -117,7 +124,9 @@ class HistoryController extends Controller
                 "title" => "Booking Theatre",
                 "label" => $bk->name,
                 "date" => $formattedDate,
-                "desc" => $start_time . '.00' . ' - ' . $end_time . '.00'
+                "desc" => $start_time . '.00' . ' - ' . $end_time . '.00',
+                "id" => $bk->book_id,
+                "type" => "room"
             ];
         };
 
@@ -139,7 +148,9 @@ class HistoryController extends Controller
                 "title" => "Booking Serbaguna",
                 "label" => $bk->name,
                 "date" => $formattedDate,
-                "desc" => $start_time . '.00' . ' - ' . $end_time . '.00'
+                "desc" => $start_time . '.00' . ' - ' . $end_time . '.00',
+                "id" => $bk->book_id,
+                "type" => "room"
             ];
         };
 
@@ -156,7 +167,9 @@ class HistoryController extends Controller
                 "title" => "Laporan Kerusakan",
                 "label" => $bk->type == "Room" ? 'Kamar/Cluster' : 'Fasilitas Umum',
                 "date" => $formattedDate,
-                "desc" => $bk->description
+                "desc" => $bk->description,
+                "id" => $bk->report_id,
+                "type" => "report"
             ];
         };
 
@@ -165,5 +178,34 @@ class HistoryController extends Controller
             "photoProfile" => $photoProfile,
             "histories" => $histories
         ]);
+    }
+    public function uploadPhoto(Request $request, string $id){
+        $type = $request->input('type');
+        $file = $request->file('photo');
+        $newStatus = Status::query()->where('name', '=', 'Done')->pluck('status_id');
+
+        if($type == 'kitchen'){
+            $history = BookKitchen::query()->find($id);
+        }else if($type == 'machine'){
+            $history = BookMachine::find($id);
+        }else if($type == 'room'){
+            $history = BookRoom::query()->find($id);
+        }else{
+            $history = Report::query()->find($id);
+        }
+
+        if(isset($file)){
+            $photo = Carbon::now()->getTimestamp() . $file->getClientOriginalName();
+            $path = "data";
+            if($file->move($path, $photo)){
+                $history->fill([
+                    "photo" => $photo,
+                    "status_id" => $newStatus[0]
+                ]);
+                
+                $history->save();
+                return redirect()->action([HistoryController::class, 'index']);
+            }
+        }
     }
 }
