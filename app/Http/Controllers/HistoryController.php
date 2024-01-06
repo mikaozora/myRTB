@@ -193,7 +193,7 @@ class HistoryController extends Controller
         }else{
             $history = Report::query()->find($id);
         }
-
+        // dd($history);
         if(isset($file)){
             $photo = Carbon::now()->getTimestamp() . $file->getClientOriginalName();
             $path = "data";
