@@ -14,6 +14,9 @@
 </head>
 
 <body>
+    @if(session('message'))
+        @include('components.notification')
+    @endif
     @include('components.sidebaruser')
     <div class="kontainer-header">
         @include('components.headercontent')
