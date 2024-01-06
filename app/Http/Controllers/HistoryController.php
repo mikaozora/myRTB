@@ -204,7 +204,7 @@ class HistoryController extends Controller
                 ]);
                 
                 $history->save();
-                return redirect()->action([HistoryController::class, 'index']);
+                return redirect()->action([HistoryController::class, 'index'])->with("message", 'Berhasil mengirim bukti penggunaan');
             }
         }
     }
