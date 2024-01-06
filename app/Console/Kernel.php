@@ -12,7 +12,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('app:update-status-kitchen')->everyTwoHours()->timezone('Asia/Jakarta')->runInBackground();
+        $schedule->command('app:update-status-machine')->everyTwoHours()->timezone('Asia/Jakarta')->runInBackground();
+        $schedule->command('app:update-status-room')->hourly()->timezone('Asia/Jakarta')->runInBackground();
     }
 
     /**
