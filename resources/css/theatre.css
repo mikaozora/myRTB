@@ -184,6 +184,12 @@ h4{
         padding: 6px 16px 16px 16px;
         width: 25%;
     }
+    .wrap-scrollable{
+        max-height: 220px;
+        overflow-y: auto;
+        border-radius: 8px;
+        scrollbar-width: none;
+    }
 }
 
 @media screen and (max-width: 768px) {

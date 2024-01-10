@@ -84,7 +84,11 @@ Route::prefix('/penghuni')->middleware([MemberMiddleware::class])->group(functio
         Route::get('/history', 'index');
         Route::put('/history/{id}', 'uploadPhoto');
     });
-    Route::get("/serbaguna", [SerbagunaController::class, 'index']);
+    
+    Route::controller(SerbagunaController::class)->group(function(){
+        Route::get('/serbaguna', 'index');
+        Route::post('/serbaguna', 'book');
+    });
     Route::controller(ReportController::class)->group(function(){
         Route::get("/report", 'index');
         Route::post("/report", 'sendReport');

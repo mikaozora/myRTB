@@ -31,3 +31,273 @@ h4{
     margin: 0px;
     font-weight: 600;
 }
+.wrap-time{
+    display: flex;
+    flex-direction: row;
+}
+
+.from-time{
+    margin-right: 8vw;
+    margin-bottom: 70px;
+}
+
+.wrap-time h5{
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.wrap-date a{
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
+
+.wrap-time{
+    padding-left: 20px;
+    margin-bottom: -50px;
+}
+
+.wrap-submit{
+    margin-top: 15x;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.wrap-submit button{
+    width: 45vw;
+    height: 40px;
+    background-color: var(--primary);
+    color: var(--bg-primary);
+    border-radius: 8px;
+    border: none;
+}
+
+.validate-choose-date{
+    color: black;
+    font-style: italic;
+}
+
+.from-time-select{
+    width: 120px;
+    height: 30px;
+    border-radius: 16px;
+    padding: 0px 5px;
+    margin-bottom: 5px;
+    font-family: "poppins", monospace;
+}
+
+.to-time-select {
+    width: 120px;
+    height: 30px;
+    border-radius: 16px;
+    padding: 0px 5px;
+    margin-bottom: 5px;
+    font-family: "poppins", monospace;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+.custom-radio {
+    width: 4rem;
+    padding: 30px 35px;
+    border: 2px solid var(--primary); /* Border color */
+    border-radius: 16px; /* Adjust the border-radius to make it look like a square */
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    font-size: 2rem;
+    font-family: 'poppins';
+    font-weight: 700;
+    background-color: #fff;
+    color: rgba(0, 0, 0, 0.20);
+    margin-bottom: 20px;
+    margin-right: 30px; /* Add margin to create spacing between radio buttons */
+}
+
+/* Style the custom radio button when selected */
+input[type="radio"]:checked + .custom-radio {
+    background-color: var(--primary); /* Background color when selected */
+}
+
+input[type="radio"][disabled] + .custom-radio {
+    background-color: #D9D9D9;
+    cursor: default;
+}
+
+.btn-submit{
+    width: 100%;
+    padding: 8px 0px;
+    border-radius: 8px;
+    background-color: var(--primary);
+    color: #fff;
+    font-size: 1.1rem;
+    border: none;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+.btn-submit:hover{
+    background-color: #16437f;
+}
+
+.wrap-content .wrap-right {
+    padding: 6px 16px 16px 16px;
+    background-color: #fff;
+    border-radius: 16px;
+    width: 29%;
+}
+
+.wrap-content .wrap-right h5{
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 16px 0px 8px 0px;
+}
+
+.ml-0{
+    margin-left: 0px;
+}
+
+.wrap-scrollable{
+    max-height: 110px;
+    overflow-y: auto;
+    border-radius: 8px;
+}
+.empty{
+    margin: 0px;
+    font-size: .85rem;
+    color: rgba(120, 120, 120, 1);
+}
+
+.wrap-scrollable::-webkit-scrollbar{
+    width: 5px;
+}
+
+.wrap-scrollable::-webkit-scrollbar-track{
+    background-color: white;
+}
+.wrap-scrollable::-webkit-scrollbar-thumb{
+    background-color: #e0e0e0;
+    border-radius: 16px;
+}
+.wrap-scrollable::-webkit-scrollbar-thumb:hover{
+    background-color: #d3d3d3;
+}
+
+.wrap-detail-user{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding-right: 8px;
+}
+.wrap-detail-user img{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
+.wrap-detail-user .wrap-detail-mid h6{
+    margin: 0px;
+    font-size: .85rem;
+    font-weight: 600;
+}
+.wrap-detail-user .wrap-detail-mid p{
+    margin: 0px;
+    font-size: .75rem;
+    color: rgba(120, 120, 120, 1);
+}
+.wrap-detail-user .wrap-detail-right p{
+    margin: 0px;
+    font-size: .75rem;
+    color: rgba(120, 120, 120, 1);
+}
+
+@media screen and (max-width: 1440px) {
+    .custom-radio {
+        width: 2rem;
+        padding: 30px 35px;
+        border-radius: 8px;
+        font-size: 1rem;
+    }
+    .wrap-content .wrap-right {
+        width: 25%;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .custom-radio {
+        width: 1rem;
+        padding: 10px 15px;
+        border-radius: 8px;
+        font-size: 1rem;
+    }
+    .wrap-content .wrap-right {
+        width: 24%;
+    }
+    
+}
+
+@media screen and (max-width: 768px){
+    .wrap-content {
+        flex-direction: column;
+        row-gap: 16px;
+    }
+    .wrap-content .wrap-left{
+        width: 95%;
+    }
+    .wrap-content .wrap-right{
+        width: 95%;
+        display: flex;
+        gap: 100px;
+    }
+    .wrap-content .wrap-right .wrap-scrollable .wrap-detail-user{
+        gap: 24px;
+    }
+    .wrap-content .wrap-right .wrap-scrollable{
+        max-height: 200px;
+    }
+    .wrap-content .wrap-right .wrap-scrollable .wrap-detail-user .wrap-detail-right p{
+        margin-right: 32px;
+    }
+    .mr{
+        margin-right: 8px;
+        margin-left: 0px;
+    }
+}
+@media screen and (max-width: 476px){
+    .wrap-content .wrap-left{
+        width: 95%;
+    }
+    .wrap-content .wrap-right{
+        gap: 16px;
+    }
+    .wrap-content .wrap-right .wrap-scrollable .wrap-detail-user{
+        gap: 8px;
+    }
+    .wrap-content .wrap-right .wrap-scrollable{
+        max-height: 230px;
+    }
+    .wrap-content .wrap-right .wrap-scrollable .wrap-detail-user .wrap-detail-right p{
+        margin-right: 0px;
+    }
+    .mr{
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+    .wrap-detail-user img{
+        width: 2rem;
+        height: 2rem;
+    }
+    .wrap-detail-user .wrap-detail-mid h6{
+        font-size: .75rem;
+    }
+    .sergun-items{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+}
