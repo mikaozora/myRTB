@@ -110,8 +110,8 @@ class RoomController extends Controller
         }
 
         // DISABLE NEXT HOUR FOR THOSE BOOKING 2 HOURS
-        for ($i = 0; $i < sizeof($roomAvail); $i++){
-            $startBook = (int)substr($roomAvail[$i]['value'], 12, 2);
+        for ($i = 0; $i < sizeof($roomAvail)-1; $i++){
+            $startBook = (int)substr($roomAvail[$i]['value'], 11, 2);
             $endBook = (int)substr($roomAvail[$i]['end'], 11, 2);
             if ($endBook - $startBook == 2){
                 $roomAvail[$i+1]['booked'] = true;
