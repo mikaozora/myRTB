@@ -53,7 +53,7 @@
                             <td>{{ $user->class }}</td>
                             <td>
                                 <div class="wrap-action">
-                                    <button class="btn-action" data-bs-toggle="modal" data-bs-target="#editModal{{$user->NIP}}"><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                    <button class="btn-action" data-bs-toggle="modal" data-bs-target="#editModal{{$user->NIP}}" id="{{$user->NIP}}" onclick="buttonClicked()"><svg xmlns="http://www.w3.org/2000/svg" width="20"
                                             height="20" viewBox="0 0 17 17" fill="none">
                                             <path
                                                 d="M14.6696 4.98648C14.9458 4.71023 14.9458 4.24982 14.6696 3.98773L13.0121 2.33023C12.75 2.05398 12.2896 2.05398 12.0133 2.33023L10.71 3.62648L13.3663 6.28273M2.125 12.2186V14.8748H4.78125L12.6154 7.03357L9.95917 4.37732L2.125 12.2186Z"
@@ -87,7 +87,43 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
 
+    <script>
+        function validatePhoneNumber(id) {
+            var inputElement = document.getElementById('input-' + id);
+            var errorStart = inputElement.parentElement.querySelector('.error-phone-start-edit label');
+            var errorLength = inputElement.parentElement.querySelector('.error-phone-length-edit label');
+            var phoneNumber = inputElement.value;
 
+            if (/^08/.test(phoneNumber)) {
+                errorStart.style.color = 'green';
+            } else {
+                errorStart.style.color = 'red';
+            }
+
+            if (/^\d{11,13}$/.test(phoneNumber)) {
+                errorLength.style.color = 'green';
+            } else {
+                errorLength.style.color = 'red';
+            }
+
+            var submitButton = inputElement.closest('.modal-content').querySelector('.btn-simpan-edit');
+            if (errorStart.style.color === 'red' || errorLength.style.color === 'red') {
+                submitButton.disabled = true;
+            } else {
+                submitButton.disabled = false;
+            }
+        }
+
+        var phoneInputs = document.querySelectorAll('.input-phone-edit');
+        phoneInputs.forEach(function (input) {
+            var nip = input.id.split('-')[1];
+
+            input.addEventListener('input', function () {
+                validatePhoneNumber(nip);
+            });
+
+            validatePhoneNumber(nip);
+        });
+    </script>
 </body>
-
 </html>
