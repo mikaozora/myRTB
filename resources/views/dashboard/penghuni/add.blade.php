@@ -57,33 +57,26 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var phoneNumberInput = document.querySelector('.input-phone');
-        console.log(phoneNumberInput.value)
         var errorPhoneStartDiv = document.querySelector('.error-phone-start');
         var errorPhoneLengthDiv = document.querySelector('.error-phone-length');
         var submitButton = document.querySelector('button.btn-simpan');
 
-        // Function to set label color
         function setLabelColor(label, isValid) {
             label.style.color = isValid ? 'green' : 'red';
         }
 
-        // Function to check if input is a number
         function isNumeric(value) {
             return !isNaN(value);
         }
 
-        // Hide error messages and set initial label color
         errorPhoneStartDiv.style.visible = 'hidden';
         errorPhoneLengthDiv.style.visible = 'hidden';
         setLabelColor(errorPhoneStartDiv.querySelector('label'), false);
         setLabelColor(errorPhoneLengthDiv.querySelector('label'), false);
 
-        // Attach an event listener to the phone number input for the 'input' event
         phoneNumberInput.addEventListener('input', function () {
             var phoneNumberValue = phoneNumberInput.value;
-            console.log(phoneNumberInput.value)
 
-            // Check if the input is a number
             if (!isNumeric(phoneNumberValue)) {
                 errorPhoneStartDiv.style.visible = 'visible';
                 setLabelColor(errorPhoneStartDiv.querySelector('label'), false);
@@ -92,7 +85,6 @@
                 errorPhoneStartDiv.style.visible = 'hidden';
                 setLabelColor(errorPhoneStartDiv.querySelector('label'), true);
 
-                // Check if the phone number starts with '08'
                 if (!phoneNumberValue.startsWith('08')) {
                     errorPhoneStartDiv.style.visible = 'visible';
                     setLabelColor(errorPhoneStartDiv.querySelector('label'), false);
@@ -101,7 +93,6 @@
                     errorPhoneStartDiv.style.visible = 'hidden';
                     setLabelColor(errorPhoneStartDiv.querySelector('label'), true);
 
-                    // Check if the phone number length is between 11 and 13 numbers
                     if (phoneNumberValue.length < 11 || phoneNumberValue.length > 13) {
                         errorPhoneLengthDiv.style.visible = 'visible';
                         setLabelColor(errorPhoneLengthDiv.querySelector('label'), false);
