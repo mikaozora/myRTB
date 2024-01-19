@@ -188,7 +188,7 @@ class BookKitchenController extends Controller
             ->where('book_kitchens.stuff_id', '=', $stuffSelected)
             ->select('users.NIP', 'users.name', 'users.photo', 'users.class', 'book_kitchens.start_time', 'book_kitchens.end_time') // Select the columns you need
             ->get();
-
+        
         $userBooks = [];
         foreach ($books as $book) {
             $tempStartTime = explode(' ', $book->start_time);
