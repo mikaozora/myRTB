@@ -12,7 +12,7 @@ class BookRoom extends Model
     use HasUuids;
 
     protected $fillable = [
-        "book_id", "NIP", "room_id", "start_time", "end_time", "photo", "type", "participant", "status_id"
+        "book_id", "NIP", "room_id", "start_time", "end_time", "photo", "type", "participant", "status_id", "is_late"
     ];
 
     protected $table = "book_rooms";

@@ -12,7 +12,7 @@ class BookMachine extends Model
     use HasUuids;
 
     protected $fillable = [
-        "book_id", "machine_id", "NIP", "start_time", "end_time", "photo", "status_id"
+        "book_id", "machine_id", "NIP", "start_time", "end_time", "photo", "status_id", "is_late"
     ];
 
     protected $table = "book_machines";

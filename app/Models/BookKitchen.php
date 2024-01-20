@@ -12,7 +12,7 @@ class BookKitchen extends Model
     use HasUuids;
 
     protected $fillable = [
-        "book_id", "NIP", "stuff_id", "start_time", "end_time", "photo", "status_id"
+        "book_id", "NIP", "stuff_id", "start_time", "end_time", "photo", "status_id", "is_late"
     ];
 
     protected $table = "book_kitchens";
