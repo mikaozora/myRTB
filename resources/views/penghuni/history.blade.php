@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         <div class="wrap-submit">
-                            @if (Request::get('status') == 'proses')
+                            @if (Request::get('status') == 'proses' && $history['type'] != 'report')
                                 <button type="button" class="btn-submit" id="btn-submit" data-bs-toggle="modal"
                                     data-bs-target="#uploadModal{{ $history['id'] }}">Selesai</button>
                             @endif
