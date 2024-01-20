@@ -177,3 +177,19 @@ p {
     padding: 0;
     padding-top: 16px;
 }
+.wrap-title{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+@media screen and (max-width: 768px){
+    .wrap-tab{
+        gap: 0px;
+        justify-content: space-around;
+        /* overflow-x: auto; */
+    }
+    .wrap-tab a{
+        padding: 4px 16px;
+    }
+}

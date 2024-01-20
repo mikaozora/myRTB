@@ -54,7 +54,8 @@ class HistoryController extends Controller
                 "date" => $formattedDate,
                 "desc" => $start_time . '.00' . ' - ' . $end_time . '.00',
                 "id" => $bk->book_id,
-                "type" => "kitchen"
+                "type" => "kitchen",
+                "isLate" => $bk->is_late
             ];
         };
 
@@ -78,7 +79,8 @@ class HistoryController extends Controller
                 "date" => $formattedDate,
                 "desc" => $start_time . '.00' . ' - ' . $end_time . '.00',
                 "id" => $bk->book_id,
-                "type" => "machine"
+                "type" => "machine",
+                "isLate" => $bk->is_late
             ];
         };
 
@@ -102,7 +104,8 @@ class HistoryController extends Controller
                 "date" => $formattedDate,
                 "desc" => $start_time . '.00' . ' - ' . $end_time . '.00',
                 "id" => $bk->book_id,
-                "type" => "room"
+                "type" => "room",
+                "isLate" => $bk->is_late
             ];
         };
 
@@ -126,7 +129,8 @@ class HistoryController extends Controller
                 "date" => $formattedDate,
                 "desc" => $start_time . '.00' . ' - ' . $end_time . '.00',
                 "id" => $bk->book_id,
-                "type" => "room"
+                "type" => "room",
+                "isLate" => $bk->is_late
             ];
         };
 
@@ -150,7 +154,8 @@ class HistoryController extends Controller
                 "date" => $formattedDate,
                 "desc" => $start_time . '.00' . ' - ' . $end_time . '.00',
                 "id" => $bk->book_id,
-                "type" => "room"
+                "type" => "room",
+                "isLate" => $bk->is_late
             ];
         };
 
@@ -169,9 +174,11 @@ class HistoryController extends Controller
                 "date" => $formattedDate,
                 "desc" => $bk->description,
                 "id" => $bk->report_id,
-                "type" => "report"
+                "type" => "report",
+                "isLate" => null
             ];
         };
+
 
         return response()->view('penghuni.history', [
             "title" => "History",
@@ -200,7 +207,8 @@ class HistoryController extends Controller
             if($file->move($path, $photo)){
                 $history->fill([
                     "photo" => $photo,
-                    "status_id" => $newStatus[0]
+                    "status_id" => $newStatus[0],
+                    "is_late" => '0'
                 ]);
                 
                 $history->save();
