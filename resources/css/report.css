@@ -120,6 +120,7 @@ textarea{
 
 .wrap-submit button:hover{
     background-color: #16437f;
+    cursor: pointer;
 }
 
 .wrap-fasum input{

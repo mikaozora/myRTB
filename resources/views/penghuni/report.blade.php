@@ -41,7 +41,7 @@
                 <div class="wrap-photo-upload">
                     <h3>Unggah Foto</h3>
                     <div class="wrap-photo">
-                        <input name="photo" type="file" class="input-photo" required>
+                        <input name="photo" type="file" accept="image/jpg, image/png, image/jpeg" class="input-photo" required>
                     </div>
                 </div>
                 <div class="wrap-submit">
