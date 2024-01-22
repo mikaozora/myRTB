@@ -89,6 +89,18 @@ label{
     padding-left: 10px;
 }
 
+.password-container{
+    position: relative;
+}
+#eye{
+    width: 7%;
+    position: absolute;
+    top: 46%;
+    right: 15px; /* Adjust the right spacing as needed */
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
 .pass{
     margin-bottom: 4%;
 }

@@ -21,7 +21,10 @@
                     </div>
                     <div class="group">
                         <label>Password</label><br>
-                        <input type="password" name="password" class="input pass" placeholder="Masukkan Password">
+                        <div class="password-container">
+                            <input type="password" name="password" class="input pass" id ="password" placeholder="Masukkan Password">
+                            <img id="eye" src="{{asset('assets/eyeoff.svg')}}">
+                        </div>
                         @if(isset($error) && ($error == "NIP or Password is required" || $error == "Invalid NIP or Password"))
                             <label class="errormsg">{{$error}}</label>                    
                         @endif
@@ -35,6 +38,18 @@
         <img class="image" src="{{asset('assets/rtbLogin.svg')}}" alt="">
     
     </div>
-
+    <script>
+        let eye = document.getElementById("eye");
+        let password = document.getElementById("password");
+        eye.onclick = function(){
+            if(password.type == "password"){
+                password.type = "type";
+                eye.src = "{{asset('assets/eyeon.svg')}}";
+            }else{
+                password.type = "password";
+                eye.src = "{{asset('assets/eyeoff.svg')}}";
+            }
+        }
+    </script>
 </body>
 </html>

@@ -34,6 +34,9 @@
     overflow-x: hidden;
     /* position: relative; */
 }
+.freeze{
+    overflow: hidden;
+}
 
 .bottom-box h1{
     color: var(--text-primary, #000);
@@ -191,6 +194,7 @@
     height: 7.5vh;
     border-radius: 50%;    
     object-fit: cover;
+    cursor: pointer;
 }
 
 h2{
@@ -313,6 +317,79 @@ h2{
     /* top: 75%; */
     /* right: 43%; */
 }
+
+#showpp{
+    width: auto;
+    height: 40vh;
+    padding: 30px;
+    /* background-color: red; */
+    position: absolute;
+    margin: 60px;
+    margin-top: 39px;
+    z-index: 100;
+    border-radius: 20px;
+    border: 1px solid #205295;
+    background: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    box-shadow: 1px -1px 30px -11px rgba(0,0,0,0.69);
+    -webkit-box-shadow: 1px -1px 30px -11px rgba(0,0,0,0.69);
+    -moz-box-shadow: 1px -1px 30px -11px rgba(0,0,0,0.69);
+}
+.pp{
+    width: auto;
+    height: 100%;
+}
+.x{
+    width: 15px;
+    height: 15px;
+    height: auto;
+    position: inherit;
+    top: 4%;
+    right: 3%;
+    cursor: pointer;
+    padding: 6px;
+    background-color: rgba(119, 119, 119, 0.2);
+    border-radius: 8px;
+}
+.x2{
+    width: 15px;
+    height: 15px;
+    height: auto;
+    position: inherit;
+    top: 4%;
+    right: 1%;
+    cursor: pointer;
+    padding: 6px;
+    background-color: rgba(119, 119, 119, 0.2);
+    border-radius: 8px;
+}
+
+#showimg{
+    /* height: 65vh; */
+    /* background-color: red; */
+    position: absolute;
+    align-self: center;
+    /* display: flex;
+    justify-items: center;
+    align-items: center; */
+    padding: 35px;
+    display: none;
+    border-radius: 20px;
+    border: 1px solid #205295;
+    background: #FFF;
+    z-index: 100;
+    box-shadow: 1px -1px 30px -11px rgba(0,0,0,0.69);
+    -webkit-box-shadow: 1px -1px 30px -11px rgba(0,0,0,0.69);
+    -moz-box-shadow: 1px -1px 30px -11px rgba(0,0,0,0.69);
+}
+#img{
+    height: 60vh;
+    z-index: 101;
+}
+
 .wrap{
     display: flex;
     align-items: flex-end;
@@ -352,4 +429,5 @@ h2{
   width: auto;
   height: auto;
   padding: 5px;
+  cursor: pointer;
 }

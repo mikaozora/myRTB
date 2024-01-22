@@ -130,7 +130,7 @@ window.Echo.channel('chat')
                     timenow +
                     '</div> <div class="container-chat2"><img id="image_result" src="../forum/' +
                     e.message +
-                    '"></div></div></div>';
+                    '" onclick="exit2(\'showimg\')"></div></div></div>';
             } else if (nip != e.nip) {
                 messages_el.innerHTML +=
                     '<div class="left-chat"> <div class="profile-info"> <img class="profile-pict" src="../data/' +
@@ -139,7 +139,7 @@ window.Echo.channel('chat')
                     e.name +
                     '</h2></div><div class="wrap"><div class="container-chat"><img id="image_result" src="../forum/' +
                     e.message +
-                    '"></div><div class="time">' +
+                    '" onclick="exit2(\'showimg\')"></div><div class="time">' +
                     timenow +
                     "</div></div></div>";
             } else {
