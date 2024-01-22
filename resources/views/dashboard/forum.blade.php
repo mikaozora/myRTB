@@ -15,33 +15,7 @@
     </div>
     <div class="container-content">
         <div class="content">
-            <div id="messages" class="bottom-box">
-                <!-- <div class="left-chat">
-
-                    <div class="profile-info">
-                        <img class="profile-pict" src=" {{asset('data/1703836552gladis.jpg') }}">
-                        <h2>halo</h2>
-                    </div>
-                    <div class="wrap">
-                        <div class="container-chat">
-                            <img id="image_result" src=" {{asset('data/1703836552gladis.jpg') }}">
-                        </div>
-                        <div class="time">
-                            12.20
-                        </div>
-                    </div>
-                </div>  
-
-                <div class="right-chat">
-                    <div class="wrap2">
-                        <div class="time2">
-                            12.20
-                        </div>
-                        <div class="container-chat2">
-                        aaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                        </div>
-                    </div>
-                </div>  -->
+            <div id="messages" class="bottom-box" id="bottom-box">
                     @php 
                         $prevDate = null;
                     @endphp
@@ -64,13 +38,17 @@
                         <!-- left chat -->
                         <div class="left-chat">
                             <div class="profile-info">
-                                <img class="profile-pict" src="{{asset('data/' . $chat->photo)}}">
+                                <img class="profile-pict" src="{{asset('data/' . $chat->photo)}}" onclick="exit2('showpp')">
                                 <h2>{{ $chat->name }}</h2>
+                                <div id="showpp">
+                                    <img class="x" src="{{ asset('assets/silang.svg') }}" onclick="exit2('showpp')">
+                                    <img id="pp" class="pp" src="{{asset('data/' . $chat->photo)}}">
+                                </div>
                             </div>
                             <div class="wrap">
                                 <div class="container-chat">
                                     @if($chat->type == "img")
-                                        <img id="image_result" src=" {{asset('forum/'. $chat->message) }}">
+                                        <img id="image_result" src=" {{asset('forum/'. $chat->message) }}" onclick="exit2('showimg')">
                                     @else
                                         <p>{{$chat->message}}</p>
                                     @endif
@@ -89,7 +67,7 @@
                                 </div>
                                 <div class="container-chat2">
                                     @if($chat->type == "img")
-                                        <img id="image_result" src=" {{asset('forum/'. $chat->message) }}">
+                                        <img id="image_result" src=" {{asset('forum/'. $chat->message) }}" onclick="exit2('showimg')">
                                     @else
                                         <p>{{$chat->message}}</p>
                                     @endif                        
@@ -100,8 +78,10 @@
                     @endforeach
 
                     <!-- <h1>{{$datenow}}</h1> -->
-                    <div id="datenow">
-
+                    <div id="datenow"></div>
+                        <div id="showimg">
+                            <img class="x2" src="{{ asset('assets/silang.svg') }}" onclick="exit2('showimg')">
+                            <img id="img" src=" {{asset('forum/'. $chat->message) }}">
                     </div>
                 </div>
             </div>
@@ -149,6 +129,20 @@
             }
             message_input.removeAttribute('disabled')
         }
+
+        function exit2(show){
+            var content = document.getElementById(show);
+            var tempat = document.getElementsByClassName("bottom-box");
+            if (content.style.display !== 'none') {
+                content.style.display = 'none';
+                tempat[0].classList='bottom-box';
+            } else {
+                content.style.display = 'block';
+                tempat[0].classList=('bottom-box freeze');
+            }
+        }
+
+
     </script>
     @vite("resources/js/forum.js")
 </body>
