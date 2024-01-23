@@ -91,8 +91,9 @@
     .home-btn button{
         font-family: 'poppins';
         font-weight: 800;
-        width: 50%;
-        height: 30px;
+        font-size: 16px;
+        width: 60%;
+        height: 45px;
         border-radius: 12px;
         border: none;
         background-color: var(--primary);
