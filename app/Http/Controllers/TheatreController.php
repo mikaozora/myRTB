@@ -202,8 +202,16 @@ class TheatreController extends Controller
             $tempEndTime = $tempEndTime[1];
             $tempStartTime = str_replace(':00:00', '.00', $tempStartTime);
             $tempEndTime = str_replace(':00:00', '.00', $tempEndTime);
+            $stringAwal = $book['name'];
+            $arrayKata = explode(' ', $stringAwal);
+            if (isset($arrayKata[2]) && strlen($arrayKata[2]) > 0) {
+                $arrayKata[2] = substr($arrayKata[2], 0, 1);
+            }
+            $arrayKata = array_slice($arrayKata, 0, 3);
+            $stringBaru =count($arrayKata) >= 3 ?  implode(' ', $arrayKata) . '.' : implode(' ', $arrayKata);
+
             $userBooks[] = [
-                "name" => $book['name'],
+                "name" => $stringBaru,
                 "NIP" => $book['NIP'],
                 "photo" => $book['photo'],
                 "class" => $book['class'],
@@ -219,6 +227,7 @@ class TheatreController extends Controller
             "timeTo" => $timeTo,
             "theatreAvail" => $theatreAvail,
             "books" => $userBooks,
+
             "photoProfile" => $photoProfile
         ]);   
     }

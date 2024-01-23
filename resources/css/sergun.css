@@ -65,12 +65,14 @@ h4{
 }
 
 .wrap-submit button{
-    width: 45vw;
+    width: 50vw;
     height: 40px;
     background-color: var(--primary);
     color: var(--bg-primary);
     border-radius: 8px;
     border: none;
+    font-family: "poppins", monospace;
+    cursor: pointer;
 }
 
 .validate-choose-date{
@@ -127,7 +129,7 @@ input[type="radio"][disabled] + .custom-radio {
     cursor: default;
 }
 
-.btn-submit{
+/* .wrap-submit.btn-submit{
     width: 100%;
     padding: 8px 0px;
     border-radius: 8px;
@@ -141,7 +143,7 @@ input[type="radio"][disabled] + .custom-radio {
 
 .btn-submit:hover{
     background-color: #16437f;
-}
+} */
 
 .wrap-content .wrap-right {
     padding: 6px 16px 16px 16px;
@@ -226,6 +228,7 @@ input[type="radio"][disabled] + .custom-radio {
     .wrap-content .wrap-right {
         width: 25%;
     }
+
 }
 
 @media screen and (max-width: 1024px) {
@@ -237,6 +240,9 @@ input[type="radio"][disabled] + .custom-radio {
     }
     .wrap-content .wrap-right {
         width: 24%;
+    }
+    .wrap-submit button{
+        width: 50vw;
     }
     
 }
@@ -253,6 +259,9 @@ input[type="radio"][disabled] + .custom-radio {
         width: 95%;
         display: flex;
         gap: 100px;
+    }
+    .wrap-submit button{
+        width: 200vw;
     }
     .wrap-content .wrap-right .wrap-scrollable .wrap-detail-user{
         gap: 24px;
