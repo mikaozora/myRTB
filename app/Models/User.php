@@ -33,5 +33,8 @@ class User extends Model
     public function forum(): HasMany{
         return $this->hasMany(Forum::class, 'NIP', 'NIP');
     }
+    public function banUser(): HasMany{
+        return $this->hasMany(BannedUser::class, 'NIP', 'NIP');
+    }
 }
 

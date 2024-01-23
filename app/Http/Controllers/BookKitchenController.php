@@ -236,6 +236,12 @@ class BookKitchenController extends Controller
         $endTime = $tempTime[1];
 
         $startTime = $date . ' ' . $startTime;
+        if($endTime == '00:00:00'){
+            $tempDate = Carbon::parse($date);
+            $date = $tempDate->addDay();
+            $date = explode(' ', $date);
+            $date = $date[0];
+        }
         $endTime = $date . ' ' . $endTime;
 
         $stuffId = $request->input('stuff');

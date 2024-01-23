@@ -79,7 +79,7 @@
 
                     <!-- <h1>{{$datenow}}</h1> -->
                     <div id="datenow"></div>
-                        <div id="showimg">
+                    <div id="showimg">
                             <img class="x2" src="{{ asset('assets/silang.svg') }}" onclick="exit2('showimg')">
                             <img id="img" src=" {{asset('forum/'. $chat->message) }}">
                     </div>

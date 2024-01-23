@@ -344,6 +344,13 @@ class BookMachineController extends Controller
         $EndTime = $timeTemp[1];
 
         $StartTime = $Date . ' ' . $StartTime;
+
+        if($EndTime == '00:00:00'){
+            $tempDate = Carbon::parse($Date);
+            $Date = $tempDate->addDay();
+            $Date = explode(' ', $Date);
+            $Date = $Date[0];
+        }
         $EndTime = $Date . ' ' . $EndTime;
 
         $machine_id = $request->input('machine');
