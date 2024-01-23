@@ -19,7 +19,7 @@ class PenghuniController extends Controller
         $user = User::query()->find($NIP);
         $photoProfile = $user->photo;
 
-        $users = User::query()->paginate(5);
+        $users = User::query()->paginate(8);
         return response()->view('dashboard.penghuni', [
             "title" => "Penghuni",
             "users" => $users,
