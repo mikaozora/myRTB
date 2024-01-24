@@ -5,11 +5,20 @@ body{
     margin: 10px 0px;
     width: 100%;
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
 }
 
 tbody tr td{
     vertical-align: middle;
+}
+
+.wrap-button .input-search{
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    padding: 4px 16px;
+    background-color: #fff;
+    font-size: .85rem;
+    min-width: 350px;
 }
 
 .wrap-button .btn-penghuni {
