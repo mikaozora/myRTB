@@ -57,6 +57,8 @@ Route::prefix("/dashboard")->middleware([AdminMiddleware::class])->group(functio
         Route::post("/penghuni", 'create');
         Route::put("/penghuni/{NIP}", 'update');
         Route::delete("/penghuni/{NIP}", 'destroy');
+        Route::get('/search', 'search')->name('search');
+        Route::get('/pagination/paginate-data', 'search');
     });
 });
 

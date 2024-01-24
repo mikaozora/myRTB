@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use FFI\Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 use function PHPUnit\Framework\fileExists;
 
@@ -14,17 +15,30 @@ class PenghuniController extends Controller
 {
     public function index(Request $request)
     {
-               
         $NIP = $request->session()->get('NIP');
         $user = User::query()->find($NIP);
         $photoProfile = $user->photo;
 
-        $users = User::query()->paginate(8);
         return response()->view('dashboard.penghuni', [
             "title" => "Penghuni",
-            "users" => $users,
             "photoProfile" => $photoProfile
         ]);
+    }
+
+    public function search(Request $request)
+    {
+
+        if ($request->ajax()) {
+            $query = $request->get('query');
+            if ($query != '') {
+                $users = User::query()->where('name', 'like', '%' . $query . '%')
+                    ->orWhere('NIP', 'like', '%' . $query . '%')
+                    ->paginate(8);
+            } else {
+                $users = User::query()->paginate(8);
+            }
+            return view('dashboard.penghuni.pagination', compact('users'));
+        }
     }
 
     public function create(Request $request)
@@ -40,8 +54,8 @@ class PenghuniController extends Controller
         $file = $request->file('photo');
         $photo = Carbon::now()->getTimestamp() . $file->getClientOriginalName();
         $path = "data";
-        if ($file->move($path, $photo)) { 
-            try{
+        if ($file->move($path, $photo)) {
+            try {
                 $user = new User();
                 $user->NIP = $nip;
                 $user->name = $name;
@@ -56,13 +70,13 @@ class PenghuniController extends Controller
                     "message",
                     "Berhasil menambah data penghuni"
                 );
-            }catch(QueryException $err){
-                if ($err->errorInfo[1] == 1062){
+            } catch (QueryException $err) {
+                if ($err->errorInfo[1] == 1062) {
                     return redirect()->action([PenghuniController::class, 'index'])->with([
                         "message" => "NIP sudah terdaftar",
                         "status" => "error"
                     ]);
-                }else{
+                } else {
                     return redirect()->action([PenghuniController::class, 'index'])->with([
                         "message" => "Gagal menambah data penghuni",
                         "status" => "error"
@@ -118,7 +132,6 @@ class PenghuniController extends Controller
             "message",
             "Berhasil mengubah data penghuni"
         );
-
     }
     public function destroy(string $nip)
     {
