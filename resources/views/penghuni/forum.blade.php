@@ -19,7 +19,7 @@
                     @php 
                         $prevDate = null;
                     @endphp
-                    @foreach ($chats as $chat)
+                    @foreach ($chats as $index => $chat)
 
                         @php 
                             $currDate = \Carbon\Carbon::parse($chat->created_at)->format('Y-m-d'); 
@@ -38,17 +38,13 @@
                         <!-- left chat -->
                         <div class="left-chat">
                             <div class="profile-info">
-                                <img class="profile-pict" src="{{asset('data/' . $chat->photo)}}" onclick="exit2('showpp')">
+                                <img class="profile-pict" src="{{asset('data/' . $chat->photo)}}" onclick="exitpp('showpp_{{$index}}', '{{$chat->photo}}')">
                                 <h2>{{ $chat->name }}</h2>
-                                <div id="showpp">
-                                    <img class="x" src="{{ asset('assets/silang.svg') }}" onclick="exit2('showpp')">
-                                    <img id="pp" class="pp" src="{{asset('data/' . $chat->photo)}}">
-                                </div>
                             </div>
                             <div class="wrap">
                                 <div class="container-chat">
                                     @if($chat->type == "img")
-                                        <img id="image_result" src=" {{asset('forum/'. $chat->message) }}" onclick="exit2('showimg')">
+                                        <img id="image_result" src=" {{asset('forum/'. $chat->message) }}" onclick="exit2('showimg_{{$index}}', '{{$chat->message}}')">
                                     @else
                                         <p>{{$chat->message}}</p>
                                     @endif
@@ -67,7 +63,7 @@
                                 </div>
                                 <div class="container-chat2">
                                     @if($chat->type == "img")
-                                        <img id="image_result" src=" {{asset('forum/'. $chat->message) }}" onclick="exit2('showimg')">
+                                        <img id="image_result" src=" {{asset('forum/'. $chat->message) }}" onclick="exit2('showimg_{{$index}}', '{{$chat->message}}')">
                                     @else
                                         <p>{{$chat->message}}</p>
                                     @endif                        
@@ -75,14 +71,23 @@
                             </div>
                         </div> 
                         @endif
+
+                        <div id="showpp_{{$index}}">
+                            <!-- <img class="x" src="{{ asset('assets/silang.svg') }}" onclick="exit3('showpp', '{{$chat->photo}}')">
+                            <img id="pp" class="pp" src="{{asset('data/' . $chat->photo)}}"> -->
+                        </div>
+
+                        <div id="index" index="{{ $index }}"></div>
+                        <div class="showimg" id="showimg_{{$index}}">
+                            <!-- <img class="x2" src="{{ asset('assets/silang.svg') }}" onclick="exit2('showimg')">
+                            <img id="img" src=" {{asset('forum/'. $chat->message) }}"> -->
+                        </div>
+
                     @endforeach
 
-                    <!-- <h1>{{$datenow}}</h1> -->
                     <div id="datenow"></div>
-                        <div id="showimg">
-                            <img class="x2" src="{{ asset('assets/silang.svg') }}" onclick="exit2('showimg')">
-                            <img id="img" src=" {{asset('forum/'. $chat->message) }}">
-                    </div>
+
+
                 </div>
             </div>
         </div>
@@ -129,17 +134,49 @@
             }
             message_input.removeAttribute('disabled')
         }
+        
+        var tempat = document.getElementsByClassName("bottom-box");
 
-        function exit2(show){
-            var content = document.getElementById(show);
-            var tempat = document.getElementsByClassName("bottom-box");
-            if (content.style.display !== 'none') {
-                content.style.display = 'none';
-                tempat[0].classList='bottom-box';
-            } else {
+        var temp = false;
+
+        function exit2(show, msg) {
+            if (!temp){
+                console.log(show, msg);
+                var content = document.getElementById(show);
                 content.style.display = 'block';
-                tempat[0].classList=('bottom-box freeze');
+                tempat[0].classList = 'bottom-box freeze';
+                var assetDataUrl = "{{ asset('forum/') }}";
+
+                content.innerHTML +=
+                    '<img class="x2" src="/assets/silang.svg" onclick="exit3(\'' + show + '\', \'' + msg + '\')">' +
+                    '<img id="img" src="' + assetDataUrl + '/' + msg + '">';
+                temp = true;
             }
+        }
+
+        function exitpp(show, msg){
+            if(!temp){
+                console.log(show, msg);
+                console.log("pp");
+                var content = document.getElementById(show);
+                content.style.display = 'block';
+                tempat[0].classList = 'bottom-box freeze';
+
+                var assetDataUrl = "{{ asset('data/') }}";
+                content.innerHTML +=
+                    '<img class="x2" src="/assets/silang.svg" onclick="exit3(\'' + show + '\', \'' + msg + '\')">' +
+                    '<img id="pp" class="pp" src="' + assetDataUrl + '/' + msg + '">';
+                temp = true;
+            }
+        }
+
+        function exit3(show, msg){
+            console.log(show, msg);
+            var content = document.getElementById(show);
+            content.style.display = 'none';
+            tempat[0].classList='bottom-box';
+            content.innerHTML = "";
+            temp = false;
         }
 
 

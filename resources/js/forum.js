@@ -123,6 +123,14 @@ window.Echo.channel('chat')
         
         eventBefore = eventNowDate;
 
+        // var index_el = document
+        //     .getElementById("index")
+        //     .getAttribute("index");
+        // var index = parseInt(index_el, 10);
+        // console.log(index_el);
+        var index = new Date().getTime();
+        var showimgg = "showimgg_" + index;
+
         if (e.type === "img") {
             if (nip == e.nip) {
                 messages_el.innerHTML +=
@@ -130,18 +138,33 @@ window.Echo.channel('chat')
                     timenow +
                     '</div> <div class="container-chat2"><img id="image_result" src="../forum/' +
                     e.message +
-                    '" onclick="exit2(\'showimg\')"></div></div></div>';
+                    '" onclick="exit2(\'showimg_' +
+                    index +
+                    "','" +
+                    e.message +
+                    "')\"></div></div></div>" +
+                    '<div class="showimg" id="showimg_' +
+                    index
+                    + '"></div>';
+                
             } else if (nip != e.nip) {
                 messages_el.innerHTML +=
                     '<div class="left-chat"> <div class="profile-info"> <img class="profile-pict" src="../data/' +
                     e.photo +
-                    '" alt = "photo"><h2>' +
+                    '" alt = "photo" onclick="exitpp(\'showpp_{{$index}}\', \'{{$chat->photo}}\')"><h2>' +
                     e.name +
                     '</h2></div><div class="wrap"><div class="container-chat"><img id="image_result" src="../forum/' +
                     e.message +
-                    '" onclick="exit2(\'showimg\')"></div><div class="time">' +
+                    '" onclick="exit2(\'showimg_' +
+                    index +
+                    "','" +
+                    e.message +
+                    '\')"></div><div class="time">' +
                     timenow +
-                    "</div></div></div>";
+                    "</div></div></div>" +
+                    '<div class="showimg" id="showimg_' +
+                    index +
+                    '"></div>';
             } else {
                 console.log("failed");
             }

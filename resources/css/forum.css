@@ -318,7 +318,7 @@ h2{
     /* right: 43%; */
 }
 
-#showpp{
+[id^="showpp"] {
     width: auto;
     height: 40vh;
     padding: 30px;
@@ -367,7 +367,7 @@ h2{
     border-radius: 8px;
 }
 
-#showimg{
+[id^="showimg"] {
     /* height: 65vh; */
     /* background-color: red; */
     position: absolute;
@@ -385,6 +385,9 @@ h2{
     -webkit-box-shadow: 1px -1px 30px -11px rgba(0,0,0,0.69);
     -moz-box-shadow: 1px -1px 30px -11px rgba(0,0,0,0.69);
 }
+/* #showimg{
+    display: none;
+} */
 #img{
     height: 60vh;
     z-index: 101;
