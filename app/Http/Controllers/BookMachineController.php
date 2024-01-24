@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BannedUser;
 use App\Models\BookMachine;
 use App\Models\Status;
 use App\Models\User;
@@ -385,6 +386,26 @@ class BookMachineController extends Controller
         $bookMachine->start_time = $StartTime;
         $bookMachine->end_time = $EndTime;
         $bookMachine->status_id = $statusId;
+
+        $today = Carbon::now()->timezone('Asia/Jakarta');
+        $date = substr($today, 8, 2);
+        $hour = substr($today, 11, 2);
+
+        $end_banned = BannedUser::where('NIP', '=', $NIP)
+        ->where('type', '=', 'machine')
+        ->select('end_time')
+        ->get();
+
+        $date_banned = substr($end_banned[0]['end_time'], 8, 2);
+        $hour_banned = substr($end_banned[0]['end_time'], 11, 2);
+
+        if ($date_banned < $date || $hour_banned < $hour){
+            return redirect()->action([BookMachineController::class, 'index'])->with([
+                'message' => 'Maaf, Anda Terkena Penalti',
+                'status' => 'error'
+            ]);
+        } 
+
         $bookMachine->save();
 
         return redirect()->action([BookMachineController::class, 'index'])->with('message', 'Berhasil melakukan booking');
