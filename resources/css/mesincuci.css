@@ -423,6 +423,11 @@ input[type="radio"]:checked + .custom-radio {
         justify-content: flex-start;
         padding-left: 10px;
     }
+
+    .washing-machines
+    {
+        display: flex;
+    }
 }
 
 @media screen and (max-width: 426px)

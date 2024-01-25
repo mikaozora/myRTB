@@ -24,9 +24,90 @@ class BookMachineController extends Controller
 
 
         if($request->is('dashboard/*')){
+
+            // minta dari link URL
+            $status = $request->get('status');
+
+            // kalau di belakang mesin cuci, kosong, ini basenya
+            if(!isset($status))
+            {
+                $status = 'Booked';
+            }
+
+            // kalau ada status=pemesanan, kaitin status ke Booked di database
+            // dan seterusnya, just like usual
+            if($status == 'pemesanan')
+            {
+                $status = 'Booked';
+            }
+            else if($status == 'proses')
+            {
+                $status = 'On Progress';
+            }
+            else if($status == 'selesai')
+            {
+                $status = 'Done';
+            }
+
+            $MachineList = [];
+
+            $MachineBooked = BookMachine::join('status', 'book_machines.status_id', '=', 'status.status_id')
+                            ->join('users', 'book_machines.NIP', '=', 'users.NIP')
+                            ->join('washing_machines', 'book_machines.machine_id', '=', 'washing_machines.machine_id')
+                            ->where('status.name', '=', $status)
+                            ->select(
+                                'book_machines.*',
+                                'users.name as user_name',
+                                'washing_machines.name as machine_name',
+                                'users.class as user_class'
+                            )
+                            ->get();
+
+
+            foreach($MachineBooked as $machine)
+            {
+                // ini untuk ambil waktunya, cuma jam
+                // example: 01, 10, 21 dan lain-lain
+                $start_time = explode(' ', $machine->start_time);
+                $start_time = substr($start_time[1], 0, 2);
+                $end_time = explode(' ', $machine->end_time);
+                $end_time = substr($end_time[1], 0, 2);
+
+                //lokalisasi ke Indonesia
+                $date = Carbon::parse($machine->start_time)->locale('id');
+                $date->settings(['formatFunction'=>'translatedFormat']);
+                //mengubah waktu kira-kira ke Senin, 24 Januari 2024
+
+                $finalDate = $date->format('l, j F Y');
+
+                $viewStatus = $status;
+
+                if($viewStatus == 'Done')
+                {
+                    $viewStatus = 'Selesai';
+                }
+
+                // masukin data yang kita punya
+                $MachineList[] =
+                [
+                    "user_name" => $machine->user_name,
+                    "machine_name" => $machine->machine_name,
+                    "date" => $finalDate,
+                    "desc" => $start_time . '.00' . ' - ' . $end_time . '.00',
+                    "id" => $machine->book_id,
+                    "user_class" => $machine->user_class,
+                    "status" => $status,
+                    "viewStatus" => $viewStatus,
+                    "uploadPhoto" => $machine->photo
+
+                ];
+            }
+
+            // dd($MachineList);
             return response()->view('dashboard.mesincuci', [
                 "title" => "Booking Mesin Cuci",
-                "photoProfile" => $photoProfile
+                "photoProfile" => $photoProfile,
+                "machines" => $MachineList
             ]);
         }
 
@@ -313,7 +394,7 @@ class BookMachineController extends Controller
                 "photo" => $book['photo'],
                 "class" => $book['class'],
                 "start_time" => $tempStartTime,
-                "end_time" => $tempEndTime
+                "end_time" => $tempEndTime,
 
             ];
         }
@@ -331,7 +412,7 @@ class BookMachineController extends Controller
             "books_M" => $userBooks_M,
             "books_F" => $userBooks_F
         ]);
-        
+
 
 
     }
@@ -404,7 +485,7 @@ class BookMachineController extends Controller
                 'message' => 'Maaf, Anda Terkena Penalti',
                 'status' => 'error'
             ]);
-        } 
+        }
 
         $bookMachine->save();
 
