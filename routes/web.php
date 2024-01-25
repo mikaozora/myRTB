@@ -47,6 +47,11 @@ Route::prefix("/dashboard")->middleware([AdminMiddleware::class])->group(functio
     });
 
     Route::get("/mesincuci", [BookMachineController::class, 'index']);
+    Route::controller(BookMachineController::class)->group(function()
+    {
+        Route::get('/mesincuci', 'index');
+        Route::put('/history/{id}', 'uploadPhoto');
+    });
     Route::get("/coworking", [RoomController::class, 'index']);
     Route::get("/dapur", [BookKitchenController::class, 'index']);
     Route::get("/serbaguna", [SerbagunaController::class, 'index']);
@@ -86,7 +91,7 @@ Route::prefix('/penghuni')->middleware([MemberMiddleware::class])->group(functio
         Route::get('/history', 'index');
         Route::put('/history/{id}', 'uploadPhoto');
     });
-    
+
     Route::controller(SerbagunaController::class)->group(function(){
         Route::get('/serbaguna', 'index');
         Route::post('/serbaguna', 'book');
