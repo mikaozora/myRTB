@@ -22,7 +22,7 @@
 
 .bottom-box{
     width: 75.8vw;
-        height: 470px;
+    height: 500px;
     border-radius: 16px;
     background:white;
     display: flex;
@@ -609,7 +609,13 @@ h2{
     }
 }
 
-@media screen and (max-width: 376px) {
+@media screen and (max-width: 375px) {
+    .inputs{
+        width: 58px;
+    }
+}
+
+@media screen and (max-width: 320px) {
     .wrap2{
         width: 260px;
     }
