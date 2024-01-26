@@ -3,7 +3,9 @@
 
 .content{
     margin-top: 0%;
-    width: 78vw;
+    /* width: 78vw; */
+        width: 100%;
+
     height: 71.7vh;
     padding: 1%;
     padding-right: 0;
@@ -20,7 +22,7 @@
 
 .bottom-box{
     width: 75.8vw;
-    height: 97%;
+        height: 470px;
     border-radius: 16px;
     background:white;
     display: flex;
@@ -131,18 +133,23 @@
     align-self: center;
 }
 
-#file_input{
+.wrap9{
+    /* background-color: purple; */
     position: absolute;
     width: 30px;
+    height: 30px; 
+    bottom: 9px;
+    right: 14%; 
+}
+
+#file_input{
+    width: 30px;
     height: 30px;   
-    right: 12%;
-    bottom: 30px;  
     z-index: 2;
     background-color: red;
     opacity: 0;
     cursor: pointer;
-    /* display: flex; */
-    position: fixed;
+    position: absolute;
 }
 
 #file_input:hover {
@@ -152,11 +159,9 @@
 #icon-input-file {
     width: 30px;
     height: 30px;
-    right: 14%;
-    bottom: 9px;
     z-index: -1;
     cursor: pointer;
-    position: absolute;
+    /* position: absolute; */
     display: inline-block;
 }
 
@@ -280,14 +285,13 @@ h2{
     padding: 8px;
     padding-bottom: 0px;
     position: relative;
-    word-wrap: break-word;
+    /* word-wrap: break-word; */
     /* min-width: 40px; */
 }
 
 .container-chat2 p{
     padding-top: 10px;
     text-align: left;
-    /* max-width: 480px;  */
     word-wrap:break-word; 
 }
 
@@ -433,4 +437,220 @@ h2{
   height: auto;
   padding: 5px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 1440px) {
+    #file_input{
+        right: 15%;
+    }
+    #icon-input-file {
+        right: 18%;
+    }
+    #message_input{
+        width: 79.4%;
+    }
+    .inputs{
+        width: 55%;
+        margin-left: 22%;
+        bottom: 4.5%;
+    }
+    .bottom-box{
+        height: 47vw;
+    }
+    .wrap9{
+        position: absolute;
+        width: 30px;
+        height: 30px; 
+        bottom: 12px;
+        right: 18.5%; 
+    }
+    .container-chat{
+        margin-left: 7%;
+    }
+    h2{
+        font-size: 1.15rem;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    h2{
+        font-size: 90%;
+    }
+    .container-chat{
+        margin-left: 8%;
+    }
+    .inputs{
+        margin-left: 31.3%;
+        bottom: 1.5%;
+        width: 50%;
+    }
+    #message_input{
+        width: 62.5%;
+    }
+    #message_send{
+        left: 67.5%;
+    }
+    .wrap9{
+        bottom: 5px;
+        right: 34%; 
+    }
+    .bottom-box{
+        height: 44vw;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .content{
+        height: 98%;
+    }
+    .bottom-box{
+        height: 44vw;
+        width: 100%;
+    }
+    #message_input{
+        width: 62.5%;
+    }
+    .inputs{
+        /* margin-left: 2%; */
+    }
+    #msg_wrap{
+        left: -62%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .bottom-box{
+        height: 58vw;
+        width: 100%;
+    }
+    .inputs{
+        width: 76.5%;
+    }
+    #msg_wrap{
+        left: -54%;
+    }
+    .inputs{
+        margin-left: 13px;
+    }
+    body {
+        overflow: hidden; 
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .bottom-box{
+        height: 110vw;
+        width: 100%;
+    }
+    .inputs{
+        width: 27%;
+    }    
+    #message_send{
+        width: 16%;
+        left: 72%;
+    }
+    #message_input{
+        width: 64%;
+    }
+    #msg_wrap{
+        left: -320px;
+    }
+    [id^="showimg"] {
+        padding: 40px;
+    }
+    #img{
+        height: 70vw;
+    }
+    .time{
+        font-size: 8px;
+    }
+    .time2{
+        font-size: 8px;
+    }
+    .profile-info{
+        width: 80%;
+    }
+    .container-chat{
+        margin-left: 14%;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .bottom-box{
+        height: 470px;
+        width: 100%;
+    }   
+    /* #message_input{
+        width: 46%;
+    }  */
+    .inputs{
+        width: 16%;
+    }
+    #msg_wrap{
+        /* padding: 10px; */
+    }
+    #file_result{
+        width: 200px;
+    }
+    .wrap2{
+        width: 300px;
+    }
+    .wrap{
+        width: 300px;
+    }
+    .container-chat2 p{
+        max-width: 250px; 
+    }  
+    .container-chat{
+        margin-left: 17%;
+    }
+    #message_input{
+        width: 62%;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .wrap2{
+        width: 260px;
+    }
+    .wrap{
+        width: 270px;
+    }
+    .container-chat2 p{
+        max-width: 220px; 
+    }  
+    #image_result{
+        max-width: 150px;   
+    }
+    .profile-pict{
+        width: 6vh;
+        height: 6vh;
+    }
+    .profile-info h2{
+        font-size: 13px;
+    }
+    .profile-info{
+        margin: 2px;
+        height: 40px;
+    }
+    [id^="showimg"] {
+        padding: 17px;
+    }
+    #img{
+        height: 52vw;
+        /* max-width: 250px; */
+    }
+    .inputs{
+        width: 0px;
+    }
+    #msg_wrap{
+        padding: 20px;
+    }
+    .cross{
+        margin-left: -0px;
+        top: 7%;
+    }
+    #file_result{
+        max-width: 180px;
+    }
 }
