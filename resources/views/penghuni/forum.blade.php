@@ -96,9 +96,10 @@
             @csrf
             <div class="inputs">
                 <input id="message_input" type="text" name="message" placeholder="Ketik disini..">
-                <input id="file_input" type="file" name="photo" accept=".png, .jpg, .jpeg" onchange="loadFile(event)">            
-                <img id="icon-input-file" src="{{asset('assets/uploadPict.svg')}}">
-                  
+                <div class="wrap9">
+                    <input id="file_input" type="file" name="photo" accept=".png, .jpg, .jpeg" onchange="loadFile(event)">            
+                    <img id="icon-input-file" src="{{asset('assets/uploadPict.svg')}}">
+                </div>
                 <div id="msg_wrap">
                     <img id="file_result">
                     <img class="cross" src="{{ asset('assets/silang.svg') }}" onclick="exit('msg_wrap')">
