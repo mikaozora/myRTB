@@ -9,6 +9,7 @@ use App\Models\Status;
 use App\Models\User;
 use Carbon\Traits\ToStringFormat;
 use DateTimeZone;
+use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Client\Response as ClientResponse;
 use Illuminate\Http\Request;
@@ -298,15 +299,20 @@ class RoomController extends Controller
         ->select('end_time')
         ->get();
 
-        $date_banned = substr($end_banned[0]['end_time'], 8, 2);
-        $hour_banned = substr($end_banned[0]['end_time'], 11, 2);
+        try{
+            $date_banned = substr($end_banned[0]['end_time'], 8, 2);
+            $hour_banned = substr($end_banned[0]['end_time'], 11, 2);
+            
+            if ($date_banned < $date || $hour_banned < $hour){
+                return redirect()->action([RoomController::class, 'index'])->with([
+                    'message' => 'Maaf, Anda Terkena Penalti',
+                    'status' => 'error'
+                ]);
+            } 
+        } catch (Exception $exception){
 
-        if ($date_banned < $date || $hour_banned < $hour){
-            return redirect()->action([RoomController::class, 'index'])->with([
-                'message' => 'Maaf, Anda Terkena Penalti',
-                'status' => 'error'
-            ]);
-        } 
+        }
+
 
         $book->save();
 
