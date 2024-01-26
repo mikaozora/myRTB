@@ -8,6 +8,7 @@ use App\Models\Room;
 use App\Models\Status;
 use App\Models\User;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 
 class SerbagunaController extends Controller
@@ -305,15 +306,20 @@ class SerbagunaController extends Controller
         ->select('end_time')
         ->get();
 
-        $date_banned = substr($end_banned[0]['end_time'], 8, 2);
-        $hour_banned = substr($end_banned[0]['end_time'], 11, 2);
+        try{
+            $date_banned = substr($end_banned[0]['end_time'], 8, 2);
+            $hour_banned = substr($end_banned[0]['end_time'], 11, 2);
+    
+            if ($date_banned < $date || $hour_banned < $hour){
+                return redirect()->action([SerbagunaController::class, 'index'])->with([
+                    'message' => 'Maaf, Anda Terkena Penalti',
+                    'status' => 'error'
+                ]);
+            } 
+        } catch(Exception $exception){
 
-        if ($date_banned < $date || $hour_banned < $hour){
-            return redirect()->action([SerbagunaController::class, 'index'])->with([
-                'message' => 'Maaf, Anda Terkena Penalti',
-                'status' => 'error'
-            ]);
-        } 
+        }
+
 
         $book->save();
 
