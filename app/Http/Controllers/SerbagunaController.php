@@ -99,7 +99,7 @@ class SerbagunaController extends Controller
             }
         }
 
-        for ($i = 0; $i < sizeof($sergunAvail); $i++){
+        for ($i = 0; $i < sizeof($sergunAvail) - 1; $i++){
             $start = (int)substr($sergunAvail[$i]['value'], 11, 2);
             $end = (int)substr($sergunAvail[$i]['end'], 11, 2);
             if ($end - $start == 2){
@@ -127,7 +127,7 @@ class SerbagunaController extends Controller
         $sergunBook = [];
         foreach ($sergunAvail as $ta){
             if ($ta['booked'] == true){
-                $theatreBok[] = $ta;
+                $sergunBook[] = $ta;
             }
         }
 
@@ -163,7 +163,6 @@ class SerbagunaController extends Controller
                             $tempChoose = (int)substr($choose, 11, 2); 
                             $tempEndAvail = (int)substr($sergunBook[$j]['end'], 11, 2);
                             $tempAvail = (int)substr($sergunBook[$j]['value'], 11, 2);
-
                             if ($tempEndAvail - $tempChoose == 2){
                                 $timeTo[2] = [
                                     "label" => $hour + 2 . ':00',
@@ -171,7 +170,9 @@ class SerbagunaController extends Controller
                                     "booked" => true,
                                     "allval" => $request->get('date') . ' ' . str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00'
                                 ];
-                                $j = sizeof($sergunBook)-1; $i = 2; $k = sizeof($sergunAvail)-1;
+                                $j = sizeof($sergunBook) - 1;
+                                $i = 2;
+                                $k = sizeof($sergunAvail)-1;
                             } else if ($tempEndAvail - $tempChoose == 3 && $tempAvail - 1 == $tempChoose){
                                 $timeTo[2] = [
                                     "label" => $hour + 2 . ':00',
@@ -179,7 +180,9 @@ class SerbagunaController extends Controller
                                     "booked" => true,
                                     "allval" => $request->get('date') . ' ' . str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00'
                                 ];
-                                $j = sizeof($sergunBook)-1; $i = 2; $k = sizeof($sergunAvail)-1;
+                                $j = sizeof($sergunBook) - 1;
+                                $i = 2;
+                                $k = sizeof($sergunAvail)-1;
                             }                       
                         }
                     }
@@ -187,25 +190,24 @@ class SerbagunaController extends Controller
             }
         }
 
-        // dd($timeParam);
+        $roomSelected = $request->get('sergun');
         $books = BookRoom::join('users', 'book_rooms.NIP', '=', 'users.NIP')
-        ->where('book_rooms.start_time', '=', $timeParam)
+        ->whereDate('book_rooms.start_time', '=', $dateParam)
+        ->where('book_rooms.room_id', '=', $roomSelected)
         ->select('users.NIP', 'users.name', 'users.photo', 'users.class', 'book_rooms.start_time', 'book_rooms.end_time', 'book_rooms.room_id')
         ->get();
-        // dd($books);
-        // $books = BookRoom::join('users', 'book_rooms.NIP', '=', 'users.NIP')
-        // ->whereDate('book_rooms.start_time', '=', $dateParam)
-        // ->where('book_rooms.room_id', '=', $room_id1)
-        // ->select('users.NIP', 'users.name', 'users.photo', 'users.class', 'book_rooms.start_time', 'book_rooms.end_time')
-        // ->get();
+        
 
+        $roomBooked = BookRoom::join('rooms', 'book_rooms.room_id', '=', 'rooms.room_id')
+        ->where('book_rooms.start_time', $datetime)
+        ->select('book_rooms.room_id')->get();
 
     //    $sergunAvailLeft = [];   
        
        $idx = 1;
        foreach($rooms as $room){
         $isBooked = false;
-        foreach($books as $b){
+        foreach($roomBooked as $b){
             if($room['room_id'] == $b['room_id']){
                 $isBooked = true;
                 break;
@@ -252,7 +254,7 @@ class SerbagunaController extends Controller
                 "end_time" => $tempEndTime
             ];
         }
-
+        // dd($userBooks);
         
         return response()->view('penghuni.serbaguna', [
             "title" => "Booking Ruang Serbaguna",
