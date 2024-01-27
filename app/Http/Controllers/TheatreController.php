@@ -101,8 +101,8 @@ class TheatreController extends Controller
             }
         }
 
-        for ($i = 0; $i < sizeof($theatreAvail); $i++){
-            $start = (int)substr($theatreAvail[$i]['value'], 12, 2);
+        for ($i = 0; $i < sizeof($theatreAvail)-1; $i++){
+            $start = (int)substr($theatreAvail[$i]['value'], 11, 2);
             $end = (int)substr($theatreAvail[$i]['end'], 11, 2);
             if ($end - $start == 2){
                 $theatreAvail[$i+1]['booked'] = true;
