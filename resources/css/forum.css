@@ -441,21 +441,24 @@ h2{
 
 @media screen and (max-width: 1440px) {
     #file_input{
-        right: 15%;
+        top: 7px;
+        right: -50px;
+        /* opacity: 1; */
     }
     #icon-input-file {
-        right: 18%;
+        margin-top: 7px;
+        margin-left: 50px;
     }
     #message_input{
-        width: 79.4%;
+        width: 84%;
     }
     .inputs{
         width: 55%;
         margin-left: 22%;
-        bottom: 4.5%;
+        bottom: 1.5%;
     }
     .bottom-box{
-        height: 47vw;
+        height: 31vw;
     }
     .wrap9{
         position: absolute;
@@ -497,9 +500,6 @@ h2{
     .bottom-box{
         height: 44vw;
     }
-}
-
-@media screen and (max-width: 1024px) {
     .content{
         height: 98%;
     }
@@ -510,11 +510,20 @@ h2{
     #message_input{
         width: 62.5%;
     }
-    .inputs{
-        /* margin-left: 2%; */
-    }
     #msg_wrap{
         left: -62%;
+    }
+    #img{
+        height: 30vw;
+    }
+    #file_input{
+        top: 0px;
+        right: 6px;
+        /* opacity:1; */
+    }
+    #icon-input-file {
+        margin-top: 0px;
+        margin-left: 0px;
     }
 }
 
@@ -559,7 +568,7 @@ h2{
         padding: 40px;
     }
     #img{
-        height: 70vw;
+        height: 39vw;
     }
     .time{
         font-size: 8px;
@@ -643,7 +652,7 @@ h2{
         padding: 17px;
     }
     #img{
-        height: 52vw;
+        height: 42vw;
         /* max-width: 250px; */
     }
     .inputs{

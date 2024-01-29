@@ -86,10 +86,8 @@
                     @endforeach
 
                     <div id="datenow"></div>
-                    <div id="showimg">
-                            <img class="x2" src="{{ asset('assets/silang.svg') }}" onclick="exit2('showimg')">
-                            <img id="img" src=" {{asset('forum/'. $chat->message) }}">
-                    </div>
+
+
                 </div>
             </div>
         </div>
@@ -98,9 +96,10 @@
             @csrf
             <div class="inputs">
                 <input id="message_input" type="text" name="message" placeholder="Ketik disini..">
-                <input id="file_input" type="file" name="photo" accept=".png, .jpg, .jpeg" onchange="loadFile(event)">            
-                <img id="icon-input-file" src="{{asset('assets/uploadPict.svg')}}">
-                  
+                <div class="wrap9">
+                    <input id="file_input" type="file" name="photo" accept=".png, .jpg, .jpeg" onchange="loadFile(event)">            
+                    <img id="icon-input-file" src="{{asset('assets/uploadPict.svg')}}">
+                </div>
                 <div id="msg_wrap">
                     <img id="file_result">
                     <img class="cross" src="{{ asset('assets/silang.svg') }}" onclick="exit('msg_wrap')">
@@ -139,30 +138,37 @@
         
         var tempat = document.getElementsByClassName("bottom-box");
 
-        function exit2(show, msg) {
-            console.log(show, msg);
-            var content = document.getElementById(show);
-            content.style.display = 'block';
-            tempat[0].classList = 'bottom-box freeze';
-            var assetDataUrl = "{{ asset('forum/') }}";
+        var temp = false;
 
-            content.innerHTML +=
-                '<img class="x2" src="/assets/silang.svg" onclick="exit3(\'' + show + '\', \'' + msg + '\')">' +
-                '<img id="img" src="' + assetDataUrl + '/' + msg + '">';
+        function exit2(show, msg) {
+            if (!temp){
+                console.log(show, msg);
+                var content = document.getElementById(show);
+                content.style.display = 'block';
+                tempat[0].classList = 'bottom-box freeze';
+                var assetDataUrl = "{{ asset('forum/') }}";
+
+                content.innerHTML +=
+                    '<img class="x2" src="/assets/silang.svg" onclick="exit3(\'' + show + '\', \'' + msg + '\')">' +
+                    '<img id="img" src="' + assetDataUrl + '/' + msg + '">';
+                temp = true;
+            }
         }
 
         function exitpp(show, msg){
-            console.log(show, msg);
-            console.log("pp");
-            var content = document.getElementById(show);
-            content.style.display = 'block';
-            tempat[0].classList = 'bottom-box freeze';
+            if(!temp){
+                console.log(show, msg);
+                console.log("pp");
+                var content = document.getElementById(show);
+                content.style.display = 'block';
+                tempat[0].classList = 'bottom-box freeze';
 
-            var assetDataUrl = "{{ asset('data/') }}";
-            content.innerHTML +=
-                '<img class="x2" src="/assets/silang.svg" onclick="exit3(\'' + show + '\', \'' + msg + '\')">' +
-                '<img id="pp" class="pp" src="' + assetDataUrl + '/' + msg + '">';
-
+                var assetDataUrl = "{{ asset('data/') }}";
+                content.innerHTML +=
+                    '<img class="x2" src="/assets/silang.svg" onclick="exit3(\'' + show + '\', \'' + msg + '\')">' +
+                    '<img id="pp" class="pp" src="' + assetDataUrl + '/' + msg + '">';
+                temp = true;
+            }
         }
 
         function exit3(show, msg){
@@ -171,6 +177,7 @@
             content.style.display = 'none';
             tempat[0].classList='bottom-box';
             content.innerHTML = "";
+            temp = false;
         }
 
 
