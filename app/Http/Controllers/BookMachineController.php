@@ -482,22 +482,15 @@ class BookMachineController extends Controller
             $date_banned = substr($end_banned[0]['end_time'], 8, 2);
             $hour_banned = substr($end_banned[0]['end_time'], 11, 2);
 
-<<<<<<< Updated upstream
         if ($date_banned < $date || $hour_banned < $hour){
             return redirect()->action([BookMachineController::class, 'index'])->with([
                 'message' => 'Maaf, Anda Terkena Penalti',
                 'status' => 'error'
             ]);
-=======
-            if ($date_banned < $date || $hour_banned < $hour){
-                return redirect()->action([BookMachineController::class, 'index'])->with([
-                    'message' => 'Maaf, Anda Terkena Penalti',
-                    'status' => 'error'
-                ]);
-            } 
-        } catch (Exception $exception){
+        }
+        }catch (Exception $exception)
+        {
 
->>>>>>> Stashed changes
         }
 
         $bookMachine->save();
