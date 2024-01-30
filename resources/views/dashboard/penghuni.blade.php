@@ -43,43 +43,6 @@
     </script>
 
     <script>
-        function validatePhoneNumber(id) {
-            var inputElement = document.getElementById('input-' + id);
-            var errorStart = inputElement.parentElement.querySelector('.error-phone-start-edit label');
-            var errorLength = inputElement.parentElement.querySelector('.error-phone-length-edit label');
-            var phoneNumber = inputElement.value;
-
-            if (/^08/.test(phoneNumber)) {
-                errorStart.style.color = 'green';
-            } else {
-                errorStart.style.color = 'red';
-            }
-
-            if (/^\d{11,13}$/.test(phoneNumber)) {
-                errorLength.style.color = 'green';
-            } else {
-                errorLength.style.color = 'red';
-            }
-
-            var submitButton = inputElement.closest('.modal-content').querySelector('.btn-simpan-edit');
-            if (errorStart.style.color === 'red' || errorLength.style.color === 'red') {
-                submitButton.disabled = true;
-            } else {
-                submitButton.disabled = false;
-            }
-        }
-
-        var phoneInputs = document.querySelectorAll('.input-phone-edit');
-        phoneInputs.forEach(function(input) {
-            var nip = input.id.split('-')[1];
-
-            input.addEventListener('input', function() {
-                validatePhoneNumber(nip);
-            });
-
-            validatePhoneNumber(nip);
-        });
-
         //pagination
         $(document).on('click', '.pagination a', function(e) {
             e.preventDefault();
@@ -125,6 +88,47 @@
                 fetchData(query)
             })
         })
+    </script>
+
+    <script>
+        function buttonClicked(){
+            function validatePhoneNumber(id) {
+            var inputElement = document.getElementById('input-' + id);
+            var errorStart = inputElement.parentElement.querySelector('.error-phone-start-edit label');
+            var errorLength = inputElement.parentElement.querySelector('.error-phone-length-edit label');
+            var phoneNumber = inputElement.value;
+
+            if (/^08/.test(phoneNumber)) {
+                errorStart.style.color = 'green';
+            } else {
+                errorStart.style.color = 'red';
+            }
+
+            if (/^\d{11,13}$/.test(phoneNumber)) {
+                errorLength.style.color = 'green';
+            } else {
+                errorLength.style.color = 'red';
+            }
+
+            var submitButton = inputElement.closest('.modal-content').querySelector('.btn-simpan-edit');
+            if (errorStart.style.color === 'red' || errorLength.style.color === 'red') {
+                submitButton.disabled = true;
+            } else {
+                submitButton.disabled = false;
+            }
+        }
+
+        var phoneInputs = document.querySelectorAll('.input-phone-edit');
+        phoneInputs.forEach(function(input) {
+            var nip = input.id.split('-')[1];
+
+            input.addEventListener('input', function() {
+                validatePhoneNumber(nip);
+            });
+
+            validatePhoneNumber(nip);
+        });
+        }
     </script>
 </body>
 
