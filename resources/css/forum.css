@@ -202,7 +202,7 @@
     cursor: pointer;
 }
 
-h2{
+.profile-info h2{
     color: var(--text-primary, #000);
     font-family: Open Sans;
     font-size: 14px;
@@ -667,5 +667,11 @@ h2{
     }
     #file_result{
         max-width: 180px;
+    }
+    .datenow h1{
+        font-size: 10px;
+    }
+    .datenow{
+        height: 10px;
     }
 }

@@ -108,7 +108,7 @@ class BookMachineController extends Controller
             return response()->view('dashboard.mesincuci', [
                 "title" => "Booking Mesin Cuci",
                 "photoProfile" => $photoProfile,
-                "machines" => $MachineList
+                "machines" => $MachineList,
             ]);
         }
 

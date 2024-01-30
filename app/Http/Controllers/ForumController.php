@@ -43,7 +43,8 @@ class ForumController extends Controller
                 "chats" => $chats,
                 "lastChat" => $lastChat,
                 "photoProfile" => $photoProfile,
-                "lastChat" => $lastChat
+                "lastChat" => $lastChat,
+                // "NIP" => $NIP
             ]);
         }
         return response()->view('penghuni.forum', [
@@ -52,7 +53,8 @@ class ForumController extends Controller
             "chats" => $chats,
             "lastChat" => $lastChat,
             "photoProfile" => $photoProfile,
-            "lastChat" => $lastChat
+            "lastChat" => $lastChat,
+            // "NIP" => $NIP
         ]);
     }
 

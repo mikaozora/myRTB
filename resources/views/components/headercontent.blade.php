@@ -19,6 +19,8 @@
             </div>
         </div>
         <div class="logout">
+            <!-- <button type="button" class="btn btn-popup" data-bs-toggle="modal" data-bs-target="#detail-{{ session('NIP') }}">Edit Password</button> -->
+
             <button class="btn-popup">Edit Password</button>
             <form action="/logout" method="POST">
                 @csrf
