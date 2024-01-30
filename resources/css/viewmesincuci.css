@@ -149,10 +149,42 @@ body {
     width: 300px;
 }
 
-@media (min-width: 576px)
+@media (max-width: 1440px)
 {
     .modal-dialog {
         max-width: 699px;
         margin: 1.75rem auto;
+    }
+    .inner-box
+    {
+        height: 475px;
+    }
+    .view
+    {
+        max-height: 420px;
+    }
+}
+
+@media (max-width: 426px)
+{
+    .wrap-tab
+    {
+        overflow-y: auto;
+    }
+
+    .modal-body
+    {
+        flex-direction: column;
+    }
+
+    .modal-content
+    {
+        width: 90%;
+    }
+
+    .modal.show .modal-dialog
+    {
+        display: flex;
+        justify-content: center;
     }
 }
