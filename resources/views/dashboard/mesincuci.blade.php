@@ -8,7 +8,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>{{$title}}</title>
     @vite('resources/css/content.css')
-    @vite('resources/css/viewmesincuci.css')
+    @vite('resources/css/view admin/viewmesincuci.css')
 </head>
 <body>
     @include('components.sidebaradmin')
@@ -21,8 +21,10 @@
 
     <div class="container-content">
 
+        {{-- ini kotak putih di bawah header --}}
         <div class="inner-box">
 
+            {{-- buat milih opsi on progress dll --}}
             <div class="wrap-tab">
                 <a href="/dashboard/mesincuci?status=pemesanan"
                     class="{{ Request::get('status') == 'pemesanan' || !Request::get('status') ? 'active' : '' }}">Pemesanan</a>

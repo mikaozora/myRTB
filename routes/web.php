@@ -50,13 +50,16 @@ Route::prefix("/dashboard")->middleware([AdminMiddleware::class])->group(functio
     Route::controller(BookMachineController::class)->group(function()
     {
         Route::get('/mesincuci', 'index');
-        Route::put('/history/{id}', 'uploadPhoto');
     });
     Route::get("/coworking", [RoomController::class, 'index']);
     Route::get("/dapur", [BookKitchenController::class, 'index']);
     Route::get("/serbaguna", [SerbagunaController::class, 'index']);
     Route::get("/report", [ReportController::class, 'index']);
     Route::get("/theatre", [TheatreController::class, 'index']);
+    Route::controller(TheatreController::class)->group(function()
+    {
+        Route::get('/theatre', 'index');
+    });
     Route::controller(PenghuniController::class)->group(function(){
         Route::get("/penghuni", 'index');
         Route::post("/penghuni", 'create');
