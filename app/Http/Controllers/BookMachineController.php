@@ -99,7 +99,8 @@ class BookMachineController extends Controller
                     "user_class" => $machine->user_class,
                     "status" => $status,
                     "viewStatus" => $viewStatus,
-                    "uploadPhoto" => $machine->photo
+                    "uploadPhoto" => $machine->photo,
+                    "is_late" => $machine->is_late
 
                 ];
             }
@@ -481,7 +482,7 @@ class BookMachineController extends Controller
         try{
             $date_banned = substr($end_banned[0]['end_time'], 8, 2);
             $hour_banned = substr($end_banned[0]['end_time'], 11, 2);
-    
+
             if ($date_banned < $date || $hour_banned < $hour){
                 return redirect()->action([BookMachineController::class, 'index'])->with([
                     'message' => 'Maaf, Anda Terkena Penalti',

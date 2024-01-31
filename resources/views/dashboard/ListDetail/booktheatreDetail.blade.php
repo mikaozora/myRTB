@@ -1,4 +1,4 @@
-<div class="modal fade" id="detail-{{$machine['id']}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="detail-{{$theatre['id']}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -7,18 +7,18 @@
         </div>
         <div class="modal-body">
                 <div class="detail-person">
-                    <h5> {{ $machine['user_name'] }} </h5>
-                    <p>{{ $machine['user_class'] }}</p>
-                    <p>{{ $machine['machine_name'] }}</p>
-                    <p>{{ $machine['date'] }}</p>
-                    <p>{{ $machine['desc'] }}</p>
-                    <p>Status : {{$machine['viewStatus']}}</h6>
+                    <h5> {{ $theatre['user_name'] }} </h5>
+                    <p>{{ $theatre['user_class'] }}</p>
+                    <p>{{ $theatre['room_name'] }}</p>
+                    <p>{{ $theatre['date'] }}</p>
+                    <p>{{ $theatre['desc'] }}</p>
+                    <p>Status : {{$theatre['viewStatus']}}</h6>
                 </div>
 
-                @if ($machine['is_late'] == 0)
+                @if ($theatre['is_late'] == 0)
                     <div class="photo-uploaded">
 
-                        <img class="photo" src="{{asset('data/' . $machine['uploadPhoto'])}}" alt="photo">
+                        <img class="photo" src="{{asset('data/' . $theatre['uploadPhoto'])}}" alt="photo">
 
                     </div>
                 @else
