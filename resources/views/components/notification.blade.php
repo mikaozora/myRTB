@@ -15,7 +15,6 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var myDiv = document.getElementById("notif");
-
             // Show the div
             myDiv.style.visibility = "visible";
 
