@@ -5,16 +5,18 @@
                 <h5 class="modal-title" id="exampleModalLabel">Hapus Penghuni</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="/dashboard/penghuni/{{$user->NIP}}" method="POST" enctype="multipart/form-data">
+            {{-- <form action="/dashboard/penghuni/{{$user->NIP}}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('DELETE')
+                @method('DELETE') --}}
+                <input type="hidden" id="userId" value="{{$user->NIP}}">
                 <div class="modal-body">
                     <p>Apakah anda yakin ingin menghapus <span>{{$user->name}}</span>?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn-simpan">Hapus</button>
+                    <button type="submit" class="btn-simpan deletebtn" data-userid="{{$user->NIP}}">Hapus</button>
                 </div>
-            </form>
+            {{-- </form> --}}
         </div>
     </div>
 </div>
+

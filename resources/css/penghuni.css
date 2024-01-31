@@ -1,6 +1,13 @@
 body{
     font-family: 'poppins';
 }
+/* .modal-backdrop.fade.show{
+    display: none;
+} */
+/* .modal-backdrop.show:first{
+    display: block;
+    background-color: rgba(0, 0, 255, 0.5);
+} */
 .wrap-button {
     margin: 10px 0px;
     width: 100%;
@@ -137,11 +144,11 @@ thead, tbody{
     cursor: pointer;
   }
 
-#photo{
+  .wrap-input input[type=file]{
     border: none;
     padding: 0px;
     border-radius: 0px;
-}
+  }
 .btn-simpan{
     border: none;
     background-color: var(--primary);
