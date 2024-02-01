@@ -54,6 +54,72 @@ class UserController extends Controller
         $request->session()->forget('NIP');
         return redirect("/");
     }
+
+    public function viewPass (Request $request){
+        $NIP = $request->session()->get('NIP');
+        $user = User::query()->find($NIP);
+        $currentPassword = $user->password;
+
+    }
+
+
+    public function verifyPassword(Request $request) {
+        $enteredPassword = $request->input('oldPassword');
+        
+        // $enteredPassword = "ozora123";
+        $NIP = $request->session()->get('NIP');
+        $user = User::query()->find($NIP);
+        
+        if ($user && Hash::check($enteredPassword, $user->password)) {
+            // error_log('Entered Password on Server: ' . $enteredPassword);
+            return response()->json(['status' => 'success', 'enteredPassword' => "tes"]);
+        } else {
+            return response()->json(['status' => 'error', 'message' => 'Wrong old password', 'enteredPassword' => "else"]);
+        }
+    }
+
+    public function change_password(Request $request){
+        $NIP = $request->session()->get('NIP');
+        $user = User::query()->find($NIP);
+        $currentPassword = $user->password;
+
+        // Validasi formulir (terserah bagaimana validasinya)
+        // $request->validate([
+        //     'oldPassword' => 'required',
+        //     'newPassword' => 'required|min:8',
+        // ]);
+
+        // Dapatkan password yang sekarang dari user yang sedang login
+
+
+        // $currentPassword = Auth::user()->password;
+
+        // Periksa apakah password yang dimasukkan benar
+        if (Hash::check($request->oldPassword, $currentPassword)) {
+            // Password lama sesuai, lakukan perubahan password baru
+            // $NIP = $request->session()->get('NIP');
+            // $user = User::query()->find($NIP);
+
+            $password = Hash::make($request->newPassword);
+
+            $user->fill([
+                "password" => $password,
+            ]);
+            $user->save();
+            $request->session()->forget('NIP');
+            return redirect("/");
+
+        } else {
+            // Password lama tidak sesuai
+            // return back()->with([
+            //     'error' => 'wrong_old_password']
+            // );
+            // return redirect([
+            //     'error' => 'wrong_old_password'
+            // ]);        
+            return back()->withErrors(['error' => 'wrong_old_password']);
+        }
+    }
     /**
      * Show the form for creating a new resource.
      */

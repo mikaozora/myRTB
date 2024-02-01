@@ -38,7 +38,8 @@ Route::get('/', [\App\Http\Controllers\HomeController::class, 'home']);
 Route::get('/sesi',[UserController::class, 'index'])->middleware([GuestMiddleware::class]);
 Route::post('/sesi/login',[UserController::class, 'login'])->middleware([GuestMiddleware::class]);
 Route::post("/logout", [UserController::class, 'logout'])->middleware([LogoutMiddleware::class]);
-
+Route::put("/change-password", [UserController::class, 'change_password'])->middleware([LogoutMiddleware::class]);
+Route::post('/verify-password', [UserController::class, 'verifyPassword']);    
 
 Route::prefix("/dashboard")->middleware([AdminMiddleware::class])->group(function(){
     Route::controller(ForumController::class)->group(function(){
@@ -107,4 +108,10 @@ Route::prefix('/penghuni')->middleware([MemberMiddleware::class])->group(functio
         Route::get("/theatre", 'index');
         Route::post("/theatre", 'book');
     });
+    // Route::controller(UserController::class)->group(function(){
+    //     Route::post("/change-password", 'change_password');
+    // });
+    Route::get('/{any}', [UserController::class, 'viewPass'])
+        ->where('any', '^(?!mesincuci|coworking|dapur|history|serbaguna|report|theatre).*$');
+    
 });
