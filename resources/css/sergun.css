@@ -65,14 +65,15 @@ h4{
 }
 
 .wrap-submit button{
-    width: 50vw;
-    height: 40px;
-    background-color: var(--primary);
-    color: var(--bg-primary);
+    width: 100%;
+    padding: 8px 0px;
     border-radius: 8px;
+    background-color: var(--primary);
+    color: #fff;
+    font-size: 1.1rem;
     border: none;
-    font-family: "poppins", monospace;
     cursor: pointer;
+    transition: all .2s ease-in-out;
 }
 
 .validate-choose-date{
