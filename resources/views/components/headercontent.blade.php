@@ -34,9 +34,9 @@
         </div>
     </div>
 
-    <div class="overlay" id="overlay"></div>
+    <div class="overlay_header" id="overlay_header"></div>
 
-    <div id="detail-{{ session('NIP') }}">
+    <div id="detail-{{ session('NIP') }}" class="contain">
         <img class="close" src="{{ asset('assets/silang.svg') }}" onclick="closeModal()">
         <h5>Change Password</h5>
         <form action="/change-password" method="POST">
@@ -75,12 +75,12 @@
             
             function openModal()    {
                 document.getElementById("detail-{{ session('NIP') }}").style.display = "block";
-                document.getElementById("overlay").style.display = "block";
+                document.getElementById("overlay_header").style.display = "block";
             }
 
             function closeModal(){
                 document.getElementById("detail-{{ session('NIP') }}").style.display = "none";
-                document.getElementById("overlay").style.display = "none";
+                document.getElementById("overlay_header").style.display = "none";
             }
             // var currentPassword = document.getElementById('currentPassword').getAttribute('data-password');
             // var oldPassInput = document.getElementById('oldPassword');
