@@ -616,11 +616,14 @@
     #message_input{
         width: 62%;
     }
-}
-
-@media screen and (max-width: 375px) {
     .inputs{
         width: 58px;
+    }
+    [id^="showpp"] {
+        height: 33%;
+    }
+    .pp{
+        height: 46vw;
     }
 }
 
