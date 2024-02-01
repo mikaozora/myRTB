@@ -109,7 +109,7 @@ img, svg {
     }
 }
 
-[id^="detail"] {
+[id^="detail-"] {
     position: fixed;
     top: 30%;
     left: 50%;
@@ -126,7 +126,7 @@ img, svg {
     display: none;
 }
 
-.overlay {
+.overlay_header {
     display: none;
     position: fixed;
     top: 0;
@@ -136,7 +136,7 @@ img, svg {
     background: rgba(0, 0, 0, 0.7); /* Warna hitam dengan opasitas */
     z-index: 999;
 }
-h5{
+.contain h5{
     text-align: center;
     color: #000;
     font-family: Poppins;
