@@ -64,7 +64,7 @@ class UserController extends Controller
 
 
     public function verifyPassword(Request $request) {
-        $enteredPassword = $request->input('oldPassword');
+        $enteredPassword = $request->input('enteredPassword');
         
         // $enteredPassword = "ozora123";
         $NIP = $request->session()->get('NIP');
@@ -72,9 +72,9 @@ class UserController extends Controller
         
         if ($user && Hash::check($enteredPassword, $user->password)) {
             // error_log('Entered Password on Server: ' . $enteredPassword);
-            return response()->json(['status' => 'success', 'enteredPassword' => "tes"]);
+            return response()->json(['status' => 'success', 'enteredPassword' => $enteredPassword]);
         } else {
-            return response()->json(['status' => 'error', 'message' => 'Wrong old password', 'enteredPassword' => "else"]);
+            return response()->json(['status' => 'error', 'message' => 'Wrong old password', 'enteredPassword' => $enteredPassword]);
         }
     }
 

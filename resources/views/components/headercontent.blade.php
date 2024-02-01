@@ -123,7 +123,10 @@
                     if (response.status === 'success') {
                         // Password cocok, lakukan aksi selanjutnya
                         console.log('Password cocok');
+                        var pesanErrorDiv = document.getElementById("pesan_error");
+                        pesanErrorDiv.style.display = "none";
                         submitButton.style.opacity = 1;
+                        submitButton.disabled = false;
                     } else {
                         var pesanErrorDiv = document.getElementById("pesan_error");
                         pesanErrorDiv.innerHTML = "Wrong old password";
