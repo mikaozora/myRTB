@@ -625,6 +625,12 @@
 }
 
 @media screen and (max-width: 320px) {
+    [id^="showpp"] {
+        height: 30%;
+    }
+    .pp{
+        height: 40vw;
+    }
     .wrap2{
         width: 260px;
     }
