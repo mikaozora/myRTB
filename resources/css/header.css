@@ -109,7 +109,7 @@ img, svg {
     }
 }
 
-[id^="detail-"] {
+[id^="detailnip"] {
     position: fixed;
     top: 30%;
     left: 50%;
