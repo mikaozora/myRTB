@@ -14,12 +14,12 @@ class BookMachineSeeder extends Seeder
     public function run(): void
     {
         BookMachine::query()->create([
-            'machine_id' => '9ac4c6c3-9965-4a4d-b029-7b885cf7cdb5',
+            'machine_id' => '9b3eb0de-1069-46f6-87b8-64dbb209309b',
             'NIP' => '0543',
             'start_time' => '2023-12-01 06:00:00',
             'end_time' => '2023-12-01 08:00:00',
             'photo' => null,
-            'status_id' => '9ac4c529-54df-40bd-b4ad-5db3381d714b'
+            'status_id' => '9b3eba04-0aa4-4ff0-a8f1-90b09fdb8908'
         ]);
     }
 }

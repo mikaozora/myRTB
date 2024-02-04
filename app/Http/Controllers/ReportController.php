@@ -16,15 +16,74 @@ class ReportController extends Controller
      */
     public function index(Request $request)
     {
-               
+
         $NIP = $request->session()->get('NIP');
         $user = User::query()->find($NIP);
         $photoProfile = $user->photo;
 
         if($request->is('dashboard/*')){
+
+            $status = $request->get('status');
+
+            if(!isset($status))
+            {
+                $status = 'On Progress';
+            }
+
+            else if($status == 'proses')
+            {
+                $status = 'On Progress';
+            }
+            else if($status == 'selesai')
+            {
+                $status = 'Done';
+            }
+
+            $reportList = [];
+
+            $report = Report::join('status', 'reports.status_id', '=', 'status.status_id')
+                      ->join('users', 'reports.NIP', '=', 'users.NIP')
+                      ->where('status.name', '=', $status)
+                      ->select(
+                        'reports.*',
+                        'users.name as user_name',
+                        'users.class as user_class',
+                        'users.room_number as user_room'
+                     )
+                     ->get();
+
+
+            foreach($report as $R)
+            {
+
+                $viewStatus = $status;
+
+                if($viewStatus == 'Done')
+                {
+                    $viewStatus = 'Selesai';
+                }
+
+                $reportList[] =
+                [
+                    "user_name" => $R->user_name,
+                    "user_class" => $R->user_class,
+                    "id" => $R->report_id,
+                    "status" => $status,
+                    "viewStatus" => $viewStatus,
+                    "uploadPhoto" => $R->photo,
+                    "description" => $R->description,
+                    "user_room" => $R->user_room,
+                    "type" => $R->type
+
+                ];
+
+
+            }
+
             return response()->view('dashboard.report', [
                 "title" => "Report",
-                "photoProfile" => $photoProfile
+                "photoProfile" => $photoProfile,
+                "report" => $reportList
             ]);
         }
         return response()->view('penghuni.report', [
@@ -44,14 +103,14 @@ class ReportController extends Controller
         $status = Status::query()->where('name', '=', 'On Progress')->get('status_id');
         $decode = json_decode($status, true);
         $status_id = $decode[0]['status_id'];
-        if ($file->move($path, $photo)) { 
+        if ($file->move($path, $photo)) {
             try{
                 $report = new Report();
                 $report->nip = $nip;
                 $report->type = $type;
                 $report->description = $description;
                 $report->photo = $photo;
-                $report->status_id = $status_id; 
+                $report->status_id = $status_id;
                 $report->save();
                 return redirect()->action([ReportController::class, 'index'])->with(
                     "message",
@@ -71,5 +130,12 @@ class ReportController extends Controller
                 }
             }
         }
+    }
+
+    public function selesai(request $request)
+    {
+        $updateStatus = Status::query()
+                        ->where('name', '=', 'Done')
+                        ->pluck('status_id');
     }
 }

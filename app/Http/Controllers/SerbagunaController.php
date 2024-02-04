@@ -14,15 +14,91 @@ use Illuminate\Http\Request;
 class SerbagunaController extends Controller
 {
     public function index(Request $request){
-               
+
         $NIP = $request->session()->get('NIP');
         $user = User::query()->find($NIP);
-        $photoProfile = $user->photo; 
+        $photoProfile = $user->photo;
 
         if($request->is('dashboard/*')){
+
+            $status = $request->get('status');
+
+            if(!isset($status))
+            {
+                $status = 'Booked';
+            }
+
+            if($status == 'pemesanan')
+            {
+                $status = 'Booked';
+            }
+            else if($status == 'proses')
+            {
+                $status = 'On Progress';
+            }
+            else if($status == 'selesai')
+            {
+                $status = 'Done';
+            }
+
+            $serbagunaList = [];
+
+            $BookedSerbaguna = BookRoom::join('status', 'book_rooms.status_id', '=', 'status.status_id')
+                             ->join('users', 'book_rooms.NIP', '=', 'users.NIP')
+                             ->join('rooms', 'book_rooms.room_id', '=', 'rooms.room_id')
+                             ->where('status.name', '=', $status)
+                             ->where(function ($query) {
+                                $query->where('rooms.name', '=', 'Serbaguna 1')
+                                    ->orWhere('rooms.name', '=', 'Serbaguna 2');
+                             })
+                             ->select(
+                                'book_rooms.*',
+                                'users.name as user_name',
+                                'rooms.name as room_name',
+                                'users.class as user_class'
+                             )
+                             ->get();
+
+
+            foreach($BookedSerbaguna as $BS)
+            {
+                $start_time = explode(' ', $BS->start_time);
+                $start_time = substr($start_time[1], 0, 2);
+                $end_time = explode(' ', $BS->end_time);
+                $end_time = substr($end_time[1], 0, 2);
+
+                $date = Carbon::parse($BS->start_time)->locale('id');
+                $date->settings(['formatFunction'=>'translatedFormat']);
+
+                $finalDate = $date->format('l, j F Y');
+
+                $viewStatus = $status;
+
+                if($viewStatus == 'Done')
+                {
+                    $viewStatus = 'Selesai';
+                }
+
+                $serbagunaList[] =
+                [
+                    "user_name" => $BS->user_name,
+                    "room_name" => $BS->room_name,
+                    "date" => $finalDate,
+                    "desc" => $start_time . '.00' . ' - ' . $end_time . '.00',
+                    "id" => $BS->book_id,
+                    "user_class" => $BS->user_class,
+                    "status" => $status,
+                    "viewStatus" => $viewStatus,
+                    "uploadPhoto" => $BS->photo,
+                    "is_late" => $BS->is_late
+                ];
+            }
+
+            // dd($serbagunaList);
             return response()->view('dashboard.serbaguna', [
                 "title" => "Booking Ruang Serbaguna",
-                "photoProfile" => $photoProfile
+                "photoProfile" => $photoProfile,
+                "serbaguna" => $serbagunaList
             ]);
         }
 
@@ -42,7 +118,7 @@ class SerbagunaController extends Controller
                 "label" => $i . ':00',
                 "value" => str_pad($i, 2, '0', STR_PAD_LEFT) . ':00:00',
                 "allval" => $request->get('date') . ' ' . str_pad($i, 2, '0', STR_PAD_LEFT) . ':00:00',
-            ];            
+            ];
         }
 
         $timeParam = $request->get('fromtime');
@@ -70,7 +146,7 @@ class SerbagunaController extends Controller
                             "value" => $timeFrom[$i]['value'],
                             "booked" => false,
                             "end" => null
-                        ];   
+                        ];
             } else if(isset($book)) {
                 for ($j = 0; $j < sizeof($book); $j++){
                     if ($timeFrom[$i]['allval'] == $book[$j]['start_time']) {
@@ -85,8 +161,8 @@ class SerbagunaController extends Controller
                             'isAvailable' => false
                         ];
                     }
-                } 
-                   
+                }
+
                 if (!$isBooked){
                         $sergunAvail[$i] = [
                             'booked' => false,
@@ -95,7 +171,7 @@ class SerbagunaController extends Controller
                             'end' => null,
                             'isAvailable' => true
                         ];
-                }            
+                }
             }
         }
 
@@ -136,7 +212,7 @@ class SerbagunaController extends Controller
         if (empty($choose) || $choose == "PilihJam"){
         } else {
             $choose = $request->get('fromtime');
-            $hour = substr($choose, 11, 2); 
+            $hour = substr($choose, 11, 2);
             if (sizeof($sergunBook) == 0){
                 for($i = 1; $i <= 2; $i++){
                     $timeTo[$i] = [
@@ -159,8 +235,8 @@ class SerbagunaController extends Controller
                                 "booked" => false,
                                 "allval" => $request->get('date') . ' ' . str_pad($hour + $i, 2, '0', STR_PAD_LEFT) . ':00:00'
                             ];
-    
-                            $tempChoose = (int)substr($choose, 11, 2); 
+
+                            $tempChoose = (int)substr($choose, 11, 2);
                             $tempEndAvail = (int)substr($sergunBook[$j]['end'], 11, 2);
                             $tempAvail = (int)substr($sergunBook[$j]['value'], 11, 2);
                             if ($tempEndAvail - $tempChoose == 2){
@@ -183,7 +259,7 @@ class SerbagunaController extends Controller
                                 $j = sizeof($sergunBook) - 1;
                                 $i = 2;
                                 $k = sizeof($sergunAvail)-1;
-                            }                       
+                            }
                         }
                     }
                 }
@@ -196,14 +272,14 @@ class SerbagunaController extends Controller
         ->where('book_rooms.room_id', '=', $roomSelected)
         ->select('users.NIP', 'users.name', 'users.photo', 'users.class', 'book_rooms.start_time', 'book_rooms.end_time', 'book_rooms.room_id')
         ->get();
-        
+
 
         $roomBooked = BookRoom::join('rooms', 'book_rooms.room_id', '=', 'rooms.room_id')
         ->where('book_rooms.start_time', $datetime)
         ->select('book_rooms.room_id')->get();
 
-    //    $sergunAvailLeft = [];   
-       
+    //    $sergunAvailLeft = [];
+
        $idx = 1;
        foreach($rooms as $room){
         $isBooked = false;
@@ -255,7 +331,7 @@ class SerbagunaController extends Controller
             ];
         }
         // dd($userBooks);
-        
+
         return response()->view('penghuni.serbaguna', [
             "title" => "Booking Ruang Serbaguna",
             "datenow" => $date,
@@ -270,7 +346,7 @@ class SerbagunaController extends Controller
     }
 
     public function book(Request $request){
-        
+
         $date = $request->get('date');
         $start_time = $request->input('from-time');
         $end_time = $request->input('to-time');
@@ -311,13 +387,13 @@ class SerbagunaController extends Controller
         try{
             $date_banned = substr($end_banned[0]['end_time'], 8, 2);
             $hour_banned = substr($end_banned[0]['end_time'], 11, 2);
-    
+
             if ($date_banned < $date || $hour_banned < $hour){
                 return redirect()->action([SerbagunaController::class, 'index'])->with([
                     'message' => 'Maaf, Anda Terkena Penalti',
                     'status' => 'error'
                 ]);
-            } 
+            }
         } catch(Exception $exception){
 
         }
