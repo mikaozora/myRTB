@@ -19,18 +19,88 @@ class BookKitchenController extends Controller
     /**
      * Display a listing of the resource.
      */
-    
+
     public function index(Request $request)
     {
-               
+
         $NIP = $request->session()->get('NIP');
         $user = User::query()->find($NIP);
         $photoProfile = $user->photo;
 
         if ($request->is('dashboard/*')) {
+
+            $status = $request->get('status');
+
+            if(!isset($status))
+            {
+                $status = 'Booked';
+            }
+
+            if($status == 'pemesanan')
+            {
+                $status = 'Booked';
+            }
+            else if($status == 'proses')
+            {
+                $status = 'On Progress';
+            }
+            else if($status == 'selesai')
+            {
+                $status = 'Done';
+            }
+
+            $dapurList = [];
+
+            $BookedDapur = BookKitchen::join('status', 'book_kitchens.status_id', '=', 'status.status_id')
+                            ->join('users', 'book_kitchens.NIP', '=', 'users.NIP')
+                            ->join('kitchen_stuffs', 'book_kitchens.stuff_id', '=', 'kitchen_stuffs.stuff_id')
+                            ->where('status.name', '=', $status)
+                            ->select(
+                                'book_kitchens.*',
+                                'users.name as user_name',
+                                'kitchen_stuffs.name as stuff_name',
+                                'users.class as user_class'
+                             )
+                            ->get();
+
+            foreach($BookedDapur as $BD)
+            {
+                $start_time = explode(' ', $BD->start_time);
+                $start_time = substr($start_time[1], 0, 2);
+                $end_time = explode(' ', $BD->end_time);
+                $end_time = substr($end_time[1], 0, 2);
+
+                $date = Carbon::parse($BD->start_time)->locale('id');
+                $date->settings(['formatFunction'=>'translatedFormat']);
+
+                $finalDate = $date->format('l, j F Y');
+
+                $viewStatus = $status;
+
+                if($viewStatus == 'Done')
+                {
+                    $viewStatus = 'Selesai';
+                }
+
+                $dapurList[] =
+                [
+                    "user_name" => $BD->user_name,
+                    "stuff_name" => $BD->stuff_name,
+                    "date" => $finalDate,
+                    "desc" => $start_time . '.00' . ' - ' . $end_time . '.00',
+                    "id" => $BD->book_id,
+                    "user_class" => $BD->user_class,
+                    "status" => $status,
+                    "viewStatus" => $viewStatus,
+                    "uploadPhoto" => $BD->photo,
+                    "is_late" => $BD->is_late
+                ];
+            }
+            // dd($BookedDapur);
             return response()->view('dashboard.dapur', [
                 "title" => "Booking Dapur",
-                "photoProfile" => $photoProfile
+                "photoProfile" => $photoProfile,
+                "dapur" => $dapurList
             ]);
         }
         $date = [];
@@ -190,7 +260,7 @@ class BookKitchenController extends Controller
             ->where('book_kitchens.stuff_id', '=', $stuffSelected)
             ->select('users.NIP', 'users.name', 'users.photo', 'users.class', 'book_kitchens.start_time', 'book_kitchens.end_time') // Select the columns you need
             ->get();
-        
+
         $userBooks = [];
         foreach ($books as $book) {
             $tempStartTime = explode(' ', $book->start_time);
@@ -286,13 +356,13 @@ class BookKitchenController extends Controller
         try{
             $date_banned = substr($end_banned[0]['end_time'], 8, 2);
             $hour_banned = substr($end_banned[0]['end_time'], 11, 2);
-    
+
             if ($date_banned < $date || $hour_banned < $hour){
                 return redirect()->action([BookKitchenController::class, 'index'])->with([
                     'message' => 'Maaf, Anda Terkena Penalti',
                     'status' => 'error'
                 ]);
-            } 
+            }
         } catch (Exception $exception){
 
         }

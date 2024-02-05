@@ -39,7 +39,7 @@ Route::get('/sesi',[UserController::class, 'index'])->middleware([GuestMiddlewar
 Route::post('/sesi/login',[UserController::class, 'login'])->middleware([GuestMiddleware::class]);
 Route::post("/logout", [UserController::class, 'logout'])->middleware([LogoutMiddleware::class]);
 Route::put("/change-password", [UserController::class, 'change_password'])->middleware([LogoutMiddleware::class]);
-Route::post('/verify-password', [UserController::class, 'verifyPassword']);    
+Route::post('/verify-password', [UserController::class, 'verifyPassword']);
 
 Route::prefix("/dashboard")->middleware([AdminMiddleware::class])->group(function(){
     Route::controller(ForumController::class)->group(function(){
@@ -47,16 +47,33 @@ Route::prefix("/dashboard")->middleware([AdminMiddleware::class])->group(functio
         Route::post("/forum/send-msg",'sendMessage');
     });
 
-    Route::get("/mesincuci", [BookMachineController::class, 'index']);
+
     Route::controller(BookMachineController::class)->group(function()
     {
         Route::get('/mesincuci', 'index');
     });
-    Route::get("/coworking", [RoomController::class, 'index']);
-    Route::get("/dapur", [BookKitchenController::class, 'index']);
-    Route::get("/serbaguna", [SerbagunaController::class, 'index']);
-    Route::get("/report", [ReportController::class, 'index']);
-    Route::get("/theatre", [TheatreController::class, 'index']);
+
+    Route::controller(RoomController::class)->group(function()
+    {
+        Route::get('/coworking', 'index');
+    });
+
+    Route::controller(BookKitchenController::class)->group(function()
+    {
+        Route::get('/dapur', 'index');
+    });
+
+    Route::controller(SerbagunaController::class)->group(function()
+    {
+        Route::get('/serbaguna', 'index');
+    });
+
+    Route::controller(ReportController::class)->group(function()
+    {
+        Route::get('/report', 'index');
+        Route::put("/report/{report_id}", 'selesai');
+    });
+
     Route::controller(TheatreController::class)->group(function()
     {
         Route::get('/theatre', 'index');
@@ -113,5 +130,5 @@ Route::prefix('/penghuni')->middleware([MemberMiddleware::class])->group(functio
     // });
     Route::get('/{any}', [UserController::class, 'viewPass'])
         ->where('any', '^(?!mesincuci|coworking|dapur|history|serbaguna|report|theatre).*$');
-    
+
 });
