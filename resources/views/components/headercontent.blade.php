@@ -78,12 +78,12 @@
         // @endif
 
         function openModal() {
-            document.getElementById("detail-{{ session('NIP') }}").style.display = "block";
+            document.getElementById("detailnip{{ session('NIP') }}").style.display = "block";
             document.getElementById("overlay_header").style.display = "block";
         }
 
         function closeModal() {
-            document.getElementById("detail-{{ session('NIP') }}").style.display = "none";
+            document.getElementById("detailnip{{ session('NIP') }}").style.display = "none";
             document.getElementById("overlay_header").style.display = "none";
         }
         // var currentPassword = document.getElementById('currentPassword').getAttribute('data-password');
