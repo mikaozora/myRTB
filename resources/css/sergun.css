@@ -189,12 +189,17 @@ input[type="radio"][disabled] + .custom-radio {
     background-color: #d3d3d3;
 }
 
-.wrap-detail-user{
+.wrap-detail-user {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 16px;
     padding-right: 8px;
+}
+
+.wrap-detail-mid{
+    margin-left: 10px;
+    flex: 1; 
 }
 .wrap-detail-user img{
     width: 3rem;

@@ -152,8 +152,8 @@ input[type="radio"]:checked + .custom-radio {
 }
 
 .btn-submit{
-    width: 780px;
-    height: 30px;
+    width: 100%;
+    padding: 8px 0px;
     border-radius: 8px;
     background-color: var(--primary);
     color: #fff;
@@ -161,8 +161,8 @@ input[type="radio"]:checked + .custom-radio {
     border: none;
     cursor: pointer;
     transition: all .2s ease-in-out;
+    margin-bottom: 2;
 }
-
 .btn-submit:hover{
     background-color: #16437f;
 }
