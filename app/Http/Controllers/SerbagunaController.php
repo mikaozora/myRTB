@@ -51,9 +51,10 @@ class SerbagunaController extends Controller
 
         $rooms = Room::query()->where('name', 'like', 'Serbaguna%')->get('room_id');
         $decode = json_decode($rooms, true);
+        $room_id = $decode[0]['room_id'];
 
         $today = $request->get('date');
-        $book = BookRoom::query()
+        $book = BookRoom::where('room_id', $room_id)
         ->where('start_time', 'like', $today.'%')
         ->get();
 
@@ -125,9 +126,9 @@ class SerbagunaController extends Controller
         }
 
         $sergunBook = [];
-        foreach ($sergunAvail as $ta){
-            if ($ta['booked'] == true){
-                $sergunBook[] = $ta;
+        foreach ($sergunAvail as $sa){
+            if ($sa['booked'] == true){
+                $sergunBook[] = $sa;
             }
         }
 
