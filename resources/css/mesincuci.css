@@ -263,42 +263,37 @@ input[type="radio"]:checked + .custom-radio {
 
 
 
-.Users-detail
-{
+.wrap-detail-user {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     margin-bottom: 16px;
     padding-right: 8px;
 }
 
-.Users-detail img
-{
+.wrap-detail-mid{
+    margin-left: 10px;
+    flex: 1; 
+}
+
+.wrap-detail-user img{
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
-    object-fit: cover;
+    object-fit: cover;  
     cursor: pointer;
 }
-
-.detail-middle h6
-{
+.wrap-detail-user .wrap-detail-mid h6{
     margin: 0px;
     font-size: .85rem;
     font-weight: 600;
-
 }
-
-.detail-middle p
-{
+.wrap-detail-user .wrap-detail-mid p{
     margin: 0px;
     font-size: .75rem;
     color: rgba(120, 120, 120, 1);
-
 }
-
-.detail-right p
-{
+.wrap-detail-user .wrap-detail-right p{
     margin: 0px;
     font-size: .75rem;
     color: rgba(120, 120, 120, 1);
@@ -408,17 +403,17 @@ input[type="radio"]:checked + .custom-radio {
         width: auto;
     }
 
-    .detail-middle
+    .wrap-detail-mid
     {
         padding-left: 20px;
     }
 
-    .detail-right
+    .wrap-detail-right
     {
         padding-left: 20px;
     }
 
-    .Users-detail
+    .wrap-detail-user
     {
         justify-content: flex-start;
         padding-left: 10px;
