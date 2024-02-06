@@ -12,6 +12,7 @@ use App\Http\Controllers\SerbagunaController;
 use App\Http\Controllers\TheatreController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\CheckRouteMiddleware;
 use App\Http\Middleware\GuestMiddleware;
 use App\Http\Middleware\LogoutMiddleware;
 use App\Http\Middleware\MemberMiddleware;
@@ -46,8 +47,7 @@ Route::prefix("/dashboard")->middleware([AdminMiddleware::class])->group(functio
         Route::get("/forum",'index');
         Route::post("/forum/send-msg",'sendMessage');
     });
-
-
+    
     Route::controller(BookMachineController::class)->group(function()
     {
         Route::get('/mesincuci', 'index');
@@ -88,13 +88,13 @@ Route::prefix("/dashboard")->middleware([AdminMiddleware::class])->group(functio
     });
 });
 
-
 Route::prefix('/penghuni')->middleware([MemberMiddleware::class])->group(function(){
+    Route::get('/{tes}', [UserController::class, 'errorRoute'])
+        ->where('tes', '^(?!mesincuci|coworking|dapur|history|serbaguna|report|theatre|forum).*$');
     Route::controller(ForumController::class)->group(function(){
         Route::get("/forum",'index');
         Route::post("/forum/send-msg",'sendMessage');
     });
-    Route::get("/mesincuci", [BookMachineController::class, 'index']);
     Route::controller(BookMachineController::class)->group(function()
     {
         Route::get("/mesincuci", "index");
@@ -128,7 +128,10 @@ Route::prefix('/penghuni')->middleware([MemberMiddleware::class])->group(functio
     // Route::controller(UserController::class)->group(function(){
     //     Route::post("/change-password", 'change_password');
     // });
+
     Route::get('/{any}', [UserController::class, 'viewPass'])
         ->where('any', '^(?!mesincuci|coworking|dapur|history|serbaguna|report|theatre).*$');
-
+   
 });
+
+
