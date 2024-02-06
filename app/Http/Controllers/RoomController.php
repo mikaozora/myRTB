@@ -327,7 +327,6 @@ class RoomController extends Controller
             ];
         }
 
-
         return response()->view('penghuni.coworking', [
             "datenow" => $date,
             "title" => "Booking CWS",
