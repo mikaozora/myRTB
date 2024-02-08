@@ -30,6 +30,7 @@ body {
     position: fixed;
     top: 16px;
     left: 16px;
+    z-index: 10;
 }
 
 .wrap-sidebar .wrap-content-sidebar {

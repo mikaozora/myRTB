@@ -10,16 +10,29 @@
     box-sizing: content-box;
 }
 
-.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     line-height: normal;
 }
-img, svg {
+img,
+svg {
     vertical-align: baseline;
 }
-.wrap-header{
+.wrap-header {
     position: relative;
+    z-index: 11;
 }
-.container-header{
+.container-header {
     display: flex;
     padding: 16px 40px;
     background-color: #fff;
@@ -28,14 +41,14 @@ img, svg {
     align-items: center;
 }
 
-.container-header h3{
-    font-family: 'poppins';
+.container-header h3 {
+    font-family: "poppins";
     font-size: 1.5rem;
     font-weight: 700;
     margin: 0px;
 }
 
-.container-header .img-container img{
+.container-header .img-container img {
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 50%;
@@ -43,7 +56,7 @@ img, svg {
     cursor: pointer;
 }
 
-.logout{
+.logout {
     display: flex;
     flex-direction: column;
     padding: 16px;
@@ -55,54 +68,54 @@ img, svg {
     right: 40px;
     opacity: 0;
     visibility: hidden;
-    box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.1);
-    transition: all .3s ease-in-out;
+    box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
     z-index: 100;
 }
 
-.logout .btn-popup{
+.logout .btn-popup {
     background-color: white;
     border: none;
     cursor: pointer;
-    color: #ADADAD;
-    font-family: 'poppins';
+    color: #adadad;
+    font-family: "poppins";
     font-size: 1rem;
     font-weight: 500;
     text-align: left;
     margin: 8px;
-    transition: all .3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
-.logout form{
+.logout form {
     margin: 0px;
 }
 
-.logout .btn-popup:hover{
+.logout .btn-popup:hover {
     color: var(--primary);
 }
 
-.logout.show{
+.logout.show {
     visibility: visible;
     opacity: 1;
 }
 
 @media screen and (max-width: 992px) {
-    .container-header h3{
+    .container-header h3 {
         font-size: 1.25rem;
         font-weight: 700;
         margin: 0px;
     }
-    .container-header .img-container img{
+    .container-header .img-container img {
         width: 2rem;
         height: 2rem;
     }
 }
 
 @media screen and (max-width: 476px) {
-    .kontainer-header{
+    .kontainer-header {
         margin-bottom: 0px;
     }
-    .container-header h3{
-        font-family: 'poppins';
+    .container-header h3 {
+        font-family: "poppins";
         font-size: 1rem;
         font-weight: 700;
         margin: 0px;
@@ -119,7 +132,7 @@ img, svg {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     border-radius: 16px;
-    background: #FFF;
+    background: #fff;
     display: flex;
     flex-direction: column;
     width: 20%;
@@ -136,7 +149,7 @@ img, svg {
     background: rgba(0, 0, 0, 0.7); /* Warna hitam dengan opasitas */
     z-index: 999;
 }
-.contain h5{
+.contain h5 {
     text-align: center;
     color: #000;
     font-family: Poppins;
@@ -146,7 +159,7 @@ img, svg {
     line-height: normal;
     margin: 10px;
 }
-.wrapp{
+.wrapp {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -155,7 +168,7 @@ img, svg {
     padding-left: 15px;
     padding-right: 15px;
 }
-.judul{
+.judul {
     color: var(--text-primary, #000);
     font-family: Poppins;
     font-size: 17px;
@@ -164,17 +177,17 @@ img, svg {
     line-height: normal;
     align-self: flex-start;
 }
-#pesan_error{
+#pesan_error {
     align-self: flex-start;
     color: red;
     font-size: 13px;
 }
-.pass_input{
+.pass_input {
     height: 35px;
     width: 100%;
     border-radius: 20px;
     border: 2px solid var(--primary, #205295);
-    background: #FFF;
+    background: #fff;
     padding-left: 20px;
     font-family: Poppins;
     font-size: 15px;
@@ -182,11 +195,11 @@ img, svg {
     font-weight: 500;
     line-height: normal;
 }
-.submit{
+.submit {
     border-radius: 20px;
     border: 2px solid var(--primary, #205295);
     background: var(--primary, #205295);
-    color: #FFF;
+    color: #fff;
     font-family: Poppins;
     font-size: 14px;
     font-style: normal;
@@ -196,7 +209,7 @@ img, svg {
     height: 30px;
     margin-top: 5px;
 }
-.close{
+.close {
     width: 15px;
     height: 15px;
     height: auto;
