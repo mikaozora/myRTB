@@ -193,19 +193,16 @@
 
                             @foreach ($books_M as $book)
 
-                                <div class="Users-detail">
-
-                                    <img src="{{ asset('data/' . $book['photo']) }}" alt="">
-                                    <div class="detail-middle">
-
-                                        <h6>{{ $book['name'] }}</h6>
-                                        <p>{{ $book['class'] }}</p>
-
-                                    </div>
-
-                                    <div class="detail-right">
-
-                                        <p>{{ $book['start_time'] }} - {{ $book['end_time'] }}</p>
+                            <div class="wrap-detail-user">
+                                <img src="{{ asset('data/' . $book['photo']) }}" alt="">
+                                <div class="wrap-detail-mid">
+                                    <h6>{{ $book['name'] }}</h6>
+                                    <p>{{ $book['class'] }}</p>
+                                </div>
+                                <div class="wrap-detail-right">
+                                    <p>{{ $book['start_time'] }} - {{ $book['end_time'] }}</p>
+                                </div>
+                            </div>
 
                                     </div>
 
@@ -227,23 +224,16 @@
 
                                 @foreach ($books_F as $book)
 
-                                <div class="Users-detail">
-
-                                    <img src="{{ asset('data/' . $book['photo']) }}" alt="">
-                                    <div class="detail-middle">
-
-                                        <h6>{{ $book['name'] }}</h6>
-                                        <p>{{ $book['class'] }}</p>
-
-                                    </div>
-
-                                    <div class="detail-right">
-
-                                        <p>{{ $book['start_time'] }} - {{ $book['end_time'] }}</p>
-
-                                    </div>
-
+                                <div class="wrap-detail-user">
+                                <img src="{{ asset('data/' . $book['photo']) }}" alt="">
+                                <div class="wrap-detail-mid">
+                                    <h6>{{ $book['name'] }}</h6>
+                                    <p>{{ $book['class'] }}</p>
                                 </div>
+                                <div class="wrap-detail-right">
+                                    <p>{{ $book['start_time'] }} - {{ $book['end_time'] }}</p>
+                                </div>
+                            </div>
 
                                 @endforeach
 
