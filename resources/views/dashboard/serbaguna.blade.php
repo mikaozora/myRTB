@@ -12,7 +12,7 @@
 </head>
 <body>
     @include('components.sidebaradmin')
-
+    @include('components.loader')
     <div class="kontainer-header">
 
         @include('components.headercontent')
