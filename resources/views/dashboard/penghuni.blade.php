@@ -21,6 +21,7 @@
             @include('components.notification')
         @endif
         @include('components.sidebaradmin')
+        @include('components.loader')
         @include('dashboard.penghuni.add')
         <div class="kontainer-header">
             @include('components.headercontent')
