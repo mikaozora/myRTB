@@ -74,7 +74,7 @@
                         </div>
 
                         <div class="wrap-submit">
-                            <button type="submit">Submit</button>
+                            <button id="submit-button" type="submit">Submit</button>
                         </div>
 
                         @endif
