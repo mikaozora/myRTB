@@ -62,7 +62,6 @@ let eventBefore = new Date();
 
 window.Echo.channel('chat')
     .listen('.message', (e) => {
-
         console.log(e);
 
         //buat tanggal
@@ -87,8 +86,8 @@ window.Echo.channel('chat')
         let eventNowDate = new Date(eventNow);
         if (lastCreatedAt === "null") {
             if (eventBefore.getTime() !== eventNowDate.getTime()) {
-                console.log(typeof (eventBefore));
-                console.log(typeof (eventNowDate));
+                console.log(typeof eventBefore);
+                console.log(typeof eventNowDate);
                 temp = true;
             } else {
                 temp = false;
@@ -98,7 +97,7 @@ window.Echo.channel('chat')
             eventBefore.setHours(0, 0, 0, 0);
             date = new Date(lastCreatedAt);
             console.log("eventBefore " + eventBefore);
-            console.log("eventNow "+ eventNowDate)
+            console.log("eventNow " + eventNowDate);
             if (eventBefore.getTime() !== eventNowDate.getTime()) {
                 console.log("eventBefore !== eventNow2");
                 temp = true;
@@ -109,9 +108,36 @@ window.Echo.channel('chat')
         // console.log("eventNow" + eventNow);
         // console.log("eventBefore" + eventBefore);
 
-        formattedDate = date.toLocaleDateString("id-ID", options);
+        // formattedDate = date.toLocaleDateString("en-US", options);
 
-        const eformattedDate = edate.toLocaleDateString("id-ID", options);
+        // const eformattedDate = edate.toLocaleDateString("en-US", options);
+
+        // Function to add ordinal suffix to the day
+        function addOrdinalSuffix(day) {
+            if (day >= 11 && day <= 13) {
+                return day + "th";
+            } else {
+                const lastDigit = day % 10;
+                switch (lastDigit) {
+                    case 1:
+                        return day + "st";
+                    case 2:
+                        return day + "nd";
+                    case 3:
+                        return day + "rd";
+                    default:
+                        return day + "th";
+                }
+            }
+        }
+
+        formattedDate = date.toLocaleDateString("en-US", options);
+
+        const dayWithOrdinalSuffix = addOrdinalSuffix(date.getDate());
+        const eformattedDate = formattedDate.replace(
+            date.getDate(),
+            dayWithOrdinalSuffix
+        );
 
         // console.log(formattedDate);
         // console.log(eformattedDate);
@@ -120,7 +146,7 @@ window.Echo.channel('chat')
             datenow.innerHTML +=
                 '<dic class="datenow"><h1>' + eformattedDate + "</h1></div>";
         }
-        
+
         eventBefore = eventNowDate;
 
         // var index_el = document
@@ -144,9 +170,8 @@ window.Echo.channel('chat')
                     e.message +
                     "')\"></div></div></div>" +
                     '<div class="showimg" id="showimg_' +
-                    index
-                    + '"></div>';
-                
+                    index +
+                    '"></div>';
             } else if (nip != e.nip) {
                 messages_el.innerHTML +=
                     '<div class="left-chat"> <div class="profile-info"> <img class="profile-pict" src="../data/' +
@@ -175,7 +200,6 @@ window.Echo.channel('chat')
             } else {
                 content.style.display = "block";
             }
-
         } else if (e.type === "text") {
             console.log("test");
             if (nip == e.nip) {
@@ -200,11 +224,11 @@ window.Echo.channel('chat')
                 console.log("failed");
             }
         }
-        
+
         message_input.value = null;
         file_input.value = null;
         message_input.removeAttribute("disabled");
-        scrollToBottom();  
+        scrollToBottom();
     });
 
 

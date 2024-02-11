@@ -40,7 +40,7 @@
 
     <div id="detailnip{{ session('NIP') }}" class="contain">
         <img class="close" src="{{ asset('assets/silang.svg') }}" onclick="closeModal()">
-        <h5>Change Password</h5>
+        <h5>Edit Password</h5>
         <form action="/change-password" method="POST">
             @csrf
             @method('PUT')

@@ -8,6 +8,7 @@
     @vite('resources/css/content.css')
     @vite('resources/css/coworking.css')
     <title>{{$title}}</title>
+    @include('components.favicon')
 </head>
 <body>
     @if(session('message'))
@@ -29,15 +30,15 @@
                         @if(!Request::get('date'))
                         <div class="wrap-span">
                             <img src="{{ asset('/assets/ill-calendar.svg') }}" alt="">
-                            <h6>Pilih tanggal dulu yuk</h6>
+                            <h6>Please choose a date first!</h6>
                         </div>
                         @else
-                        <h4>Pilih Jam Booking</h4>
+                        <h4>Booking Time</h4>
                         <div class="wrap-time">
                             <div class="from-time">
-                                <h5>Dari :</h5>
+                                <h5>Start :</h5>
                                 <select name="from-time" id="fromtime" class="from-time-select" onchange="timeChange()" required>
-                                <option value="PilihJam">Pilih Jam</option>
+                                <option value="PilihJam">Select Time</option>
                                     @foreach ($roomAvail as $ra)
                                         <option value="{{$ra['value']}}" {{ Request::get('fromtime') == $ra['value']  ? 'selected' : '' }} 
                                         {{$ra['booked'] == true ? 'disabled' : ''}} {{$ra['isAvailable'] == true ? '' : 'disabled'}}>
@@ -48,9 +49,9 @@
                             </div>
 
                             <div class="to-time">
-                                <h5>Sampai :</h5>
+                                <h5>Finish :</h5>
                                 <select name="to-time" id="totime" class="to-time-select" required>
-                                <option value="">Pilih Jam</option>
+                                <option value="">Select Time</option>
                                     @foreach ($timeTo as $time)
                                     <option value="{{ $time['allval'] }}"
                                         {{ Request::get('totime') == $time['value'] ? 'selected' : '' }} 
@@ -62,14 +63,14 @@
                             </div>
                             
                         </div>
-                        <h4>Jumlah Partisipan</h4>
+                        <h4>Number of Participant</h4>
                         <div class="wrap-participation">
                             <input type="text" name="count" id="participant" placeholder="Type Here" required>
                             <div class="error-participant">
-                                <label for="">Minimal Partisipan adalah 15 Orang</label>
+                                <label for="">Minimum participants are 15 people</label>
                             </div>
                         </div>
-                        <h4>Tipe</h4>
+                        <h4>Type</h4>
                         <div class="wrap-type">
                             <div class="wrap-private">
                                 <input type="radio" name="book_type" value="Private" required>
@@ -88,10 +89,10 @@
                 </form>
             </div>
             <div class="wrap-right">
-                <h5>Pengguna Hari Ini</h5>
+                <h5>Today's User</h5>
                 <div class="wrap-scrollable">
                     @if (empty($books))
-                        <p class="empty">Tidak ada pengguna hari ini</p>
+                        <p class="empty">No users today</p>
                     @else
                         @foreach ($books as $book)
                             <div class="wrap-detail-user">

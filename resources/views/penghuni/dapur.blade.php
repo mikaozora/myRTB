@@ -9,6 +9,7 @@
     @vite('resources/css/app.css')
     @vite('resources/css/content.css')
     @vite('resources/css/dapur.css')
+    @include('components.favicon')
 </head>
 
 <body>
@@ -31,15 +32,15 @@
                         @if (!Request::get('date'))
                             <div class="wrap-span">
                                 <img src="{{ asset('/assets/ill-calendar.svg') }}" alt="">
-                                <h6>Pilih tanggal dulu yuk</h6>
+                                <h6>Please choose the date first!</h6>
                             </div>
                         @else
-                            <h4>Jam Booking</h4>
+                            <h4>Booking Time</h4>
                             <div class="wrap-time">
                                 <div class="from-time">
                                     <select name="from-time" id="time" class="from-time-select"
                                         onchange="timeChange()" required>
-                                        <option value="">Pilih Jam</option>
+                                        <option value="">Select Time</option>
                                         @foreach ($timeAvail as $time)
                                             <option value="{{ $time['value'] }}"
                                                 {{ Request::get('time') == $time['value'] ? 'selected' : '' }} {{$time['isAvailable'] ? '' : 'disabled'}}>
@@ -48,9 +49,9 @@
                                     </select>
                                 </div>
                             </div>
-                            <h4>Fasilitas</h4>
+                            <h4>Facility</h4>
 
-                            <h5>Kompor</h5>
+                            <h5>Stove</h5>
                             <div class="wrap-stove">
                                 <div class="stove">
                                     @foreach ($stoveAvailLeft as $sl)
@@ -145,10 +146,10 @@
                     </div>
                 </div>
                 <div class="user-content">
-                    <h5>Pengguna Hari Ini</h5>
+                    <h5>Today's User</h5>
                     <div class="wrap-scrollable">
                         @if (empty($books))
-                            <p class="empty">Tidak ada pengguna hari ini</p>
+                            <p class="empty">No users today</p>
                         @else
                             @foreach ($books as $book)
                                 <div class="wrap-detail-user">

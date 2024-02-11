@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Penghuni</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="/dashboard/penghuni" method="POST" enctype="multipart/form-data">
@@ -13,27 +13,27 @@
                         <input type="text" name="NIP" required placeholder="xxxx">
                     </div>
                     <div class="wrap-input">
-                        <p>Nama</p>
+                        <p>Name</p>
                         <input type="text" name="name" required placeholder="John Doe">
                     </div>
                     <div class="wrap-input">
                         <p>Gender</p>
                         <select name="gender" id="gender" class="form-select" aria-label="Default select example">
-                            <option value="">Pilih Jenis Kelamin</option>
-                            <option value="Male">Pria</option>
-                            <option value="Female">Wanita</option>
+                            <option value="">Select gender</option>
+                            <option value="Male">Man</option>
+                            <option value="Female">Woman</option>
                         </select>
                     </div>
                     <div class="wrap-input">
-                        <p>Kelas</p>
+                        <p>Class</p>
                         <input type="text" name="class" required placeholder="PPTI 20">
                     </div>
                     <div class="wrap-input">
-                        <p>No Kamar</p>
+                        <p>Room Number</p>
                         <input type="text" name="room_number" required placeholder="Axxx">
                     </div>
                     <div class="wrap-input">
-                        <p>No Telepon</p>
+                        <p>Phone Number</p>
                         <input type="text" name="phone_number" class="input-phone" required placeholder="08xxx">
                         <div class="error-phone-start">
                             <label for="">Phone Number must starts with '08'</label>
@@ -43,12 +43,12 @@
                         </div>
                     </div>
                     <div class="wrap-input">
-                        <p>Foto Profile</p>
+                        <p>Profile Photo</p>
                         <input type="file" id="photo" name="photo" required accept=".png, .jpg, .jpeg">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn-simpan">Simpan</button>
+                    <button type="submit" class="btn-simpan">Save</button>
                 </div>
             </form>
         </div>

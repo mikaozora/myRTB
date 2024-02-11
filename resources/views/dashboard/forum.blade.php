@@ -7,6 +7,7 @@
     <title>{{$title}}</title>
     @vite('resources/css/content.css')
     @vite('resources/css/forum.css')
+    @include('components.favicon')
 </head>
 <body>    
     @include('components.sidebaradmin')
@@ -23,12 +24,12 @@
                     @foreach ($chats as $index => $chat)
 
                         @php 
-                            $currDate = \Carbon\Carbon::parse($chat->created_at)->format('Y-m-d'); 
+                            $currDate = \Carbon\Carbon::parse($chat->created_at)->locale('en')->isoFormat('dddd, Do MMMM YYYY'); 
                         @endphp
 
                         @if($currDate != $prevDate)
                             <div class="datenow">
-                                <h1>{{ \Carbon\Carbon::parse($chat->created_at)->locale('id_ID')->isoFormat('dddd, D MMMM YYYY') }}</h1>
+                                <h1>{{ \Carbon\Carbon::parse($chat->created_at)->locale('en')->isoFormat('dddd, Do MMMM YYYY') }}</h1>
                             </div>
                             @php
                                 $prevDate = $currDate;
@@ -96,7 +97,7 @@
         <form id="message_form" method="POST" enctype="multipart/form-data" action="/penghuni/forum/send-msg">
             @csrf
             <div class="inputs">
-                <input id="message_input" type="text" name="message" placeholder="Ketik disini..">
+                <input id="message_input" type="text" name="message" placeholder="Type here..">
                 <div class="wrap9">
                     <input id="file_input" type="file" name="photo" accept=".png, .jpg, .jpeg" onchange="loadFile(event)">            
                     <img id="icon-input-file" src="{{asset('assets/uploadPict.svg')}}">
@@ -106,7 +107,7 @@
                     <img class="cross" src="{{ asset('assets/silang.svg') }}" onclick="exit('msg_wrap')">
                 </div>
 
-                <button type="submit" id="message_send">Kirim</button>
+                <button type="submit" id="message_send">Send</button>
 
             </div>
         </form>

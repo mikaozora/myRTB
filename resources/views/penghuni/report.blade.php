@@ -8,6 +8,7 @@
     @vite('resources/css/app.css')
     @vite('resources/css/content.css')
     @vite('resources/css/report.css')
+    @include('components.favicon')
 </head>
 <body>
     @if(session('message'))
@@ -27,20 +28,20 @@
                     <div class="wrap-allfasum">
                         <div class="wrap-fasum">
                             <input type="radio" name="report_type" value="Public Facility" required>
-                            <p>Fasilitas Umum</p>
+                            <p>Public Facility</p>
                         </div>
                         <div class="wrap-fasum">
                             <input type="radio" name="report_type" value="Room" required>
-                            <p>Cluster/Kamar</p>
+                            <p>Cluster/Room</p>
                         </div>
                     </div>
                 </div>
                 <div class="wrap-report">
-                    <h3>Laporan / Keluhan</h3>
+                    <h3>Reports / Complaints</h3>
                     <textarea name="report" id="" cols="100" rows="15" placeholder="Jelaskan kerusakan yang dialami..." class="report-textarea" required></textarea>
                 </div>
                 <div class="wrap-photo-upload">
-                    <h3>Unggah Foto</h3>
+                    <h3>Upload Photo</h3>
                     <div class="wrap-photo">
                         <input name="photo" type="file" accept="image/jpg, image/png, image/jpeg" class="input-photo" required>
                     </div>

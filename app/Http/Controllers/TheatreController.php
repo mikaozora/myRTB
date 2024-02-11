@@ -64,7 +64,7 @@ class TheatreController extends Controller
                 $end_time = explode(' ', $BT->end_time);
                 $end_time = substr($end_time[1], 0, 2);
 
-                $date = Carbon::parse($BT->start_time)->locale('id');
+                $date = Carbon::parse($BT->start_time)->locale('en');
                 $date->settings(['formatFunction'=>'translatedFormat']);
 
                 $finalDate = $date->format('l, j F Y');
@@ -92,7 +92,7 @@ class TheatreController extends Controller
             }
             // dd($TheatreList);
             return response()->view('dashboard.theatre', [
-                "title" => "Booking Theatre",
+                "title" => "Theatre Booking",
                 "photoProfile" => $photoProfile,
                 "theatre" => $TheatreList
             ]);
@@ -296,7 +296,7 @@ class TheatreController extends Controller
 
         return response()->view('penghuni.theatre', [
             "datenow" => $date,
-            "title" => "Booking Theatre",
+            "title" => "Theatre Booking",
             "timeFrom" => $timeFrom,
             "timeTo" => $timeTo,
             "theatreAvail" => $theatreAvail,
@@ -341,7 +341,7 @@ class TheatreController extends Controller
 
             if ($date_banned > $date || $hour_banned > $hour){
                 return redirect()->action([TheatreController::class, 'index'])->with([
-                    'message' => 'Maaf, Anda Terkena Penalti',
+                    'message' => 'Sorry, you are suspended',
                     'status' => 'error'
                 ]);
             }
@@ -353,7 +353,7 @@ class TheatreController extends Controller
         $book->save();
 
         return redirect()->action([TheatreController::class, 'index'])->with(
-            'message', 'Berhasil Melakukan Booking Theatre'
+            'message', 'Success Booked Theatre'
         );
     }
 

@@ -75,7 +75,7 @@ class BookMachineController extends Controller
                 $end_time = substr($end_time[1], 0, 2);
 
                 //lokalisasi ke Indonesia
-                $date = Carbon::parse($machine->start_time)->locale('id');
+                $date = Carbon::parse($machine->start_time)->locale('en');
                 $date->settings(['formatFunction'=>'translatedFormat']);
                 //mengubah waktu kira-kira ke Senin, 24 Januari 2024
 
@@ -107,7 +107,7 @@ class BookMachineController extends Controller
 
             // dd($MachineList);
             return response()->view('dashboard.mesincuci', [
-                "title" => "Booking Mesin Cuci",
+                "title" => "Washing Machine Booking",
                 "photoProfile" => $photoProfile,
                 "machines" => $MachineList,
             ]);
@@ -411,7 +411,7 @@ class BookMachineController extends Controller
 
         // dd($books_M);
         return response()->view('penghuni.mesincuci', [
-            "title" => "Booking Mesin Cuci",
+            "title" => "Washing Machine Booking",
             "datenow" => $date,
             "timeAvail" => $TimeAvailable,
             "userGender" => $userGender,
@@ -464,7 +464,7 @@ class BookMachineController extends Controller
         // ini kalau dia gk milih mesin, wajib isi
         if(empty($machine_id)){
             return redirect()->action([BookMachineController::class, 'index'])->with([
-                "message" => 'Wajib memilih mesin cuci',
+                "message" => 'Must choose a washing machine',
                 "status" => 'error'
             ]);
         }
@@ -492,7 +492,7 @@ class BookMachineController extends Controller
 
             if ($date_banned > $date || $hour_banned > $hour){
                 return redirect()->action([BookMachineController::class, 'index'])->with([
-                    'message' => 'Maaf, Anda Terkena Penalti',
+                    'message' => 'Sorry, you are suspended',
                     'status' => 'error'
                 ]);
             }
@@ -502,7 +502,7 @@ class BookMachineController extends Controller
 
         $bookMachine->save();
 
-        return redirect()->action([BookMachineController::class, 'index'])->with('message', 'Berhasil melakukan booking');
+        return redirect()->action([BookMachineController::class, 'index'])->with('message', 'Success Booked Washing Machine');
 
     }
 

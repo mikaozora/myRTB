@@ -11,6 +11,7 @@
     @vite('resources/css/app.css')
     @vite('resources/css/content.css')
     @vite('resources/css/history.css')
+    @include('components.favicon')
 </head>
 
 <body>
@@ -26,11 +27,11 @@
         <div class="wrap-content">
             <div class="wrap-tab">
                 <a href="/penghuni/history?status=pemesanan"
-                    class="{{ Request::get('status') == 'pemesanan' || !Request::get('status') ? 'active' : '' }}">Pemesanan</a>
+                    class="{{ Request::get('status') == 'pemesanan' || !Request::get('status') ? 'active' : '' }}">Booked</a>
                 <a href="/penghuni/history?status=proses"
-                    class="{{ Request::get('status') == 'proses' ? 'active' : '' }}">Proses</a>
+                    class="{{ Request::get('status') == 'proses' ? 'active' : '' }}">Ongoing</a>
                 <a href="/penghuni/history?status=selesai"
-                    class="{{ Request::get('status') == 'selesai' ? 'active' : '' }}">Selesai</a>
+                    class="{{ Request::get('status') == 'selesai' ? 'active' : '' }}">Done</a>
             </div>
             <hr>
             <div class="wrapped">

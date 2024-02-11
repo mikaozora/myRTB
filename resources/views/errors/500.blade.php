@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   @vite('resources/css/app.css')
   <title>404</title>
-
+  @include('components.favicon')
   <style id="" media="all">
     * {
         -webkit-box-sizing: border-box;

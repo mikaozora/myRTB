@@ -2,10 +2,10 @@
     <thead>
         <tr>
             <th scope="col">NIP</th>
-            <th scope="col" class="w-25">Nama</th>
-            <th scope="col">Jenis Kelamin</th>
-            <th scope="col">Kamar</th>
-            <th scope="col">Kelas</th>
+            <th scope="col" class="w-25">Name</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Room Number</th>
+            <th scope="col">Class</th>
             <th scope="col"></th>
         </tr>
     </thead>

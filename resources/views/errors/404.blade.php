@@ -132,6 +132,7 @@
     }
   </style>
   <meta name="robots" content="noindex, follow">
+  @include('components.favicon')
 </head>
 
 <body>

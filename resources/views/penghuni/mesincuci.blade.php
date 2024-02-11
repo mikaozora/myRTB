@@ -9,6 +9,7 @@
     @vite('resources/css/app.css')
     @vite('resources/css/content.css')
     @vite('resources/css/mesincuci.css')
+    @include('components.favicon')
 </head>
 
 <body>
@@ -53,7 +54,8 @@
 
                             </div>
                         @else
-                            <h4>Pilih Jam Booking</h4>
+
+                            <h4>Booking Time</h4>
                             <div class="Choose-time">
 
 
@@ -63,7 +65,7 @@
                                     <select name="opt-time" id="time" class="from-time-select"
                                         onchange="timeChange()" required>
 
-                                        {{-- tampilih kata pertama di drop down --}}
+                                        {{-- tampilih kata pertama di drop down--}}
                                         <option value=""> Pilih Jam</option>
 
                                         {{-- pengulangan jam yang ada --}}
@@ -83,7 +85,7 @@
 
                             </div>
 
-                            <h4>Pilih Mesin Cuci</h4>
+                            <h4>Choose Washing Machine</h4>
                             <div class="Choose-Washing-Machine">
 
                                 @if ($userGender == 'Male')
@@ -138,7 +140,7 @@
 
                 <div class="Look-Washing-Machine">
 
-                    <h4>Mesin Cuci</h4>
+                    <h4>Washing Machine</h4>
 
                     <div class="washing-machines">
 
@@ -169,7 +171,7 @@
 
                 <div class="Check-Users">
 
-                    <h4>Pengguna Hari Ini</h4>
+                    <h4>Today's User</h4>
 
                     @if ($userGender == 'Male')
 
@@ -177,18 +179,26 @@
 
                             @if (empty($books_M))
 
-                                <p class="empty">Tidak ada pengguna hari ini</p>
-                            @else
-                                @foreach ($books_M as $book)
-                                    <div class="wrap-detail-user">
-                                        <img src="{{ asset('data/' . $book['photo']) }}" alt="">
-                                        <div class="wrap-detail-mid">
-                                            <h6>{{ $book['name'] }}</h6>
-                                            <p>{{ $book['class'] }}</p>
-                                        </div>
-                                        <div class="wrap-detail-right">
-                                            <p>{{ $book['start_time'] }} - {{ $book['end_time'] }}</p>
-                                        </div>
+                            <p class="empty">Tidak ada pengguna hari ini</p>
+
+                        @else
+
+                            @foreach ($books_M as $book)
+
+                                <div class="Users-detail">
+
+                                    <img src="{{ asset('data/' . $book['photo']) }}" alt="">
+                                    <div class="detail-middle">
+
+                                        <h6>{{ $book['name'] }}</h6>
+                                        <p>{{ $book['class'] }}</p>
+
+                                    </div>
+
+                                    <div class="detail-right">
+
+                                        <p>{{ $book['start_time'] }} - {{ $book['end_time'] }}</p>
+
                                     </div>
 
                         </div>
@@ -196,27 +206,39 @@
                 </div>
                 @endforeach
 
-                @endif
-            </div>
-        @else
-            <div class="Users-Scrollable_F">
-                {{-- ini bagian yang cewek kalau booking --}}
-                {{-- kalau kosong alias ga ada yang booking --}}
-                @if (empty($books_F))
-                    <p class="empty">Tidak ada pengguna hari ini</p>
-                @else
-                    @foreach ($books_F as $book)
-                        <div class="wrap-detail-user">
-                            <img src="{{ asset('data/' . $book['photo']) }}" alt="">
-                            <div class="wrap-detail-mid">
-                                <h6>{{ $book['name'] }}</h6>
-                                <p>{{ $book['class'] }}</p>
-                            </div>
-                            <div class="wrap-detail-right">
-                                <p>{{ $book['start_time'] }} - {{ $book['end_time'] }}</p>
-                            </div>
+                        @endif
                         </div>
-                    @endforeach
+
+                    @else
+                        <div class="Users-Scrollable_F">
+                            {{-- ini bagian yang cewek kalau booking --}}
+                            {{-- kalau kosong alias ga ada yang booking --}}
+                            @if (empty($books_F))
+                                <p class="empty">Tidak ada pengguna hari ini</p>
+
+                            @else
+
+                                @foreach ($books_F as $book)
+
+                                <div class="Users-detail">
+
+                                    <img src="{{ asset('data/' . $book['photo']) }}" alt="">
+                                    <div class="detail-middle">
+
+                                        <h6>{{ $book['name'] }}</h6>
+                                        <p>{{ $book['class'] }}</p>
+
+                                    </div>
+
+                                    <div class="detail-right">
+
+                                        <p>{{ $book['start_time'] }} - {{ $book['end_time'] }}</p>
+
+                                    </div>
+
+                                </div>
+
+                                @endforeach
 
                 @endif
             </div>
