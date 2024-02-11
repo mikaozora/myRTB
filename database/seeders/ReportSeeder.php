@@ -18,7 +18,7 @@ class ReportSeeder extends Seeder
             'type' => 'Room',
             'description' => 'AC Bocor',
             'photo' => 'photo3.jpg',
-            'status_id' => '9ac4c529-54df-40bd-b4ad-5db3381d714b'
+            'status_id' => '9b3eba04-0aa4-4ff0-a8f1-90b09fdb8908'
         ]);
     }
 }

@@ -21,6 +21,7 @@
             @include('components.notification')
         @endif
         @include('components.sidebaradmin')
+        @include('components.loader')
         @include('dashboard.penghuni.add')
         <div class="kontainer-header">
             @include('components.headercontent')
@@ -141,53 +142,21 @@
             });
         }
 
-        // delete
-        $(document).ready(function() {
-            // Remove existing click event handlers
-            $(document).off('click', '.deletebtn');
+        function attachToggleListener() {
+            const toggle = document.querySelector('.img-container');
+            const menu = document.querySelector('.logout');
 
-            $(document).on('click', '.deletebtn', function(e) {
-                e.preventDefault();
-                $(this).prop('disabled', true);
-
-                // Get the CSRF token from the meta tag
-                let csrfToken = $('meta[name="csrf-token"]').attr('content');
-
-                let userId = $(this).data('userid');
-
-                $.ajax({
-                    url: "/dashboard/penghuni/" + userId,
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': csrfToken
-                    },
-                    data: {
-                        _method: 'DELETE'
-                    },
-                    success: function(response) {
-                        // Use promises to sequence actions
-                        updateHTML(response)
-                            .then(reattachKeyupEvent)
-                            .then(handleVisibility) // Call handleVisibility after HTML update
-                            .then(function() {
-                                // Additional actions if needed
-                                console.log("All actions completed.");
-                                $('.editbtn').prop('disabled', false);
-
-                                // Reset the form fields
-                                $(modalId + ' form')[0].reset();
-
-                            })
-                            .catch(function(error) {
-                                console.error("Error:", error);
-                            });
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
+            toggle.addEventListener('click', function() {
+                menu.classList.toggle('show');
             });
-        })
+        }
+        document.body.addEventListener('click', function(event) {
+            // Check if the clicked element has the class .img-container
+            if (event.target.matches('.img-container')) {
+                const menu = document.querySelector('.logout');
+                menu.classList.toggle('show');
+            }
+        });
 
         // Main function to handle AJAX and subsequent actions
         $(document).ready(function() {
@@ -237,16 +206,13 @@
                             .then(reattachKeyupEvent)
                             .then(handleVisibility) // Call handleVisibility after HTML update
                             .then(function() {
-                                // Additional actions if needed
-                                console.log("All actions completed.");
                                 $('.editbtn').prop('disabled', false);
 
                                 // Reset the form fields
                                 $(modalId + ' form')[0].reset();
 
-                                // Hide the modal after successful submission
-
-
+                                // Reattach the toggle event listener
+                                attachToggleListener()
 
                             })
                             .catch(function(error) {
@@ -259,6 +225,51 @@
                 });
             });
         });
+
+        // delete
+        $(document).ready(function() {
+            // Remove existing click event handlers
+            $(document).off('click', '.deletebtn');
+
+            $(document).on('click', '.deletebtn', function(e) {
+                e.preventDefault();
+                $(this).prop('disabled', true);
+
+                // Get the CSRF token from the meta tag
+                let csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+                let userId = $(this).data('userid');
+
+                $.ajax({
+                    url: "/dashboard/penghuni/" + userId,
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    data: {
+                        _method: 'DELETE'
+                    },
+                    success: function(response) {
+                        // Use promises to sequence actions
+                        updateHTML(response)
+                            .then(reattachKeyupEvent)
+                            .then(handleVisibility) // Call handleVisibility after HTML update
+                            .then(function() {
+                                $('.deletebtn').prop('disabled', false);
+
+                                // Reset the form fields
+                                attachToggleListener()
+                            })
+                            .catch(function(error) {
+                                console.error("Error:", error);
+                            });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+        })
     </script>
 
     <script>

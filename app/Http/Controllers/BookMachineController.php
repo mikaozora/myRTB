@@ -342,11 +342,18 @@ class BookMachineController extends Controller
 
             $tempStartTime = str_replace(':00:00', '.00', $tempStartTime);
             $tempEndTime = str_replace(':00:00', '.00', $tempEndTime);
+            $stringAwal = $book['name'];
+            $arrayKata = explode(' ', $stringAwal);
+            if (isset($arrayKata[2]) && strlen($arrayKata[2]) > 0) {
+                $arrayKata[2] = substr($arrayKata[2], 0, 1);
+            }
+            $arrayKata = array_slice($arrayKata, 0, 3);
+            $stringBaru =count($arrayKata) >= 3 ?  implode(' ', $arrayKata) . '.' : implode(' ', $arrayKata);
 
             $userBooks_M[] =
             [
 
-                "name" => $book['name'],
+                "name" => $stringBaru,
                 "NIP" => $book['NIP'],
                 "photo" => $book['photo'],
                 "class" => $book['class'],
@@ -471,8 +478,8 @@ class BookMachineController extends Controller
         $bookMachine->status_id = $statusId;
 
         $today = Carbon::now()->timezone('Asia/Jakarta');
-        $date = substr($today, 8, 2);
-        $hour = substr($today, 11, 2);
+        $date = intval(substr($today, 8, 2));
+        $hour = intval(substr($today, 11, 2));
 
         $end_banned = BannedUser::where('NIP', '=', $NIP)
         ->where('type', '=', 'machine')
@@ -480,10 +487,10 @@ class BookMachineController extends Controller
         ->get();
 
         try{
-            $date_banned = substr($end_banned[0]['end_time'], 8, 2);
-            $hour_banned = substr($end_banned[0]['end_time'], 11, 2);
+            $date_banned = intval(substr($end_banned[0]['end_time'], 8, 2));
+            $hour_banned = intval(substr($end_banned[0]['end_time'], 11, 2));
 
-            if ($date_banned < $date || $hour_banned < $hour){
+            if ($date_banned > $date || $hour_banned > $hour){
                 return redirect()->action([BookMachineController::class, 'index'])->with([
                     'message' => 'Maaf, Anda Terkena Penalti',
                     'status' => 'error'

@@ -15,11 +15,11 @@ class BookRoomSeeder extends Seeder
     {
         BookRoom::query()->create([
             'NIP' => '0543',
-            'room_id' => '9ac4c42e-89e4-41e1-bb2b-a98a38fa2f07',
+            'room_id' => '9b3eba27-11f0-4c7c-93c8-6217781260f3',
             'start_time' => '2023-12-01 06:00:00',
             'end_time' => '2023-12-01 08:00:00',
             'photo' => null,
-            'status_id' => '9ac4c529-54df-40bd-b4ad-5db3381d714b',
+            'status_id' => '9b3eba04-0aa4-4ff0-a8f1-90b09fdb8908',
             'type' => 'Private',
             'participant' => 25
         ]);

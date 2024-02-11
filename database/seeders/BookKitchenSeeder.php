@@ -14,12 +14,12 @@ class BookKitchenSeeder extends Seeder
     public function run(): void
     {
         BookKitchen::query()->create([
-            'stuff_id' => '9ac4c8b6-d14c-42ab-9a5b-b00bbc8bb356',
+            'stuff_id' => '9b3eba7f-8c14-4a2a-a31d-d3fb9957f3e9',
             'NIP' => '0543',
             'start_time' => '2023-12-01 06:00:00',
             'end_time' => '2023-12-01 08:00:00',
             'photo' => null,
-            'status_id' => '9ac4c529-54df-40bd-b4ad-5db3381d714b'
+            'status_id' => '9b3eba04-5b0a-4f60-be96-868f1db402ed'
         ]);
     }
 }

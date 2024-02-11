@@ -327,8 +327,8 @@ class TheatreController extends Controller
         $book->end_time = $end_time;
 
         $today = Carbon::now()->timezone('Asia/Jakarta');
-        $date = substr($today, 8, 2);
-        $hour = substr($today, 11, 2);
+        $date = intval(substr($today, 8, 2));
+        $hour = intval(substr($today, 11, 2));
 
         $end_banned = BannedUser::where('NIP', '=', $nip)
         ->where('type', '=', 'theater')
@@ -336,10 +336,10 @@ class TheatreController extends Controller
         ->get();
 
         try{
-            $date_banned = substr($end_banned[0]['end_time'], 8, 2);
-            $hour_banned = substr($end_banned[0]['end_time'], 11, 2);
+            $date_banned = intval(substr($end_banned[0]['end_time'], 8, 2));
+            $hour_banned = intval(substr($end_banned[0]['end_time'], 11, 2));
 
-            if ($date_banned < $date || $hour_banned < $hour){
+            if ($date_banned > $date || $hour_banned > $hour){
                 return redirect()->action([TheatreController::class, 'index'])->with([
                     'message' => 'Maaf, Anda Terkena Penalti',
                     'status' => 'error'

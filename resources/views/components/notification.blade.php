@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <h3 class="notification {{ session('status') == 'error' ? 'error' : ''}}" id="notif">
+    <h3 class="notification {{ session('status') == 'error' ? 'error' : '' }}" id="notif">
         {{ session('message') }}
     </h3>
     <script>
@@ -17,6 +17,10 @@
             var myDiv = document.getElementById("notif");
             // Show the div
             myDiv.style.visibility = "visible";
+            myDiv.style.opacity = "1";
+            setTimeout(function() {
+                myDiv.classList.add("show-animate");
+            }, 50);
 
             // Hide the div after 1 second
             setTimeout(function() {

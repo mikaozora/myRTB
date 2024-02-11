@@ -14,6 +14,7 @@
     @include('components.notification')
     @endif
     @include('components.sidebaruser')
+    @include('components.loader')
     <div class="kontainer-header">
         @include('components.headercontent')
     </div>

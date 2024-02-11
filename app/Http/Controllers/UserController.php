@@ -59,7 +59,10 @@ class UserController extends Controller
         $NIP = $request->session()->get('NIP');
         $user = User::query()->find($NIP);
         $currentPassword = $user->password;
+    }
 
+    public function errorRoute(Request $request){
+        return response()->view('errors.404', [], 404);
     }
 
 

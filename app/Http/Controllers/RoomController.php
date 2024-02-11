@@ -44,11 +44,85 @@ class RoomController extends Controller
         $photoProfile = $user->photo;
 
         if ($request->is('dashboard/*')) {
+            $status = $request->get('status');
+
+            if(!isset($status))
+            {
+                $status = 'Booked';
+            }
+
+            if($status == 'pemesanan')
+            {
+                $status = 'Booked';
+            }
+            else if($status == 'proses')
+            {
+                $status = 'On Progress';
+            }
+            else if($status == 'selesai')
+            {
+                $status = 'Done';
+            }
+
+            $coworkingList = [];
+
+            $BookedCoworking = BookRoom::join('status', 'book_rooms.status_id', '=', 'status.status_id')
+                             ->join('users', 'book_rooms.NIP', '=', 'users.NIP')
+                             ->join('rooms', 'book_rooms.room_id', '=', 'rooms.room_id')
+                             ->where('status.name', '=', $status)
+                             ->where('rooms.name', '=', 'Co-working Space')
+                             ->select(
+                                'book_rooms.*',
+                                'users.name as user_name',
+                                'rooms.name as room_name',
+                                'users.class as user_class'
+                             )
+                             ->get();
+
+            foreach($BookedCoworking as $BC)
+            {
+                $start_time = explode(' ', $BC->start_time);
+                $start_time = substr($start_time[1], 0, 2);
+                $end_time = explode(' ', $BC->end_time);
+                $end_time = substr($end_time[1], 0, 2);
+
+                $date = Carbon::parse($BC->start_time)->locale('id');
+                $date->settings(['formatFunction'=>'translatedFormat']);
+
+                $finalDate = $date->format('l, j F Y');
+
+                $viewStatus = $status;
+
+                if($viewStatus == 'Done')
+                {
+                    $viewStatus = 'Selesai';
+                }
+
+                $coworkingList[] =
+                [
+                    "user_name" => $BC->user_name,
+                    "room_name" => $BC->room_name,
+                    "date" => $finalDate,
+                    "desc" => $start_time . '.00' . ' - ' . $end_time . '.00',
+                    "id" => $BC->book_id,
+                    "user_class" => $BC->user_class,
+                    "status" => $status,
+                    "viewStatus" => $viewStatus,
+                    "uploadPhoto" => $BC->photo,
+                    "is_late" => $BC->is_late,
+                    "type" => $BC->type
+                ];
+            }
+
+            // dd($coworkingList);
             return response()->view('dashboard.coworking', [
                 "title" => "Booking CWS",
-                "photoProfile" => $photoProfile
+                "photoProfile" => $photoProfile,
+                "coworking" => $coworkingList
             ]);
         }
+
+
         $date = [];
         for ($i = 0; $i <= 6; $i++) {
             $carbonInstance = Carbon::createFromFormat('Y-m-d H:i:s', Carbon::now()->addDay($i));
@@ -253,7 +327,6 @@ class RoomController extends Controller
             ];
         }
 
-
         return response()->view('penghuni.coworking', [
             "datenow" => $date,
             "title" => "Booking CWS",
@@ -302,13 +375,13 @@ class RoomController extends Controller
         try{
             $date_banned = substr($end_banned[0]['end_time'], 8, 2);
             $hour_banned = substr($end_banned[0]['end_time'], 11, 2);
-            
+
             if ($date_banned < $date || $hour_banned < $hour){
                 return redirect()->action([RoomController::class, 'index'])->with([
                     'message' => 'Maaf, Anda Terkena Penalti',
                     'status' => 'error'
                 ]);
-            } 
+            }
         } catch (Exception $exception){
 
         }
