@@ -142,6 +142,7 @@ p{
     transition: all .2s ease-in-out;
     font-size: 1.1rem;
     padding: 8px 0px;
+    cursor: pointer;
 }
 
 .wrap-submit button:hover{
@@ -261,9 +262,18 @@ p{
 }
 
 @media screen and (max-width: 1024px) {
-    .bottom-box .wrap-right {
+     .bottom-box .wrap-right {
         width: 25%;
     }
+    /* .wrap-detail-user .wrap-detail-mid h6{
+        font-size: .60rem;
+    }
+    .wrap-detail-user .wrap-detail-mid p{
+        font-size: .60rem;
+    }
+    .wrap-detail-user .wrap-detail-right p{
+        font-size: .60rem;
+    } */ 
 }
 @media screen and (max-width: 992px) {
     .bottom-box .wrap-right {

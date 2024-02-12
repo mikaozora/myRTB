@@ -115,10 +115,15 @@ label{
     border: 2px solid var(--primary, #205295);
     background: var(--primary, #205295);
     margin-top: 2%;
+    cursor: pointer;
 }
 
 .btn{
     width: 90%;
+}
+
+.submitbtn:hover{
+    background-color: #16437f;
 }
 
 .errormsg{

@@ -66,14 +66,18 @@ h4{
 
 .wrap-submit button{
     width: 100%;
-    padding: 8px 0px;
-    border-radius: 8px;
     background-color: var(--primary);
-    color: #fff;
-    font-size: 1.1rem;
+    color: var(--bg-primary);
+    border-radius: 8px;
     border: none;
-    cursor: pointer;
     transition: all .2s ease-in-out;
+    font-size: 1.1rem;
+    padding: 8px 0px;
+    cursor: pointer;
+}
+
+.wrap-submit button:hover{
+    background-color: #16437f;
 }
 
 .validate-choose-date{
