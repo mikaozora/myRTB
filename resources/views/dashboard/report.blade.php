@@ -25,10 +25,10 @@
         <div class='inner-box'>
             <div class="wrap-tab">
                 <a href="/dashboard/report?status=proses"
-                    class="{{ Request::get('status') == 'proses' || !Request::get('status') ? 'active' : '' }}">Proses</a>
+                    class="{{ Request::get('status') == 'proses' || !Request::get('status') ? 'active' : '' }}">On Progress</a>
 
                 <a href="/dashboard/report?status=selesai"
-                    class="{{ Request::get('status') == 'selesai' ? 'active' : '' }}">Selesai</a>
+                    class="{{ Request::get('status') == 'selesai' ? 'active' : '' }}">Done</a>
             </div>
 
             <hr>

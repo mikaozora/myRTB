@@ -47,7 +47,7 @@
             <div class="wrapp">
                 <label class="judul" for="oldPassword">Old Password</label>
                 <input class="pass_input" type="password" id="oldPassword" name="oldPassword" class="oldPassword"
-                    placeholder="Masukkan password lama" name="oldPassword" required oninput="verifyPassword()">
+                    placeholder="Enter old password" name="oldPassword" required oninput="verifyPassword()">
                 <div id="pesan_error">
 
                 </div>
@@ -55,7 +55,7 @@
             <div class="wrapp">
                 <label class="judul" for="newPassword">New Password</label>
                 <input class="pass_input" type="password" id="newPassword" name="newPassword"
-                    placeholder="Buat password baru" name="newPassword" minlength="8" required>
+                    placeholder="Enter new password" name="newPassword" minlength="8" required>
             </div>
             <div class="wrapp">
                 <button id="submit" class="submit" type="submit">Save Changes</button>
@@ -83,8 +83,25 @@
         }
 
         function closeModal() {
-            document.getElementById("detailnip{{ session('NIP') }}").style.display = "none";
-            document.getElementById("overlay_header").style.display = "none";
+            var modal = document.getElementById("detailnip{{ session('NIP') }}");
+            var overlay = document.getElementById("overlay_header");
+
+            // Add the fade-out-up class for the fade-out animation
+            modal.classList.add("fade-out-up");
+            overlay.classList.add("fade-out-up-overlay");
+
+            // After a short delay, hide the modal and overlay and remove the fade-out-up class
+            setTimeout(function () {
+                overlay.style.display = "none";
+                modal.style.display = "none";
+                overlay.classList.remove("fade-out-up-overlay");
+                modal.classList.remove("fade-out-up");
+            }, 150); 
+
+            // Sembunyikan overlay
+            // document.getElementById("overlay_header").style.display = "none";
+            // document.getElementById("detailnip{{ session('NIP') }}").style.display = "none";
+
         }
         // var currentPassword = document.getElementById('currentPassword').getAttribute('data-password');
         // var oldPassInput = document.getElementById('oldPassword');

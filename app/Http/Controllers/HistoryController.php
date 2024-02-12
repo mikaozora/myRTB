@@ -44,7 +44,7 @@ class HistoryController extends Controller
             $end_time = explode(' ', $bk->end_time);
             $end_time = substr($end_time[1], 0, 2);
             
-            $date = Carbon::parse($bk->start_time)->locale('id');
+            $date = Carbon::parse($bk->start_time)->locale('en');
             $date->settings(['formatFunction' => 'translatedFormat']);
             $formattedDate = $date->format('l, j F Y');
 
@@ -69,12 +69,12 @@ class HistoryController extends Controller
             $end_time = explode(' ', $bk->end_time);
             $end_time = substr($end_time[1], 0, 2);
             
-            $date = Carbon::parse($bk->start_time)->locale('id');
+            $date = Carbon::parse($bk->start_time)->locale('en');
             $date->settings(['formatFunction' => 'translatedFormat']);
             $formattedDate = $date->format('l, j F Y');
 
             $histories[] = [
-                "title" => "Booking Mesin Cuci",
+                "title" => "Washing Machine Booking",
                 "label" => $bk->name,
                 "date" => $formattedDate,
                 "desc" => $start_time . '.00' . ' - ' . $end_time . '.00',
@@ -94,12 +94,12 @@ class HistoryController extends Controller
             $end_time = explode(' ', $bk->end_time);
             $end_time = substr($end_time[1], 0, 2);
             
-            $date = Carbon::parse($bk->start_time)->locale('id');
+            $date = Carbon::parse($bk->start_time)->locale('en');
             $date->settings(['formatFunction' => 'translatedFormat']);
             $formattedDate = $date->format('l, j F Y');
 
             $histories[] = [
-                "title" => "Booking Co-Working Space",
+                "title" => "Co-Working Space Booking",
                 "label" => $bk->participant . ' participant',
                 "date" => $formattedDate,
                 "desc" => $start_time . '.00' . ' - ' . $end_time . '.00',
@@ -119,12 +119,12 @@ class HistoryController extends Controller
             $end_time = explode(' ', $bk->end_time);
             $end_time = substr($end_time[1], 0, 2);
             
-            $date = Carbon::parse($bk->start_time)->locale('id');
+            $date = Carbon::parse($bk->start_time)->locale('en');
             $date->settings(['formatFunction' => 'translatedFormat']);
             $formattedDate = $date->format('l, j F Y');
 
             $histories[] = [
-                "title" => "Booking Theatre",
+                "title" => "Theatre Booking",
                 "label" => $bk->name,
                 "date" => $formattedDate,
                 "desc" => $start_time . '.00' . ' - ' . $end_time . '.00',
@@ -144,12 +144,12 @@ class HistoryController extends Controller
             $end_time = explode(' ', $bk->end_time);
             $end_time = substr($end_time[1], 0, 2);
             
-            $date = Carbon::parse($bk->start_time)->locale('id');
+            $date = Carbon::parse($bk->start_time)->locale('en');
             $date->settings(['formatFunction' => 'translatedFormat']);
             $formattedDate = $date->format('l, j F Y');
 
             $histories[] = [
-                "title" => "Booking Serbaguna",
+                "title" => "Serbaguna Booking",
                 "label" => $bk->name,
                 "date" => $formattedDate,
                 "desc" => $start_time . '.00' . ' - ' . $end_time . '.00',
@@ -164,13 +164,13 @@ class HistoryController extends Controller
 
         foreach($report as $bk){
             
-            $date = Carbon::parse($bk->start_time)->locale('id');
+            $date = Carbon::parse($bk->start_time)->locale('en');
             $date->settings(['formatFunction' => 'translatedFormat']);
             $formattedDate = $date->format('l, j F Y');
 
             $histories[] = [
-                "title" => "Laporan Kerusakan",
-                "label" => $bk->type == "Room" ? 'Kamar/Cluster' : 'Fasilitas Umum',
+                "title" => "Report",
+                "label" => $bk->type == "Room" ? 'Room/Cluster' : 'Public Facility',
                 "date" => $formattedDate,
                 "desc" => $bk->description,
                 "id" => $bk->report_id,
@@ -212,7 +212,7 @@ class HistoryController extends Controller
                 ]);
                 
                 $history->save();
-                return redirect()->action([HistoryController::class, 'index'])->with("message", 'Berhasil mengirim bukti penggunaan');
+                return redirect()->action([HistoryController::class, 'index'])->with("message", 'Successfully sent!');
             }
         }
     }

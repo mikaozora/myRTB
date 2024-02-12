@@ -18,12 +18,12 @@
                     @csrf
                     <div class="group">
                         <label>NIP</label><br>
-                        <input type="text" name="NIP" class="input" placeholder="Masukkan NIP"><br>
+                        <input type="text" name="NIP" class="input" placeholder="Enter NIP"><br>
                     </div>
                     <div class="group">
                         <label>Password</label><br>
                         <div class="password-container">
-                            <input type="password" name="password" class="input pass" id ="password" placeholder="Masukkan Password">
+                            <input type="password" name="password" class="input pass" id ="password" placeholder="Enter Password">
                             <img id="eye" src="{{asset('assets/eyeoff.svg')}}">
                         </div>
                         @if(isset($error) && ($error == "NIP or Password is required" || $error == "Invalid NIP or Password"))
