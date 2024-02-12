@@ -36,35 +36,31 @@ use Illuminate\Http\Response;
 
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'home']);
 
-Route::get('/sesi',[UserController::class, 'index'])->middleware([GuestMiddleware::class]);
-Route::post('/sesi/login',[UserController::class, 'login'])->middleware([GuestMiddleware::class]);
+Route::get('/sesi', [UserController::class, 'index'])->middleware([GuestMiddleware::class]);
+Route::post('/sesi/login', [UserController::class, 'login'])->middleware([GuestMiddleware::class]);
 Route::post("/logout", [UserController::class, 'logout'])->middleware([LogoutMiddleware::class]);
 Route::put("/change-password", [UserController::class, 'change_password'])->middleware([LogoutMiddleware::class]);
 Route::post('/verify-password', [UserController::class, 'verifyPassword']);
 
-Route::prefix("/dashboard")->middleware([AdminMiddleware::class])->group(function(){
-    Route::controller(ForumController::class)->group(function(){
-        Route::get("/forum",'index');
-        Route::post("/forum/send-msg",'sendMessage');
+Route::prefix("/dashboard")->middleware([AdminMiddleware::class])->group(function () {
+    Route::controller(ForumController::class)->group(function () {
+        Route::get("/forum", 'index');
+        Route::post("/forum/send-msg", 'sendMessage');
     });
-    
-    Route::controller(BookMachineController::class)->group(function()
-    {
+
+    Route::controller(BookMachineController::class)->group(function () {
         Route::get('/mesincuci', 'index');
     });
 
-    Route::controller(RoomController::class)->group(function()
-    {
+    Route::controller(RoomController::class)->group(function () {
         Route::get('/coworking', 'index');
     });
 
-    Route::controller(BookKitchenController::class)->group(function()
-    {
+    Route::controller(BookKitchenController::class)->group(function () {
         Route::get('/dapur', 'index');
     });
 
-    Route::controller(SerbagunaController::class)->group(function()
-    {
+    Route::controller(SerbagunaController::class)->group(function () {
         Route::get('/serbaguna', 'index');
     });
 
@@ -78,7 +74,7 @@ Route::prefix("/dashboard")->middleware([AdminMiddleware::class])->group(functio
     {
         Route::get('/theatre', 'index');
     });
-    Route::controller(PenghuniController::class)->group(function(){
+    Route::controller(PenghuniController::class)->group(function () {
         Route::get("/penghuni", 'index');
         Route::post("/penghuni", 'create');
         Route::put("/penghuni/{NIP}", 'update');
@@ -88,40 +84,39 @@ Route::prefix("/dashboard")->middleware([AdminMiddleware::class])->group(functio
     });
 });
 
-Route::prefix('/penghuni')->middleware([MemberMiddleware::class])->group(function(){
+Route::prefix('/penghuni')->middleware([MemberMiddleware::class])->group(function () {
     Route::get('/{tes}', [UserController::class, 'errorRoute'])
         ->where('tes', '^(?!mesincuci|coworking|dapur|history|serbaguna|report|theatre|forum).*$');
-    Route::controller(ForumController::class)->group(function(){
-        Route::get("/forum",'index');
-        Route::post("/forum/send-msg",'sendMessage');
+    Route::controller(ForumController::class)->group(function () {
+        Route::get("/forum", 'index');
+        Route::post("/forum/send-msg", 'sendMessage');
     });
-    Route::controller(BookMachineController::class)->group(function()
-    {
+    Route::controller(BookMachineController::class)->group(function () {
         Route::get("/mesincuci", "index");
         Route::post("/mesincuci", "bookMesinCuci");
     });
-    Route::controller(RoomController::class)->group(function(){
+    Route::controller(RoomController::class)->group(function () {
         Route::get("/coworking", 'index');
         Route::post("/coworking", 'bookCWS');
     });
-    Route::controller(BookKitchenController::class)->group(function(){
+    Route::controller(BookKitchenController::class)->group(function () {
         Route::get("/dapur", 'index');
         Route::post("/dapur", 'create');
     });
-    Route::controller(HistoryController::class)->group(function(){
+    Route::controller(HistoryController::class)->group(function () {
         Route::get('/history', 'index');
         Route::put('/history/{id}', 'uploadPhoto');
     });
 
-    Route::controller(SerbagunaController::class)->group(function(){
+    Route::controller(SerbagunaController::class)->group(function () {
         Route::get('/serbaguna', 'index');
         Route::post('/serbaguna', 'book');
     });
-    Route::controller(ReportController::class)->group(function(){
+    Route::controller(ReportController::class)->group(function () {
         Route::get("/report", 'index');
         Route::post("/report", 'sendReport');
     });
-    Route::controller(TheatreController::class)->group(function(){
+    Route::controller(TheatreController::class)->group(function () {
         Route::get("/theatre", 'index');
         Route::post("/theatre", 'book');
     });
@@ -131,7 +126,5 @@ Route::prefix('/penghuni')->middleware([MemberMiddleware::class])->group(functio
 
     Route::get('/{any}', [UserController::class, 'viewPass'])
         ->where('any', '^(?!mesincuci|coworking|dapur|history|serbaguna|report|theatre).*$');
-   
 });
-
 

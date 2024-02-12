@@ -48,11 +48,12 @@ class ReportController extends Controller
                         'reports.*',
                         'users.name as user_name',
                         'users.class as user_class',
-                        'users.room_number as user_room'
+                        'users.room_number as user_room',
+                        'admin photo as admin_photo'
                      )
                      ->get();
 
-
+            // dd($report);
             foreach($report as $R)
             {
 
@@ -73,7 +74,8 @@ class ReportController extends Controller
                     "uploadPhoto" => $R->photo,
                     "description" => $R->description,
                     "user_room" => $R->user_room,
-                    "type" => $R->type
+                    "type" => $R->type,
+                    "photoAdmin" => $R->admin_photo
 
                 ];
 
@@ -132,10 +134,34 @@ class ReportController extends Controller
         }
     }
 
-    public function selesai(request $request)
+    public function selesai(request $request, string $report_id)
     {
+        $file = $request->file('photo');
         $updateStatus = Status::query()
                         ->where('name', '=', 'Done')
                         ->pluck('status_id');
+
+        $report = Report::query()->find($report_id);
+        // $report->fill([
+        //     "status_id" => $updateStatus[0]
+        // ]);
+        if(isset($file)){
+            $photo = Carbon::now()->getTimestamp() . $file->getClientOriginalName();
+            $path = "data";
+            if($file->move($path, $photo)){
+                $report->fill([
+                    "admin photo" => $photo,
+                    "status_id" => $updateStatus[0],
+                ]);
+
+                $report->save();
+                return redirect()->action([ReportController::class, 'index'])->with("message", 'Berhasil menyelesaikan laporan');
+            }
+        }
+
+
+        // $report->save();
+        // return redirect()->action([ReportController::class, 'index'])->with("message", 'Berhasil menyelesaikan laporan');
+
     }
 }

@@ -107,6 +107,11 @@ body {
     margin-right: 30px;
 }
 
+.btn.btn-primary
+{
+    background-color: var(--primary);
+}
+
 .modal-body {
     position: relative;
     flex: 1 1 auto;
@@ -114,7 +119,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .modal-title {

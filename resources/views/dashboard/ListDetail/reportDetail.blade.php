@@ -18,11 +18,28 @@
                     <p>Status : {{$report['viewStatus']}}</h6>
                 </div>
 
-                <div class="photo-uploaded">
+                @if ($report['viewStatus'] == 'On Progress')
 
-                    <img class="photo" src="{{asset('data/' . $report['uploadPhoto'])}}" alt="photo">
+                    <div class="photo-uploaded">
 
-                </div>
+                        <img class="photo" src="{{asset('data/' . $report['uploadPhoto'])}}" alt="photo">
+
+                    </div>
+                @elseif ($report['viewStatus'] == 'Selesai')
+                    <div class="photo-uploaded">
+
+                        <img class="photo" src="{{asset('data/' . $report['photoAdmin'])}}" alt="photo">
+
+                    </div>
+
+                @else
+
+                    <div class='no-photo-uploaded'>
+                        <p>No photo uploaded</p>
+                    </div>
+
+                @endif
+
 
                 {{-- @if ($theatre['is_late'] == 0)
 

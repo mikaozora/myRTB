@@ -12,7 +12,7 @@ class Report extends Model
     use HasUuids;
 
     protected $fillable = [
-        "report_id", "NIP", "type", "description", "photo", "status_id"
+        "report_id", "NIP", "type", "description", "photo", "status_id", "admin photo"
     ];
 
     protected $table = "reports";
