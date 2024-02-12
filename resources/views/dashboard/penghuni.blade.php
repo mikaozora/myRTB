@@ -110,18 +110,38 @@
                 // Show the div if found
                 if (myDiv) {
                     myDiv.style.visibility = "visible";
+                    myDiv.style.opacity = "1";
+                    setTimeout(function() {
+                        myDiv.classList.add("show-animate");
+                    }, 50);
 
-                    // Hide the div after 3 seconds
+                    // Hide the div after 1 second
                     setTimeout(function() {
                         myDiv.style.visibility = "hidden";
                         myDiv.style.opacity = "0";
-                        resolve();
                     }, 3000);
                 } else {
                     console.error("Element with id 'notif' not found.");
                     resolve(); // Resolve the promise even if the element is not found
                 }
             });
+        }
+
+        function showLoader() {
+            return new Promise(function(resolve) {
+                window.addEventListener('load', () => {
+                    const loader = document.querySelector('.wrap-loader');
+                    console.log(loader);
+
+                    // Add loader-hidden class
+                    console.log("hellow");
+                    loader.classList.add('loader-hidden');
+                    console.log(loader); // Check if loader has the loader-hidden class
+
+                    // Resolve the promise after adding the class
+                    resolve();
+                })
+            })
         }
 
         // Function to update HTML content
@@ -161,6 +181,10 @@
 
         // Main function to handle AJAX and subsequent actions
         $(document).ready(function() {
+            $(document).ajaxComplete(function() {
+                // Add loader-hidden class to .wrap-loader after successful AJAX request
+                $('.wrap-loader').addClass('loader-hidden');
+            });
 
             // Remove existing click event handlers
             $(document).off('click', '.editbtn');
@@ -229,6 +253,10 @@
 
         // delete
         $(document).ready(function() {
+            $(document).ajaxComplete(function() {
+                // Add loader-hidden class to .wrap-loader after successful AJAX request
+                $('.wrap-loader').addClass('loader-hidden');
+            });
             // Remove existing click event handlers
             $(document).off('click', '.deletebtn');
 
