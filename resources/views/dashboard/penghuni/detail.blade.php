@@ -2,7 +2,7 @@
     <div class="modal-dialog" id="dialog-detail">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Detail Penghuni</h5>
+                <h5 class="modal-title" id="exampleModalLabel">User Details</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="detail">
@@ -14,23 +14,23 @@
                             <p>{{$user->NIP}}</p>
                         </div>
                         <div class="content">
-                            <h6>Kamar</h6>
+                            <h6>Room Number</h6>
                             <p>{{$user->room_number}}</p>
                         </div>
                         <div class="content">
-                            <h6>Nama</h6>
+                            <h6>Name</h6>
                             <p>{{$user->name}}</p>
                         </div>
                         <div class="content">
-                            <h6>No Telepon</h6>
+                            <h6>Phone Number</h6>
                             <p>{{$user->phone_number}}</p>
                         </div>
                         <div class="content">
-                            <h6>Kelas</h6>
+                            <h6>Class</h6>
                             <p>{{$user->class}}</p>
                         </div>
                         <div class="content">
-                            <h6>Jenis Kelamin</h6>
+                            <h6>Gender</h6>
                             <p>{{$user->gender}}</p>
                         </div>
                     </div>

@@ -9,6 +9,7 @@
     @vite('resources/css/theatre.css')
     @vite('resources/css/content.css')
     <title>{{$title}}</title>
+    @include('components.favicon')
 </head>
 
 <body>
@@ -31,15 +32,15 @@
                         @if(!Request::get('date'))
                         <div class="wrap-span">
                             <img src="{{ asset('/assets/ill-calendar.svg') }}" alt="">
-                            <h6>Pilih tanggal dulu yuk</h6>
+                            <h6>Please choose the date first!</h6>
                         </div>
                         @else
-                        <h4>Pilih Jam Booking</h4>
+                        <h4>Select Booking Time</h4>
                         <div class="wrap-time">
                             <div class="from-time">
-                                <h5>Dari :</h5>
+                                <h5>Start :</h5>
                                 <select name="from-time" id="fromtime" class="from-time-select" onchange="timeChange()" required>
-                                    <option value="PilihJam">Pilih Jam</option>
+                                    <option value="PilihJam">PSelect Time</option>
                                     @foreach ($theatreAvail as $ta)
                                     <option value="{{$ta['value']}}" {{ Request::get('fromtime') == $ta['value']  ? 'selected' : '' }} 
                                     {{$ta['booked'] == true ? 'disabled' : ''}}  {{$ta['isAvailable'] == true ? '' : 'disabled'}}>
@@ -49,9 +50,9 @@
                                 </select>
                             </div>
                             <div class="to-time">
-                                <h5>Sampai :</h5>
+                                <h5>Finish :</h5>
                                 <select name="to-time" id="totime" class="to-time-select" required>
-                                    <option value="">Pilih Jam</option>
+                                    <option value="">Select Time</option>
                                     @foreach ($timeTo as $tt)
                                     <option value="{{ $tt['allval'] }}" {{ Request::get('totime') == $tt['value'] ? 'selected' : '' }} {{$tt['booked'] == true ? 'disabled' : ''}}>
                                         {{ $tt['label'] }}
@@ -69,10 +70,10 @@
                     </div>
             </div>
             <div class="wrap-right">
-                <h5>Pengguna Hari Ini</h5>
+                <h5>Today's User</h5>
                 <div class="wrap-scrollable">
                     @if (empty($books))
-                    <p class="empty">Tidak ada pengguna hari ini</p>
+                    <p class="empty">No users today</p>
                     @else
                     @foreach ($books as $book)
                     <div class="wrap-detail-user">

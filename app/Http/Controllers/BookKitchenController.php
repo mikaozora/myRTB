@@ -98,7 +98,7 @@ class BookKitchenController extends Controller
             }
             // dd($BookedDapur);
             return response()->view('dashboard.dapur', [
-                "title" => "Booking Dapur",
+                "title" => "Kitchen Booking",
                 "photoProfile" => $photoProfile,
                 "dapur" => $dapurList
             ]);
@@ -288,7 +288,7 @@ class BookKitchenController extends Controller
         }
 
         return response()->view('penghuni.dapur', [
-            "title" => "Booking Dapur",
+            "title" => "Kitchen Booking",
             "datenow" => $date,
             "timeAvail" => $timeAvail,
             "stoveAvailLeft" => $stoveAvailLeft,
@@ -359,7 +359,7 @@ class BookKitchenController extends Controller
 
             if ($date_banned > $date || $hour_banned > $hour){
                 return redirect()->action([BookKitchenController::class, 'index'])->with([
-                    'message' => 'Maaf, Anda Terkena Penalti',
+                    'message' => 'Sorry, you are suspended',
                     'status' => 'error'
                 ]);
             }
@@ -370,6 +370,6 @@ class BookKitchenController extends Controller
 
         $bookKitchen->save();
 
-        return redirect()->action([BookKitchenController::class, 'index'])->with('message', 'Berhasil melakukan booking');
+        return redirect()->action([BookKitchenController::class, 'index'])->with('message', 'Success Booked Kitchen');
     }
 }

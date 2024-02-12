@@ -6,6 +6,7 @@
     <title>Login</title>
     @vite('resources/css/app.css')
     @vite('resources/css/login.css')
+    @include('components.favicon')
 </head>
 <body>
     <div class="container">

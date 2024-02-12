@@ -9,6 +9,7 @@
     <title>{{$title}}</title>
     @vite('resources/css/content.css')
     @vite('resources/css/view admin/viewserbaguna.css')
+    @include('components.favicon')
 </head>
 <body>
     @include('components.sidebaradmin')

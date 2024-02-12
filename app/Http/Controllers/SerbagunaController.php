@@ -96,7 +96,7 @@ class SerbagunaController extends Controller
 
             // dd($serbagunaList);
             return response()->view('dashboard.serbaguna', [
-                "title" => "Booking Ruang Serbaguna",
+                "title" => "Ruang Serbaguna Booking",
                 "photoProfile" => $photoProfile,
                 "serbaguna" => $serbagunaList
             ]);
@@ -334,7 +334,7 @@ class SerbagunaController extends Controller
         // dd($userBooks);
 
         return response()->view('penghuni.serbaguna', [
-            "title" => "Booking Ruang Serbaguna",
+            "title" => "Ruang Serbaguna Booking",
             "datenow" => $date,
             "timeFrom" => $timeFrom,
             "timeTo" => $timeTo,
@@ -391,7 +391,7 @@ class SerbagunaController extends Controller
 
             if ($date_banned > $date || $hour_banned > $hour){
                 return redirect()->action([SerbagunaController::class, 'index'])->with([
-                    'message' => 'Maaf, Anda Terkena Penalti',
+                    'message' => 'Sorry, you are suspended',
                     'status' => 'error'
                 ]);
             }
@@ -403,7 +403,7 @@ class SerbagunaController extends Controller
         $book->save();
 
         return redirect()->action([SerbagunaController::class, 'index'])->with(
-            'message', 'Berhasil Melakukan Booking Serbaguna'
+            'message', 'Success Booked Serbaguna'
         );
     }
 }

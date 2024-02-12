@@ -9,6 +9,7 @@
     <title>{{$title}}</title>
     @vite('resources/css/content.css')
     @vite('resources/css/view admin/viewmesincuci.css')
+    @include('components.favicon')
 </head>
 <body>
     @include('components.sidebaradmin')
@@ -27,11 +28,11 @@
             {{-- buat milih opsi on progress dll --}}
             <div class="wrap-tab">
                 <a href="/dashboard/mesincuci?status=pemesanan"
-                    class="{{ Request::get('status') == 'pemesanan' || !Request::get('status') ? 'active' : '' }}">Pemesanan</a>
+                    class="{{ Request::get('status') == 'pemesanan' || !Request::get('status') ? 'active' : '' }}">Booked</a>
                 <a href="/dashboard/mesincuci?status=proses"
-                    class="{{ Request::get('status') == 'proses' ? 'active' : '' }}">Proses</a>
+                    class="{{ Request::get('status') == 'proses' ? 'active' : '' }}">Ongoing</a>
                 <a href="/dashboard/mesincuci?status=selesai"
-                    class="{{ Request::get('status') == 'selesai' ? 'active' : '' }}">Selesai</a>
+                    class="{{ Request::get('status') == 'selesai' ? 'active' : '' }}">Done</a>
             </div>
 
             <hr>

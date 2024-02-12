@@ -116,7 +116,7 @@ class RoomController extends Controller
 
             // dd($coworkingList);
             return response()->view('dashboard.coworking', [
-                "title" => "Booking CWS",
+                "title" => "Co-Working Space Booking",
                 "photoProfile" => $photoProfile,
                 "coworking" => $coworkingList
             ]);
@@ -329,7 +329,7 @@ class RoomController extends Controller
 
         return response()->view('penghuni.coworking', [
             "datenow" => $date,
-            "title" => "Booking CWS",
+            "title" => "Co-Working Space Booking",
             "timeFrom" => $timeFrom,
             "timeTo" => $timeTo,
             "roomAvail" => $roomAvail,
@@ -378,7 +378,7 @@ class RoomController extends Controller
 
             if ($date_banned < $date || $hour_banned < $hour){
                 return redirect()->action([RoomController::class, 'index'])->with([
-                    'message' => 'Maaf, Anda Terkena Penalti',
+                    'message' => 'Sorry, you are suspended',
                     'status' => 'error'
                 ]);
             }
@@ -391,7 +391,7 @@ class RoomController extends Controller
 
         return redirect()->action([RoomController::class, 'index'])->with(
             'message',
-            'Berhasil Melakukan Booking Co-working Space'
+            'Success Booked Co-working Space'
         );
     }
 }

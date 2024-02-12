@@ -26,7 +26,7 @@ class ForumController extends Controller
             ->select('forums.*', 'users.name', 'users.photo')
             ->orderBy('forums.created_at') 
             ->get();
-        $date = Carbon::now()->locale('id_ID')->isoFormat('dddd, D MMMM YYYY');
+        $date = Carbon::now()->isoFormat('dddd, D MMMM YYYY');
         $forumcount = Forum::count();
         $lastChat = "";
         if($forumcount === 0){

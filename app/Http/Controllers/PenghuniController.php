@@ -20,7 +20,7 @@ class PenghuniController extends Controller
         $photoProfile = $user->photo;
 
         return response()->view('dashboard.penghuni', [
-            "title" => "Penghuni",
+            "title" => "User",
             "photoProfile" => $photoProfile
         ]);
     }

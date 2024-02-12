@@ -49,7 +49,7 @@ class HistoryController extends Controller
             $formattedDate = $date->format('l, j F Y');
 
             $histories[] = [
-                "title" => "Booking Dapur",
+                "title" => "Kitchen Booking",
                 "label" => $bk->name,
                 "date" => $formattedDate,
                 "desc" => $start_time . '.00' . ' - ' . $end_time . '.00',
