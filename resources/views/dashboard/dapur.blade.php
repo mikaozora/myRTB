@@ -24,11 +24,11 @@
         <div class="inner-box">
             <div class="wrap-tab">
                 <a href="/dashboard/dapur?status=pemesanan"
-                    class="{{ Request::get('status') == 'pemesanan' || !Request::get('status') ? 'active' : '' }}">Pemesanan</a>
+                    class="{{ Request::get('status') == 'pemesanan' || !Request::get('status') ? 'active' : '' }}">Booked</a>
                 <a href="/dashboard/dapur?status=proses"
-                    class="{{ Request::get('status') == 'proses' ? 'active' : '' }}">Proses</a>
+                    class="{{ Request::get('status') == 'proses' ? 'active' : '' }}">Ongoing</a>
                 <a href="/dashboard/dapur?status=selesai"
-                    class="{{ Request::get('status') == 'selesai' ? 'active' : '' }}">Selesai</a>
+                    class="{{ Request::get('status') == 'selesai' ? 'active' : '' }}">Done</a>
             </div>
 
             <hr>

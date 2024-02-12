@@ -38,7 +38,7 @@
                 </div>
                 <div class="wrap-report">
                     <h3>Reports / Complaints</h3>
-                    <textarea name="report" id="" cols="100" rows="15" placeholder="Jelaskan kerusakan yang dialami..." class="report-textarea" required></textarea>
+                    <textarea name="report" id="" cols="100" rows="15" placeholder="Please explain..." class="report-textarea" required></textarea>
                 </div>
                 <div class="wrap-photo-upload">
                     <h3>Upload Photo</h3>

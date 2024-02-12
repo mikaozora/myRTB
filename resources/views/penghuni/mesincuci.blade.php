@@ -66,7 +66,7 @@
                                         onchange="timeChange()" required>
 
                                         {{-- tampilih kata pertama di drop down--}}
-                                        <option value=""> Pilih Jam</option>
+                                        <option value=""> Select time</option>
 
                                         {{-- pengulangan jam yang ada --}}
                                         {{-- timeavail minta dari controller --}}
@@ -179,7 +179,7 @@
 
                             @if (empty($books_M))
 
-                            <p class="empty">Tidak ada pengguna hari ini</p>
+                            <p class="empty">No users today</p>
 
                         @else
 
