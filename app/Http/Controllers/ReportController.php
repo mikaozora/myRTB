@@ -116,17 +116,17 @@ class ReportController extends Controller
                 $report->save();
                 return redirect()->action([ReportController::class, 'index'])->with(
                     "message",
-                    "Laporan Diterima!"
+                    "Report sent!"
                 );
             }catch(QueryException $err){
                 if ($err->errorInfo[1] == 1062){
                     return redirect()->action([ReportController::class, 'index'])->with([
-                        "message" => "Laporan Gagal Dikirim",
+                        "message" => "Report failed to send!",
                         "status" => "error"
                     ]);
                 }else{
                     return redirect()->action([ReportController::class, 'index'])->with([
-                        "message" => "Laporan Gagal Dikirim",
+                        "message" => "Report failed to send!",
                         "status" => "error"
                     ]);
                 }

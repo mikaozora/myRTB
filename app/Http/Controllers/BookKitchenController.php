@@ -70,7 +70,7 @@ class BookKitchenController extends Controller
                 $end_time = explode(' ', $BD->end_time);
                 $end_time = substr($end_time[1], 0, 2);
 
-                $date = Carbon::parse($BD->start_time)->locale('id');
+                $date = Carbon::parse($BD->start_time)->locale('en');
                 $date->settings(['formatFunction'=>'translatedFormat']);
 
                 $finalDate = $date->format('l, j F Y');

@@ -8,6 +8,10 @@
     @vite('resources/css/content.css')
     @vite('resources/css/forum.css')
     @include('components.favicon')
+    <script type="module">
+        import { format } from 'https://cdn.skypack.dev/date-fns';
+        import { enUS } from 'https://cdn.skypack.dev/date-fns/locale';
+    </script>
 </head>
 <body>    
     @include('components.sidebaradmin')

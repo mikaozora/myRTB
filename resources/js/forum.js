@@ -65,12 +65,12 @@ window.Echo.channel('chat')
         console.log(e);
 
         //buat tanggal
-        const options = {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-        };
+        // const options = {
+        //     weekday: "long",
+        //     year: "numeric",
+        //     month: "long",
+        //     day: "numeric",
+        // };
 
         const edate = new Date(e.created_at);
         const hours = edate.getHours().toString().padStart(2, "0");
@@ -78,8 +78,11 @@ window.Echo.channel('chat')
         const timenow = hours + ":" + minutes;
 
         console.log(edate);
+        console.log("last", lastCreatedAt);
         let date = "";
         let formattedDate = "";
+        let formattedDate2 = "";
+
         let eventNow = edate;
         let temp = false;
         eventNow.setHours(0, 0, 0, 0);
@@ -98,7 +101,9 @@ window.Echo.channel('chat')
             date = new Date(lastCreatedAt);
             console.log("eventBefore " + eventBefore);
             console.log("eventNow " + eventNowDate);
-            if (eventBefore.getTime() !== eventNowDate.getTime()) {
+            if (
+                eventBefore.getTime() !== eventNowDate.getTime()
+            ) {
                 console.log("eventBefore !== eventNow2");
                 temp = true;
             } else {
@@ -113,6 +118,52 @@ window.Echo.channel('chat')
         // const eformattedDate = edate.toLocaleDateString("en-US", options);
 
         // Function to add ordinal suffix to the day
+        // function addOrdinalSuffix(day) {
+        //     if (day >= 11 && day <= 13) {
+        //         return day + "th";
+        //     } else {
+        //         const lastDigit = day % 10;
+        //         switch (lastDigit) {
+        //             case 1:
+        //                 return day + "st";
+        //             case 2:
+        //                 return day + "nd";
+        //             case 3:
+        //                 return day + "rd";
+        //             default:
+        //                 return day + "th";
+        //         }
+        //     }
+        // }
+
+        // formattedDate = date.toLocaleDateString("en-US", options);
+
+        // const dayWithOrdinalSuffix = addOrdinalSuffix(date.getDate());
+        // const eformattedDate = formattedDate.replace(
+        //     date.getDate(),
+        //     dayWithOrdinalSuffix
+        // );
+
+        // console.log(formattedDate);
+        // console.log(eformattedDate);
+        const options = {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+        };
+
+        function formatDateToCustomString(datee) {
+            const dayWithOrdinalSuffix = addOrdinalSuffix(datee.getDate());
+            const eeformattedDate = datee.toLocaleDateString("en-US", options);
+            const eformattedDate = eeformattedDate.replace(
+                datee.getDate(),
+                dayWithOrdinalSuffix
+            );
+
+            return eformattedDate + ", " + datee.getFullYear();
+        }
+
         function addOrdinalSuffix(day) {
             if (day >= 11 && day <= 13) {
                 return day + "th";
@@ -130,21 +181,37 @@ window.Echo.channel('chat')
                 }
             }
         }
+        // const dayWithOrdinalSuffix = addOrdinalSuffix(date.getDate());
+        // eformattedDate = eformattedDate.replace(
+        //     date.getDate(),
+        //     dayWithOrdinalSuffix
+        // );
 
         formattedDate = date.toLocaleDateString("en-US", options);
 
         const dayWithOrdinalSuffix = addOrdinalSuffix(date.getDate());
-        const eformattedDate = formattedDate.replace(
+        const formattedDateTrue = formattedDate.replace(
             date.getDate(),
             dayWithOrdinalSuffix
         );
+        // const edate = new Date(e.created_at);
 
-        // console.log(formattedDate);
-        // console.log(eformattedDate);
+        formattedDate2 = edate.toLocaleDateString("en-US", options);
 
-        if (formattedDate !== eformattedDate || temp) {
+        const dayWithOrdinalSuffix2 = addOrdinalSuffix(edate.getDate());
+        const formattedDateTrue2 = formattedDate2.replace(
+            edate.getDate(),
+            dayWithOrdinalSuffix2
+        );
+
+        console.log("formattedDate", formattedDateTrue2);
+        console.log("eformattedDate", formattedDateTrue);
+
+        if (formattedDateTrue2 !== formattedDateTrue || temp) {
             datenow.innerHTML +=
-                '<dic class="datenow"><h1>' + eformattedDate + "</h1></div>";
+                '<dic class="datenow"><h1>' +
+                formattedDateTrue2 +
+                "</h1></div>";
         }
 
         eventBefore = eventNowDate;

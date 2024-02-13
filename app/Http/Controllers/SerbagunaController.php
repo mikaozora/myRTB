@@ -67,7 +67,7 @@ class SerbagunaController extends Controller
                 $end_time = explode(' ', $BS->end_time);
                 $end_time = substr($end_time[1], 0, 2);
 
-                $date = Carbon::parse($BS->start_time)->locale('id');
+                $date = Carbon::parse($BS->start_time)->locale('en');
                 $date->settings(['formatFunction'=>'translatedFormat']);
 
                 $finalDate = $date->format('l, j F Y');

@@ -109,7 +109,7 @@
             </div>
             <div class="wrap-right">
                 <div class="stuff-content">
-                    <h5>Kompor</h5>
+                    <h5>Stove</h5>
                     <div class="stuff-items">
                         @foreach ($stoves as $stove)
                             <label>
