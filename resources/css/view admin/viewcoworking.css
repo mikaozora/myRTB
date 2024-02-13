@@ -160,6 +160,11 @@ body {
     align-items: center;
 }
 
+.btn.btn-primary
+{
+    background-color: var(--primary);
+}
+
 
 .modal-content
 {

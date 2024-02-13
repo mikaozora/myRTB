@@ -12,6 +12,13 @@
     @include('components.favicon')
 </head>
 <body>
+
+    @if (session('message'))
+
+        @include('components.notification')
+
+    @endif
+
     @include('components.sidebaradmin')
     @include('components.loader')
     <div class="kontainer-header">
@@ -51,25 +58,30 @@
 
                         </div>
 
-                        <div class='info-button'>
+                        <div class="button-info-selesai">
+                            <div class='info-button'>
 
 
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detail-{{$report['id']}}">i</button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detail-{{$report['id']}}">i</button>
 
 
-                           {{-- button information kalau di selesai --}}
-                            @include('dashboard.ListDetail.reportDetail')
+                               {{-- button information kalau di selesai --}}
+                                @include('dashboard.ListDetail.reportDetail')
+
+                            </div>
+
+                            <div class="submit-button">
+                                @if (Request::get('status') == 'proses' || Request::get('status') == '')
+
+                                    <button type="button" class="btn btn-primary selesai" data-bs-toggle="modal" data-bs-target="#selesai-{{$report['id']}}">Selesai</button>
+                                    @include('dashboard.ListDetail.selesaikonfirmasi')
+
+                                @endif
+
+
+                            </div>
 
                         </div>
-
-                        <div class="submit-button">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#selesai-{{$report['id']}}">selesai</button>
-                            @include('dashboard.ListDetail.selesaikonfirmasi')
-
-                        </div>
-
-
-
 
                     </div>
                 @endforeach
