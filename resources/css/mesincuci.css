@@ -11,7 +11,7 @@ h4
     margin-top: 10px;
     margin-bottom: 8px;
     font-size: 1.1rem;
-    margin-left: 10px;
+    /* margin-left: 10px; */
 }
 
 body
@@ -75,7 +75,7 @@ body
 
 .Choose-time
 {
-    padding-left: 10px;
+    /* padding-left: 10px; */
     padding-bottom: 15px;
     display: flex;
     flex-direction: row;
@@ -112,7 +112,7 @@ body
 {
     height: auto;
     width: auto;
-    padding-left: 10px;
+    /* padding-left: 10px; */
     /* background-color: aqua; */
 }
 
