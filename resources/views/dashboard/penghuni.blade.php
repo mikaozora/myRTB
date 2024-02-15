@@ -166,9 +166,9 @@
         function attachToggleListener() {
             const toggle = document.querySelector('.img-container');
             const menu = document.querySelector('.logout');
-
             toggle.addEventListener('click', function() {
                 menu.classList.toggle('show');
+
             });
         }
         document.body.addEventListener('click', function(event) {
@@ -249,6 +249,8 @@
                     }
                 });
             });
+            attachToggleListener();
+            reAttachValidatePhone();
         });
 
         // delete
@@ -308,6 +310,7 @@
 
         function buttonClicked() {
             $('.modal-backdrop.show:not(:first)').remove();
+            $('.modal-backdrop.show:not(:first)').remove();
 
             function validatePhoneNumber(id) {
                 var inputElement = document.getElementById('input-' + id);
@@ -344,6 +347,59 @@
                 });
 
                 validatePhoneNumber(nip);
+            });
+        }
+    </script>
+    <script>
+        function reAttachValidatePhone() {
+            var phoneNumberInput = document.querySelector('.input-phone');
+            var errorPhoneStartDiv = document.querySelector('.error-phone-start');
+            var errorPhoneLengthDiv = document.querySelector('.error-phone-length');
+            var submitButton = document.querySelector('button.btn-simpan');
+
+            function setLabelColor(label, isValid) {
+                label.style.color = isValid ? 'green' : 'red';
+            }
+
+            function isNumeric(value) {
+                return !isNaN(value);
+            }
+
+            errorPhoneStartDiv.style.visible = 'hidden';
+            errorPhoneLengthDiv.style.visible = 'hidden';
+            setLabelColor(errorPhoneStartDiv.querySelector('label'), false);
+            setLabelColor(errorPhoneLengthDiv.querySelector('label'), false);
+
+            phoneNumberInput.addEventListener('input', function() {
+                var phoneNumberValue = phoneNumberInput.value;
+
+                if (!isNumeric(phoneNumberValue)) {
+                    errorPhoneStartDiv.style.visible = 'visible';
+                    setLabelColor(errorPhoneStartDiv.querySelector('label'), false);
+                    submitButton.disabled = true;
+                } else {
+                    errorPhoneStartDiv.style.visible = 'hidden';
+                    setLabelColor(errorPhoneStartDiv.querySelector('label'), true);
+
+                    if (!phoneNumberValue.startsWith('08')) {
+                        errorPhoneStartDiv.style.visible = 'visible';
+                        setLabelColor(errorPhoneStartDiv.querySelector('label'), false);
+                        submitButton.disabled = true;
+                    } else {
+                        errorPhoneStartDiv.style.visible = 'hidden';
+                        setLabelColor(errorPhoneStartDiv.querySelector('label'), true);
+
+                        if (phoneNumberValue.length < 11 || phoneNumberValue.length > 13) {
+                            errorPhoneLengthDiv.style.visible = 'visible';
+                            setLabelColor(errorPhoneLengthDiv.querySelector('label'), false);
+                            submitButton.disabled = true;
+                        } else {
+                            errorPhoneLengthDiv.style.visible = 'hidden';
+                            setLabelColor(errorPhoneLengthDiv.querySelector('label'), true);
+                            submitButton.disabled = false;
+                        }
+                    }
+                }
             });
         }
     </script>
