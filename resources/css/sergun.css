@@ -55,13 +55,13 @@ h4{
 }
 
 .wrap-time{
-    padding-left: 20px;
+    /* padding-left: 20px; */
     margin-bottom: -50px;
 }
 
 .wrap-submit{
     margin-top: 15x;
-    margin-bottom: 15px;
+    /* margin-bottom: 15px; */
     display: flex;
     justify-content: center;
 }
@@ -70,7 +70,7 @@ h4{
     width: 100%;
     background-color: var(--primary);
     color: var(--bg-primary);
-    border-radius: 8px;
+    border-radius: 20px;
     border: none;
     transition: all .2s ease-in-out;
     font-size: 1.1rem;

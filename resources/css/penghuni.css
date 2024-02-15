@@ -21,7 +21,7 @@ tbody tr td{
 
 .wrap-button .input-search{
     border: 1px solid var(--primary);
-    border-radius: 8px;
+    border-radius: 20px;
     padding: 4px 16px;
     background-color: #fff;
     font-size: .85rem;
@@ -40,7 +40,7 @@ tbody tr td{
     justify-content: center;
     border: none;
     padding: 8px 16px;
-    border-radius: 8px;
+    border-radius: 20px;
 }
 .wrap-button .btn-penghuni:hover{
     background-color: #16437f;
@@ -159,8 +159,8 @@ thead, tbody{
     color: #fff;
     font-size: 1rem;
     font-weight: 400;
-    padding: 8px 16px;
-    border-radius: 8px;
+    padding: 8px 30px;
+    border-radius: 20px;
 }
 .btn-simpan:hover{
     background-color: #16437f;
@@ -172,8 +172,8 @@ thead, tbody{
     color: #fff;
     font-size: 1rem;
     font-weight: 400;
-    padding: 8px 16px;
-    border-radius: 8px;
+    padding: 8px 30px;
+    border-radius: 20px;
 }
 
 .btn-simpan-edit:hover{
