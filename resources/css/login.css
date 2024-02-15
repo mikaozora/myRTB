@@ -108,14 +108,14 @@ label{
 .submitbtn{
     color: #FFF;
     font-family: Poppins;
-    font-size: 1.38rem;
+    font-size: 1.1rem;
+    padding: 8px 0px;
     width: 100%;
-    height: 50%;
-    border-radius: 20px;
-    border: 2px solid var(--primary, #205295);
-    background: var(--primary, #205295);
-    margin-top: 2%;
+    border-radius: 8px;
+    border: none;
+    background: var(--primary);
     cursor: pointer;
+    transition: all .2s ease-in-out;
 }
 
 .btn{
