@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\WashingMachine;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class BookMachineController extends Controller
@@ -105,11 +106,20 @@ class BookMachineController extends Controller
                 ];
             }
 
+            $MachineListCollection = new Collection($MachineList);
+            $sortedMachineListCollection = $MachineListCollection->sortBy(function ($item) {
+                $dateTimestamp = strtotime($item['date']);
+
+                $descPrefix = substr($item['desc'], 0, 2);
+
+                return [$dateTimestamp, $descPrefix];
+            })->values()->all();
+
             // dd($MachineList);
             return response()->view('dashboard.mesincuci', [
                 "title" => "Washing Machine Booking",
                 "photoProfile" => $photoProfile,
-                "machines" => $MachineList,
+                "machines" => $sortedMachineListCollection,
             ]);
         }
 

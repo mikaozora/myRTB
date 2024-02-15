@@ -9,6 +9,7 @@ use App\Models\Status;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class SerbagunaController extends Controller
@@ -93,12 +94,19 @@ class SerbagunaController extends Controller
                     "is_late" => $BS->is_late
                 ];
             }
+            $serbagunaListCollection = new Collection($serbagunaList);
+            $sortedserbagunaList = $serbagunaListCollection->sortBy(function ($item) {
+                $dateTimestamp = strtotime($item['date']);
 
+                $descPrefix = substr($item['desc'], 0, 2);
+
+                return [$dateTimestamp, $descPrefix];
+            })->values()->all();
             // dd($serbagunaList);
             return response()->view('dashboard.serbaguna', [
                 "title" => "Serbaguna Booking",
                 "photoProfile" => $photoProfile,
-                "serbaguna" => $serbagunaList
+                "serbaguna" => $sortedserbagunaList
             ]);
         }
 
