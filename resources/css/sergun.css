@@ -7,13 +7,15 @@ h4{
 .wrap-content {
     display: flex;
     justify-content: space-between;
+    gap: 8px;
 }
 
 .wrap-content .wrap-left {
     padding: 6px 16px 16px 16px;
     background-color: #fff;
     border-radius: 16px;
-    width: 65%;
+    /* width: 65%; */
+    flex-grow: 1;
 }
 
 .wrap-content .wrap-validate-choose-date .wrap-span {

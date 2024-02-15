@@ -13,6 +13,7 @@ h4 {
     padding: 6px 16px 16px 16px;
     background-color: #fff;
     border-radius: 16px;
+    /* margin-bottom: 23px; */
     /* width: 65%; */
     flex-grow: 1;
 }
@@ -22,6 +23,7 @@ h4 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    /* height: fit-content; */
 }
 .wrap-content .wrap-validate-choose-date .wrap-span img {
     width: 250px;
@@ -30,6 +32,8 @@ h4 {
 .wrap-content .wrap-validate-choose-date .wrap-span h6 {
     font-size: 16px;
     margin: 0px;
+    /* margin-bottom: 4px; */
+    /* margin-top: 15px; */
     font-weight: 600;
 }
 
@@ -149,6 +153,7 @@ input[type="radio"]:checked + .custom-radio {
     background-color: #fff;
     border-radius: 16px;
     width: 29%;
+    /* margin-bottom: 23px; */
 }
 
 .wrap-content .wrap-right h5{

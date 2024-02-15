@@ -30,17 +30,19 @@ body
 
     display: flex;
     justify-content: space-between;
+    gap: 8px;
 
 }
 
 /* ini sisi form mesin cuci */
 .schedule-box
 {
-    padding: 10px 10px 10px;
+    padding: 6px 16px 16px 16px;
     background-color: white;
-    height: auto;
-    width: 800px;
+    /* height: auto; */
+    /* width: 800px; */
     border-radius: 16px;
+    flex-grow: 1;
 }
 
 .Not-choose-date
@@ -161,7 +163,7 @@ input[type="radio"]:checked + .custom-radio {
     border: none;
     cursor: pointer;
     transition: all .2s ease-in-out;
-    margin-bottom: 2;
+    margin-bottom: 20px;
 }
 .btn-submit:hover{
     background-color: #16437f;
@@ -179,11 +181,10 @@ input[type="radio"]:checked + .custom-radio {
 }
 .today-user-box
 {
-    padding: 0px 10px 0px;
-    background-color: white;
-    height: auto;
-    width: 350px;
+    padding: 6px 16px 16px 16px;
+    background-color: #fff;
     border-radius: 16px;
+    width: 29%;
 }
 
 .today-user-box h3
