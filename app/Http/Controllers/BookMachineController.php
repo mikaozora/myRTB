@@ -338,6 +338,7 @@ class BookMachineController extends Controller
                     ->where('book_machines.machine_id', '=', $machineSelected_M)
                     ->where('users.gender', '=', 'Male')
                     ->select('users.NIP', 'users.name', 'users.photo', 'users.class', 'book_machines.start_time', 'book_machines.end_time')
+                    ->orderBy('book_machines.start_time', 'asc')
                     ->get();
 
         $userBooks_M = [];
@@ -381,6 +382,7 @@ class BookMachineController extends Controller
                     ->where('book_machines.machine_id', '=', $machineSelected_F)
                     ->where('users.gender', '=', 'Female')
                     ->select('users.NIP', 'users.name', 'users.photo', 'users.class', 'book_machines.start_time', 'book_machines.end_time')
+                    ->orderBy('book_machines.start_time', 'asc')
                     ->get();
 
         $userBooks_F = [];
