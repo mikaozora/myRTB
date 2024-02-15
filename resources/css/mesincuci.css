@@ -187,7 +187,7 @@ input[type="radio"]:checked + .custom-radio {
     width: 29%;
 }
 
-.today-user-box h3
+.today-user-box h
 {
     padding-left: 10px;
 }
@@ -264,7 +264,7 @@ input[type="radio"]:checked + .custom-radio {
 
 
 
-.wrap-detail-user {
+.Users-detail {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -272,29 +272,29 @@ input[type="radio"]:checked + .custom-radio {
     padding-right: 8px;
 }
 
-.wrap-detail-mid{
+.detail-middle{
     margin-left: 10px;
     flex: 1; 
 }
 
-.wrap-detail-user img{
+.Users-detail img{
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
     object-fit: cover;  
     cursor: pointer;
 }
-.wrap-detail-user .wrap-detail-mid h6{
+.Users-detail .detail-middle h6{
     margin: 0px;
     font-size: .85rem;
     font-weight: 600;
 }
-.wrap-detail-user .wrap-detail-mid p{
+.Users-detail .detail-middle p{
     margin: 0px;
     font-size: .75rem;
     color: rgba(120, 120, 120, 1);
 }
-.wrap-detail-user .wrap-detail-right p{
+.Users-detail .detail-right p{
     margin: 0px;
     font-size: .75rem;
     color: rgba(120, 120, 120, 1);

@@ -272,6 +272,7 @@ class SerbagunaController extends Controller
         ->whereDate('book_rooms.start_time', '=', $dateParam)
         ->where('book_rooms.room_id', '=', $roomSelected)
         ->select('users.NIP', 'users.name', 'users.photo', 'users.class', 'book_rooms.start_time', 'book_rooms.end_time', 'book_rooms.room_id')
+        ->orderBy('book_rooms.start_time', 'asc')
         ->get();
 
 
@@ -279,7 +280,11 @@ class SerbagunaController extends Controller
         ->where('book_rooms.start_time', $datetime)
         ->select('book_rooms.room_id')->get();
 
+        // $books = BookRoom::orderBy('start_time', 'asc')
+        // ->get();
+
     //    $sergunAvailLeft = [];
+
 
        $idx = 1;
        foreach($rooms as $room){
