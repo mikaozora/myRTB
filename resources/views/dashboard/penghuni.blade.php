@@ -200,7 +200,7 @@
                 let userId = $(this).data('userid');
                 let nama = $(`#nama-${userId}`).val();
                 let gender = $(`#gender-${userId}`).val();
-                let kelas = $(`#kelas-${userId}`).val();
+                let kelas = $(`#class-${userId}`).val();
                 let kamar = $(`#kamar-${userId}`).val();
                 let telp = $(`#input-${userId}`).val();
                 let photo = $(`#photo-${userId}`)[0].files[0];
