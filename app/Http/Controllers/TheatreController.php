@@ -8,6 +8,7 @@ use App\Models\Room;
 use App\Models\Status;
 use App\Models\User;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -90,11 +91,20 @@ class TheatreController extends Controller
                     "is_late" => $BT->is_late
                 ];
             }
+                
+            $TheatreListCollection = new Collection($TheatreList);
+            $sortedTheatreListCollection = $TheatreListCollection->sortBy(function ($item) {
+                $dateTimestamp = strtotime($item['date']);
+
+                $descPrefix = substr($item['desc'], 0, 2);
+
+                return [$dateTimestamp, $descPrefix];
+            })->values()->all();
             // dd($TheatreList);
             return response()->view('dashboard.theatre', [
                 "title" => "Theatre Booking",
                 "photoProfile" => $photoProfile,
-                "theatre" => $TheatreList
+                "theatre" => $sortedTheatreListCollection
             ]);
         }
 
@@ -103,7 +113,7 @@ class TheatreController extends Controller
             $carbonInstance = Carbon::createFromFormat('Y-m-d H:i:s', Carbon::now()->addDay($i));
             $res = $carbonInstance->format('Y-m-d');
             $date[] = [
-                "label" => Carbon::now()->addDay($i)->locale('id_ID')->format('D, d'),
+                "label" => Carbon::now()->addDay($i)->timezone('Asia/Jakarta')->format('D, d'),
                 "value" => $res
             ];
         }

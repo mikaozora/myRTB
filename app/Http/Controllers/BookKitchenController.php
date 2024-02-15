@@ -9,6 +9,7 @@ use App\Models\Status;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -96,11 +97,20 @@ class BookKitchenController extends Controller
                     "is_late" => $BD->is_late
                 ];
             }
+            
+            $dapurListCollection = new Collection($dapurList);
+            $sorteddapurListCollection = $dapurListCollection->sortBy(function ($item) {
+                $dateTimestamp = strtotime($item['date']);
+
+                $descPrefix = substr($item['desc'], 0, 2);
+
+                return [$dateTimestamp, $descPrefix];
+            })->values()->all();
             // dd($BookedDapur);
             return response()->view('dashboard.dapur', [
                 "title" => "Kitchen Booking",
                 "photoProfile" => $photoProfile,
-                "dapur" => $dapurList
+                "dapur" => $sorteddapurListCollection
             ]);
         }
         $date = [];
@@ -108,7 +118,7 @@ class BookKitchenController extends Controller
             $carbonInstance = Carbon::createFromFormat('Y-m-d H:i:s', Carbon::now()->addDay($i));
             $res = $carbonInstance->format('Y-m-d');
             $date[] = [
-                "label" => Carbon::now()->addDay($i)->locale('id_ID')->format('D, d'),
+                "label" => Carbon::now()->addDay($i)->timezone('Asia/Jakarta')->format('D, d'),
                 "value" => $res
             ];
         }

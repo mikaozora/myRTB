@@ -20,13 +20,25 @@
                         <p>Gender</p>
                         <select name="gender" id="gender" class="form-select" aria-label="Default select example">
                             <option value="">Select gender</option>
-                            <option value="Male">Man</option>
-                            <option value="Female">Woman</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
                         </select>
                     </div>
                     <div class="wrap-input">
                         <p>Class</p>
-                        <input type="text" name="class" required placeholder="PPTI 20">
+                        <select name="class" id="class" class="form-select" aria-label="Default select example">
+                            <option value="">Select class</option>
+                            <option value="PPBP 3">PPBP 3</option>
+                            <option value="PPBP 4">PPBP 4</option>
+                            <option value="PPBP 5">PPBP 5</option>
+                            <option value="PPBP 6">PPBP 6</option>
+                            <option value="PPTI 14">PPTI 14</option>
+                            <option value="PPTI 15">PPTI 15</option>
+                            <option value="PPTI 16">PPTI 16</option>
+                            <option value="PPTI 17">PPTI 17</option>
+                            <option value="PPTI 18">PPTI 18</option>
+                            <option value="PPTI 19">PPTI 19</option>
+                        </select>
                     </div>
                     <div class="wrap-input">
                         <p>Room Number</p>

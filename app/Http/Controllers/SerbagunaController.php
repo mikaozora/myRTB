@@ -9,6 +9,7 @@ use App\Models\Status;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class SerbagunaController extends Controller
@@ -93,12 +94,19 @@ class SerbagunaController extends Controller
                     "is_late" => $BS->is_late
                 ];
             }
+            $serbagunaListCollection = new Collection($serbagunaList);
+            $sortedserbagunaList = $serbagunaListCollection->sortBy(function ($item) {
+                $dateTimestamp = strtotime($item['date']);
 
+                $descPrefix = substr($item['desc'], 0, 2);
+
+                return [$dateTimestamp, $descPrefix];
+            })->values()->all();
             // dd($serbagunaList);
             return response()->view('dashboard.serbaguna', [
-                "title" => "Ruang Serbaguna Booking",
+                "title" => "Serbaguna Booking",
                 "photoProfile" => $photoProfile,
-                "serbaguna" => $serbagunaList
+                "serbaguna" => $sortedserbagunaList
             ]);
         }
 
@@ -107,7 +115,7 @@ class SerbagunaController extends Controller
             $carbonInstance = Carbon::createFromFormat('Y-m-d H:i:s' , Carbon::now()->addDay($i));
             $res = $carbonInstance->format('Y-m-d');
             $date[] = [
-                "label" => Carbon::now()->addDay($i)->locale('id_ID')->format('D,d'),
+                "label" => Carbon::now()->addDay($i)->timezone('Asia/Jakarta')->format('D, d'),
                 "value" => $res
             ];
         }
@@ -339,7 +347,7 @@ class SerbagunaController extends Controller
         // dd($userBooks);
 
         return response()->view('penghuni.serbaguna', [
-            "title" => "Ruang Serbaguna Booking",
+            "title" => "Serbaguna Booking",
             "datenow" => $date,
             "timeFrom" => $timeFrom,
             "timeTo" => $timeTo,

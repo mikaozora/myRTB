@@ -102,6 +102,10 @@ body {
     border-radius: 30px;
 }
 
+.btn.btn-primary.selesai
+{
+    border-radius: 20px;
+}
 
 
 .modal-body {
@@ -282,6 +286,10 @@ body {
         width: 100%;
     }
 
+#modal-information
+{
+    max-width: 700px;
+}
 
 @media (max-width: 1440px)
 {

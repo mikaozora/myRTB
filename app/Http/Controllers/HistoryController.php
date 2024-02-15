@@ -9,6 +9,7 @@ use App\Models\Report;
 use App\Models\Status;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class HistoryController extends Controller
@@ -178,12 +179,24 @@ class HistoryController extends Controller
                 "isLate" => null
             ];
         };
+        
+        // Convert the $histories array to a Laravel collection
 
+        $historiesCollection = new Collection($histories);
+        $sortedHistories = $historiesCollection->sortBy(function ($item) {
+            // Sort by 'date' first
+            $dateTimestamp = strtotime($item['date']);
+
+            // If 'date' is the same, sort by the first two digits of 'desc'
+            $descPrefix = substr($item['desc'], 0, 2);
+
+            return [$dateTimestamp, $descPrefix];
+        })->values()->all();
 
         return response()->view('penghuni.history', [
             "title" => "History",
             "photoProfile" => $photoProfile,
-            "histories" => $histories
+            "histories" => $sortedHistories
         ]);
     }
     public function uploadPhoto(Request $request, string $id){
