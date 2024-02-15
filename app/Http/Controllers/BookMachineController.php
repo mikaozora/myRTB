@@ -122,7 +122,7 @@ class BookMachineController extends Controller
             $carbonInstance = Carbon::createFromFormat('Y-m-d H:i:s', Carbon::now()->addDay($i));
             $res = $carbonInstance->format('Y-m-d');
             $date[] = [
-                "label" => Carbon::now()->addDay($i)->locale('id_ID')->format('D, d'),
+                "label" => Carbon::now()->addDay($i)->timezone('Asia/Jakarta')->format('D, d'),
                 "value" => $res
             ];
 
