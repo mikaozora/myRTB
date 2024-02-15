@@ -96,7 +96,7 @@ class SerbagunaController extends Controller
 
             // dd($serbagunaList);
             return response()->view('dashboard.serbaguna', [
-                "title" => "Ruang Serbaguna Booking",
+                "title" => "Serbaguna Booking",
                 "photoProfile" => $photoProfile,
                 "serbaguna" => $serbagunaList
             ]);
@@ -334,7 +334,7 @@ class SerbagunaController extends Controller
         // dd($userBooks);
 
         return response()->view('penghuni.serbaguna', [
-            "title" => "Ruang Serbaguna Booking",
+            "title" => "Serbaguna Booking",
             "datenow" => $date,
             "timeFrom" => $timeFrom,
             "timeTo" => $timeTo,

@@ -68,17 +68,17 @@ class PenghuniController extends Controller
                 $user->save();
                 return redirect()->action([PenghuniController::class, 'index'])->with(
                     "message",
-                    "Berhasil menambah data penghuni"
+                    "Successfully added user data!"
                 );
             } catch (QueryException $err) {
                 if ($err->errorInfo[1] == 1062) {
                     return redirect()->action([PenghuniController::class, 'index'])->with([
-                        "message" => "NIP sudah terdaftar",
+                        "message" => "NIP has registered!",
                         "status" => "error"
                     ]);
                 } else {
                     return redirect()->action([PenghuniController::class, 'index'])->with([
-                        "message" => "Gagal menambah data penghuni",
+                        "message" => "Failed to add user data",
                         "status" => "error"
                     ]);
                 }
@@ -116,7 +116,7 @@ class PenghuniController extends Controller
                 $user->save();
                 return redirect()->action([PenghuniController::class, 'index'])->with(
                     "message",
-                    "Berhasil mengubah data penghuni"
+                    "Successfully edited user data"
                 );
             }
         }
@@ -130,7 +130,7 @@ class PenghuniController extends Controller
         $user->save();
         return redirect()->action([PenghuniController::class, 'index'])->with(
             "message",
-            "Berhasil mengubah data penghuni"
+            "Successfully edited user data"
         );
     }
     public function destroy(string $nip)
@@ -144,7 +144,7 @@ class PenghuniController extends Controller
         $user->delete();
         return redirect()->action([PenghuniController::class, 'index'])->with(
             "message",
-            "Berhasil menghapus data penghuni"
+            "Successfully deleted user data"
         );
     }
 }
