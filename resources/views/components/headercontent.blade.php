@@ -67,7 +67,9 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    @vite('resources/js/header.js')
+    @if (Request::path() != 'dashboard/penghuni')
+        @vite('resources/js/header.js')
+    @endif
     <script>
         // @if (isset($openn) && $openn === true)
         //     openModal();
@@ -91,12 +93,12 @@
             overlay.classList.add("fade-out-up-overlay");
 
             // After a short delay, hide the modal and overlay and remove the fade-out-up class
-            setTimeout(function () {
+            setTimeout(function() {
                 overlay.style.display = "none";
                 modal.style.display = "none";
                 overlay.classList.remove("fade-out-up-overlay");
                 modal.classList.remove("fade-out-up");
-            }, 150); 
+            }, 150);
 
             // Sembunyikan overlay
             // document.getElementById("overlay_header").style.display = "none";
