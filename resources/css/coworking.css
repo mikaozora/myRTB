@@ -164,7 +164,7 @@ p{
 }
 
 .from-time-select {
-    width: 100px;
+    width: 120px;
     height: 30px;
     border-radius: 16px;
     padding: 0px 5px;
@@ -173,7 +173,7 @@ p{
 }
 
 .to-time-select {
-    width: 100px;
+    width: 120px;
     height: 30px;
     border-radius: 16px;
     padding: 0px 5px;

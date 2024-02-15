@@ -296,6 +296,7 @@ class RoomController extends Controller
             ->whereDate('book_rooms.start_time', '=', $dateParam)
             ->where('book_rooms.room_id', '=', $room_id)
             ->select('users.NIP', 'users.name', 'users.photo', 'users.class', 'book_rooms.start_time', 'book_rooms.end_time', 'book_rooms.type')
+            ->orderBy('book_rooms.start_time', 'asc')
             ->get();
 
         $userBooks = [];
