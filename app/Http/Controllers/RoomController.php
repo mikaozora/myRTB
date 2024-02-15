@@ -10,6 +10,7 @@ use App\Models\User;
 use Carbon\Traits\ToStringFormat;
 use DateTimeZone;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Client\Response as ClientResponse;
 use Illuminate\Http\Request;
@@ -113,12 +114,20 @@ class RoomController extends Controller
                     "type" => $BC->type
                 ];
             }
+            $coworkingListCollection = new Collection($coworkingList);
+            $sortedcoworkingListCollection = $coworkingListCollection->sortBy(function ($item) {
+                $dateTimestamp = strtotime($item['date']);
+
+                $descPrefix = substr($item['desc'], 0, 2);
+
+                return [$dateTimestamp, $descPrefix];
+            })->values()->all();
 
             // dd($coworkingList);
             return response()->view('dashboard.coworking', [
                 "title" => "Co-Working Space Booking",
                 "photoProfile" => $photoProfile,
-                "coworking" => $coworkingList
+                "coworking" => $sortedcoworkingListCollection
             ]);
         }
 

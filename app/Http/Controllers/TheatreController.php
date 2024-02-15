@@ -8,6 +8,7 @@ use App\Models\Room;
 use App\Models\Status;
 use App\Models\User;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -90,11 +91,20 @@ class TheatreController extends Controller
                     "is_late" => $BT->is_late
                 ];
             }
+                
+            $TheatreListCollection = new Collection($TheatreList);
+            $sortedTheatreListCollection = $TheatreListCollection->sortBy(function ($item) {
+                $dateTimestamp = strtotime($item['date']);
+
+                $descPrefix = substr($item['desc'], 0, 2);
+
+                return [$dateTimestamp, $descPrefix];
+            })->values()->all();
             // dd($TheatreList);
             return response()->view('dashboard.theatre', [
                 "title" => "Theatre Booking",
                 "photoProfile" => $photoProfile,
-                "theatre" => $TheatreList
+                "theatre" => $sortedTheatreListCollection
             ]);
         }
 
