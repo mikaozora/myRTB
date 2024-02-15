@@ -259,6 +259,39 @@ thead, tbody{
     border: 1px solid var(--primary);
 }
 
+.wrap-input .input-room{
+    margin-bottom: 0;
+}
+
+.error-room-first label{
+    color: red;
+    font-size: 14px;
+}
+
+.error-room-second label{
+    color: red;
+    font-size: 14px;
+}
+
+.error-room-last label{
+    color: red;
+    font-size: 14px;
+}
+
+.error-room-first-edit label{
+    color: red;
+    font-size: 14px;
+}
+
+.error-room-second-edit label{
+    color: red;
+    font-size: 14px;
+}
+
+.error-room-last-edit label{
+    color: red;
+    font-size: 14px;
+}
 
 @media screen and (max-width: 768px) {
     .wrap-table{
