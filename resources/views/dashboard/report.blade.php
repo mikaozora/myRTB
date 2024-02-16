@@ -73,7 +73,7 @@
                             <div class="submit-button">
                                 @if (Request::get('status') == 'proses' || Request::get('status') == '')
 
-                                    <button type="button" class="btn btn-primary selesai" data-bs-toggle="modal" data-bs-target="#selesai-{{$report['id']}}">Selesai</button>
+                                    <button type="button" class="btn btn-primary selesai" data-bs-toggle="modal" data-bs-target="#selesai-{{$report['id']}}">Done</button>
                                     @include('dashboard.ListDetail.selesaikonfirmasi')
 
                                 @endif

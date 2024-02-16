@@ -77,7 +77,7 @@ class SerbagunaController extends Controller
 
                 if($viewStatus == 'Done')
                 {
-                    $viewStatus = 'Selesai';
+                    $viewStatus = 'Done';
                 }
 
                 $serbagunaList[] =
