@@ -112,6 +112,19 @@ class PenghuniController extends Controller
 
         $user = User::query()->find($nip);
 
+        $room = User::query()->where('room_number', '=', $roomNum)->get();
+        $isFull = $room->count();
+        try{
+            if ($isFull >= 2){
+                return redirect()->action([PenghuniController::class, 'index'])->with([
+                    "message" => "Room is full!",
+                    "status" => "error"
+                ]);
+            }
+        } catch (Exception $e) {
+                    
+        }
+
         if (isset($file)) {
             $img = "data/" . $user->photo;
             if (fileExists($img)) {
