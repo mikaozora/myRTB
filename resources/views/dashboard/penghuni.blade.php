@@ -361,18 +361,12 @@
                     errorFirst.style.color = 'red';
                 }
 
-                if (/^[AB][G1235]/.test(roomNumber)) {
+                if (/^[B][G1235]/.test(roomNumber) || /^[A][G123]/.test(roomNumber) ) {
                     errorSecond.style.color = 'green';
                 } else {
-                    errorSecond.style.color = 'red';
+                    errorSecond.style.color='red';
                 }
-
-                if (/^[A][5]/.test(roomNumber)) {
-                    errorSecond.style.color = 'red';
-                } else {
-                    errorSecond.style.color = 'green';
-                }
-
+                
                 if (/^[AB][G1235]\d{2}$/.test(roomNumber) && parseInt(roomNumber.slice(2)) >= 1 && parseInt(roomNumber.slice(2)) <= 32) {
                     errorLast.style.color = 'green';
                 } else {
