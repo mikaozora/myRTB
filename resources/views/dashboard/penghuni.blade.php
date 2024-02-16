@@ -367,6 +367,12 @@
                     errorSecond.style.color = 'red';
                 }
 
+                if (/^[A][5]/.test(roomNumber)) {
+                    errorSecond.style.color = 'red';
+                } else {
+                    errorSecond.style.color = 'green';
+                }
+
                 if (/^[AB][G1235]\d{2}$/.test(roomNumber) && parseInt(roomNumber.slice(2)) >= 1 && parseInt(roomNumber.slice(2)) <= 32) {
                     errorLast.style.color = 'green';
                 } else {
