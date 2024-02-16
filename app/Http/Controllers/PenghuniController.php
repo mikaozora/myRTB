@@ -65,7 +65,22 @@ class PenghuniController extends Controller
                 $user->phone_number = $phoneNum;
                 $user->photo = $photo;
                 $user->gender = $gender;
+
+                $room = User::query()->where('room_number', '=', $roomNum)->get();
+                $isFull = $room->count();
+                try{
+                    if ($isFull >= 2){
+                        return redirect()->action([PenghuniController::class, 'index'])->with([
+                            "message" => "Room is full!",
+                            "status" => "error"
+                        ]);
+                    }
+                } catch (Exception $e) {
+                    
+                }
+
                 $user->save();
+
                 return redirect()->action([PenghuniController::class, 'index'])->with(
                     "message",
                     "Successfully added user data!"

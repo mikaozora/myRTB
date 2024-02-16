@@ -47,7 +47,16 @@
                     <div class="wrap-input">
                         <p>Room Number</p>
                         <input type="text" id="kamar-{{$user->NIP}}" name="room_number" required placeholder="Axxx"
-                            value="{{ $user->room_number }}">
+                            value="{{ $user->room_number }}" class="room_number-edit">
+                            <div class="error-room-first-edit">
+                                <label for="">Must starts with 'A' or 'B'</label>
+                            </div>
+                            <div class="error-room-second-edit">
+                                <label for="">Must followed by: G/1/2/3/5</label>
+                            </div>
+                            <div class="error-room-last-edit">
+                                <label for="">Must contains number between 01 - 32</label>
+                            </div>
                     </div>
                     <div class="wrap-input">
                         <p>Phone Number</p>
@@ -73,3 +82,4 @@
         </div>
     </div>
 </div>
+
