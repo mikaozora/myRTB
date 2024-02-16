@@ -367,6 +367,12 @@
                     errorSecond.style.color = 'red';
                 }
 
+                if (/^[A][5]/.test(roomNumber)) {
+                    errorSecond.style.color = 'red';
+                } else {
+                    errorSecond.style.color = 'green';
+                }
+
                 if (/^[AB][G1235]\d{2}$/.test(roomNumber) && parseInt(roomNumber.slice(2)) >= 1 && parseInt(roomNumber.slice(2)) <= 32) {
                     errorLast.style.color = 'green';
                 } else {
@@ -425,6 +431,8 @@
             if (roomNumberValue.length !== 4){
                 valid = false;
             }
+
+            if (roomNumberValue[0] == 'A' && roomNumberValue[1] == '5')
 
             if (roomNumberValue[0] !== 'A' && roomNumberValue[0] !== 'B') {
                 errorRoomFirstDiv.style.display = 'block';
