@@ -350,11 +350,18 @@ class TheatreController extends Controller
             $date_banned = intval(substr($end_banned[0]['end_time'], 8, 2));
             $hour_banned = intval(substr($end_banned[0]['end_time'], 11, 2));
 
-            if ($date_banned > $date || $hour_banned > $hour){
+            if ($date_banned > $date){
                 return redirect()->action([TheatreController::class, 'index'])->with([
                     'message' => 'Sorry, you are suspended',
                     'status' => 'error'
                 ]);
+            } else if ($date_banned == $date){
+                if ($hour_banned > $hour){
+                    return redirect()->action([TheatreController::class, 'index'])->with([
+                        'message' => 'Sorry, you are suspended',
+                        'status' => 'error'
+                    ]); 
+                }
             }
         } catch (Exception $exception){
 

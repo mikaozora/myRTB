@@ -269,7 +269,7 @@ class BookKitchenController extends Controller
             ->whereDate('book_kitchens.start_time', '=', $dateParam)
             ->where('book_kitchens.stuff_id', '=', $stuffSelected)
             ->select('users.NIP', 'users.name', 'users.photo', 'users.class', 'book_kitchens.start_time', 'book_kitchens.end_time') // Select the columns you need
-            ->orderBy('book_kitchen.start_time', 'asc')
+            ->orderBy('book_kitchens.start_time', 'asc')
             ->get();
 
         $userBooks = [];
@@ -368,11 +368,18 @@ class BookKitchenController extends Controller
             $date_banned = intval(substr($end_banned[0]['end_time'], 8, 2));
             $hour_banned = intval(substr($end_banned[0]['end_time'], 11, 2));
 
-            if ($date_banned > $date || $hour_banned > $hour){
+            if ($date_banned > $date){
                 return redirect()->action([BookKitchenController::class, 'index'])->with([
                     'message' => 'Sorry, you are suspended',
                     'status' => 'error'
                 ]);
+            } else if ($date_banned == $date){
+                if ($hour_banned > $hour){
+                    return redirect()->action([BookKitchenController::class, 'index'])->with([
+                        'message' => 'Sorry, you are suspended',
+                        'status' => 'error'
+                    ]); 
+                }
             }
         } catch (Exception $exception){
 
