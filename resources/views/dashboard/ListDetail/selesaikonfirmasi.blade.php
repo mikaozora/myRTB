@@ -13,7 +13,7 @@
                     <div class="wrap-upload">
                         <img id="icon-input-file-{{ $report['id'] }}" class="icon-input-file"
                             src="{{ asset('assets/uploadPict.svg') }}">
-                        <input id="upload-file-{{ $report['id'] }}" type="file" name="photo" class="upload-file"
+                        <input id="upload-file-{{ $report['id'] }}" type="file" name="photo" accept=".png, .jpg, .jpeg" class="upload-file"
                             required onchange="loadFile('{{ $report['id'] }}')">
                         {{-- <input type="hidden" name="type" value="{{ $report['type'] }}"> --}}
 
