@@ -269,7 +269,7 @@ class BookKitchenController extends Controller
             ->whereDate('book_kitchens.start_time', '=', $dateParam)
             ->where('book_kitchens.stuff_id', '=', $stuffSelected)
             ->select('users.NIP', 'users.name', 'users.photo', 'users.class', 'book_kitchens.start_time', 'book_kitchens.end_time') // Select the columns you need
-            ->orderBy('book_kitchen.start_time', 'asc')
+            ->orderBy('book_kitchens.start_time', 'asc')
             ->get();
 
         $userBooks = [];
