@@ -86,7 +86,7 @@ class BookMachineController extends Controller
 
                 if($viewStatus == 'Done')
                 {
-                    $viewStatus = 'Selesai';
+                    $viewStatus = 'Done';
                 }
 
                 // masukin data yang kita punya

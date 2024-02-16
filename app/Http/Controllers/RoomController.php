@@ -96,7 +96,7 @@ class RoomController extends Controller
 
                 if($viewStatus == 'Done')
                 {
-                    $viewStatus = 'Selesai';
+                    $viewStatus = 'Done';
                 }
 
                 $coworkingList[] =

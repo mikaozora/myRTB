@@ -61,7 +61,7 @@ class ReportController extends Controller
 
                 if($viewStatus == 'Done')
                 {
-                    $viewStatus = 'Selesai';
+                    $viewStatus = 'Done';
                 }
 
                 $reportList[] =

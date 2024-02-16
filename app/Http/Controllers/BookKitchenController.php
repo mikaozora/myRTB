@@ -80,7 +80,7 @@ class BookKitchenController extends Controller
 
                 if($viewStatus == 'Done')
                 {
-                    $viewStatus = 'Selesai';
+                    $viewStatus = 'Done';
                 }
 
                 $dapurList[] =

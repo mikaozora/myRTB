@@ -12,7 +12,7 @@
                     <p>{{ $report['type'] }}</p>
                     <p>{{ $report['user_room'] }}</p>
                     <br>
-                    <p><b>Deskripsi kerusakan:</b><p>
+                    <p><b>Complaint:</b><p>
                     <p>{{ $report['description'] }}</p>
                     <br>
                     <p>Status : {{$report['viewStatus']}}</h6>
@@ -25,7 +25,7 @@
                         <img class="photo" src="{{asset('data/' . $report['uploadPhoto'])}}" alt="photo">
 
                     </div>
-                @elseif ($report['viewStatus'] == 'Selesai')
+                @elseif ($report['viewStatus'] == 'Done')
                     <div class="photo-uploaded">
 
                         <img class="photo" src="{{asset('data/' . $report['photoAdmin'])}}" alt="photo">
