@@ -361,12 +361,12 @@
                     errorFirst.style.color = 'red';
                 }
 
-                if (/^[B][G1235]/.test(roomNumber) || /^[A][G123]/.test(roomNumber) ) {
+                if (/^[B][G1235]/.test(roomNumber) || /^[A][G123]/.test(roomNumber)) {
                     errorSecond.style.color = 'green';
                 } else {
-                    errorSecond.style.color='red';
+                    errorSecond.style.color = 'red';
                 }
-                
+
                 if (/^[AB][G1235]\d{2}$/.test(roomNumber) && parseInt(roomNumber.slice(2)) >= 1 && parseInt(roomNumber.slice(2)) <= 32) {
                     errorLast.style.color = 'green';
                 } else {
@@ -418,23 +418,63 @@
         setLabelColor(errorPhoneStartDiv.querySelector('label'), false);
         setLabelColor(errorPhoneLengthDiv.querySelector('label'), false);
         
+        // function validateRoomNumber() {
+        //     var roomNumberValue = roomNumberInput.value.toUpperCase();
+        //     var valid = true;
+
+        //     if (roomNumberValue[0] == 'A' && roomNumberValue[1] == '5'){
+        //         errorRoomFirstDiv.style.display = 'block';
+        //         setLabelColor(errorRoomFirstDiv.querySelector('label'), false);
+        //         valid = false;
+        //     } else if (roomNumberValue[0] !== 'A' && roomNumberValue[0] !== 'B') {
+        //         errorRoomFirstDiv.style.display = 'block';
+        //         setLabelColor(errorRoomFirstDiv.querySelector('label'), false);
+        //         valid = false;
+        //     } else {
+        //         setLabelColor(errorRoomFirstDiv.querySelector('label'), true);
+        
+        //         if (!['G', '1', '2', '3', '5'].includes(roomNumberValue[1])) {
+        //             errorRoomSecondDiv.style.display = 'block';
+        //             setLabelColor(errorRoomSecondDiv.querySelector('label'), false);
+        //             valid = false;
+        //         } else {
+        //             setLabelColor(errorRoomSecondDiv.querySelector('label'), true);
+                    
+        //             var thirdFourthDigits = roomNumberValue.substring(2);
+                    
+        //             if (!isNumeric(thirdFourthDigits) || parseInt(thirdFourthDigits) < 1 || parseInt(thirdFourthDigits) > 32) {
+        //                 errorRoomLastDiv.style.display = 'block';
+        //                 setLabelColor(errorRoomLastDiv.querySelector('label'), false);
+        //                 valid = false;
+        //             } else {
+        //                 setLabelColor(errorRoomLastDiv.querySelector('label'), true);
+        //             }
+        //         }
+        //     }
+
+        //     if (roomNumberValue.length !== 4){
+        //         setLabelColor(errorRoomLastDiv.querySelector('label'), false);
+        //         valid = false;
+        //     }
+
+        //     return valid;
+        // }
+
         function validateRoomNumber() {
-            var roomNumberValue = roomNumberInput.value.toUpperCase();
+            var roomNumberValue = roomNumberInput.value;
             var valid = true;
 
-            if (roomNumberValue.length !== 4){
+            if (roomNumberValue[0] == 'A' && roomNumberValue[1] == '5'){
+                errorRoomFirstDiv.style.display = 'block';
+                setLabelColor(errorRoomFirstDiv.querySelector('label'), false);
                 valid = false;
-            }
-
-            if (roomNumberValue[0] == 'A' && roomNumberValue[1] == '5')
-
-            if (roomNumberValue[0] !== 'A' && roomNumberValue[0] !== 'B') {
+            } else if (roomNumberValue[0] !== 'A' && roomNumberValue[0] !== 'B') {
                 errorRoomFirstDiv.style.display = 'block';
                 setLabelColor(errorRoomFirstDiv.querySelector('label'), false);
                 valid = false;
             } else {
                 setLabelColor(errorRoomFirstDiv.querySelector('label'), true);
-        
+
                 if (!['G', '1', '2', '3', '5'].includes(roomNumberValue[1])) {
                     errorRoomSecondDiv.style.display = 'block';
                     setLabelColor(errorRoomSecondDiv.querySelector('label'), false);
@@ -461,6 +501,7 @@
 
             return valid;
         }
+
 
         function validatePhoneNumber() {
             var phoneNumberValue = phoneNumberInput.value;
