@@ -146,6 +146,14 @@ class ReportController extends Controller
         //     "status_id" => $updateStatus[0]
         // ]);
         if(isset($file)){
+
+            $allowedFileTypes = ['jpg', 'jpeg', 'png'];
+            $extension = $file->getClientOriginalExtension();
+
+            // if (!in_array($extension, $allowedFileTypes)) {
+            //     return redirect()->back()->with('error', 'Hanya file JPG dan PNG yang diizinkan');
+            // }
+
             $photo = Carbon::now()->getTimestamp() . $file->getClientOriginalName();
             $path = "data";
             if($file->move($path, $photo)){
