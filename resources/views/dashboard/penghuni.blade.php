@@ -432,6 +432,8 @@
                 valid = false;
             }
 
+            if (roomNumberValue[0] == 'A' && roomNumberValue[1] == '5')
+
             if (roomNumberValue[0] !== 'A' && roomNumberValue[0] !== 'B') {
                 errorRoomFirstDiv.style.display = 'block';
                 setLabelColor(errorRoomFirstDiv.querySelector('label'), false);
