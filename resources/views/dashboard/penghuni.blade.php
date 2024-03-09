@@ -52,6 +52,8 @@
     <script>
         //pagination
         $(document).ready(function() {
+            window.APP_URL = '{{ mix('APP_URL') }}';
+
             $(document).on('click', '.pagination a', function(e) {
                 e.preventDefault();
                 let page = $(this).attr('href').split('page=')[1]
@@ -61,7 +63,7 @@
 
             function users(page, query) {
                 $.ajax({
-                    url: "/dashboard/pagination/paginate-data",
+                    url: window.APP_URL+"/dashboard/pagination/paginate-data",
                     method: 'GET',
                     data: {
                         page: page,
@@ -217,7 +219,7 @@
                 let modalId = `#editModal${userId}`;
 
                 $.ajax({
-                    url: "/dashboard/penghuni/" + userId,
+                    url: window.APP_URL+"/dashboard/penghuni/" + userId,
                     method: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': csrfToken

@@ -140,12 +140,9 @@
                 },
                 success: function(response) {
                     var enteredPasswordFromController = response.enteredPassword;
-                    console.log(enteredPassword);
-                    console.log('Entered Password from Controller:', enteredPasswordFromController);
 
                     if (response.status === 'success') {
                         // Password cocok, lakukan aksi selanjutnya
-                        console.log('Password cocok');
                         var pesanErrorDiv = document.getElementById("pesan_error");
                         pesanErrorDiv.style.display = "none";
                         submitButton.style.opacity = 1;
