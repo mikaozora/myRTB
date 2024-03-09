@@ -52,6 +52,8 @@
     <script>
         //pagination
         $(document).ready(function() {
+            window.APP_URL = '{{ mix('APP_URL') }}';
+
             $(document).on('click', '.pagination a', function(e) {
                 e.preventDefault();
                 let page = $(this).attr('href').split('page=')[1]
@@ -61,7 +63,7 @@
 
             function users(page, query) {
                 $.ajax({
-                    url: "/dashboard/pagination/paginate-data",
+                    url: window.APP_URL+"/dashboard/pagination/paginate-data",
                     method: 'GET',
                     data: {
                         page: page,
@@ -131,12 +133,9 @@
             return new Promise(function(resolve) {
                 window.addEventListener('load', () => {
                     const loader = document.querySelector('.wrap-loader');
-                    console.log(loader);
 
                     // Add loader-hidden class
-                    console.log("hellow");
                     loader.classList.add('loader-hidden');
-                    console.log(loader); // Check if loader has the loader-hidden class
 
                     // Resolve the promise after adding the class
                     resolve();
@@ -217,7 +216,7 @@
                 let modalId = `#editModal${userId}`;
 
                 $.ajax({
-                    url: "/dashboard/penghuni/" + userId,
+                    url: window.APP_URL+"/dashboard/penghuni/" + userId,
                     method: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': csrfToken

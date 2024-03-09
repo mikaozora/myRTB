@@ -144,7 +144,7 @@
 
         function exit2(show, msg) {
             if (!temp){
-                console.log(show, msg);
+
                 var content = document.getElementById(show);
                 content.style.display = 'block';
                 tempat[0].classList = 'bottom-box freeze';
@@ -159,8 +159,6 @@
 
         function exitpp(show, msg){
             if(!temp){
-                console.log(show, msg);
-                console.log("pp");
                 var content = document.getElementById(show);
                 content.style.display = 'block';
                 tempat[0].classList = 'bottom-box freeze';
@@ -174,7 +172,6 @@
         }
 
         function exit3(show, msg){
-            console.log(show, msg);
             var content = document.getElementById(show);
             content.style.display = 'none';
             tempat[0].classList='bottom-box';
