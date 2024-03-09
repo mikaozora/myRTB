@@ -62,7 +62,6 @@ let eventBefore = new Date();
 
 window.Echo.channel('chat')
     .listen('.message', (e) => {
-        console.log(e);
 
         //buat tanggal
         // const options = {
@@ -77,8 +76,6 @@ window.Echo.channel('chat')
         const minutes = edate.getMinutes().toString().padStart(2, "0");
         const timenow = hours + ":" + minutes;
 
-        console.log(edate);
-        console.log("last", lastCreatedAt);
         let date = "";
         let formattedDate = "";
         let formattedDate2 = "";
@@ -89,8 +86,6 @@ window.Echo.channel('chat')
         let eventNowDate = new Date(eventNow);
         if (lastCreatedAt === "null") {
             if (eventBefore.getTime() !== eventNowDate.getTime()) {
-                console.log(typeof eventBefore);
-                console.log(typeof eventNowDate);
                 temp = true;
             } else {
                 temp = false;
@@ -99,12 +94,9 @@ window.Echo.channel('chat')
         } else if (lastCreatedAt !== "null") {
             eventBefore.setHours(0, 0, 0, 0);
             date = new Date(lastCreatedAt);
-            console.log("eventBefore " + eventBefore);
-            console.log("eventNow " + eventNowDate);
             if (
                 eventBefore.getTime() !== eventNowDate.getTime()
             ) {
-                console.log("eventBefore !== eventNow2");
                 temp = true;
             } else {
                 temp = false;
@@ -204,8 +196,7 @@ window.Echo.channel('chat')
             dayWithOrdinalSuffix2
         );
 
-        console.log("formattedDate", formattedDateTrue2);
-        console.log("eformattedDate", formattedDateTrue);
+            
 
         if (formattedDateTrue2 !== formattedDateTrue || temp) {
             datenow.innerHTML +=
@@ -258,7 +249,6 @@ window.Echo.channel('chat')
                     index +
                     '"></div>';
             } else {
-                console.log("failed");
             }
 
             var content = document.getElementById("msg_wrap");
@@ -268,7 +258,6 @@ window.Echo.channel('chat')
                 content.style.display = "block";
             }
         } else if (e.type === "text") {
-            console.log("test");
             if (nip == e.nip) {
                 messages_el.innerHTML +=
                     '<div class="right-chat"><div class="wrap2"><div class="time2">' +
@@ -288,7 +277,6 @@ window.Echo.channel('chat')
                     timenow +
                     "</div></div></div>";
             } else {
-                console.log("failed");
             }
         }
 

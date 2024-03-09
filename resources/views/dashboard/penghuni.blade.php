@@ -133,12 +133,9 @@
             return new Promise(function(resolve) {
                 window.addEventListener('load', () => {
                     const loader = document.querySelector('.wrap-loader');
-                    console.log(loader);
 
                     // Add loader-hidden class
-                    console.log("hellow");
                     loader.classList.add('loader-hidden');
-                    console.log(loader); // Check if loader has the loader-hidden class
 
                     // Resolve the promise after adding the class
                     resolve();

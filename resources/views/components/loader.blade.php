@@ -17,7 +17,6 @@
 <script>
     window.addEventListener('load', () => {
         const loader = document.querySelector('.wrap-loader')
-        console.log(loader);
         loader.classList.add('loader-hidden')
 
         loader.addEventListener('transitioned', () => {
