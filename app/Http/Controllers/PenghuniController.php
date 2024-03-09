@@ -53,7 +53,7 @@ class PenghuniController extends Controller
         $phoneNum = $request->input('phone_number');
         $file = $request->file('photo');
         $photo = Carbon::now()->getTimestamp() . $file->getClientOriginalName();
-        $path = "data";
+        $path = env('UPLOAD_DIR');
         if ($file->move($path, $photo)) {
             try {
                 $user = new User();
@@ -131,7 +131,7 @@ class PenghuniController extends Controller
                 @unlink($img);
             }
             $photo = Carbon::now()->getTimestamp() . $file->getClientOriginalName();
-            $path = "data";
+            $path = env('UPLOAD_DIR');
             if ($file->move($path, $photo)) {
                 $user->fill([
                     "name" => $name,

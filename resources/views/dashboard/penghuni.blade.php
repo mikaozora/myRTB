@@ -50,10 +50,10 @@
     </script>
 
     <script>
-        let url = "{{ env('APP_URL') }}";
+        // let url = "{{ env('APP_URL') }}";
         //pagination
         $(document).ready(function() {
-
+            let url = "{{ env('APP_URL') }}";
             $(document).on('click', '.pagination a', function(e) {
                 e.preventDefault();
                 let page = $(this).attr('href').split('page=')[1]
@@ -77,11 +77,7 @@
             }
         })
 
-        // search
-        $(document).ready(function() {
-            fetchData();
-
-            function fetchData(query = '') {
+        function fetchData(query = '', url) {
                 $.ajax({
                     url: url + "/dashboard/search",
                     method: 'GET',
@@ -95,9 +91,15 @@
                 })
             }
 
+        // search
+        $(document).ready(function() {
+            let url = "{{ env('APP_URL') }}";
+            fetchData('', url);
+
+
             $(document).on('keyup', '#search', function() {
                 var query = $(this).val()
-                fetchData(query)
+                fetchData(query, url)
             })
         })
 
@@ -153,10 +155,11 @@
 
         // Function to reattach keyup event
         function reattachKeyupEvent() {
+            let url = "{{ env('APP_URL') }}";
             return new Promise(function(resolve) {
                 $('#search').on('keyup', function() {
                     var query = $(this).val();
-                    fetchData(query);
+                    fetchData(query, url);
                 });
                 resolve();
             });
@@ -180,6 +183,7 @@
 
         // Main function to handle AJAX and subsequent actions
         $(document).ready(function() {
+            let url = "{{ env('APP_URL') }}";
             $(document).ajaxComplete(function() {
                 // Add loader-hidden class to .wrap-loader after successful AJAX request
                 $('.wrap-loader').addClass('loader-hidden');
@@ -216,7 +220,7 @@
                 let modalId = `#editModal${userId}`;
 
                 $.ajax({
-                    url: window.APP_URL + "/dashboard/penghuni/" + userId,
+                    url: url + "/dashboard/penghuni/" + userId,
                     method: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': csrfToken
@@ -254,6 +258,7 @@
 
         // delete
         $(document).ready(function() {
+            let url = "{{ env('APP_URL') }}";
             $(document).ajaxComplete(function() {
                 // Add loader-hidden class to .wrap-loader after successful AJAX request
                 $('.wrap-loader').addClass('loader-hidden');
@@ -271,7 +276,7 @@
                 let userId = $(this).data('userid');
 
                 $.ajax({
-                    url: "/dashboard/penghuni/" + userId,
+                    url: url + "/dashboard/penghuni/" + userId,
                     method: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': csrfToken
