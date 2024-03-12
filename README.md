@@ -7,6 +7,73 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Software Version
+**Server:** Laravel 10, MySQL (using xampp)
+
+**Language:** PHP > 8.*
+
+**CSS Framework:** Bootsrap 5
+
+
+
+## Installation
+
+#### Install myRTB webapps
+
+* Clone this repository
+
+```bash
+  git clone https://github.com/mikaozora/myRTB.git
+```
+
+* Install all dependency laravel
+
+```bash
+  composer update
+```
+
+* Install for vite js
+
+```bash
+  npm install
+```
+
+* Migrate the database
+
+```bash
+  php artisan migrate
+```
+
+* Seed the database
+
+```bash
+  php artisan db:seed --class=UserSeeder
+  php artisan db:seed --class=StatusSeeder
+  php artisan db:seed --class=RoomSeeder
+  php artisan db:seed --class=WashingMachineSeeder
+  php artisan db:seed --class=KitchenStuffSeeder
+  php artisan db:seed --class=ForumSeeder
+```
+
+## Run Code
+
+#### Go to the directory where you clone the code
+* terminal 1  
+
+```bash
+  php artisan serve
+```
+* terminal 2
+
+```bash
+  npm run dev
+```
+* terminal 3 (run the scheduler)
+
+```bash
+  php artisan schedule:work
+```
+
 ## Installation
 
 #### Install myRTB webapps
