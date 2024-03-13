@@ -418,9 +418,9 @@
                 return /^\d+$/.test(value);
             }
 
-            setLabelColor(errorRoomFirstDiv.querySelector('label'), false);
-            setLabelColor(errorRoomSecondDiv.querySelector('label'), false);
-            setLabelColor(errorRoomLastDiv.querySelector('label'), false);
+            // setLabelColor(errorRoomFirstDiv.querySelector('label'), false);
+            // setLabelColor(errorRoomSecondDiv.querySelector('label'), false);
+            // setLabelColor(errorRoomLastDiv.querySelector('label'), false);
             setLabelColor(errorPhoneStartDiv.querySelector('label'), false);
             setLabelColor(errorPhoneLengthDiv.querySelector('label'), false);
 
@@ -466,48 +466,48 @@
             //     return valid;
             // }
 
-            function validateRoomNumber() {
-                var roomNumberValue = roomNumberInput.value;
-                var valid = true;
+            // function validateRoomNumber() {
+            //     var roomNumberValue = roomNumberInput.value;
+            //     var valid = true;
 
-                if (roomNumberValue[0] == 'A' && roomNumberValue[1] == '5') {
-                    errorRoomFirstDiv.style.display = 'block';
-                    setLabelColor(errorRoomFirstDiv.querySelector('label'), false);
-                    valid = false;
-                } else if (roomNumberValue[0] !== 'A' && roomNumberValue[0] !== 'B') {
-                    errorRoomFirstDiv.style.display = 'block';
-                    setLabelColor(errorRoomFirstDiv.querySelector('label'), false);
-                    valid = false;
-                } else {
-                    setLabelColor(errorRoomFirstDiv.querySelector('label'), true);
+            //     if (roomNumberValue[0] == 'A' && roomNumberValue[1] == '5') {
+            //         errorRoomFirstDiv.style.display = 'block';
+            //         setLabelColor(errorRoomFirstDiv.querySelector('label'), false);
+            //         valid = false;
+            //     } else if (roomNumberValue[0] !== 'A' && roomNumberValue[0] !== 'B') {
+            //         errorRoomFirstDiv.style.display = 'block';
+            //         setLabelColor(errorRoomFirstDiv.querySelector('label'), false);
+            //         valid = false;
+            //     } else {
+            //         setLabelColor(errorRoomFirstDiv.querySelector('label'), true);
 
-                    if (!['G', '1', '2', '3', '5'].includes(roomNumberValue[1])) {
-                        errorRoomSecondDiv.style.display = 'block';
-                        setLabelColor(errorRoomSecondDiv.querySelector('label'), false);
-                        valid = false;
-                    } else {
-                        setLabelColor(errorRoomSecondDiv.querySelector('label'), true);
+            //         if (!['G', '1', '2', '3', '5'].includes(roomNumberValue[1])) {
+            //             errorRoomSecondDiv.style.display = 'block';
+            //             setLabelColor(errorRoomSecondDiv.querySelector('label'), false);
+            //             valid = false;
+            //         } else {
+            //             setLabelColor(errorRoomSecondDiv.querySelector('label'), true);
 
-                        var thirdFourthDigits = roomNumberValue.substring(2);
+            //             var thirdFourthDigits = roomNumberValue.substring(2);
 
-                        if (!isNumeric(thirdFourthDigits) || parseInt(thirdFourthDigits) < 1 || parseInt(
-                                thirdFourthDigits) > 32) {
-                            errorRoomLastDiv.style.display = 'block';
-                            setLabelColor(errorRoomLastDiv.querySelector('label'), false);
-                            valid = false;
-                        } else {
-                            setLabelColor(errorRoomLastDiv.querySelector('label'), true);
-                        }
-                    }
-                }
+            //             if (!isNumeric(thirdFourthDigits) || parseInt(thirdFourthDigits) < 1 || parseInt(
+            //                     thirdFourthDigits) > 32) {
+            //                 errorRoomLastDiv.style.display = 'block';
+            //                 setLabelColor(errorRoomLastDiv.querySelector('label'), false);
+            //                 valid = false;
+            //             } else {
+            //                 setLabelColor(errorRoomLastDiv.querySelector('label'), true);
+            //             }
+            //         }
+            //     }
 
-                if (roomNumberValue.length !== 4) {
-                    setLabelColor(errorRoomLastDiv.querySelector('label'), false);
-                    valid = false;
-                }
+            //     if (roomNumberValue.length !== 4) {
+            //         setLabelColor(errorRoomLastDiv.querySelector('label'), false);
+            //         valid = false;
+            //     }
 
-                return valid;
-            }
+            //     return valid;
+            // }
 
 
             function validatePhoneNumber() {
@@ -552,14 +552,14 @@
                 return true;
             }
 
-            roomNumberInput.addEventListener('input', function() {
-                var roomValid = validateRoomNumber();
-                var phoneValid = validatePhoneNumber();
-                submitButton.disabled = !(roomValid && phoneValid && allLabelsGreen());
-            });
+            // roomNumberInput.addEventListener('input', function() {
+            //     var roomValid = validateRoomNumber();
+            //     var phoneValid = validatePhoneNumber();
+            //     submitButton.disabled = !(roomValid && phoneValid && allLabelsGreen());
+            // });
 
             phoneNumberInput.addEventListener('input', function() {
-                var roomValid = validateRoomNumber();
+                // var roomValid = validateRoomNumber();
                 var phoneValid = validatePhoneNumber();
                 submitButton.disabled = !(roomValid && phoneValid && allLabelsGreen());
             });

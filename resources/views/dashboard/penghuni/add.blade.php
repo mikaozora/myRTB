@@ -42,7 +42,8 @@
                     </div>
                     <div class="wrap-input">
                         <p>Room Number</p>
-                        <select name="class" id="class" class="form-select" aria-label="Default select example">
+                        <select name="room_number" id="room" class="form-select"
+                            aria-label="Default select example">
                             <option value="">Select Room</option>
                             <option value="AG01">AG01</option>
                             <option value="AG02">AG02</option>
