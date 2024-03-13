@@ -51,6 +51,7 @@ message_form.addEventListener("submit", function (e) {
         url: currentPath + "/send-msg",
         data: formData
     };
+    console.log("add msg");
 
     axios(options).then(() => {
         scrollToBottom(); // Panggil scrollToBottom setelah pesan dikirim
