@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Model
@@ -35,6 +36,9 @@ class User extends Model
     }
     public function banUser(): HasMany{
         return $this->hasMany(BannedUser::class, 'NIP', 'NIP');
+    }
+    public function userRoom(): BelongsTo{
+        return $this->belongsTo(UserRooms::class, 'number_rooms', 'number_rooms');
     }
 }
 

@@ -51,6 +51,7 @@ message_form.addEventListener("submit", function (e) {
         url: currentPath + "/send-msg",
         data: formData
     };
+    console.log("add msg");
 
     axios(options).then(() => {
         scrollToBottom(); // Panggil scrollToBottom setelah pesan dikirim
@@ -62,7 +63,7 @@ let eventBefore = new Date();
 
 window.Echo.channel('chat')
     .listen('.message', (e) => {
-
+        console.log(e);
         //buat tanggal
         // const options = {
         //     weekday: "long",
@@ -216,6 +217,7 @@ window.Echo.channel('chat')
         var showimgg = "showimgg_" + index;
 
         if (e.type === "img") {
+            console.log("halo img");
             if (nip == e.nip) {
                 messages_el.innerHTML +=
                     '<div class="right-chat"><div class="wrap2"><div class="time2">' +
@@ -258,7 +260,9 @@ window.Echo.channel('chat')
                 content.style.display = "block";
             }
         } else if (e.type === "text") {
+            console.log("halo text");
             if (nip == e.nip) {
+                console.log("wewe");
                 messages_el.innerHTML +=
                     '<div class="right-chat"><div class="wrap2"><div class="time2">' +
                     timenow +
