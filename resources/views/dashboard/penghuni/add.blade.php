@@ -45,7 +45,7 @@
                         <select name="room_number" id="room" class="form-select"
                             aria-label="Default select example">
                             <option value="">Select Room</option>
-                            <option value="AG01">AG01</option>
+                            <option value="AG01" disabled>AG01</option>
                             <option value="AG02">AG02</option>
                             <option value="AG03">AG03</option>
                             <option value="AG04">AG04</option>
@@ -68,7 +68,7 @@
                             <option value="AG21">AG21</option>
                             <option value="AG22">AG22</option>
                             <option value="AG23">AG23</option>
-                            <option value="AG24">AG24</option>
+                            <option value="AG24" disabled>AG24</option>
                             <option value="AG25">AG25</option>
                             <option value="AG26">AG26</option>
                             <option value="AG27">AG27</option>
@@ -88,8 +88,8 @@
                             <option value="A108">A108</option>
                             <option value="A109">A109</option>
                             <option value="A110">A110</option>
-                            <option value="A111">A111</option>
-                            <option value="A112">A112</option>
+                            <option value="A111" disabled>A111</option>
+                            <option value="A112" disabled>A112</option>
                             <option value="A113">A113</option>
                             <option value="A114">A114</option>
                             <option value="A115">A115</option>
@@ -142,7 +142,7 @@
                             <option value="B129">B129</option>
                             <option value="B130">B130</option>
                             <option value="B131">B131</option>
-                            <option value="B132">B132</option>
+                            <option value="B132" disabled>B132</option>
 
                             <option value="A201">A201</option>
                             <option value="A202">A202</option>
@@ -166,7 +166,7 @@
                             <option value="A220">A220</option>
                             <option value="A221">A221</option>
                             <option value="A222">A222</option>
-                            <option value="A223">A223</option>
+                            <option value="A223" disabled>A223</option>
                             <option value="A224">A224</option>
                             <option value="A225">A225</option>
                             <option value="A226">A226</option>
@@ -180,7 +180,7 @@
                             <option value="B201">B201</option>
                             <option value="B202">B202</option>
                             <option value="B203">B203</option>
-                            <option value="B204">B204</option>
+                            <option value="B204" disabled>B204</option>
                             <option value="B205">B105</option>
                             <option value="B206">B206</option>
                             <option value="B207">B207</option>
@@ -226,18 +226,18 @@
                             <option value="A314">A314</option>
                             <option value="A315">A315</option>
                             <option value="A316">A316</option>
-                            <option value="A317">A317</option>
+                            <option value="A317" disabled>A317</option>
                             <option value="A318">A318</option>
-                            <option value="A319">A319</option>
+                            <option value="A319" disabled>A319</option>
                             <option value="A320">A320</option>
                             <option value="A321">A321</option>
-                            <option value="A322">A322</option>
+                            <option value="A322" disabled>A322</option>
                             <option value="A323">A323</option>
                             <option value="A324">A324</option>
                             <option value="A325">A325</option>
                             <option value="A326">A326</option>
                             <option value="A327">A137</option>
-                            <option value="A328">A328</option>
+                            <option value="A328" disabled>A328</option>
                             <option value="A329">A329</option>
                             <option value="A330">A330</option>
                             <option value="A331">A331</option>
@@ -264,14 +264,14 @@
                             <option value="B319">B319</option>
                             <option value="B320">B320</option>
                             <option value="B321">B321</option>
-                            <option value="B322">B322</option>
+                            <option value="B322" disabled>B322</option>
                             <option value="B323">B323</option>
                             <option value="B324">B324</option>
                             <option value="B325">B325</option>
-                            <option value="B326">B326</option>
+                            <option value="B326" disabled>B326</option>
                             <option value="B327">B327</option>
                             <option value="B328">B328</option>
-                            <option value="B329">B329</option>
+                            <option value="B329" disabled>B329</option>
                             <option value="B330">B330</option>
                             <option value="B331">B331</option>
                             <option value="B332">B332</option>
@@ -279,7 +279,7 @@
                             <option value="B501">B501</option>
                             <option value="B502">B502</option>
                             <option value="B503">B503</option>
-                            <option value="B504">B504</option>
+                            <option value="B504" disabled>B504</option>
                             <option value="B505">5305</option>
                             <option value="B506">B506</option>
                             <option value="B507">B507</option>
@@ -291,7 +291,7 @@
                             <option value="B513">B513</option>
                             <option value="B514">B514</option>
                             <option value="B515">B515</option>
-                            <option value="B516">B516</option>
+                            <option value="B516" disabled>B516</option>
                             <option value="B517">B517</option>
                             <option value="B518">B518</option>
                             <option value="B519">B519</option>
@@ -299,10 +299,10 @@
                             <option value="B521">B521</option>
                             <option value="B522">B522</option>
                             <option value="B523">B523</option>
-                            <option value="B524">B524</option>
+                            <option value="B524" disabled>B524</option>
                             <option value="B525">B525</option>
                             <option value="B526">B526</option>
-                            <option value="B527">B527</option>
+                            <option value="B527" disabled>B527</option>
                             <option value="B528">B528</option>
                             <option value="B529">B529</option>
                             <option value="B530">B530</option>
